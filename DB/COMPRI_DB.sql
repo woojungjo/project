@@ -146,8 +146,6 @@ CREATE TABLE sale_board (
         CONSTRAINT sale_board_member_id_fk REFERENCES member(member_id) ON DELETE CASCADE,
     title VARCHAR2(300) NOT NULL,
     content VARCHAR2(4000) NOT NULL,
-
-    -- test
     views NUMBER DEFAULT 0 NOT NULL,
     write_dt TIMESTAMP DEFAULT current_timestamp NOT NULL,
     like_cnt NUMBER DEFAULT 0 NOT NULL,
