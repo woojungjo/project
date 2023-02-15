@@ -1,5 +1,3 @@
-
-SQL
 CREATE TABLE goods
 (
 	goods_id NUMBER NOT NULL,
@@ -121,7 +119,7 @@ REFERENCES goods(goods_id) ON DELETE CASCADE;
 ALTER TABLE non_member_goods_cart
 ADD CONSTRAINT cart_id_fk FOREIGN KEY(cart_id)
 REFERENCES cart(cart_id) ON DELETE CASCADE;
-=======
+
 DROP table region_board;
 
 CREATE TABLE region_board (
@@ -148,6 +146,8 @@ CREATE TABLE sale_board (
         CONSTRAINT sale_board_member_id_fk REFERENCES member(member_id) ON DELETE CASCADE,
     title VARCHAR2(300) NOT NULL,
     content VARCHAR2(4000) NOT NULL,
+
+    -- test
     views NUMBER DEFAULT 0 NOT NULL,
     write_dt TIMESTAMP DEFAULT current_timestamp NOT NULL,
     like_cnt NUMBER DEFAULT 0 NOT NULL,
