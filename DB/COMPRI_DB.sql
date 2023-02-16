@@ -320,3 +320,164 @@ CREATE TABLE sale_board_bookmark (
         CONSTRAINT sale_board_bookmark_post_no_fk REFERENCES sale_board(post_no) ON DELETE SET NULL
 );
 
+
+-- qna board, mate board
+
+CREATE TABLE mate_board (
+	post_no	NUMBER	NOT NULL,
+	member_id	NUMBER	NOT NULL,
+	title	VARCHAR2(300)	NOT NULL,
+	content	VARCHAR2(4000)	NOT NULL,
+	views	NUMBER	NOT NULL,
+	write_dt	TIMESTAMP	NOT NULL,
+	report_cnt	NUMBER	NOT NULL,
+	meeting_status	CHAR(1)	NOT NULL,
+	meeting_time	TIMESTAMP	NOT NULL,
+	meeting_area	VARCHAR2(70)	NOT NULL,
+	participant_id_1	NUMBER	NOT NULL,
+	participant_id_2	NUMBER	NOT NULL,
+	participant_id_3	NUMBER	NOT NULL
+);
+
+ALTER TABLE mate_board ADD CONSTRAINT mate_board_post_no_pk PRIMARY KEY (POST_NO);
+
+CREATE TABLE mate_board_comment (
+	comment_no	NUMBER	NOT NULL,
+	post_no	NUMBER	NOT NULL,
+	member_id	NUMBER	NOT NULL,
+	secret_yn	CHAR(1)	NOT NULL,
+	content	VARCHAR2(4000)	NOT NULL,
+    like_cnt	NUMBER	NOT NULL,
+	high_comment_no	NUMBER	NULL,
+	write_dt	TIMESTAMP	NOT NULL,
+	comment_lv	NUMBER(1)	DEFAULT 1	NOT NULL
+);
+
+ALTER TABLE mate_board_comment ADD CONSTRAINT mate_board_comment_comment_no_post_no_pk PRIMARY KEY (comment_no, POST_NO);
+
+CREATE TABLE mate_board_file (
+	file_id	VARCHAR2(200)	NOT NULL,
+	post_no	NUMBER	NOT NULL,
+	file_name	VARCHAR2(200)	NOT NULL,
+	file_path	VARCHAR2(1000)	NOT NULL,
+	file_type	VARCHAR2(5)	NOT NULL,
+	file_size	NUMBER	NOT NULL,
+	create_dt	TIMESTAMP	NOT NULL
+);
+
+ALTER TABLE mate_board_file ADD CONSTRAINT mate_board_file_file_id_post_no_pk PRIMARY KEY (file_ID, post_no);
+
+CREATE TABLE mate_board_act_not (
+	not_no	NUMBER	NOT NULL,
+	member_id	NUMBER	NOT NULL,
+	post_no	NUMBER,
+	not_target_member_id	NUMBER	NOT NULL,
+	not_content	VARCHAR2(150)	NOT NULL,
+	not_type	VARCHAR2(15)	NOT NULL,
+	not_dt	TIMESTAMP	NOT NULL,
+	not_read_dt	TIMESTAMP	NULL
+);
+
+ALTER TABLE mate_board_act_not ADD CONSTRAINT mate_board_act_not_not_no_pk PRIMARY KEY (not_no);
+
+CREATE TABLE mate_board_keyword_not (
+	not_no	NUMBER	NOT NULL,
+	not_content	VARCHAR2(150)	NOT NULL,
+	not_dt	TIMESTAMP	NOT NULL,
+	not_read_dt	TIMESTAMP	NULL,
+	post_no	NUMBER,
+	keyword	VARCHAR2(30)	NOT NULL,
+	member_id	NUMBER	NOT NULL
+);
+
+ALTER TABLE mate_board_keyword_not ADD CONSTRAINT mate_board_keyword_not_not_no_pk PRIMARY KEY (not_no);
+
+CREATE TABLE mate_board_bookmark (
+	bookmark_no	NUMBER	NOT NULL,
+	member_id	NUMBER	NOT NULL,
+	post_no	NUMBER	NOT NULL
+);
+
+ALTER TABLE mate_board_bookmark ADD CONSTRAINT mate_board_bookmark_bookmark_no_pk PRIMARY KEY (bookmark_no);
+
+CREATE TABLE mate_board_tags (
+	tag_name	VARCHAR2(60)	NOT NULL,
+	post_no	NUMBER
+);
+
+ALTER TABLE mate_board_tags ADD CONSTRAINT mate_board_tags_tag_name_post_no_pk PRIMARY KEY (tag_name, post_no);
+
+
+
+CREATE TABLE qna_board (
+	post_no	NUMBER	NOT NULL,
+	member_id NUMBER	NOT NULL,
+	title	VARCHAR2(300)	NOT NULL,
+	content	VARCHAR2(4000)	NOT NULL,
+	views	NUMBER	NOT NULL,
+	write_dt	TIMESTAMP	NOT NULL,
+	secret_yn	CHAR(1)	NOT NULL
+);
+
+ALTER TABLE qna_board ADD CONSTRAINT qna_board_post_no_pk PRIMARY KEY (POST_NO);
+
+
+CREATE TABLE qna_board_comment (
+	comment_no	NUMBER	NOT NULL,
+	post_no	NUMBER	NOT NULL,
+	member_id	NUMBER	NOT NULL,
+	secret_yn	CHAR(1)	NOT NULL,
+	content	VARCHAR2(4000)	NOT NULL,
+	like_cnt	NUMBER	NOT NULL,
+	high_comment_no	NUMBER	NULL,
+	write_dt	TIMESTAMP	NOT NULL,
+	comment_lv	NUMBER(1)	DEFAULT 0	NOT NULL
+);
+
+ALTER TABLE qna_board_comment ADD CONSTRAINT qna_board_comment_comment_no_post_no_pk PRIMARY KEY (POST_NO, comment_no);
+
+
+CREATE TABLE qna_board_file (
+	file_ID	VARCHAR2(200)	NOT NULL,
+	post_no	NUMBER	NOT NULL,
+	file_name	VARCHAR2(200)	NOT NULL,
+	file_path	VARCHAR2(1000)	NOT NULL,
+	file_type	VARCHAR2(5)	NOT NULL,
+	file_size	NUMBER	NOT NULL,
+	create_dt	TIMESTAMP	NOT NULL
+);
+
+ALTER TABLE qna_board_file ADD CONSTRAINT qna_board_file_file_id_post_no_pk PRIMARY KEY (POST_NO, file_ID);
+
+CREATE TABLE qna_board_act_not (
+	not_no	NUMBER	NOT NULL,
+	member_id	NUMBER	NOT NULL,
+	post_no	NUMBER	NOT NULL,
+	not_target_member_id	NUMBER	NOT NULL,
+	not_content	VARCHAR2(150)	NOT NULL,
+	not_type	VARCHAR2(15)	NOT NULL,
+	not_dt	TIMESTAMP	NOT NULL,
+	not_read_dt	TIMESTAMP	NULL
+);
+
+ALTER TABLE qna_board_act_not ADD CONSTRAINT qna_board_act_not_not_no_pk PRIMARY KEY (not_no, member_id);
+
+CREATE TABLE qna_board_keyword_not (
+	not_no	NUMBER	NOT NULL,
+	not_content	VARCHAR2(150)	NOT NULL,
+	not_dt	TIMESTAMP	NOT NULL,
+	not_read_dt	TIMESTAMP	NULL,
+	post_no	NUMBER	NOT NULL,
+	keyword	VARCHAR2(30)	NOT NULL,
+	member_id	NUMBER	NOT NULL
+);
+
+ALTER TABLE qna_board_keyword_not ADD CONSTRAINT qna_board_keyword_not_not_no_pk PRIMARY KEY (not_no);
+
+CREATE TABLE qna_board_bookmark (
+	bookmark_no	NUMBER	NOT NULL,
+	member_id	NUMBER	NOT NULL,
+	post_no	NUMBER	NOT NULL
+);
+
+ALTER TABLE qna_board_bookmark ADD CONSTRAINT qna_board_bookmark_bookmark_no_pk PRIMARY KEY (bookmark_no);
