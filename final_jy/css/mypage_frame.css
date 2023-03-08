@@ -69,6 +69,11 @@ body {
     height: fit-content;
     flex-grow: 0;
     flex-shrink: 0;
+
+    text-decoration: none;
+}
+.gnb_li .nav_text {
+    color: white;
 }
 #container {
     width: 1130px;
@@ -105,19 +110,47 @@ body {
 .mypage_nav_ul {
     width: 220px;
     padding-left: 0;
+    margin-top: 90px;
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(1fr, 10);
+    grid-template-rows: repeat(10, 50px);
 }
 .mypage_nav_li {
     display: flex;
     justify-content: center;
+    align-items: center;
     text-align: center;
     flex-grow: 0;
     flex-shrink: 0;
 
     margin-right: 10px;
+    border: 1px solid black;
     cursor: pointer;
     list-style: none;
+}
+.mypage_nav_li .nav_text {
+    color: black;
+}
+
+/* 해당 마이페이지 영역으로 이동했을 때 nav가 색 칠해지도록 */
+/* .mypage_nav_li:first-of-type {
+    background-color: #53917E;
+}
+.mypage_nav_li:first-of-type .nav_text {
+    color: white;
+} */
+
+#section {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.mypage_article_title {
+    margin-bottom: 20px;
+    
+    display: flex;
+    justify-content: center;
+}
+.mypage_article_title > h3 {
+    font-size: 1.5em;
 }
