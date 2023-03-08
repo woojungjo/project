@@ -1,0 +1,123 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+#wrap {
+    font-family: 'Jeju Gothic', sans-serif;
+}
+body {
+    margin: 0;
+}
+.widthfix {
+    min-width: 1500px;
+}
+.header_color {
+    background-color: #53917E; 
+    height: 100px; 
+}
+#header {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+    padding: 0px 100px;
+    /* background-color: #7cb342; */
+    position: sticky;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#header > span {
+    color: white;
+    font-size: 22px;   
+}
+.nav_item {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    cursor: pointer;
+    list-style: none;
+
+    color: white;
+}
+#gnb {
+    margin-left: 100px;
+}
+.gnb {   
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.5em;
+}
+.gnb_li {
+    margin-right: 50px;
+}
+.gnb_li:last-of-type {
+    margin-right: 0;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.nav_text {
+    height: fit-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#container {
+    width: 1130px;
+    margin: 0 auto;
+}
+#login_bt {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    border: 0;
+    margin-left: 10px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-family: 'Jeju Gothic', sans-serif;
+
+    cursor: pointer;
+}
+#info li:last-of-type {
+    margin-right: 0;
+}
+.fa-bars {
+    display: inline-block;
+    font-size: 16px;
+}
+#info li:first-of-type::after {
+    content: "";
+    background-image: url("../imgs/pin-8-16.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -10%;
+}
+.mypage_nav_ul {
+    width: 220px;
+    padding-left: 0;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(1fr, 10);
+}
+.mypage_nav_li {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    cursor: pointer;
+    list-style: none;
+}
