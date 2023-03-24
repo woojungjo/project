@@ -1,5 +1,3 @@
-
-
 ALTER TABLE city
 ADD CONSTRAINT city_country_id_fk FOREIGN KEY (country_id)  
 REFERENCES country (country_id) ON DELETE CASCADE;
