@@ -40,7 +40,7 @@ thead > tr > th {
     border-radius: 5px;
     padding: 0 16px;
 
-    background: url("../imgs/calendar-days-solid.svg") no-repeat right 8px center / 16px auto;
+    background: url("/resources/imgs/priceCompare/calendar-days-solid.svg") no-repeat right 8px center / 16px auto;
 }
 #cartDate::-webkit-clear-button,
 #cartDate::-webkit-inner-spin-button {
@@ -130,11 +130,11 @@ thead > tr > th {
     cursor: pointer;
 }
 .count_minus_bt {
-    background-image: url(../imgs/minus-xs-svgrepo-gray.svg);
-    /* background-image: url(../imgs/minus-xs-svgrepo-black.svg); */
+    background-image: url(/resources/imgs/priceCompare/minus-xs-svgrepo-gray.svg);
+    /* background-image: url(/resources/imgs/priceCompare/minus-xs-svgrepo-black.svg); */
 }
 .count_plus_bt {
-    background-image: url(../imgs/plus-xs-svgrepo-com.svg);
+    background-image: url(/resources/imgs/priceCompare/plus-xs-svgrepo-com.svg);
 }
 .delete_bt_div {
     margin-left: 15px;
@@ -151,7 +151,7 @@ thead > tr > th {
 
     background-color: rgb(233, 228, 228);
     background-size: cover;
-    background-image: url(../imgs/cross-small-svgrepo-com\ \(2\).svg);
+    background-image: url(/resources/imgs/priceCompare/cross-small-svgrepo-com\ \(2\).svg);
     cursor: pointer;
 }
 tfoot > tr {

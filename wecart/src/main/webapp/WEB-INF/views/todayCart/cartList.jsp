@@ -10,13 +10,13 @@
 
     <link rel="shortcut icon" href="../resources/ico/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../resources/ico/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../resources/css/cart_frame.css">
-    <link rel="stylesheet" href="../resources/css/mypage_cart.css">
-    <link rel="stylesheet" href="../resources/css/today_cart.css">
+    <link rel="stylesheet" href="../resources/css/priceCompare/cart_frame.css">
+    <link rel="stylesheet" href="../resources/css/priceCompare/mypage_cart.css">
+    <link rel="stylesheet" href="../resources/css/priceCompare/today_cart.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
     <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
-    <script src="../resources/js/today_cart.js" async></script>
+    <script src="../resources/js/priceCompare/today_cart.js" async></script>
 </head>
 <body>
     <div id="wrap">

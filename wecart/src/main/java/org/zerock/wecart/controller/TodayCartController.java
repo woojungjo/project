@@ -28,7 +28,8 @@ public class TodayCartController {
 		return "redirect:cartList";
 	} //register
 	
-	@PostMapping("/remove")
+//	@PostMapping("/remove")		Ajax일 때 PostMapping으로
+	@GetMapping("/remove")		//현재 확인단계일 때만 임시로 겟매핑
 	public String remove() {
 		log.trace("remove() invoked.");
 		
