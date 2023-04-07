@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeCart</title>
+
+    <link rel="shortcut icon" href="ico/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="ico/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/cart.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
+    <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div class="widthfix header_color">    
+            <div id="header">
+                <span>우리동네<br>장바구니</span>
+                <div id="gnb">
+                    <ul class="nav gnb">
+                        <li class="nav_item gnb_li"><span class="nav_text">가격비교</span></li>
+                        <li class="nav_item gnb_li"><span class="nav_text">커뮤니티</span> </li>
+                        <li class="nav_item gnb_li"><span class="nav_text">QNA</span></li>
+                    </ul>
+                </div>
+
+                <div id="info">
+                    <ul class="nav">
+                        <li class="nav_item"><span class="nav_text">개포동</span></li>
+                        <li class="nav_item"><button onclick=window.location.href='#' id="login_bt">로그인</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="widthfix">    
+            <div id="search">
+                <div class="cate">
+                    <i class="fa-solid fa-bars fa-2x"></i>
+                    <span>카테고리</span>    
+                </div>
+                <div class="search_bar">
+                    <form action="#" method="get">
+                        <div class="search_form">
+                            <input type="text" name="search_item" placeholder="검색어를 입력해주세요" class="search_input">
+                            <button type="submit"class="submit_bt"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
+                        </div>                    
+                    </form>                          
+                </div> 
+                <div>
+                    <button type="button" class="mypick_bt"><i class="fa-regular fa-heart fa-2x"></i></button>
+                    <button type="button" class="mypick_bt"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
+                </div>             
+            </div>
+        </div>
+        <div class="widthfix">  
+            <div id="container">
+                <div id="section">
+                    <div class="cate_nav">
+                        <ul class="cate_ul">
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">곡물가공품</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+                                
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>견과류</li>
+                                    <li>국수</li>
+                                    <li>냉동만두</li>
+                                    <li>당면</li>
+                                    <li>두부</li>
+                                    <li>라면</li>
+                                    <li>밀가루</li>
+                                    <li>부침가루</li>
+                                    <li>빵</li>
+                                    <li>스프</li>
+                                    <li>식빵</li>
+                                    <li>시리얼</li>
+                                    <li>즉석국</li>
+                                    <li>즉석덮밥</li>
+                                    <li>즉석밥</li>
+                                    <li>즉석죽</li>
+                                    <li>컵라면</li>
+                                    <li>컵밥</li>
+                                    <li>탕</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">정육·난류</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>계란</li>
+                                    <li>닭고기</li>
+                                    <li>돼지고기</li>
+                                    <li>쇠고기</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">수산가공품</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>맛김</li>
+                                    <li>맛살</li>
+                                    <li>어묵</li>
+                                    <li>참치캔</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">낙농·축산가공품</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>마가린</li>
+                                    <li>발효유</li>
+                                    <li>분유</li>
+                                    <li>소시지</li>
+                                    <li>우유</li>
+                                    <li>치즈</li>
+                                    <li>햄</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">조미류·장류·식용유</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>간장</li>
+                                    <li>고추장</li>
+                                    <li>된장</li>
+                                    <li>잼</li>
+                                    <li>마요네즈</li>
+                                    <li>꿀</li>
+                                    <li>설탕</li>
+                                    <li>소금</li>
+                                    <li>식용유</li>
+                                    <li>식초</li>
+                                    <li>쌈장</li>
+                                    <li>참기름</li>
+                                    <li>카레</li>
+                                    <li>케첩</li>
+                                    <li>혼합조미료</li>
+                                    <li>드레싱</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">채소</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>감자</li>
+                                    <li>고구마</li>
+                                    <li>깻잎</li>
+                                    <li>단무지</li>
+                                    <li>당근</li>
+                                    <li>대파</li>
+                                    <li>마늘</li>
+                                    <li>무</li>
+                                    <li>배추</li>
+                                    <li>버섯</li>
+                                    <li>상추</li>
+                                    <li>시금치</li>
+                                    <li>양배추</li>
+                                    <li>양파</li>
+                                    <li>오이</li>
+                                    <li>쪽파</li>
+                                    <li>콩나물</li>
+                                    <li>포기김치</li>
+                                    <li>풋고추</li>
+                                    <li>호박</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">과자·빙과류</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>감자칩</li>
+                                    <li>껌</li>
+                                    <li>모나카류아이스크림</li>
+                                    <li>빙과류</li>
+                                    <li>새우깡</li>
+                                    <li>아이스크림</li>
+                                    <li>에너지바</li>
+                                    <li>초코바</li>
+                                    <li>초코파이</li>
+                                    <li>초콜릿</li>
+                                    <li>사탕</li>
+                                    <li>비스킷</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">차·음료·주류</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>주스</li>
+                                    <li>차</li>
+                                    <li>두유</li>
+                                    <li>막걸리</li>
+                                    <li>맥주</li>
+                                    <li>비타민음료</li>
+                                    <li>사이다</li>
+                                    <li>생수</li>
+                                    <li>소주</li>
+                                    <li>에너지음료</li>
+                                    <li>이온음료</li>
+                                    <li>캔커피</li>
+                                    <li>커피믹스</li>
+                                    <li>콜라</li>
+                                    <li>포도주</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">이미용품</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>화장지</li>
+                                    <li>바디워시</li>
+                                    <li>로션</li>
+                                    <li>생리대</li>
+                                    <li>비누</li>
+                                    <li>손세정제</li>
+                                    <li>염색약</li>
+                                    <li>면도날</li>
+                                    <li>샴푸</li>
+                                    <li>종이기저귀</li>
+                                    <li>치약</li>
+                                    <li>칫솔</li>
+                                    <li>구강청결제</li>
+                                    <li>마스크</li>
+                                    <li>코로나 자가검사 키트</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">세탁·주방·가사용품</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>고무장갑</li>
+                                    <li>랩</li>
+                                    <li>부탄가스</li>
+                                    <li>살균소독제</li>
+                                    <li>살충제</li>
+                                    <li>섬유유연제</li>
+                                    <li>섬유탈취제</li>
+                                    <li>세정제</li>
+                                    <li>세탁세제(가루형)</li>
+                                    <li>세탁세제(액체형)</li>
+                                    <li>습기제거제</li>
+                                    <li>위생배</li>
+                                    <li>주방세제</li>
+                                    <li>키친타올</li>
+                                </ul>
+                            </li>
+                            <li class="cate_nav_item">
+                                <input type="radio" id="component1" name="component" value="상품코드">
+                                <div class="cate_title">
+                                    <label for="component1">생선류</label>
+                                    <button type="button" class="cate_nav_bt"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+
+                                <ul class="nonedeco_li" style="max-height: 0px; opacity: 0;">
+                                    <li>갈치</li>
+                                    <li>고등어</li>
+                                    <li>오징어</li>
+                                    <li>조기</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="article">
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <p>
+                ⓒ 2023 WeCart, Inc. All Rights Reserved
+            </p>
+            <ul>
+                <li class="nav_item">이용약관</li>
+                <li class="nav_item">개인정보처리방침</li>
+                <li class="nav_item">사업자정보</li>
+                <li class="nav_item">깃허브</li>
+            </ul>
+            <p>
+                고객센터 <br>
+                전화번호: 02-1234-5678
+            </p>           
+        </div>
+    </div>
+</body>
+</html>
