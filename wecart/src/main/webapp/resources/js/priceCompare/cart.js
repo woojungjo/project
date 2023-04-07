@@ -207,10 +207,21 @@ window.onload = function () {
     //         e.target.classList.remove("cate_in_li_selected");
     //     });
     // });
-    document.querySelector('.cate_in_li_a').addEventListener('click', function(event) {
-        event.preventDefault();
-        window.location.href = this.getAttribute('href');
-      });
+    // document.querySelector('.cate_in_li_a').addEventListener('click', function(event) {
+    //     event.preventDefault();
+    //     window.location.href = this.getAttribute('href');
+    // });
+
+    var mypickGoods = document.querySelector(".mypick_goods");
+    mypickGoods.addEventListener('click', () => {
+        location.href = "#"
+    });
+
+    var mypickCart = document.querySelector(".mypick_cart");
+    mypickCart.addEventListener('click', function (e) {
+        console.log(e.target);
+        location = "/todayCart/cartList";
+    });
 };
 
 
