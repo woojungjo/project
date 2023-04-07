@@ -1,5 +1,5 @@
 package org.zerock.wecart.controller;
 
-public class Controller {
+public class ControllerTests {
 
 }
