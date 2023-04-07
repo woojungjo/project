@@ -1,0 +1,164 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+#wrap {
+    font-family: 'Jeju Gothic', sans-serif;
+}
+body {
+    margin: 0;
+}
+.widthfix {
+    min-width: 1500px;
+}
+.header_color {
+    background-color: #53917E; 
+    height: 100px; 
+}
+#header {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+    padding: 0px 100px;
+    /* background-color: #7cb342; */
+    position: sticky;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#header > span {
+    color: white;
+    font-size: 22px;   
+}
+.nav_item {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    cursor: pointer;
+    list-style: none;
+
+    color: white;
+}
+#gnb {
+    margin-left: 100px;
+}
+.gnb {   
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.5em;
+}
+.gnb_li {
+    margin-right: 50px;
+}
+.gnb_li:last-of-type {
+    margin-right: 0;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.nav_text {
+    height: fit-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#search {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#container {
+    width: 1130px;
+    margin: 0 auto;
+}
+#login_bt {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    border: 0;
+    margin-left: 10px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-family: 'Jeju Gothic', sans-serif;
+
+    cursor: pointer;
+}
+#info li:last-of-type {
+    margin-right: 0;
+}
+.fa-bars {
+    display: inline-block;
+    font-size: 16px;
+}
+#info li:first-of-type::after {
+    content: "";
+    background-image: url("../imgs/pin-8-16.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -10%;
+}
+.cate {
+    display: flex;    
+    width: 120px;
+    justify-content: space-around;
+}
+.cate > span {
+    font-size: 20px;
+    align-self: center;
+}
+.search_form {
+    width: 400px;
+    height: 40px;
+    border: 1px solid #53917E;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-around;
+}
+.search_bar {
+    width: 400px;
+}
+.submit_bt {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-color: white;
+    color: #53917E;
+
+    align-self: center;
+    cursor: pointer;
+}
+.search_input {
+    width: 300px;
+    border: 0;
+
+    font-family: 'Jeju Gothic', sans-serif;
+}
+.mypick_bt {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    margin-left: 20px;
+    
+    background-color: white;
+    color: #53917E;
+    cursor: pointer;
+}
+.mypick_bt:first-of-type {
+    margin-left: 0;
+}

@@ -1,0 +1,111 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+html{
+    margin: 0;
+    padding: 0;
+}
+#wrap {
+    width: 100vw;
+    margin: 0;
+    
+    font-family: 'Jeju Gothic', sans-serif;
+}
+body {
+    margin: 0;
+}
+#header {
+    /* width: 100%; */
+    border-bottom: 1px solid lightgray;
+    padding: 0px 100px;
+    background-color: rgb(83, 189, 56);
+}
+.nav_item {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+#gnb {
+    position: relative;
+    top: 45px;
+    left: 50px;
+}
+#gnb li {
+    font-size: 25px;
+}
+#info li:first-of-type::after {
+    content: "";
+    background-image: url("../imgs/whiteloc.png");
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align: -10%;
+}
+#info li {
+    position: relative;
+    left: 87%;
+}
+#login_bt {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    
+    font-family: 'Jeju Gothic', sans-serif;
+}
+#logo {
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    left: 5%;
+}
+#container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+#section {
+    width: 1130px;
+    margin: auto auto;
+    /* border: 1px solid grey; */
+
+    text-align: center;
+}
+#section > p {
+    font-size: 30px;
+}
+.address {
+    width: 300px;
+    height: 30px;
+
+    font-family: 'Jeju Gothic', sans-serif;
+}
+.start_bt {
+    width: 80px;
+    height: 35px;
+
+    font-family: 'Jeju Gothic', sans-serif;
+}
+#footer {
+    width: 100%;
+    border-top: 1px solid lightgray;
+}
+#footer > P:first-of-type {
+    margin-left: 42px;
+}
+#footer > p:last-of-type {
+    margin-right: 42px;
+    float: right;
+}
+#footer ul > .nav_item + .nav_item::before {
+    content: '';
+    width: 1px;
+    height: 16px;
+    margin-right: 15px;
+
+    background-color: lightgray;
+    vertical-align: -2px;
+
+    display: inline-block;
+}
