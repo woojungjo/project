@@ -1,0 +1,188 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body {
+    margin: 0;
+}
+#wrap {
+    font-family: 'Jeju Gothic', sans-serif;
+    overflow: hidden;
+    min-width: 1190px;
+}
+.header_color {
+    background-color: #53917E; 
+    height: 100px; 
+}
+#header {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+    /* background-color: #7cb342; */
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#header > span {
+    color: white;
+    font-size: 22px;   
+}
+.nav_item {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    cursor: pointer;
+    list-style: none;
+
+    color: white;
+}
+#gnb {
+    margin-left: 100px;
+}
+.gnb {   
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.5em;
+}
+.gnb_li {
+    margin-right: 50px;
+}
+.gnb_li:last-of-type {
+    margin-right: 0;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.nav_text {
+    height: fit-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    text-decoration: none;
+}
+.gnb_li .nav_text {
+    color: white;
+}
+#container {
+    width: 1130px;
+    margin: 0 auto;
+    position: relative;
+}
+#login_bt {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    border: 0;
+    margin-left: 10px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-family: 'Jeju Gothic', sans-serif;
+
+    cursor: pointer;
+}
+#info li:last-of-type {
+    margin-right: 0;
+}
+.fa-bars {
+    display: inline-block;
+    font-size: 16px;
+}
+#info li:first-of-type::after {
+    content: "";
+    background-image: url("/resources/imgs/priceCompare/pin-8-16.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -10%;
+}
+.mypage_nav_ul {
+    width: 220px;
+    padding-left: 0;
+    margin-top: 90px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(10, 50px);
+}
+.mypage_nav_li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    list-style: none;
+}
+.mypage_nav_li:first-of-type {
+    border-top: 1px solid black;
+}
+.mypage_nav_li .nav_text {
+    color: black;
+}
+.mypage_nav_li:first-of-type {
+    background-color: #53917E;
+}
+.mypage_nav_li:first-of-type .nav_text {
+    color: white;
+}
+/* 해당 마이페이지 영역으로 이동했을 때 nav가 굵어지도록 */
+.mypage_nav_li:nth-of-type(3) {
+    background-color: rgb(236, 233, 233);
+}
+.mypage_nav_li:nth-of-type(3) .nav_text span {
+    color: rgb(85, 84, 84);
+    font-weight: bold;
+}
+#section {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.mypage_article_title {
+    margin-bottom: 16px;
+    
+    display: flex;
+    justify-content: center;
+}
+.mypage_article_title > h3 {
+    font-size: 1.5em;
+}
+#top_bt {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid lightgray;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    right: 24px;
+    bottom: 20px;
+    z-index: 100;
+}
+#top_bt:hover {
+    background-color: #53917E;
+}
+.a_black_text {
+    text-decoration: none;
+    color: black;
+}
