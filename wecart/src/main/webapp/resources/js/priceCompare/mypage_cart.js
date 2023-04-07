@@ -42,7 +42,7 @@ window.onload = function () {
 
         if (counts[index] >= 2) {
             const minusBt = document.querySelectorAll(".count_minus_bt")[index];
-            minusBt.style.backgroundImage = "url(../imgs/minus-xs-svgrepo-black.svg)";
+            minusBt.style.backgroundImage = "url(../../resources/imgs/minus-xs-svgrepo-black.svg)";
         }
 
         //합계 구하기
@@ -92,7 +92,7 @@ window.onload = function () {
         amountDiv[index].textContent = `${counts[index]}`;
 
         if (counts[index] == 1) {
-            e.currentTarget.style.backgroundImage = "url(../imgs/minus-xs-svgrepo-gray.svg)";
+            e.currentTarget.style.backgroundImage = "url(../../resources/imgs/minus-xs-svgrepo-gray.svg)";
         }
 
         //합계 구하기

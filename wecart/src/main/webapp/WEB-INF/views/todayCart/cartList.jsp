@@ -25,9 +25,9 @@
                 <span>우리동네<br>장바구니</span>
                 <div id="gnb">
                     <ul class="nav gnb">
-                        <li class="nav_item gnb_li"><span class="nav_text">가격비교</span></li>
-                        <li class="nav_item gnb_li"><span class="nav_text">커뮤니티</span> </li>
-                        <li class="nav_item gnb_li"><span class="nav_text">QNA</span></li>
+                        <li class="nav_item gnb_li"><a href="/priceCompare/list" class="nav_text">가격비교</a></li>
+                        <li class="nav_item gnb_li"><a href="#" class="nav_text">커뮤니티</a> </li>
+                        <li class="nav_item gnb_li"><a href="#" class="nav_text">QNA</a></li>
                     </ul>
                 </div>
 
@@ -47,7 +47,7 @@
                     <span>카테고리</span>    
                 </div>
                 <div class="search_bar">
-                    <form action="#" method="get">
+                    <form action="/priceCompare/search" method="get">
                         <div class="search_form">
                             <input type="text" name="search_item" placeholder="검색어를 입력해주세요" class="search_input">
                             <button type="submit"class="submit_bt"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
@@ -55,8 +55,8 @@
                     </form>                          
                 </div> 
                 <div>
-                    <button type="button" class="mypick_bt"><i class="fa-regular fa-heart fa-2x"></i></button>
-                    <button type="button" class="mypick_bt"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
+                    <button type="button" class="mypick_bt mypick_goods"><i class="fa-regular fa-heart fa-2x"></i></button>
+                    <button type="button" class="mypick_bt mypick_cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
                 </div>             
             </div>
         </div>
@@ -70,7 +70,7 @@
                                 <h2>오늘의 장바구니</h2>
                             </div>
                             <div class="mycart_table_div">
-                                <form action="#" method="post">
+                                <form action="/todayCart/register" method="post">
                                     <table id="mycart_tbl">
                                         <thead>
                                             <tr>
@@ -332,7 +332,7 @@
                                         </tfoot>
                                     </table>
 
-                                    <div id="mycart_tbl_button">
+                                    <div class="mycart_tbl_button_flex">
                                         <input type="submit" value="장바구니 저장" class="mycart_tbl_bt todayCartSave">
                                     </div>
                                 </form>                        
