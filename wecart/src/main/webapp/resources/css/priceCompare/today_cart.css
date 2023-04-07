@@ -45,3 +45,12 @@
     background: transparent;
     cursor: pointer;
 }
+.mycart_tbl_button_flex {
+    margin-bottom: 50px;
+
+    display: flex;
+    justify-content: end;
+}
+.todayCartSave {
+	background-color: #cee9dd;
+}

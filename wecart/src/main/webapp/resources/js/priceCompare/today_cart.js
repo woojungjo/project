@@ -42,7 +42,7 @@ window.onload = function () {
 
         if (counts[index] >= 2) {
             const minusBt = document.querySelectorAll(".count_minus_bt")[index];
-            minusBt.style.backgroundImage = "url(../imgs/minus-xs-svgrepo-black.svg)";
+            minusBt.style.backgroundImage = "url(../resources/imgs/minus-xs-svgrepo-black.svg)";
         }
 
         //합계 구하기
@@ -92,7 +92,7 @@ window.onload = function () {
         amountDiv[index].textContent = `${counts[index]}`;
 
         if (counts[index] == 1) {
-            e.currentTarget.style.backgroundImage = "url(../imgs/minus-xs-svgrepo-gray.svg)";
+            e.currentTarget.style.backgroundImage = "url(../resources/imgs/minus-xs-svgrepo-gray.svg)";
         }
 
         //합계 구하기
@@ -126,6 +126,20 @@ window.onload = function () {
             checkBox.checked = true;
         });
     } //if
+    
+    allSelect.addEventListener('change', function () {
+        if(allSelect.checked) {
+            const checkBoxs = document.querySelectorAll(".cart_select");
+            checkBoxs.forEach((checkBox) => {
+                checkBox.checked = true;
+            });
+        } else {
+            const checkBoxs = document.querySelectorAll(".cart_select");
+            checkBoxs.forEach((checkBox) => {
+                checkBox.checked = false;
+            });
+        } //if-else
+    });    
 
     //선택삭제
     var allDelete = document.querySelector("#allDeletebt");
@@ -161,21 +175,7 @@ window.onload = function () {
             
             total.textContent = tPrice.toLocaleString();
         }); //.forEach
-    }); //.click
-
-    allSelect.addEventListener('change', function () {
-        if(allSelect.checked) {
-            const checkBoxs = document.querySelectorAll(".cart_select");
-            checkBoxs.forEach((checkBox) => {
-                checkBox.checked = true;
-            });
-        } else {
-            const checkBoxs = document.querySelectorAll(".cart_select");
-            checkBoxs.forEach((checkBox) => {
-                checkBox.checked = false;
-            });
-        } //if-else
-    });    
+    }); //.click    
 
     //상품 개별 삭제
     var deleteBts = document.querySelectorAll(".delete_bt");
@@ -205,5 +205,17 @@ window.onload = function () {
 
     deleteBts.forEach((bt) => {
         bt.addEventListener('click', deleteOne)
+    });
+    
+    //찜한상품, 장바구니 버튼 이동
+    var mypickGoods = document.querySelector(".mypick_goods");
+    mypickGoods.addEventListener('click', () => {
+        location.href = "#"
+    });
+
+    var mypickCart = document.querySelector(".mypick_cart");
+    mypickCart.addEventListener('click', function (e) {
+        console.log(e.target);
+        location = "/todayCart/cartList";
     });
 };

@@ -16,8 +16,13 @@ public class PriceCompareController {
 	
 	@GetMapping("/list")
 	public void list() {
-		log.trace("list() invoked.");
-		
+		log.trace("list() invoked.");		
 	} //list
+	
+	@GetMapping("/search")
+	public void search(String search_item) {
+		log.trace("search() invoked.");
+		log.info("\t+ search_item: {}", search_item);
+	} //search
 	
 } //end class
