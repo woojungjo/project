@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.zerock.myapp.service.UserService;
+import org.zerock.wecart.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

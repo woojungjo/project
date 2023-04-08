@@ -214,7 +214,7 @@ window.onload = function () {
 
     var mypickGoods = document.querySelector(".mypick_goods");
     mypickGoods.addEventListener('click', () => {
-        location.href = "#"
+        location.href = "/mypage/cart/wishedPrds";
     });
 
     var mypickCart = document.querySelector(".mypick_cart");
