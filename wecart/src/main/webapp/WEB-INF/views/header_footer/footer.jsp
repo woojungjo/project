@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%--@include file="/resources/css/footer.css" --%>
-
-  <link rel="stylesheet" href="/Woojungjo_Resources/css/footer.css">
+  <link rel="stylesheet" href="/css/header_footer/footer.css">
 
 
- </div> <!-- wrapper: header+main-->
+</div> <!-- wrapper: header+main-->
         <footer>
             <div class="footerText">
                 <p>
@@ -29,4 +27,4 @@
                  </p>
             </div>
         </footer>
-    </div> <!--wrapper_contatiner-->
+  </div> <!--wrapper_contatiner--> 

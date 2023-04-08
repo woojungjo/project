@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <link rel="stylesheet" href="/Woojungjo_Resources/css/afterlogin_header.css">
+    <link rel="stylesheet" href="/css/header_footer/afterlogin_header.css">
     
     <div class="wrapper_contatiner">
       <div class="wrapper">

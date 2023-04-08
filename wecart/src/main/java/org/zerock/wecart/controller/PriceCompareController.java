@@ -25,4 +25,27 @@ public class PriceCompareController {
 		log.info("\t+ search_item: {}", search_item);
 	} //search
 	
+	
+	@ReqeustMapping(
+			path= {"/matemodify"},
+			method= {
+					RequestMethod.GET,
+					RequestMethod.POST	
+			}
+			){
+		
+	}//modify 
+	
+	@RequestMapping(
+			path={"/basicGetPost"},		
+			method= {
+				RequestMethod.GET,
+				RequestMethod.POST	
+			})
+	public String basicGetPost() {
+		log.trace("basicGetPost() invoked");
+		return "sample";
+	}
+
+	
 } //end class
