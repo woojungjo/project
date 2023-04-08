@@ -1,0 +1,230 @@
+@charset "UTF-8";
+
+.mate_board_name{
+   display: flex;
+   justify-content: center;
+   
+   font-size: 50px;
+   
+  margin-top:50px;
+}
+
+#mate_board_info > div{
+    margin: 7px 0;
+}
+#mate_board_writer_and_bookMark{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#mate_board_writedt_and_views{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content : start;
+}
+
+.mate_board_title{
+    font-size: 2rem;
+}
+.mate_board_views{
+    margin-left: 10px;
+}
+
+hr{
+	border: none;
+    height: 2px;
+    background-color: #dcdbdb; 
+}
+#mate_board_contents{  
+  /* grid-column: 1 / span 2; */
+
+  min-height: 500px;
+  width: 1130px;
+  justify-self: center;
+  border: 2px solid #dcdbdb;
+}
+
+/*이 부분 고치기!!!!!!!!!!!!!!!!!*/
+.mate_board_contents_wrapper{
+    margin: 10px;
+}
+#mate_board_contents div{
+    margin: 5px 10px;
+}
+
+#mate_board_contents .mate_board_maps{
+    margin-top: 15px;
+}
+#mate_board_contents #mate_board_contents_dt_and_members{
+	margin-left:0;
+}
+
+#mate_board_contents_dt_and_members{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+#member{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;   
+}
+.mate_board_contents_join{
+    display: flex;
+    justify-content: center;
+}
+
+#mate_board_info_below {
+    text-align: right;
+}
+
+#mate_board_info_below > div{
+    margin: 7px 0;
+}
+
+#mate_board_info_below>button:first-of-type{
+    margin-top: 10px;
+}
+
+.mate_board_recruiting_option, button{
+    border: 1px solid #dcdbdb;
+	background: none;
+    text-align: center;
+    color: #3f4945;
+
+    width: 70px;
+    height: 30px;
+
+    border-radius: 5px;
+
+}						
+
+.mate_board_writer button:first-of-type{
+    width: 80px;
+
+}
+
+#sub {
+  border: 1px solid #dcdbdb;;
+  display: none;
+  padding: 15px;
+  width: 200px;
+}
+#sub > div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#sub li{
+	list-style: none;
+}
+
+#sub, .currentMemberNum:hover{
+    cursor: pointer;
+}
+
+
+.mate_board_recruiting_option{
+        appearance: none;
+}
+
+.mate_board_recruiting_option option{
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+/* select option{
+    background-color: red;
+  } */
+
+
+button{
+    transition: border-radius 2s ease-in-out;
+    cursor:pointer;
+}
+
+button:hover{
+    transform: scale(1.05);
+   background-color:  #3f4945;
+   color: white;
+   cursor:pointer;
+}
+
+#download_button{
+    width: 85px;
+}
+#modify_delete{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*
+.board_change input{
+    border: 1px solid #dcdbdb;
+	background: none;
+    border-radius: 3rem;
+}
+*/
+  .board_change{
+    display: flex;
+    width: 1030px;
+    padding: 50px 50px 0px 50px;
+    margin: 0 auto;
+    column-gap: 50px;
+  }
+  .board_change >a{
+    flex-grow: 1;
+
+  }
+  .board_change >a> button{
+    height: 50px;
+    width: 100%;
+  }
+  .board_change .now{
+    background-color: #3f4945;
+    color: white;
+  }
+
+
+.custom-confirm-button-class {
+    border: 1px solid #dcdbdb !important;
+	background: none !important;
+    text-align: center !important;
+    color: #3f4945 !important;
+    border-radius: 5px !important;
+
+  }
+  
+ .custom-cancel-button-class {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+       /*cursor: pointer;*/
+  }
+  
+.dropdown-menu ul{
+    display: none;
+    list-style: none;
+}
+
+#mate_board_attach_download{
+    width: 300px;
+    position: absolute;
+    right: 0px;
+    border: solid 1px #53917E;
+    display: none;
+  }
+  
+  #mate_board_attach_download > ul{
+    list-style-type: none;
+    padding: 0 10px;
+  }
+  #mate_board_attach_download li{
+    padding: 5px;
+  }
+
