@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ <h1><%= request.getRequestURI() %></h1>
 </body>
 </html>
