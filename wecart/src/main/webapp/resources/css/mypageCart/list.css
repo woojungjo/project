@@ -1,0 +1,199 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body {
+    margin: 0;
+}
+#wrap {
+    font-family: 'Jeju Gothic', sans-serif;
+    overflow: hidden;
+    min-width: 1190px;
+}
+.header_color {
+    background-color: #53917E; 
+    height: 100px; 
+}
+#header {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+    /* background-color: #7cb342; */
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#header > span {
+    color: white;
+    font-size: 22px;   
+}
+.nav_item {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    cursor: pointer;
+    list-style: none;
+
+    color: white;
+}
+#gnb {
+    margin-left: 100px;
+}
+.gnb {   
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.5em;
+}
+.gnb_li {
+    margin-right: 50px;
+}
+.gnb_li:last-of-type {
+    margin-right: 0;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+select {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    width: 77px;
+} 
+
+select option {
+    text-align: center;
+  }
+
+table, td, th{
+    border-collapse: collapse;
+    border: 1px solid black;
+
+}
+
+td img{
+    width: 180px;
+    height: 180px;
+}
+
+.nav_text {
+    height: fit-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    text-decoration: none;
+}
+.gnb_li .nav_text {
+    color: white;
+}
+#login_bt {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    border: 0;
+    margin-left: 10px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-family: 'Jeju Gothic', sans-serif;
+
+    cursor: pointer;
+}
+#info li:last-of-type {
+    margin-right: 0;
+}
+.fa-bars {
+    display: inline-block;
+    font-size: 16px;
+}
+#info li:first-of-type::after {
+    content: "";
+    background-image: url("../imgs/pin-8-16.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -10%;
+}
+
+.article {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    justify-content: center;
+    display: flex;
+}
+
+
+.shoppingBasketList{
+    margin: auto;
+}
+
+.shoppingBasketList td:first-child{
+    width: 180px;
+    height: 180px;
+}
+
+.shoppingBasketList td:last-child{
+    text-align: center;
+    width: 350px;
+    height: 180px;
+}
+
+/* nav에 관한 부분 */
+.mypage_nav_ul {
+    width: 220px;
+    padding-left: 0;
+    margin-top: 90px;
+    float: le;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(10, 50px);
+}
+.mypage_nav_li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    list-style: none;
+}
+.mypage_nav_li:first-of-type {
+    border-top: 1px solid black;
+}
+.mypage_nav_li .nav_text {
+    color: black;
+}
+.mypage_nav_li:first-of-type {
+    background-color: #53917E;
+}
+.mypage_nav_li:first-of-type .nav_text {
+    color: white;
+}
+/* 해당 마이페이지 영역으로 이동했을 때 nav가 굵어지도록 */
+.mypage_nav_li:nth-of-type(3) {
+    background-color: rgb(236, 233, 233);
+}
+.mypage_nav_li:nth-of-type(3) .nav_text span {
+    color: rgb(85, 84, 84);
+    font-weight: bold;
+}

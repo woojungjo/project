@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+     
+    <script>
+        function deletePreviousSibling(element) {
+            var previousSibling = element.previousSibling;
+            console.log(element.previousElementSibling);
+            console.log(previousSibling);
+            console.log(previousSibling.parentNode);
+            element.previousElementSibling.remove();
+
+            if (previousSibling && previousSibling.nodeType === 1) {
+                console.log(previousSibling);
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div>
+        <p>This is the first paragraph</p>
+        <p>This is the second paragraph</p>
+        <p>This is the third paragraph</p>
+        <button onclick="deletePreviousSibling(this)">Delete previous</button>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
