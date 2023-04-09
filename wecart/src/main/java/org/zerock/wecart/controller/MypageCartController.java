@@ -49,13 +49,15 @@ public class MypageCartController {
 	// 찜한 상품들 표시
 	@GetMapping("/wishedPrds")
 	public void wishedPrds() {
-		log.trace("wishtedPrds() invoked.");
+		log.trace("wishedPrds() invoked.");
 	} // wishedPrds  jhwan
 	
 	// 찜한 상품 삭제
-	@PostMapping("/wishedPrdsRemoved")
-	public void wishedProds() {
+	@GetMapping("/wishedPrdsRemoved")
+	public String wishedPrdsRemoved() {
 		log.trace("wishedPrdsRemoved() invoked. ");
+		
+		return "redirect:wishedPrds";
 	} // wishedProdsRemoved   jhwan
 	
 	

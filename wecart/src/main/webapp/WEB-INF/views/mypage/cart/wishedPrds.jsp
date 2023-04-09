@@ -84,7 +84,7 @@
 
                             <div class="rightAsUserStandard">
                                 <button onclick="deleteDiv(this)">삭제</button>
-                                <button class="mypick_bt"><i class="fa-solid fa-cart-shopping fa-1x"></i> 담기</button>
+                                <button class="mypick_bt" onclick="addPrdToCart()"><i class="fa-solid fa-cart-shopping fa-1x"></i> 담기</button>
                             </div>
                         </div>
                         <hr>
@@ -187,8 +187,16 @@
                 divTag.remove();
                 console.log(hrTag) ;
     
-            }
-        }
+                
+                window.location.href = "/mypage/cart/wishedPrdsRemoved";
+            } // if
+        } // deleteDiv(btn)
+        
+        function addPrdToCart(){
+        	alert("상품이 카트에 담겼습니다");
+        	
+        	window.location.href= "/todayCart/cartList";
+        } // addPrdToCart()
 
     </script>
 
