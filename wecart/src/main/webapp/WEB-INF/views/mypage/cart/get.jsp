@@ -46,8 +46,8 @@
                         <ul class="mypage_nav_ul">
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>마이페이지</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>개인정보 수정</span></a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text"><span>장바구니 목록</span></a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text"><span>찜한 상품</span></a></li>
+                            <li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text"><span>장바구니 목록</span></a></li>
+                            <li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text"><span>찜한 상품</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>즐겨찾는 마트</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>내 활동 내역</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>키워드알림</span></a></li>

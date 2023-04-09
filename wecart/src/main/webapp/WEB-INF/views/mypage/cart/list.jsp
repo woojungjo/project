@@ -45,8 +45,8 @@
                 <ul class="mypage_nav_ul">
                     <li class="mypage_nav_li"><a href="#" class="nav_text">마이페이지</a></li>
                     <li class="mypage_nav_li"><a href="#" class="nav_text">개인정보 수정</a></li>
-                    <li class="mypage_nav_li"><a href="#" class="nav_text">장바구니 목록</a></li>
-                    <li class="mypage_nav_li"><a href="#" class="nav_text">찜한 상품</a></li>
+                    <li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text">장바구니 목록</a></li>
+                    <li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text">찜한 상품</a></li>
                     <li class="mypage_nav_li"><a href="#" class="nav_text">즐겨찾는 마트</a></li>
                     <li class="mypage_nav_li"><a href="#" class="nav_text">내 활동 내역</a></li>
                     <li class="mypage_nav_li"><a href="#" class="nav_text">키워드알림</a></li>
@@ -77,7 +77,7 @@
                                     장바구니 등록일: 230326<br>
                                     상품명: 수박 외 5건 <br><br>
 
-                                    <p><a href="/priceCompare/showPrd">상세보기 </a> </p>
+                                    <p><a href="/mypage/cart/get">상세보기 </a> </p>
 
                                 </td>
                             </tr>
@@ -90,7 +90,7 @@
                                     장바구니 등록일: 230326<br>
                                     상품명: 수박 외 5건 <br><br>
 
-                                    <p><a href="/priceCompare/showPrd">상세보기 </a> </p>
+                                    <p><a href="/mypage/cart/get">상세보기 </a> </p>
 
                                 </td>
 
@@ -102,7 +102,7 @@
                                     장바구니 등록일: 230326<br>
                                     상품명: 수박 외 5건 <br><br>
 
-                                    <p><a href="/priceCompare/showPrd">상세보기 </a> </p>
+                                    <p><a href="/mypage/cart/get">상세보기 </a> </p>
 
                                 </td>
                             </tr>

@@ -21,8 +21,10 @@ public class MypageCartController {
 	} //get
 	
 	@PostMapping("/remove")
-	public void remove() {
+	public String remove() {
 		log.trace("remove() invoked.");
+		
+		return "redirect:/mypage/cart/list";
 	} //remove
 	
 	@PostMapping("/currentPrice")
