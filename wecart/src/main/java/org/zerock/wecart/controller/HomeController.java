@@ -21,7 +21,7 @@ public class HomeController {
     @GetMapping("/main")   // 메인화면으로 이동
     public String main() {
     	log.trace("main () invoked.");
-       return "main";
+       return "main/main";
     }
     
 }//RootController
