@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -37,6 +38,8 @@ public class PriceCompareController {
 	@PostMapping("/addPrdToCart")
 	public void addPrdToCart() {
 		log.trace("addPrdToCart() invoked. ");
+		
+		
 	} // addPrdToCart   Jhwan
 	
 	// 해당 상품을 찜할 수 있음
@@ -45,9 +48,4 @@ public class PriceCompareController {
 		log.trace("addPrd() invoked. ");
 	} // addPrd   Jhwan
 	
-	// 해당 상품을 찜에서 해제한다.
-	@PostMapping("/cancelPrd")
-	public void cancelPrd() {
-		log.trace("cancelPrd() invoked. ");
-	} // cancelPrd   Jhwan
 } //end class
