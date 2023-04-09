@@ -22,11 +22,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
         rel="stylesheet">
         
-    <link rel="stylesheet" href="/Woojungjo_Resources/css/main.css">
+    <link rel="stylesheet" href="../../resources/css/main/main.css">
 
 </head>
 <body>
-	<jsp:include page="/Woojung_JSP/afterlogin_header.jsp" flush="true" />
+	<jsp:include page="../header_footer/main_header.jsp" flush="true" />
 	
 	
         <main>
@@ -45,7 +45,7 @@
             <!--*********************************************메인 내용은 여기까지*********************************************-->
         </main>
         
-        <jsp:include page="/Woojung_JSP/footer.jsp" flush="true" />
+        <jsp:include page="../header_footer/footer.jsp" flush="true" />
         
 </body>
 <!-- 카카오API -->
