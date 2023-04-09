@@ -2,6 +2,7 @@ package org.zerock.wecart.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.NoArgsConstructor;
@@ -24,5 +25,30 @@ public class PriceCompareController {
 		log.trace("search() invoked.");
 		log.info("\t+ search_item: {}", search_item);
 	} //search
+
 	
+	// 한 상품을 디테일하게 보여줌
+	// showPrd/{mainCategory} 식으로 보여줘야 할 것 같음 => RestFUL API 공부 후 파악하기
+	@GetMapping("/showPrd")
+	public void priceCompare() {
+		log.trace("showPrd() invoked. ");
+	} // priceCompare   Jhwan
+	
+	// 카트를 누르면 상품을 오늘의 카트에 담는다.
+	@PostMapping("/addPrdToCart")
+	public void addPrdToCart() {
+		log.trace("addPrdToCart() invoked. ");
+	} // addPrdToCart   Jhwan
+	
+	// 해당 상품을 찜할 수 있음
+	@PostMapping("/addPrd")
+	public void addPrd() {
+		log.trace("addPrd() invoked. ");
+	} // addPrd   Jhwan
+	
+	// 해당 상품을 찜에서 해제한다.
+	@PostMapping("/cancelPrd")
+	public void cancelPrd() {
+		log.trace("cancelPrd() invoked. ");
+	} // cancelPrd   Jhwan
 } //end class

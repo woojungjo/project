@@ -380,7 +380,7 @@
                         </div>
 
                         <div class="goods_img_tbl">
-                            <a href="#" class="goods_img_a">
+                            <a href="/priceCompare/showPrd" class="goods_img_a">
                                 <div class="goods_img">
                                     <div class="goods_img_content">
                                         <img src="https://picsum.photos/id/684/200/200" alt=""> <!--jsp-->

@@ -26,6 +26,12 @@
 	</view-resolvers>
 
 	<context:component-scan base-package="org.zerock.wecart.controller" />
+	<context:component-scan base-package="org.zerock.wecart.domain" />
+	<context:component-scan base-package="org.zerock.wecart.exception" />
+	<context:component-scan base-package="org.zerock.wecart.listener" />
+	<context:component-scan base-package="org.zerock.wecart.mapper" />
+	<context:component-scan base-package="org.zerock.wecart.service" />
+	
 	
 	
 	

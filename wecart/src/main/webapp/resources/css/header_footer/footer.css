@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+footer{
+    /* position: absolute;*/
+    bottom: 0; 
+    width: 100%;
+
+    font-size: 0.8rem;
+    color: #777;
+    border-top:1px solid #dcdbdb;
+}
+.footerText{
+    margin-left: 15px;
+}
+.copyright{
+    float: right;
+    margin-right: 15px;
+}
+footer a:link {
+    font-size: 0.8rem;
+    color: #777;
+}
+footer a:link, footer a:visited  {
+    font-size: 0.8rem;
+    color: #777;
+}

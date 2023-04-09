@@ -204,7 +204,7 @@ window.onload = function () {
     //찜한상품, 장바구니 버튼 이동
     var mypickGoods = document.querySelector(".mypick_goods");
     mypickGoods.addEventListener('click', () => {
-        location.href = "#"
+        location.href = "/mypage/cart/wishedPrds";
     });
 
     var mypickCart = document.querySelector(".mypick_cart");
