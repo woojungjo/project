@@ -42,7 +42,9 @@
 	</bean>
 
 
+	<context:component-scan base-package="org.zerock.wecart.domain" />
 	<context:component-scan base-package="org.zerock.wecart.service" />
+	<context:component-scan base-package="org.zerock.wecart.listener" />
 	<mybatis-spring:scan base-package="org.zerock.wecart.mapper" />
 
 </beans>
