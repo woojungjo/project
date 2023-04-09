@@ -30,7 +30,7 @@ public class PriceCompareController {
 	// showPrd/{mainCategory} 식으로 보여줘야 할 것 같음 => RestFUL API 공부 후 파악하기
 	@GetMapping("/showPrd")
 	public void priceCompare() {
-		log.trace("priceCompare() invoked. ");
+		log.trace("showPrd() invoked. ");
 	} // priceCompare   Jhwan
 	
 	// 카트를 누르면 상품을 오늘의 카트에 담는다.
