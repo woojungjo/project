@@ -26,6 +26,7 @@ public class PriceCompareController {
 		log.trace("search() invoked.");
 		log.info("\t+ search_item: {}", search_item);
 	} //search
+
 	
 	// 한 상품을 디테일하게 보여줌
 	// showPrd/{mainCategory} 식으로 보여줘야 할 것 같음 => RestFUL API 공부 후 파악하기

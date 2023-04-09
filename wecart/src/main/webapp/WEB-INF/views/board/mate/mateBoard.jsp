@@ -13,6 +13,11 @@
     <script src="/Board/YJ_Resources/js/script.js" defer></script>
     <script src="/Board/YS_Resources/js/script2.js" defer></script>
 
+    <link rel="stylesheet" href="/Board/YS_Resources/css/style.css">
+    <link rel="stylesheet" href="/Board/YJ_Resources/css/style.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="/Board/YS_Resources/css/style2.css">
+	
     <!-- <script src="https://kit.fontawesome.com/78271596c1.js" crossorigin="anonymous"></script> -->
 
     <script src="https://kit.fontawesome.com/a623128410.js" crossorigin="anonymous"></script>
@@ -21,26 +26,24 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
         rel="stylesheet">
-        
-    <link rel="stylesheet" href="/Board/YS_Resources/css/style.css">
-    <link rel="stylesheet" href="/Board/YJ_Resources/css/style.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.css" integrity="sha512-NvuRGlPf6cHpxQqBGnPe7fPoACpyrjhlSNeXVUY7BZAj1nNhuNpRBq3osC4yr2vswUEuHq2HtCsY2vfLNCndYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.js" integrity="sha512-eN8dd/MGUx/RgM4HS5vCfebsBxvQB2yI0OS5rfmqfTo8NIseU+FenpNoa64REdgFftTY4tm0w8VMj5oJ8t+ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+    
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="/Board/YS_Resources/css/style2.css">
+
 
 </head>
 <body>
-	<jsp:include page="/Woojung_JSP/afterlogin_header.jsp" flush="true" />
+	<jsp:include page="../../header_footer/afterlogin_header.jsp" flush="true" />
  	
  	 <main>
         <!--*********************************************메인 내용은 여기부터*********************************************-->
@@ -289,7 +292,8 @@
 
         <!--*********************************************메인 내용은 여기까지*********************************************-->
     </main>
-       <jsp:include page="/Woojung_JSP/footer.jsp" flush="true" />
+	    <jsp:include page="../../header_footer/footer.jsp" flush="true" />
+
 </body>
 
 

@@ -85,3 +85,16 @@ header .header_login{
 
     padding: 0;
 }
+.header_login li{
+    padding: 12px 12px;
+    text-align: center;
+}
+.header_login li:hover {
+    background-color: #236853;
+    border-radius: 5px;
+    color: white;
+}
+.WeCart a:link, .WeCart a:visited, .headerbar_menu a:link, .headerbar_menu a:visited, .header_login a:link, .header_login a:visited{
+	color: white;
+}
+

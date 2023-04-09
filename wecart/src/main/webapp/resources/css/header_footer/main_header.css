@@ -21,7 +21,7 @@ a
    text-decoration:none;
 }
 .wrapper{
-    width: 1280px;
+    width: 1130px;
     padding: 20px 30px;
     margin: auto;
 
@@ -51,7 +51,7 @@ header .site_name{
 }
 
 header .headerbar_menu{
-    flex:3;
+    flex:2;
 
     display: flex;
     flex-wrap: wrap;
@@ -74,7 +74,7 @@ header .headerbar_menu{
     color: white;
 }
 header .header_login{
-    flex:1.7;
+    flex:1.9;
      
     display: flex;
     justify-content: space-evenly;
@@ -85,4 +85,18 @@ header .header_login{
     font-size: 1.3rem;
 
     padding: 0;
+}
+
+.header_login li{
+    padding: 12px 12px;
+    text-align: center;
+}
+.header_login li:hover {
+    background-color: #236853;
+    border-radius: 5px;
+    color: white;
+}
+
+.WeCart a:link, .WeCart a:visited, .headerbar_menu a:link, .headerbar_menu a:visited, .header_login a:link, .header_login a:visited{
+	color: white;
 }
