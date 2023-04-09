@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper">
+
+  <select id="selectAll" resultType="org.zerock.wecart.domain.board.QnaBoardVO">
+    SELECT a.*, coalesce(b.comment_count, 0) AS comment_count
+    FROM qna_board a
+    LEFT OUTER JOIN (
+    SELECT post_no AS tmp, count(*) AS comment_count
+    FROM qna_board_comment
+    GROUP BY post_no) b 
+    ON (a.post_no = b.tmp)
+    ORDER BY a.${sort} DESC
+    OFFSET (#{currPage}-1) * #{amount} ROWS
+    FETCH NEXT #{amount} ROWS ONLY
+  </select>
+
+
+
+</mapper>

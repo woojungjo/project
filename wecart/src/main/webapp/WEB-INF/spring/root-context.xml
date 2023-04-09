@@ -14,7 +14,7 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<!-- JDBC 연결생성을 위한 필수 4가지 정보 -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@khdatabasestudy_high?TNS_ADMIN=C:/opt/OracleCloudWallet/FIN" />
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@khdatabasestudy_high?TNS_ADMIN=/Users/kim-yongsae/Library/CloudStorage/OneDrive-개인/문서/kh_project/Wallet_KHDatabaseStudy" />
 		<property name="username" value="FINAL" />
 		<property name="password" value="Oracle12345678" />
 
