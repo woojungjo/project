@@ -15,8 +15,10 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/priceCompare")
 @Controller
 public class PriceCompareController {
+
 	//테스트중
 	//테스트2
+	//테스트3
 	@GetMapping("/list")
 	public void list() {
 		log.trace("list() invoked.");		
