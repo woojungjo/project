@@ -25,8 +25,8 @@
                     <li><a href="/"><i class="fa-regular fa-comment-dots"></i></li>
                     <li><a href="/"><i class="fa-regular fa-bell"></i></li>
                     <li><a href="/"><i class="fa-solid fa-piggy-bank"></i></li>
-                    <li><a href="/mypage/editaccount">Juuu</li>
-                    <li><a href="/">로그아웃</li>
+                    <li><a href="/mypage/edit/check_password">Juuu</li>
+                    <li><a href="/user/logout">로그아웃</a></li>
                 </ul>   <!--header_login-->
 
             </div> <!--container-->
