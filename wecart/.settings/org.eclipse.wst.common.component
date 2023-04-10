@@ -20,19 +20,13 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-                                                		
-        
-        
-        
-        
-        
-        <property name="java-output-path" value="target/classes"/>
                                                 
         
         
         
         
         <property name="context-root" value="/"/>
+        <property name="java-output-path" value="/wecart/target/classes"/>
                                                 	
     
     
