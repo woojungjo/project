@@ -19,6 +19,7 @@ public class PriceCompareController {
 	//테스트중
 	//테스트2
 	//테스트3
+	//테스트4
 	@GetMapping("/list")
 	public void list() {
 		log.trace("list() invoked.");		

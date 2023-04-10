@@ -13,7 +13,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-*.properties
+wecart/src/main/webapp/META-INF/maven/org.zerock/wecart/pom.properties
 wecart/src/main/webapp/META-INF/MANIFEST.MF
 
 # External tool builders
