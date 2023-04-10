@@ -23,7 +23,7 @@
 
               <ul class="header_login">
                   <li><a href="#">개포동 <i class="fa-solid fa-location-dot"></i></li>
-                  <li><a href="main">로그인</li>
+                  <li><a href="/user/login"">로그인</a></li>
               </ul><!--header_login-->
 
           </div> <!--container-->
