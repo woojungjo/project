@@ -26,39 +26,91 @@
 
 
 <script>
-        function addProducts() {
-            var input = prompt("몇 개를 장바구니에 추가하시겠습니까?");
-            var values = input.split(',');
-
+		
+		// 장바구니
+		// 장바구니 버튼을 클릭 시, 
+		// 오늘에 카트로 해당 상품을 담는디
+        function addPrdToTodayCart() {
+            var input = confirm("상품을 장바구니에 추가하시겠습니까?");
+    		
             console.log(input);
-            console.log(values);
+            if (input) {
+    	    	const url = 'http://localhost:8080/todayCart/register';
+    	        const data = { item: '수박', id: 1237 };
+    	        const xhr = new XMLHttpRequest();
+    	        xhr.open('POST', url, true);
+    	        xhr.setRequestHeader('Content-Type', 'application/json');
+    	        
+    	    	
+    	    	xhr.onload = function(){
+    	    		if(xhr.status === 200 ){
+    	    			console.log(xhr.response);
+    	    		} else {
+    					console.error(xhr.statusText);        			
+    	    		} // if - else
+    	    	} // function
+            
+            
+	    		xhr.send(JSON.stringify(data));
+            } // if 
 
-            var num = Number(values[0]);
-            var yesNo = values[1].trim().toLowerCase() === 'yes';
-
-            if (yesNo) {
-                alert("You entered the number " + num + " and clicked OK.");
-            } else {
-                alert("You entered the number " + num + " and clicked Cancel.");
-            }
-        }
-
-        function changedHeart(btn) {
-
-            var className = btn.className;
-            var iTag = btn.childNodes;
+        } // addPrdToTodayCart
+        
+        // 하트
+        // 하트를 누를 시
+        // 하트는 변하게 되고, 해당 상품을 좋아요에 담는다
+        function addPrdToLike(btn){
+        	// 하트가 변하는 스코프
+        	{
+                 var className = btn.className;
+                 var iTag = btn.childNodes;
 
 
-            console.log(iTag);
-            console.log(iTag[0]);
-            console.log(iTag[1]);
-            if(btn.childNodes[1] === "i.fa-solid.fa-heart.fa-2xl"){
-                console.log("hello");
-                btn.childNodes[1] = "fa-regular fa-heart fa-2x";
-            }else{
+                 console.log(iTag);
+                 console.log(iTag[0]);
+                 console.log(iTag[1]);
+                 if(btn.childNodes[1] === "i.fa-solid.fa-heart.fa-2xl"){
+                     console.log("hello");
+                     btn.childNodes[1] = "fa-regular fa-heart fa-2x";
+                 }else{
 
-            }
-        }
+                 } // if - else
+             } // changedHeart
+             
+	    	alert("상품이 찜목록에 담겼습니다");
+	    	
+	    	const url = 'http://localhost:8080/priceCompare/addPrd';
+	        const data = { item: '수박', id: 1237 };
+	        const xhr = new XMLHttpRequest();
+	        xhr.open('POST', url);
+	        xhr.setRequestHeader('Content-Type', 'application/json');
+	        
+	    	
+	    	xhr.onload = function(){
+	    		if(xhr.status === 200 ){
+	    			console.log(xhr.response);
+	    		} else {
+					console.error(xhr.statusText);        			
+	    		}
+	    	};
+	    	
+	    	xhr.onerror = function(){
+	    		
+	    		console.error('Error: Network Error');
+	    	};
+	    	
+	    	xhr.send(JSON.stringify(data));
+        } // addPrdToLike
+        
+        // 마트 위치
+        // 위치 아이콘을 누를 시
+        // 해당 마트가 보여지는 지도로 날라간다
+        function locationOfMarts(){
+        	
+        	// 일단 <a href > 로 구현
+        	
+        } // locationOfMarts()
+        
     </script>
 
 </head>
@@ -122,29 +174,28 @@
 				<div class="leftFromUser">
 					<h3>과일류 > 수박</h3>
 					<h3>1통</h3>
-					<img src="/resources/imgs/mypageCart/waterMelon.PNG" alt="waterMelon.PNG" />
+					<img src="/resources/imgs/mypageCart/waterMelon.PNG"
+						alt="waterMelon.PNG" />
 				</div>
 
 				<div class="rightFromUser">
 					<p></p>
 					<div>
 						<button type="button" class="mypick_btHeart"
-							onclick="return confirm('찜 목록에 추가하시겠습니까?')">
+							onclick="addPrdToLike(this)">
 							<i class="fa-regular fa-heart fa-2x"></i>
 						</button>
 
 						<!-- <button type="button" class="mypick_btHeart" onclick="changedHeart(this)">
                             <i class="fa-solid fa-heart fa-2xl"></i></button> -->
-						<button type="button" onclick=addProducts()>
-							장바구니
-						</button>
+						<button type="button" onclick="addPrdToTodayCart()">장바구니</button>
 					</div>
 					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; 13000</p>
 					<table class="tableToShowPrice">
 						<tr>
 							<td>마트 1&emsp;
 								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
+									<a href="/map/locationOfMarts"><i class="fa-solid fa-location-dot"></a></i>
 								</button> &emsp;
 							</td>
 							<td>13.000</td>
