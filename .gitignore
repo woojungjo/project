@@ -15,7 +15,6 @@ local.properties
 .recommenders
 *.properties
 MANIFEST.MF
-pom.xml
 
 # External tool builders
 .externalToolBuilders/
