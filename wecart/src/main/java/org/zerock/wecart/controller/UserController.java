@@ -40,4 +40,10 @@ public class UserController {
 		return null;
 	} // signup
 	
+	@GetMapping("/signupTerms")
+	public String signupTerms() {
+		
+		return null;
+	} // signup
+	
 } // end class

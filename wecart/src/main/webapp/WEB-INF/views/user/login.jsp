@@ -56,7 +56,7 @@
             <ul id="find">
                 <li><a href="#">아이디 찾기</a></li>
                 <li><a href="#">비밀번호 찾기</a></li>
-                <li><a href="#">회원가입</a></li>
+                <li><a href="/user/signupTerms">회원가입</a></li>
             </ul>
 
         </div>
@@ -88,6 +88,7 @@
         © 2023 Wecart, Inc. ALL Rights Reserved
 
     </footer>
+    
 </body>
 
 </html>

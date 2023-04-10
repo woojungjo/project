@@ -86,7 +86,7 @@
 
     </main>
 
-    <footer>
+	<footer>
         <ul id="footer_1">
             <li><a href="#">이용약관</a></li>
             <li><a href="#">개인정보처리방침</a></li>
@@ -94,7 +94,7 @@
             <li>회사 주소 : Lorem, ipsum dolor.</li>
             <li>회사 대표전화 : 012-3456-7890</li>
             <li>팩스번호 : 012-3456-7890</li>
-            <li>사업자 번호 : 1234</li>
+            <li>사업자 번호 : 1234</li>            
         </ul>
 
         <ul id="footer_2">
@@ -103,14 +103,15 @@
             <li><a href="#"></a>김민규</li>
             <li><a href="#"></a>김용세</li>
             <li><a href="#"></a>김정환</li>
-            <li><a href="#"></a>김지연</li>
+            <li><a href="#"></a>김지연</li>            
         </ul>
-
+        
         <br>
 
         © 2023 Wecart, Inc. ALL Rights Reserved
 
     </footer>
+
 </body>
 
 </html>
