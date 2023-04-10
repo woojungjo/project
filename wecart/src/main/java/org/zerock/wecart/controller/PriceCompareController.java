@@ -33,6 +33,7 @@ public class PriceCompareController {
 	@GetMapping("/showPrd")
 	public void priceCompare() {
 		log.trace("showPrd() invoked. ");
+		
 	} // priceCompare   Jhwan
 	
 	// 카트를 누르면 상품을 오늘의 카트에 담는다.
@@ -45,8 +46,10 @@ public class PriceCompareController {
 	
 	// 해당 상품을 찜할 수 있음
 	@PostMapping("/addPrd")
-	public void addPrd() {
+	public String addPrd() {
 		log.trace("addPrd() invoked. ");
+		
+		return "redirect:showPrd";
 	} // addPrd   Jhwan
 	
 } //end class
