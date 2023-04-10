@@ -16,15 +16,13 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class PriceCompareController {
 
-	//테스트중//jh
-	//테스트2
-	//테스트3
-	//테스트4
+	//전체 상품 조회
 	@GetMapping("/list")
 	public void list() {
 		log.trace("list() invoked.");		
 	} //list
 	
+	//상품 검색 시 화면
 	@GetMapping("/search")
 	public void search(String search_item) {
 		log.trace("search() invoked.");
@@ -56,8 +54,4 @@ public class PriceCompareController {
 		return "redirect:showPrd";
 	} // addPrd   Jhwan
 	
-	
-	public void hello() {
-		//git test용 함수 ㅇㅇㅇㅇ
-	}// 
 } //end class
