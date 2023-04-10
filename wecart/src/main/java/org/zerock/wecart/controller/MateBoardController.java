@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,21 +26,25 @@ public class MateBoardController {		//JavaBeans, POJO
 		log.trace("get() invoked");
 	}//get
 	
-
-	@RequestMapping(
-			path= {"/matemodify"},
-			method= {
-					RequestMethod.GET,
-					RequestMethod.POST	
-			})
-	public void mateModify(){
+	@GetMapping("/matemodify")
+	public void mateModify() {
 		log.trace("modify() invoked");
+	}//modify 
+	
+	@PostMapping("/matemodify")
+	public String mateModify(RedirectAttributes rttrs) {
+		log.trace("modify({}) invoked", rttrs);
+		
+		return "redirect:/board/mateboard/matelist";
+		
 	}//modify 
 	
 	
 	@PostMapping("/mateRemove")
-	public void mateRemove() {
+	public String mateRemove() {
 		log.trace("mateRemove() invoked");
+		
+		return "redirect:/board/mateboard/matelist";
 	}//remove 
 	
 }//MateBoardController
