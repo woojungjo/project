@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,7 +15,11 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/priceCompare")
 @Controller
 public class PriceCompareController {
-	
+
+	//테스트중//jh
+	//테스트2
+	//테스트3
+	//테스트4
 	@GetMapping("/list")
 	public void list() {
 		log.trace("list() invoked.");		
@@ -32,23 +37,27 @@ public class PriceCompareController {
 	@GetMapping("/showPrd")
 	public void priceCompare() {
 		log.trace("showPrd() invoked. ");
+		
 	} // priceCompare   Jhwan
 	
 	// 카트를 누르면 상품을 오늘의 카트에 담는다.
 	@PostMapping("/addPrdToCart")
 	public void addPrdToCart() {
 		log.trace("addPrdToCart() invoked. ");
+		
+		
 	} // addPrdToCart   Jhwan
 	
 	// 해당 상품을 찜할 수 있음
 	@PostMapping("/addPrd")
-	public void addPrd() {
+	public String addPrd() {
 		log.trace("addPrd() invoked. ");
+		
+		return "redirect:showPrd";
 	} // addPrd   Jhwan
 	
-	// 해당 상품을 찜에서 해제한다.
-	@PostMapping("/cancelPrd")
-	public void cancelPrd() {
-		log.trace("cancelPrd() invoked. ");
-	} // cancelPrd   Jhwan
+	
+	public void hello() {
+		//git test용 함수 ㅇㅇㅇㅇ
+	}// 
 } //end class

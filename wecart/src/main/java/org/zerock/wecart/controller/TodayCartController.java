@@ -35,5 +35,4 @@ public class TodayCartController {
 		
 		return "redirect:cartList";
 	} //remove
-	
 } //end class
