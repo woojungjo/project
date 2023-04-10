@@ -42,7 +42,7 @@ window.onload = function () {
 
         if (counts[index] >= 2) {
             const minusBt = document.querySelectorAll(".count_minus_bt")[index];
-            minusBt.style.backgroundImage = "url(../resources/imgs/minus-xs-svgrepo-black.svg)";
+            minusBt.style.backgroundImage = "url(../resources/imgs/priceCompare/minus-xs-svgrepo-black.svg)";
         }
 
         //합계 구하기
@@ -92,7 +92,7 @@ window.onload = function () {
         amountDiv[index].textContent = `${counts[index]}`;
 
         if (counts[index] == 1) {
-            e.currentTarget.style.backgroundImage = "url(../resources/imgs/minus-xs-svgrepo-gray.svg)";
+            e.currentTarget.style.backgroundImage = "url(../resources/imgs/priceCompare/minus-xs-svgrepo-gray.svg)";
         }
 
         //합계 구하기
@@ -153,12 +153,7 @@ window.onload = function () {
         // });
         var checks = document.querySelectorAll(".cart_select");
         if(confirm('삭제하시겠습니까?')) {
-            checks.forEach((check) => {
-                if(check.checked) {
-                    var tr = check.closest(".goods_price_tr");
-                    tr.remove();
-                } //if
-            });
+            location = "/todayCart/remove";
         } //if
 
         totals.forEach((total) => {
@@ -181,8 +176,7 @@ window.onload = function () {
     var deleteBts = document.querySelectorAll(".delete_bt");
     var deleteOne = function (e) {
         if(confirm('삭제하시겠습니까?')) {
-            var tr = e.target.closest(".goods_price_tr");
-            tr.remove();
+            location = "/todayCart/remove";
         } //if  
         
         //합계 구하기
@@ -210,7 +204,7 @@ window.onload = function () {
     //찜한상품, 장바구니 버튼 이동
     var mypickGoods = document.querySelector(".mypick_goods");
     mypickGoods.addEventListener('click', () => {
-        location.href = "#"
+        location.href = "/mypage/cart/wishedPrds";
     });
 
     var mypickCart = document.querySelector(".mypick_cart");

@@ -117,7 +117,7 @@ body {
 }
 #info li:first-of-type::after {
     content: "";
-    background-image: url("../imgs/pin-8-16.png");
+    background-image: url("/resources/imgs/priceCompare/pin-8-16.png");
     display: inline-block;
     width: 16px;
     height: 16px;

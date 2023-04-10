@@ -10,12 +10,12 @@
 
     <link rel="shortcut icon" href="../../resources/ico/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../../resources/ico/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../../resources/css/mypage_frame.css">
-    <link rel="stylesheet" href="../../resources/css/mypage_cart.css">
+    <link rel="stylesheet" href="../../resources/css/priceCompare/mypage_frame.css">
+    <link rel="stylesheet" href="../../resources/css/priceCompare/mypage_cart.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
     <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
-    <script src="../../resources/js/mypage_cart.js"></script>
+    <script src="../../resources/js/priceCompare/mypage_cart.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -46,8 +46,8 @@
                         <ul class="mypage_nav_ul">
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>마이페이지</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>개인정보 수정</span></a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text"><span>장바구니 목록</span></a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text"><span>찜한 상품</span></a></li>
+                            <li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text"><span>장바구니 목록</span></a></li>
+                            <li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text"><span>찜한 상품</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>즐겨찾는 마트</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>내 활동 내역</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>키워드알림</span></a></li>
@@ -64,7 +64,7 @@
 
                         <div class="mypage_article_content">
                             <div class="mycart_table_div">
-                                <form action="#" method="get">
+                                <form action="/mypage/cart/currentPrice" method="post">
                                     <table id="mycart_tbl">
                                         <thead>
                                             <tr>
@@ -299,12 +299,12 @@
                                     </table>
 
                                     <div id="mycart_tbl_button">
-                                        <button type="button" class="mycart_tbl_bt">장바구니 삭제</button>
+                                        <button type="button" id="cart_remove_bt" class="mycart_tbl_bt">장바구니 삭제</button>
 
                                         <div>
                                             <input type="submit" value="현재 가격 비교" class="mycart_tbl_bt">
 
-                                            <button type="button" class="mycart_tbl_bt">장바구니 목록</button>
+                                            <button type="button" id="cart_list_bt" class="mycart_tbl_bt">장바구니 목록</button>
                                         </div>                                        
                                     </div>
                                 </form>                        
