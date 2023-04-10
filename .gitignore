@@ -14,7 +14,6 @@ local.properties
 .loadpath
 .recommenders
 *.properties
-MANIFEST.MF
 
 # External tool builders
 .externalToolBuilders/
@@ -48,7 +47,6 @@ MANIFEST.MF
 
 # STS (Spring Tool Suite)
 .springBeans
-root-context.xml
 
 # Code Recommenders
 .recommenders/
@@ -245,5 +243,3 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all
 # End of https://www.toptal.com/developers/gitignore/api/macos,java,windows,eclipse
 /target/
-
-
