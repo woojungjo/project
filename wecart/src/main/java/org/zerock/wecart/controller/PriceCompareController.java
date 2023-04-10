@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class PriceCompareController {
 
-	//테스트중
+	//테스트중//jh
 	//테스트2
 	//테스트3
 	//테스트4
@@ -53,4 +53,8 @@ public class PriceCompareController {
 		log.trace("addPrd() invoked. ");
 	} // addPrd   Jhwan
 	
+	
+	public void hello() {
+		//git test용 함수 ㅇㅇㅇㅇ
+	}// 
 } //end class
