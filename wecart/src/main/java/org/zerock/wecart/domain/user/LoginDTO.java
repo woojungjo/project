@@ -1,4 +1,4 @@
-package org.zerock.wecart.domain;
+package org.zerock.wecart.domain.user;
 
 import lombok.Data;
 

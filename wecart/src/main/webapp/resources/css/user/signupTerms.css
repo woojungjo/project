@@ -25,9 +25,13 @@ header {
     display: block;
 }
 .container {
-    text-align: center;
-    height: 600px;
     position: relative;
+    width: auto;
+    max-width: 768px;
+    min-width: 460px;
+}
+.terms_ul {
+    padding-left: 0px;
 }
 .terms_li {
     padding-top: 20px;
@@ -37,8 +41,6 @@ header {
     overflow: auto;
     height: 90px;
     margin-top: 8px;
-    margin-left: 35%;
-    margin-right: 35%;
     padding: 12px;
     border: 1px solid #dadada;
     background: #fff;
@@ -54,17 +56,15 @@ header {
     color:#8e8e8e;
 }
 .terms_btn {
-    margin: 29px -5px 0
+    margin: 80px;
+    text-align: center;
 }
 .terms_btn>span {
-    display: block;
-    float: left;
-    width: 50%
+    display: inline-block;
 }
 .terms_btn span:before {
     content: '';
     display: block;
-    clear: both
 }
 .terms_btn>span .btn_config {
     width: auto;
@@ -81,6 +81,7 @@ header {
     margin-top: 10px
 }
 #cancel {
+    position: relative;
     color: #fff;
     background-color: #8e8e8e;
     width: 165px;

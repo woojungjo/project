@@ -23,14 +23,25 @@
 	
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
-	</view-resolvers>
-	
-	<!-- 뷰 컨트롤러 설정 -->
-	<view-controller path="/user/login" 		view-name="/user/login"			status-code="200" />
-	<view-controller path="/user/signupTerms" 	view-name="/user/signupTerms"	status-code="200" />
+	</view-resolvers>	
 
 	<context:component-scan base-package="org.zerock.wecart.controller" />
 	<context:component-scan base-package="org.zerock.wecart.exception" />
 	<context:component-scan base-package="org.zerock.wecart.interceptor" />
+
+	<!-- 뷰 컨트롤러 설정 -->
+	<view-controller path="/user/login" 		view-name="/user/login"			status-code="200" />
+	<view-controller path="/user/signupTerms" 	view-name="/user/signupTerms"	status-code="200" />
+
+	<!-- 인터셉터 설정 -->
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/loginPost" />
+
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+
+	</interceptors>
 	
 </beans:beans>
