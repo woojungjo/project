@@ -1,4 +1,4 @@
-package org.zerock.wecart.mapper;
+package org.zerock.wecart.service.board.qnaboard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -18,54 +18,54 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.wecart.domain.pricecompare.GoodsVO;
-import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
+import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
+import org.zerock.wecart.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
-@NoArgsConstructor
 @Log4j2
-
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/**/root-*.xml"})
+@NoArgsConstructor
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class PriceCompareMapperTests {
+
+@ExtendWith(SpringExtension.class	)
+@ContextConfiguration(locations="file:src/main/webapp/WEB-INF/**/root-*.xml")
+public class QnaBoardServiceTests {
 
 	@Setter(onMethod_= {@Autowired})
-	private PriceCompareMapper mapper;
+	private QnaBoardService service;
+	
 	
 	@BeforeAll
 	void beforeAll() {
 		log.trace("beforeAll() invoked.");
 		
-		assert this.mapper != null;
-		log.info("\t+ this.mapper: {}", this.mapper);
-	} //beforeAll
+		assertNotNull(this.service);
+		log.info("\t+ service : {}", this.service);
+	} // beforeAll
+	
 	
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("Test1: selectAll")
-	@Timeout(value=4, unit=TimeUnit.SECONDS)
-	void selectAll() {
-		log.trace("selectAll() invoked.");
+	@DisplayName("testGetList")
+	@Timeout(value = 2 ,unit = TimeUnit.SECONDS)
+	void testGetList() throws ServiceException {
+		log.trace("testGetList() invoked.");
 		
-		List<GoodsVO> list = this.mapper.selectAll();
-		assertNotNull(list);
+		Criteria cri = new Criteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
 		
-		list.forEach(log::info);	
+		List<QnaBoard_CommentCountVO> list = this.service.getList(cri);
 		
-	} //selectAll
+		assert list != null;
+		list.forEach(log::info);
+	} // testGetList
 	
-} //end class
-
-
-
-
-
-
-
+	
+} // end class

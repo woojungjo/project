@@ -394,3 +394,11 @@ select, button{
 .currPage > a{
   color : #53917E;
 }
+
+
+#sticky{
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding-bottom: 50px;
+}

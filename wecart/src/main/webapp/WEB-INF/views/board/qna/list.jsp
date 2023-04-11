@@ -16,13 +16,13 @@
             <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
             rel="stylesheet">
             
-            <link rel="stylesheet" href="/resources/css/JSP_Resources/main.css">
-            <link rel="stylesheet" href="/resources/css/JSP_Resources/afterlogin_header.css">
-            <link rel="stylesheet" href="/resources/css/JSP_Resources/footer.css">
-            <link rel="stylesheet" href="/resources/css/style.css">
-            <script src="/resources/js/board.js" defer ></script>
+            <link rel="stylesheet" href="/resources/css/header_footer/main_header.css">
+            <link rel="stylesheet" href="/resources/css/header_footer/home_header.css">
+            <link rel="stylesheet" href="/resources/css/header_footer/footer.css">
+            <link rel="stylesheet" href="/resources/css/board/qna/style.css">
+            <script src="/resources/js/board/qna/board.js" defer ></script>
             
-</head>
+        </head>
 <body>
     
     <div class="wrapper_contatiner">
@@ -70,13 +70,12 @@
                                 </div>
                                 <c:choose>
                                     <c:when test="${qnaBoardVO.secret_yn  == 0}">
-                                        <div class="board_title"><a href="QnaBoardRead.html">${qnaBoardVO.title}</a></div>
+                                        <div class="board_title"><a href="/board/qna/read/${qnaBoardVO.post_no}">${qnaBoardVO.title}</a></div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="board_title"><a href="QnaBoardRead.html"><span class="fas fa-lock" />비밀글 입니다.</a></div>    
+                                        <div class="board_title"><span class="fas fa-lock" />비밀글 입니다.</div>    
                                     </c:otherwise>
                                 </c:choose>
-                                <!-- <div class="board_title"><a href="QnaBoardRead.html">${qnaBoardVO.title}</a></div> -->
                                 <div class="board_tail">
                                     <div><span class="fas fa-eye"></span>${qnaBoardVO.views}</div>
                                     <div><span class="fas fa-comment-dots"></span>${qnaBoardVO.comment_count}</div>
@@ -86,12 +85,12 @@
                     </c:forEach>
                     
                 </ul>
-
-
-                <form action="" method="POST">
+            </article>
+            <div id="sticky">
+                <form action="/board/qna/list" method="GET">
 
                     <div id="board_search">
-                        <select name="정렬" id="board_sort">
+                        <select name="sort" id="board_sort">
                             <c:choose>
                                 <c:when test="${param.sort == 'views'}">
                                     <option value="views">조회순</option>
@@ -101,17 +100,17 @@
                                     <option value="post_no">최신순</option>
                                     <option value="views">조회순</option>
                                 </c:otherwise>
-                        </c:choose>
+                            </c:choose>
                         </select>
                         <div>
-                            <select name="검색" id="search_select">
-                                <option value="">제목 +  내용</option>
-                                <option value="">제목</option>
-                                <option value="">내용</option>
-                                <option value="">작성자</option>
+                            <select name="type" id="search_select">
+                                <option value="title-content">제목 +  내용</option>
+                                <option value="title">제목</option>
+                                <option value="content">내용</option>
+                                <option value="member_id">작성자</option>
                             </select>
-                            <input type="text">
-                            <button type="submit">검색</button>
+                            <input type="text" name="keyword">
+                            <button type="submit" >검색</button>
                         </div>
                         <a href="BoardWrite.html"><button type="button"><span class="fas fa-pen-to-square" />글쓰기</button></a>
                     </div>
@@ -149,8 +148,8 @@
                     </c:choose>
                 </div>
 
-            </article>
-
+           
+        </div>            
 
             <!--*********************************************메인 내용은 여기까지*********************************************-->
         </main>
@@ -160,16 +159,16 @@
     </div> <!-- wrapper: header+main-->
            <footer>
                <div class="footerText">
-                   <p>
+                    <p>
                        WeCart
                        <span>
                            <a href="">사업자 정보</a>
                            <a href="">이용약관</a>
                            <a href="">개인정보처리방침</a>
                        </span>
-                   </p>
+                    </p>
                    
-                   <p>
+                    <p>
                        Woojungjo
                        <a href="https://github.com/zuxico123">감성현</a>
                        <a href="https://github.com/KimYongSae">김용세</a>
