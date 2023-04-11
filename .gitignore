@@ -491,6 +491,3 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all
 # End of https://www.toptal.com/developers/gitignore/api/macos,java,windows,eclipse
 /target/
-
-
->>>>>>> branch 'main' of https://github.com/woojungjo/project.git
