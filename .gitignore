@@ -13,7 +13,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-*.properties
+wecart/src/main/webapp/META-INF/maven/org.zerock/wecart/pom.properties
+wecart/src/main/webapp/META-INF/MANIFEST.MF
 
 # External tool builders
 .externalToolBuilders/
@@ -243,5 +244,3 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all
 # End of https://www.toptal.com/developers/gitignore/api/macos,java,windows,eclipse
 /target/
-
-
