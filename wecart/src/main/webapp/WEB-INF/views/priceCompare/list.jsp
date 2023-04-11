@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -378,31 +380,32 @@
                                 <li class="nav_item goods_sort_li"><a href="#" class="goods_sort_a">높은 가격순</a></li>
                             </ul>
                         </div>
-
+                                             
                         <div class="goods_img_tbl">
-                            <a href="/priceCompare/showPrd" class="goods_img_a">
-                                <div class="goods_img">
-                                    <div class="goods_img_content">
-                                        <img src="https://picsum.photos/id/684/200/200" alt=""> <!--jsp-->
-                                    </div>
-                                    
-                                </div>
-                                <div class="goods_img_title">
-                                    <span class="goods_name">손잡이 크린백(35cm x 45cm)</span>   <!--jsp-->
-                                    
-                                    <div class="goods_img_price">
-                                        <span class="lowest_price">최저</span>
-                                        <span class="price_won">
-                                            <span class="goods_price won">4,480</span>   <!--jsp-->
-                                            <span class="won">원</span>
-                                        </span>
+                            <c:forEach var="list" items="${__GOODSLIST__}">   
+                                <a href="/priceCompare/showPrd/${list.goods_id}" class="goods_img_a">
+                                    <div class="goods_img">
+                                        <div class="goods_img_content">
+                                            <img src="${list.goods_pic}" alt="상품">
+                                        </div>
                                         
                                     </div>
-                                </div>
-                            </a>
-                            
+                                    <div class="goods_img_title">
+                                        <span class="goods_name">${list.goods_name}</span>
+                                        
+                                        <div class="goods_img_price">
+                                            <span class="lowest_price">최저</span>
+                                            <span class="price_won">
+                                                <span class="goods_price won"><fmt:formatNumber value="${list.low_price}" pattern="#,##0" /></span>
+                                                <span class="won">원</span>
+                                            </span>
+                                            
+                                        </div>
+                                    </div>
+                                </a>   
+                            </c:forEach>                   
+                        </div>                        
 
-                        </div>
                         <div class="page_index">
                             <a href="#" class="page_index_item"><i class="fa-solid fa-angles-left"></i></a>
                             <a href="#" class="page_index_item"><i class="fa-solid fa-angle-left"></i></a>
