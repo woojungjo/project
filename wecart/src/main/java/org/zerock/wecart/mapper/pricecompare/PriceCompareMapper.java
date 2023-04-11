@@ -1,4 +1,4 @@
-package org.zerock.wecart.mapper.pricecomapre;
+package org.zerock.wecart.mapper.pricecompare;
 
 import java.util.List;
 

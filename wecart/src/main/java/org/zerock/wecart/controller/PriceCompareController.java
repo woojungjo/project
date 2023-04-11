@@ -1,10 +1,16 @@
 package org.zerock.wecart.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.zerock.wecart.domain.pricecompare.GoodsVO;
+import org.zerock.wecart.exception.ControllerException;
+import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,10 +22,26 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class PriceCompareController {
 
+	private PriceCompareService service;
+	
+	@Autowired
+	public PriceCompareController(PriceCompareService service) {
+		this.service = service;
+	} //Constructor
+	
+	
 	//전체 상품 조회
 	@GetMapping("/list")
-	public void list() {
-		log.trace("list() invoked.");		
+	public void list(Model model) throws ControllerException {
+		log.trace("list() invoked.");
+		
+		try {
+			List<GoodsVO> list = this.service.getList();
+			model.addAttribute("__GOODSLIST__", list);
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
+		
 	} //list
 	
 	//상품 검색 시 화면
