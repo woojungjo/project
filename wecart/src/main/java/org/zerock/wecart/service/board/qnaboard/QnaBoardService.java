@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.QnaBoardVO;
+import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 import org.zerock.wecart.exception.ServiceException;
 
 public interface QnaBoardService {
 
 	
 	// 1. 게시물 전체목록 조회 (LIST)
-	public abstract List<QnaBoardVO> getList(Criteria cri) throws ServiceException;
+	public abstract List<QnaBoard_CommentCountVO> getList(Criteria cri) throws ServiceException;
 	
 	// 2. 특정 게시물 상세조회 (READ)
-//	public abstract QnaBoardVO get(Integer bno) throws ServiceException;
+	public abstract QnaBoardVO get(Integer post_no) throws ServiceException;
 	
 	// 3. 특정 게시물 삭제 (DELETE)
 //	public abstract boolean remove(Integer bno) throws ServiceException;
