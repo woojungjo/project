@@ -25,12 +25,13 @@
                     <li><a href="/"><i class="fa-regular fa-comment-dots"></i></a></li>
                     <li><a href="/"><i class="fa-regular fa-bell"></i></a></li>
                     <li><a href="/"><i class="fa-solid fa-piggy-bank"></i></a></li>
-                    <li><a href="/mypage/edit/check_password">Juuu</a></li>
+                    <li>
+                        <a href="/mypage/edit/check_password">
+                         <% String id = (String)session.getAttribute("id"); %> <%= id %>
+                        </a>
+                    </li>
                     <li><a href="/user/logout">로그아웃</a></li>
                 </ul>   <!--header_login-->
 
             </div> <!--container-->
-            
-           
-        
         </header>
