@@ -18,22 +18,22 @@ public class MateBoardController {		//JavaBeans, POJO
 
 	@GetMapping("/matelist")
 	public void mateList() {
-		log.trace("list() invoked");
+		log.trace("matelist() invoked");
 	}//list
 	
 	@GetMapping("/mateget")
 	public void mateGet() {
-		log.trace("get() invoked");
+		log.trace("mateget() invoked");
 	}//get
 	
 	@GetMapping("/matemodify")
 	public void mateModify() {
-		log.trace("modify() invoked");
+		log.trace("matemodify() invoked");
 	}//modify 
 	
 	@PostMapping("/matemodify")
 	public String mateModify(RedirectAttributes rttrs) {
-		log.trace("modify({}) invoked", rttrs);
+		log.trace("matemodify({}) invoked", rttrs);
 		
 		return "redirect:/board/mateboard/matelist";
 		
@@ -41,8 +41,8 @@ public class MateBoardController {		//JavaBeans, POJO
 	
 	
 	@PostMapping("/mateRemove")
-	public String mateRemove() {
-		log.trace("mateRemove() invoked");
+	public String mateRemove(RedirectAttributes rttrs) {
+		log.trace("mateRemove({}) invoked", rttrs);
 		
 		return "redirect:/board/mateboard/matelist";
 	}//remove 

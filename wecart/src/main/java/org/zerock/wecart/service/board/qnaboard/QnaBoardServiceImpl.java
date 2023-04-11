@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.QnaBoardVO;
+import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
 
@@ -24,7 +25,7 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	
 	
 	@Override
-	public List<QnaBoardVO> getList(Criteria cri) throws ServiceException {
+	public List<QnaBoard_CommentCountVO> getList(Criteria cri) throws ServiceException {
 		log.trace("getList() invoked.");
 		
 		try {
@@ -49,5 +50,15 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	} // getList
 
 
+	@Override
+	public QnaBoardVO get(Integer post_no) throws ServiceException {
+		log.trace("getTotalAmount() invoked.");
+		
+		try {
+			return this.mapper. read(post_no);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // get
 
 } // end class

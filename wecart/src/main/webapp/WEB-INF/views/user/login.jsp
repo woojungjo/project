@@ -16,7 +16,7 @@
 
     <header>
         <div id="logo">
-            우동장
+            우리동네 장바구니
         </div>       
     </header>
 
@@ -26,12 +26,12 @@
             <div id="panel_out">
                 <div id="panel_in">
     
-                    <div id="id">
-                        <input type="text" id="id_text" placeholder="아이디">
+                    <div id="id_box">
+                        <input type="text" id="id" name="login_id" placeholder="아이디">
                     </div>
     
-                    <div id="pw">
-                        <input type="password" id="pw_text" placeholder="비밀번호">
+                    <div id="pw_box">
+                        <input type="password" id="pw" name="pwd" placeholder="비밀번호">
                     </div>
     
                     <div id="login_button">
@@ -56,7 +56,7 @@
             <ul id="find">
                 <li><a href="#">아이디 찾기</a></li>
                 <li><a href="#">비밀번호 찾기</a></li>
-                <li><a href="#">회원가입</a></li>
+                <li><a href="/user/signupTerms">회원가입</a></li>
             </ul>
 
         </div>
@@ -64,30 +64,28 @@
     </div>
 
     <footer>
+
         <ul id="footer_1">
-            <li><a href="#">이용약관</a></li>
-            <li><a href="#">개인정보처리방침</a></li>
-            <li>회사소개</li>
-            <li>회사 주소 : Lorem, ipsum dolor.</li>
-            <li>회사 대표전화 : 012-3456-7890</li>
-            <li>팩스번호 : 012-3456-7890</li>
-            <li>사업자 번호 : 1234</li>            
+            <li><a href="">사업자 정보</a></li>
+            <li><a href="">이용약관</a></li>
+            <li><a href="">개인정보처리방침</a></li>            
         </ul>
 
         <ul id="footer_2">
-            <li><a href="#"></a>감성현</li>
-            <li><a href="#"></a>조연주</li>
-            <li><a href="#"></a>김민규</li>
-            <li><a href="#"></a>김용세</li>
-            <li><a href="#"></a>김정환</li>
-            <li><a href="#"></a>김지연</li>            
+            <li><a href="https://github.com/woojungjo">Woojungjo</a></li>
+            <li><a href="https://github.com/zuxico123">감성현</a></li>
+            <li><a href="https://github.com/KimYongSae">김용세</a></li>
+            <li><a href="https://github.com/JeongHwan95">김정환</a></li>
+            <li><a href="https://github.com/comdesk">김지연</a></li>
+            <li><a href="https://github.com/Juyeonjoo">조연주</a></li>            
         </ul>
         
         <br>
 
-        © 2023 Wecart, Inc. ALL Rights Reserved
+        &copy; 2023 WeCart, Inc. All Rights Reserved
 
     </footer>
+    
 </body>
 
 </html>

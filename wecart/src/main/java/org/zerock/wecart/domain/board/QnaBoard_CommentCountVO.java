@@ -4,8 +4,7 @@ import java.sql.Timestamp;
 import lombok.Value;
 
 @Value
-
-public class QnaBoardVO {
+public class QnaBoard_CommentCountVO {
 	private Integer post_no;
 	private Integer member_id;
 	private String title;
@@ -13,4 +12,6 @@ public class QnaBoardVO {
 	private Integer views;
 	private Timestamp write_dt;
 	private Integer secret_yn;
+	private Integer comment_count;
+	
 }
