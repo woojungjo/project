@@ -16,15 +16,13 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class PriceCompareController {
 
-	//테스트중
-	//테스트2
-	//테스트3
-	//테스트4
+	//전체 상품 조회
 	@GetMapping("/list")
 	public void list() {
 		log.trace("list() invoked.");		
 	} //list
 	
+	//상품 검색 시 화면
 	@GetMapping("/search")
 	public void search(String search_item) {
 		log.trace("search() invoked.");
@@ -37,6 +35,7 @@ public class PriceCompareController {
 	@GetMapping("/showPrd")
 	public void priceCompare() {
 		log.trace("showPrd() invoked. ");
+		
 	} // priceCompare   Jhwan
 	
 	// 카트를 누르면 상품을 오늘의 카트에 담는다.
@@ -49,8 +48,10 @@ public class PriceCompareController {
 	
 	// 해당 상품을 찜할 수 있음
 	@PostMapping("/addPrd")
-	public void addPrd() {
+	public String addPrd() {
 		log.trace("addPrd() invoked. ");
+		
+		return "redirect:showPrd";
 	} // addPrd   Jhwan
 	
 } //end class

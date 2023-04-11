@@ -15,6 +15,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
     <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
 
+
+	<script>
+		
+		// 기간 설정 후 버튼 클릭하여 이 페이지를 다시 리로드하고 그때
+		// 기간에 따라 쇼핑 리스트를 정렬
+	    function sendPeriod(){
+	    	var period = document.getElementById("selectedPeriod").value;
+	    	var url = "/mypage/cart/list?period=" + period;
+	    	window.location.href= url;
+	    } // sendPeriod()
+	    
+	    // 상세보기를 클릭 시, 
+	    // 해당 장바구니의 id를 mypage/cart/get()에 전달하여
+	    // 해당 장바구니를 보여줌 (Restful API를 사용할지 말지 고민)
+	    function seeDetailCart(){
+	    	
+	    } // seeDetailCart()
+	    
+	</script>
 </head>
 
 <body>
@@ -60,11 +79,12 @@
                 <div>
                     <p>
                         <select id="selectedPeriod">
-                            <option value="1week">일주일</option>
-                            <option value="1">1개월</option>
-                            <option value="3">3개월</option>
-                            <option value="6">6개월</option>
+                            <option value="week">일주일</option>
+                            <option value="1month">1개월</option>
+                            <option value="3months">3개월</option>
+                            <option value="6months">6개월</option>
                         </select>
+                        <button onclick="sendPeriod()">전송</button> 
                     </p>
 
                     <table class="shoppingBasketList">
@@ -112,8 +132,6 @@
             </div>
         </article>
 
-
-
         <div class="widthfix">
             <div id="footer">
 
@@ -121,36 +139,6 @@
         </div>
     </div>
 
-    <script>
-
-        var urlParams = new URLSearchParams(window.location.search);
-        var selectedPeriod = document.getElementById("selectedPeriod");
-        var id = urlParams.get("selectedPeriod");
-
-        console.log(id);
-
-        const selectedPeriod = document.getElementById("selectedPeriod");
-        const shoppingBasketList = document.getElementById("shoppingBasketList");
-
-        selectedPeriod.addEventListener("mousedown", function () {
-            var xhr = new XMLHttpRequest();
-            var url = "shoppingBasketList.html?selectedPeriod=" + selectedPeriod.value;
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    dataTable.innerHTML = xhr.responseText;
-                }
-            }
-
-            xhr.open("GET", url, true);
-            xhr.send();
-
-            // window.location.href = "shoppingBasketList.html?selectedPeriod=" + selectedPeriod.value;
-        });
-
-
-
-    </script>
 </body>
 
 </html>
