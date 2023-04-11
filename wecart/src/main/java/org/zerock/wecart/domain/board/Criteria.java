@@ -23,6 +23,10 @@ public class Criteria {
 	private String type;
 	private String keyword;
 	
+//	private String title;
+//	private String content;
+//	private String member_id;
+	
 	// 위의 모든 기준정보를 기반으로, Query String 을 만들어주는 메소드 추가
 	public String getPagingUri() {
 		log.trace("getPagingUri() invoked.");
@@ -34,7 +38,7 @@ public class Criteria {
 //		builder.queryParam("amount", this.amount);
 //		builder.queryParam("pagesPerPage", this.pagesPerPage);
 //		builder.queryParam("type", this.type);
-//		builder.queryParam("keyword", this.keyword);
+		builder.queryParam("keyword", this.keyword);
 
 		String queryString = builder.toUriString();
 		log.info("\t+ queryString: {}", queryString);
