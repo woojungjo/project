@@ -1,47 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-    <!DOCTYPE html>
-    <html lang="ko">
-        
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            
-            <title>WeCart</title>
-            
-            <script src="https://kit.fontawesome.com/a623128410.js" crossorigin="anonymous"></script>
-            
-            <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
-            rel="stylesheet">
-            
-            <link rel="stylesheet" href="/resources/css/header_footer/main_header.css">
-            <link rel="stylesheet" href="/resources/css/header_footer/home_header.css">
-            <link rel="stylesheet" href="/resources/css/header_footer/footer.css">
-            <link rel="stylesheet" href="/resources/css/board/qna/style.css">
-            <script src="/resources/js/board/qna/board.js" defer ></script>
-            
-        </head>
-<body>
-    
-    <div class="wrapper_contatiner">
-        <div class="wrapper">
-            
-        <header>
-            <div class="container">
-                <div class="site_name">
-                         <div class="WeCart">
-                            <span>우리동네<br>장바구니</span>
-                        </div> <!--WeCart-->
-                </div>  <!--site_name-->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.Duration" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 
-                <ul class="headerbar_menu">
+<!DOCTYPE html>
+<html lang="ko">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>WeCart</title>
+        
+        <script src="https://kit.fontawesome.com/a623128410.js" crossorigin="anonymous"></script>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
+        rel="stylesheet">
+        
+        <link rel="stylesheet" href="/resources/css/header_footer/main_header.css">
+        <link rel="stylesheet" href="/resources/css/header_footer/home_header.css">
+        <link rel="stylesheet" href="/resources/css/header_footer/footer.css">
+        <link rel="stylesheet" href="/resources/css/board/qna/style.css">
+        <script src="/resources/js/board/qna/board.js" defer ></script>
+        
+    </head>
+    <body>
+        
+        <div class="wrapper_contatiner">
+            <div class="wrapper">
+                
+                <header>
+                    <div class="container">
+                        <div class="site_name">
+                            <div class="WeCart">
+                                <span>우리동네<br>장바구니</span>
+                            </div> <!--WeCart-->
+                        </div>  <!--site_name-->
+                        
+                        <ul class="headerbar_menu">
                     <li>가격비교</li>
                     <li>커뮤니티</li>
                     <li>Q&A</li>
                 </ul><!--headerbar_menu-->
-
+                
                 <ul class="header_login">
                     <li>개포동 <i class="fa-solid fa-location-dot"></i></li>
                     <li><i class="fa-regular fa-comment-dots"></i></li>
@@ -49,24 +54,45 @@
                     <li><i class="fa-solid fa-piggy-bank"></i></li>
                     <li>Juuu</li>
                 </ul>   <!--header_login-->
-
+                
             </div> <!--container-->
-        
+            
         </header>
-	
-	
+        
+        
         <main>
             <!--*********************************************메인 내용은 여기부터*********************************************-->
             
             <article id="board">
                 <div class="qna_board_name">문의게시판</div>
                 <ul>
+                    <fmt:formatDate value="${currentTime}" pattern="yyyyMMddHHmmss" var="currDate" />
                     <c:forEach items="${list}" var="qnaBoardVO">
                         <li class="board_list">
                             <div class="board_grid">
                                 <div class="board_head">
                                     <div>${qnaBoardVO.member_id}</span></div>
-                                    <div>&nbsp;&nbsp;${qnaBoardVO.write_dt}</div>
+                                    <fmt:formatDate value="${qnaBoardVO.write_dt}" pattern="yyyyMMddHHmmss" var="write_dt" />
+                                    <fmt:formatDate value="${qnaBoardVO.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
+                                    <c:set var="currentLocalDateTime" value="${LocalDateTime.parse(currDate, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                    <c:set var="writeLocalDateTime" value="${LocalDateTime.parse(write_dt, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                    <c:set var="diffMinutes" value="${Duration.between(writeLocalDateTime, currentLocalDateTime).toMinutes()}"/>
+                                    
+                                    <c:choose>
+                                        <c:when test="${diffMinutes < 1}">
+                                            <div>&nbsp;&nbsp;방금 전</div>
+                                        </c:when>
+                                        <c:when test="${diffMinutes < 60}">
+                                            <div>&nbsp;&nbsp;${diffMinutes}분 전</div>
+                                        </c:when>
+                                        <c:when test="${diffMinutes < 1440}">
+                                            <fmt:formatNumber value="${diffMinutes div 60}" pattern="##" var="minutestoTime"/>
+                                            <div>&nbsp;&nbsp;${minutestoTime}시간 전</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div>&nbsp;&nbsp;${formatDate}</div>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <c:choose>
                                     <c:when test="${qnaBoardVO.secret_yn  == 0}">

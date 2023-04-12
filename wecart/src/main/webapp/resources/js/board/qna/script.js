@@ -42,12 +42,12 @@ icon.onclick = function() {
 };
 
 
-var oEditors = [];
-        nhn.husky.EZCreator.createInIFrame({
-         oAppRef: oEditors,
-         elPlaceHolder: document.getElementById("ir1"),
-         sSkinURI: "wecart/src/main/webapp/WEB-INF/views/board/smarteditor/SmartEditor2Skin.html",
-         fCreator: "createSEditor2"
-        });
+// var oEditors = [];
+//         nhn.husky.EZCreator.createInIFrame({
+//          oAppRef: oEditors,
+//          elPlaceHolder: document.getElementById("ir1"),
+//          sSkinURI: "wecart/src/main/webapp/WEB-INF/views/board/smarteditor/SmartEditor2Skin.html",
+//          fCreator: "createSEditor2"
+//         });
 
 

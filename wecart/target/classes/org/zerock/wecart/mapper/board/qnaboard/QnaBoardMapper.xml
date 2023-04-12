@@ -18,14 +18,15 @@
       <where>
         <choose>
           <when test="type == 'title-content'">
-            a.title like '%'||#{keyword}||'%'
-            OR a.content like '%'||#{keyword}||'%'
+            a.title LIKE '%'||#{keyword}||'%'
+            OR a.content LIKE '%'||#{keyword}||'%'
           </when>
           <when test="type == 'title'">
-            a.title like '%'||#{keyword}||'%'
+            a.title LIKE '%'||#{keyword}||'%'
           </when>
           <when test="type == 'content'">
-            a.content like '%'||#{keyword}||'%'
+            a.content LIKE '%'||#{keyword}||'%'
+
           </when>
           <when test="type == 'member_id'">
             a.member_id = #{keyword}
