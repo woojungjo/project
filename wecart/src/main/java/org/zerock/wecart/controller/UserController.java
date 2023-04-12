@@ -51,13 +51,9 @@ public class UserController {
 	
 
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		log.info("로그아웃");
-		HttpSession session = request.getSession(false);
+	public void logout() {
+		log.info("오류 메시지");
 		
-		session.invalidate();
-		
-		return "redirect:/";
 	} // logout
 	
 	@GetMapping("/signup")
@@ -71,5 +67,10 @@ public class UserController {
 		
 		return null;
 	} // signup
+	
+	@GetMapping("/findAccount")
+	public void findAccount() {
+		
+	} // findAccount
 	
 } // end class

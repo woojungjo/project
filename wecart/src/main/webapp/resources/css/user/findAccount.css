@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+html,
+body {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 auto;
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+    font-family: -apple-system, BlinkMacSystemFont, helvetica, "Apple SD Gothic Neo", sans-serif
+}
+
+header {
+    padding-top: 60px;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+#logo {
+    text-align: center;
+    font-size: 3em;
+    color: #03c75a;
+    display: block;
+}
+
+#container {
+    position: relative;
+    width: auto;
+    max-width: 768px;
+    min-width: 460px;
+    height: 600px;
+}
+
+#content {
+    max-width: 460px;
+}
+
+nav {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+a#tab {
+    display: inline-block;
+    width: 200px;
+
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    
+    text-align: center;
+}
+
+/* 탭 버튼 스타일링 */
+.tablinks {
+    background-color: white;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+/* 선택된 탭 버튼 스타일링 */
+.tablinks.active {
+    background-color: black;
+    color: #fff;
+}
+
+/* 탭 내용 스타일링 */
+.tabcontent {
+    display: none;
+    padding: 10px;
+}
+
+/* 선택된 탭 내용 스타일링 */
+.tabcontent.show {
+    display: block;
+}
+
+.article {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.input_title {
+    flex-basis: auto;
+    margin-right: 10px;
+}
+
+.input {
+    width: 340px;
+    height: 40px;
+    margin: 0px, 0px, 0px, 10px;
+}
+
+#next {
+    text-align: center;    
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+#next_button {
+    display: inline-block;
+    position: relative;
+    width: 340px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: white;
+    background-color: black;
+}
+
+footer {
+    color: gray;
+    padding-top: 30px;
+    text-align: center;
+}
+
+#footer_1>li,
+#footer_2>li {
+    display: inline-block;
+    padding-left: 2px;
+}
+
+#footer_1>li::after,
+#footer_2>li::after {
+    content: '|';
+    color: #dadada;
+    padding-left: 5px;
+}
+
+#footer_1>li:last-child::after,
+#footer_2>li:last-child::after {
+    content: '';
+}

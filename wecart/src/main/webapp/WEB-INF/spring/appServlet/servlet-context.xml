@@ -42,6 +42,12 @@
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
 
+		<interceptor>
+			<mapping path="/user/logout" />
+
+			<beans:ref bean="logoutInterceptor" />
+		</interceptor>
+		
 	</interceptors>
 	
 </beans:beans>
