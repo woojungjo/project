@@ -74,12 +74,34 @@ public class PriceCompareMapperTests {
 	void selectTotalCount() {
 		log.trace("selectTotalCount() invoked.");
 		
-		Integer totalCount = this.mapper.selectTotalCount();
+//		String keyword = "product_1";
+		String keyword = null;
+		
+		Integer totalCount = this.mapper.selectTotalCount(keyword);
 		
 		log.info("\t+ totalCount: {}", totalCount);
 		
 	} //selectTotalCount
 	
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("Test1: selectAll")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectSearch() {
+		log.trace("selectSearch() invoked.");
+		
+		GoodsCriteria cri = new GoodsCriteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
+		cri.setKeyword("product_1");
+		
+		List<GoodsVO> list = this.mapper.selectSearch(cri);
+		assertNotNull(list);
+		
+		list.forEach(log::info);	
+		
+	} //selectSearch
 } //end class
 
 

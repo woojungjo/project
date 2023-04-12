@@ -75,6 +75,29 @@ public class PriceCompareControllerTests {
 		log.info("\t+ viewName: {}", modelAndView.getViewName());
 		log.info("\t+ model: {}", modelAndView.getModel());		
 	} //list
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("TEST2: search")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void search() throws Exception {
+		log.trace("search() invoked.");
+		
+		MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+		
+		MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.get("/priceCompare/search"); 
+		requestBuilder.param("currPage", "1");
+		requestBuilder.param("amount", "40");
+		requestBuilder.param("keyword", "product_1");
+		
+		@Cleanup("clear")
+		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		
+		log.info("\t+ viewName: {}", modelAndView.getViewName());
+		log.info("\t+ model: {}", modelAndView.getModel());		
+	} //search
 } //end class
 
 

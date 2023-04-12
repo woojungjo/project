@@ -14,7 +14,6 @@
                 sale t2
             WHERE 
                 t1.goods_id = t2.goods_id
-                AND t1.goods_id <= 800
                 AND t2.price = (
                                 SELECT min(price)
                                 FROM sale 
@@ -25,6 +24,36 @@
 			FETCH NEXT #{amount} ROWS ONLY
         ]]>
     </select>
-  
+
+    <select id="selectTotalCount">
+        SELECT count(goods_id)
+        FROM goods
+        <where>
+            <if test="keyword != null">
+                goods_name LIKE '%'||#{keyword}||'%'
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSearch" resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
+        <![CDATA[ 
+            SELECT 
+                t1.*, t2.price
+            FROM 
+                goods t1,
+                sale t2
+            WHERE 
+                t1.goods_id = t2.goods_id
+                AND t2.price = (
+                                SELECT min(price)
+                                FROM sale 
+                                WHERE goods_id = t2.goods_id
+                                )
+                AND t1.goods_name LIKE '%'||#{keyword}||'%'
+            ORDER BY t1.goods_id
+            OFFSET (#{currPage} - 1) * #{amount} ROWS
+            FETCH NEXT #{amount} ROWS ONLY
+        ]]>
+    </select>
 
 </mapper>

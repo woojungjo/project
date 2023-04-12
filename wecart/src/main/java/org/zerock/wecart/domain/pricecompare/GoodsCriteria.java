@@ -19,10 +19,10 @@ public class GoodsCriteria {
 		log.trace("getPagingUri() invoked.");
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
+		if(keyword != null) builder.queryParam("keyword", this.keyword);
 		builder.queryParam("currPage", this.currPage);
 		builder.queryParam("amount", this.amount);
-		builder.queryParam("pagesPerPage", this.pagesPerPage);
-		builder.queryParam("keyword", this.keyword);
+		builder.queryParam("pagesPerPage", this.pagesPerPage);		
 		
 		String queryString = builder.toUriString();
 		log.info("\t+ queryString: {}", queryString);

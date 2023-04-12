@@ -29,7 +29,7 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	@Transactional
 	@Override
 	public List<GoodsVO> getList(GoodsCriteria cri) throws ServiceException {
-		log.trace("getList() invoked.");
+		log.trace("getList({}) invoked.", cri);
 		
 		try {
 			return this.mapper.selectAll(cri);
@@ -39,15 +39,26 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	} //getList
 
 	@Override
-	public Integer getTotalAmount() throws ServiceException {
+	public Integer getTotalAmount(String keyword) throws ServiceException {
 		log.trace("getTotalAmount() invoked.");
 		
 		try {
-			return this.mapper.selectTotalCount();
+			return this.mapper.selectTotalCount(keyword);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch
 	} //getTotalAmount
+
+	@Override
+	public List<GoodsVO> getSearchList(GoodsCriteria cri) throws ServiceException {
+		log.trace("getSearchList({}) invoked.", cri);
+		
+		try {
+			return this.mapper.selectSearch(cri);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //getSearchList
 
 	
 	
