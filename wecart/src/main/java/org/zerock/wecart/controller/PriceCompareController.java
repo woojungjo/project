@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
+import org.zerock.wecart.domain.pricecompare.GoodsPageDTO;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
@@ -30,14 +32,20 @@ public class PriceCompareController {
 	} //Constructor
 	
 	
-	//전체 상품 조회
+	//전체 상품 조회(페이징 처리)
 	@GetMapping("/list")
-	public void list(Model model) throws ControllerException {
+	public void list(GoodsCriteria cri, Model model) throws ControllerException {
 		log.trace("list() invoked.");
 		
 		try {
-			List<GoodsVO> list = this.service.getList();
+			List<GoodsVO> list = this.service.getList(cri);
 			model.addAttribute("__GOODSLIST__", list);
+			
+			int totalAmount = this.service.getTotalAmount();
+			GoodsPageDTO pageDTO = new GoodsPageDTO(cri, totalAmount);
+			log.info("\t+ pageDTO: {}", pageDTO);
+			
+			model.addAttribute("__GOODSPAGEMAKER__", pageDTO);	
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} //try-catch
