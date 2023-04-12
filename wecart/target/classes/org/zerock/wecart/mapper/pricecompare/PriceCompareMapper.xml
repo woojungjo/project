@@ -14,12 +14,15 @@
                 sale t2
             WHERE 
                 t1.goods_id = t2.goods_id
-                AND t1.goods_id <= 50
+                AND t1.goods_id <= 800
                 AND t2.price = (
                                 SELECT min(price)
                                 FROM sale 
                                 WHERE goods_id = t2.goods_id
                                 )
+            ORDER BY t1.goods_id
+            OFFSET (#{currPage} - 1) * #{amount} ROWS
+			FETCH NEXT #{amount} ROWS ONLY
         ]]>
     </select>
   

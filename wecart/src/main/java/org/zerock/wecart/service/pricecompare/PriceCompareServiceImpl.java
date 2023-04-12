@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
@@ -27,15 +28,26 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 
 	@Transactional
 	@Override
-	public List<GoodsVO> getList() throws ServiceException {
+	public List<GoodsVO> getList(GoodsCriteria cri) throws ServiceException {
 		log.trace("getList() invoked.");
 		
 		try {
-			return this.mapper.selectAll();
+			return this.mapper.selectAll(cri);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch
 	} //getList
+
+	@Override
+	public Integer getTotalAmount() throws ServiceException {
+		log.trace("getTotalAmount() invoked.");
+		
+		try {
+			return this.mapper.selectTotalCount();
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //getTotalAmount
 
 	
 	

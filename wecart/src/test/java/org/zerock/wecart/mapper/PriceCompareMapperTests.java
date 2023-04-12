@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
 
@@ -54,12 +55,30 @@ public class PriceCompareMapperTests {
 	void selectAll() {
 		log.trace("selectAll() invoked.");
 		
-		List<GoodsVO> list = this.mapper.selectAll();
+		GoodsCriteria cri = new GoodsCriteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
+		
+		List<GoodsVO> list = this.mapper.selectAll(cri);
 		assertNotNull(list);
 		
 		list.forEach(log::info);	
 		
 	} //selectAll
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("Test2: selectTotalCount")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectTotalCount() {
+		log.trace("selectTotalCount() invoked.");
+		
+		Integer totalCount = this.mapper.selectTotalCount();
+		
+		log.info("\t+ totalCount: {}", totalCount);
+		
+	} //selectTotalCount
 	
 } //end class
 

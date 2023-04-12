@@ -16,12 +16,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @NoArgsConstructor
@@ -44,7 +44,8 @@ public class PriceCompareServiceTests {
 		assert this.service != null;
 		log.info("\t+ this.service: {}", this.service);
 	} //beforeAll
-	
+
+	//1. 상품 전체 조회 (페이징 처리)
 //	@Disabled
 	@Test
 	@Order(1)
@@ -53,7 +54,11 @@ public class PriceCompareServiceTests {
 	void getList() throws ServiceException {
 		log.trace("getList() invoked.");
 		
-		List<GoodsVO> list = this.service.getList();
+		GoodsCriteria cri = new GoodsCriteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
+		
+		List<GoodsVO> list = this.service.getList(cri);
 		
 		if(list != null) {
 			log.info("\t+ list: {}", list);
