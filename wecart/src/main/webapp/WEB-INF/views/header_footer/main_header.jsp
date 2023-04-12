@@ -27,7 +27,7 @@
                     <li><a href="/"><i class="fa-solid fa-piggy-bank"></i></a></li>
                     <li>
                         <a href="/mypage/edit/check_password">
-                         <% String id = (String)session.getAttribute("id"); %> <%= id %>
+                         <%= session.getAttribute("id") %>
                         </a>
                     </li>
                     <li><a href="/user/logout">로그아웃</a></li>

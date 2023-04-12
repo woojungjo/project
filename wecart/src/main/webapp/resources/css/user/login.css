@@ -12,7 +12,6 @@ html,body {
     font-family: -apple-system,BlinkMacSystemFont,helvetica,"Apple SD Gothic Neo",sans-serif
 }
 header {
-    /* height: 100px; */
     padding-top: 90px;
     padding-bottom: 20px;
     box-sizing: border-box
@@ -27,6 +26,7 @@ header {
     width: auto;
     max-width: 768px;
     min-width: 460px;
+    height: 600px;
 }
 #panel_out{
     width: 460px;
@@ -34,7 +34,6 @@ header {
 }
 #panel_in {
     padding: 20px;
-    /* height: 215px; */
     border: 1px solid #c6c6c6;
     border-radius: 6px;
     background-color: #fff;
@@ -128,9 +127,12 @@ header {
     padding: 30px 15px 15px 0px;
 }
 footer {
+	width: 460px;
     color: gray;
-    height: 125px;    
     text-align: center;
+}
+#footer_1, #footer_2 {
+	padding: 0px;
 }
 #footer_1>li, #footer_2>li{
     display: inline-block;
