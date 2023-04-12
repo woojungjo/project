@@ -1,6 +1,4 @@
-package org.zerock.wecart.mapper;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+package org.zerock.wecart.service;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
-import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
+import org.zerock.wecart.exception.ServiceException;
+import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,39 +28,43 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/**/root-*.xml"})
+@ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/**/root-*.xml"})
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class PriceCompareMapperTests {
+public class PriceCompareServiceTests {
 
-	@Setter(onMethod_= {@Autowired})
-	private PriceCompareMapper mapper;
+	@Autowired
+	private PriceCompareService service;
 	
 	@BeforeAll
 	void beforeAll() {
 		log.trace("beforeAll() invoked.");
 		
-		assert this.mapper != null;
-		log.info("\t+ this.mapper: {}", this.mapper);
+		assert this.service != null;
+		log.info("\t+ this.service: {}", this.service);
 	} //beforeAll
 	
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("Test1: selectAll")
+	@DisplayName("Test1: getList()")
 	@Timeout(value=4, unit=TimeUnit.SECONDS)
-	void selectAll() {
-		log.trace("selectAll() invoked.");
+	void getList() throws ServiceException {
+		log.trace("getList() invoked.");
 		
-		List<GoodsVO> list = this.mapper.selectAll();
-		assertNotNull(list);
+		List<GoodsVO> list = this.service.getList();
 		
-		list.forEach(log::info);	
+		if(list != null) {
+			log.info("\t+ list: {}", list);
+		} else {
+			throw new ServiceException("GoodsVO is NULL.");
+		} //if-else
 		
-	} //selectAll
-	
+	} //getList
 } //end class
+
+
 
 
 

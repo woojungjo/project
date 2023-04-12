@@ -26,6 +26,7 @@
           </when>
           <when test="type == 'content'">
             a.content LIKE '%'||#{keyword}||'%'
+
           </when>
           <when test="type == 'member_id'">
             a.member_id = #{keyword}
