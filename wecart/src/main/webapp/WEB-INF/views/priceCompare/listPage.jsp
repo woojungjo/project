@@ -112,7 +112,7 @@
                 <div class="search_bar">
                     <form action="/priceCompare/search" method="get">
                         <div class="search_form">
-                            <input type="text" name="search_item" placeholder="검색어를 입력해주세요" class="search_input">
+                            <input type="text" name="keyword" placeholder="검색어를 입력해주세요" class="search_input">
                             <button type="submit"class="submit_bt"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
                         </div>                    
                     </form>                          
@@ -410,17 +410,17 @@
                             <c:set var="currPage" value="${not empty param.currPage ? param.currPage : 1}"/>
                             <!-- 1. first -->
                             <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(1)}"
-                                href="/priceCompare/list${__GOODSPAGEMAKER__.cri.pagingUri}" 
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" 
                                 class="page_index_item"><i class="fa-solid fa-angles-left"></i></a>
 
                             <!-- 2. prev -->
                             <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(currPage eq 1 ? 1 : currPage - 1)}"
-                                href="/priceCompare/list${__GOODSPAGEMAKER__.cri.pagingUri}" class="page_index_item"><i class="fa-solid fa-angle-left"></i></a>
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" class="page_index_item"><i class="fa-solid fa-angle-left"></i></a>
 
                             <!-- 3. 페이지번호 목록 -->
                             <c:forEach var="pageNum" begin="${__GOODSPAGEMAKER__.startPage}" end="${__GOODSPAGEMAKER__.endPage}">
                                 <a data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(pageNum)}"
-                                   href="/priceCompare/list${__GOODSPAGEMAKER__.cri.pagingUri}" 
+                                   href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" 
                                    class="page_index_item ${currPage eq pageNum ? 'currPage' : ''}">
                                    ${pageNum}
                                 </a>
@@ -428,11 +428,11 @@
 
                             <!-- 4. next -->
                             <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(currPage eq __GOODSPAGEMAKER__.realEndPage ? __GOODSPAGEMAKER__.realEndPage : currPage + 1)}"
-                                href="/priceCompare/list${__GOODSPAGEMAKER__.cri.pagingUri}" class="page_index_item"><i class="fa-solid fa-angle-right"></i></a>
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" class="page_index_item"><i class="fa-solid fa-angle-right"></i></a>
 
                             <!-- 5. last  -->
                             <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(__GOODSPAGEMAKER__.realEndPage)}"
-                                href="/priceCompare/list${__GOODSPAGEMAKER__.cri.pagingUri}" 
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" 
                                 class="page_index_item"><i class="fa-solid fa-angles-right"></i></a>    
                         </div>
                     </div>                   

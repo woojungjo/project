@@ -12,6 +12,8 @@ public interface PriceCompareMapper {
 	public abstract List<GoodsVO> selectAll(GoodsCriteria cri);
 	
 	//2. 총 상품 개수 반환
-	@Select("SELECT count(goods_id) FROM goods WHERE goods_id <= 800")
-	public abstract Integer selectTotalCount();
+	public abstract Integer selectTotalCount(String keyword);
+	
+	//3. 상품 검색
+	public abstract List<GoodsVO> selectSearch(GoodsCriteria cri);
 } //end interface

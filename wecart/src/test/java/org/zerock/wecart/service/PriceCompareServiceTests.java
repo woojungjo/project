@@ -67,6 +67,48 @@ public class PriceCompareServiceTests {
 		} //if-else
 		
 	} //getList
+	
+	//2. 총 상품 개수 반환
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("Test2: getTotalAmount()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void getTotalAmount() throws ServiceException {
+		log.trace("getTotalAmount() invoked.");
+		
+		String keyword = "product_1";
+//		String keyword = null;
+		
+		Integer totalAmount = this.service.getTotalAmount(keyword);
+		
+		log.info("\t+ totalAmount: {}", totalAmount);
+		
+	} //getTotalAmount
+	
+	//3. 상품 검색 
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("Test3: getSearchList()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void getSearchList() throws ServiceException {
+		log.trace("getSearchList() invoked.");
+		
+		GoodsCriteria cri = new GoodsCriteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
+		cri.setKeyword("product_1");
+		
+		List<GoodsVO> list = this.service.getSearchList(cri);
+		
+		if(list != null) {
+			log.info("\t+ list: {}", list);
+		} else {
+			throw new ServiceException("GoodsVO is NULL.");
+		} //if-else
+		
+	} //getSearchList
 } //end class
 
 
