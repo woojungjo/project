@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html>
     <html lang="ko">
@@ -61,11 +63,12 @@
             <main id="board_main">
                 <div id="qna_board_read">
                     <div class="qna_board_name">문의게시판</div>
-                    <div class="qna_board_writer">${vo.member_id}작성자</div>
-                    <div class="qna_board_writedt">${vo.write_dt}</div>
-                    <div class="qnd_board_views"><span class="fas fa-eye"></span>${vo.views}</div>
-                    <div class="qna_board_title"><span class="fas fa-lock"></span>${vo.title}</div>
-                    <div class="qna_board_contents">${vo.content}</div>
+                    <div class="qna_board_writer">${readVO[0].member_id}</div>
+                    <fmt:formatDate value="${readVO[0].write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
+                    <div class="qna_board_writedt">${formatDate}</div>
+                    <div class="qnd_board_views"><span class="fas fa-eye"></span>${readVO[0].views}</div>
+                    <div class="qna_board_title"><span class="fas fa-lock"></span>${readVO[0].title}</div>
+                    <div class="qna_board_contents">${readVO[0].content}</div>
                     <div class="qna_board_attach"><button id="download_button"><span class="fas fa-paperclip"></span>첨부파일</button>
                         <div id="qna_board_attach_download">
                             <ul>
@@ -81,7 +84,7 @@
                 <div class="board_commant">
     
                     <div id="board_commant_head">
-                        <div>n개의 댓글</div>
+                        <div>${readVO[2]}개의 댓글</div>
                         <div>
                             <div><span class="fas fa-arrow-left-long"/>&nbsp;이전&nbsp;</div>
                             <div>다음&nbsp;<span class="fas fa-arrow-right-long"/></div>
@@ -101,50 +104,52 @@
                             <input type="submit" value="등록">
                         </div>
                     </form>
-    
-                    <div class="board_commant_read">
-                        <div class="board_commant_read_header">
-                            <div class="board_commant_read_header_namegroup">
-                                <div class="fas fa-piggy-bank"></div>
-                                <div>
-                                    <div>작성자</div>
-                                    <div>작성일자</div>
+                    <c:forEach items="${readVO[1]}" var="commentList">
+                        <div class="board_commant_read">
+                            <div class="board_commant_read_header">
+                                <div class="board_commant_read_header_namegroup">
+                                    <div class="fas fa-piggy-bank"></div>
+                                    <div>
+                                        <div>${commentList.member_id}</div>
+                                        <fmt:formatDate value="${commentList.write_dt}" pattern="yyyy-MM-dd" var="commentFormatDate" />
+                                        <div>${commentFormatDate}</div>
+                                    </div>
+                                </div>
+                                <div class="fas fa-bars">
+                                    <div class="board_commant_ud">
+                                        <ul>
+                                            <li>수정</li>
+                                            <li>삭제</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="fas fa-bars">
-                                <div class="board_commant_ud">
-                                    <ul>
-                                        <li>수정</li>
-                                        <li>삭제</li>
-                                    </ul>
+                            <div class="board_commant_read_main">
+                                ${commentList.content}
+                            </div>
+                            <div class="board_commant_read_footer">
+                                <button class="board_commant_commant">답글쓰기</button>
+                                <div><span class="fas fa-heart"/>${commentList.like_cnt}</div>
+                            </div>
+                        </div>
+                        <hr>
+                        
+                        <div class="board_commant_commant_write">
+                            <form class="board_commant_write" action="" method="post">
+                                <input type="hidden" name="post_no" value="">
+                                <input type="hidden" name="user_id" value=""> 
+                                <input type="hidden" name="high_comment_no" value=""> 
+                                <input type="hidden" name="comment_lv" value="">
+                                <div>댓글작성자</div>
+                                <input type="text" name="content" placeholder="댓글을 남겨보세요.">
+                                <input type="hidden" name="seclet_yn" value="n">
+                                <div class="board_commant_write_footer" >
+                                    <div class="fas fa-lock"></div>
+                                    <input type="submit" value="등록">
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        <div class="board_commant_read_main">
-                            댓글내용~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                        </div>
-                        <div class="board_commant_read_footer">
-                            <button class="board_commant_commant">답글쓰기</button>
-                            <div><span class="fas fa-heart"/>count</div>
-                        </div>
-                    </div>
-                    <hr>
-    
-                    <div class="board_commant_commant_write">
-                        <form class="board_commant_write" action="" method="post">
-                            <input type="hidden" name="post_no" value="">
-                            <input type="hidden" name="user_id" value=""> 
-                            <input type="hidden" name="high_comment_no" value=""> 
-                            <input type="hidden" name="comment_lv" value="">
-                            <div>댓글작성자</div>
-                            <input type="text" name="content" placeholder="댓글을 남겨보세요.">
-                            <input type="hidden" name="seclet_yn" value="n">
-                            <div class="board_commant_write_footer" >
-                                <div class="fas fa-lock"></div>
-                                <input type="submit" value="등록">
-                            </div>
-                        </form>
-                    </div>
+                    </c:forEach>
                 </div>
             </main>
 

@@ -16,10 +16,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.wecart.domain.board.Criteria;
-import org.zerock.wecart.domain.board.QnaBoardVO;
-import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
-import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
+import org.zerock.wecart.domain.board.QnaBoardCommentVO;
+import org.zerock.wecart.mapper.board.qnaboard.QnaBoardCommentMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,7 +35,7 @@ import lombok.extern.log4j.Log4j2;
 public class QnaBoardCommentMapperTests {
 
 	@Setter(onMethod_= {@Autowired})
-	private QnaBoardMapper mapper;
+	private QnaBoardCommentMapper mapper;
 	
 	@BeforeAll
 	void beforeAll() {
@@ -50,23 +48,21 @@ public class QnaBoardCommentMapperTests {
 	}
 	
 	
-//	댓글 받아오는거 테스트부터
 	@Test
 	@Order(1)
-	void qnaBoardMapperSelectAllTest() {
-		log.trace("qnaBoardMapperSelectAllTest() invoked.");
+	void commentTest() {
+		log.trace("commentTest() invoked.");
 		
-		Criteria cri = new Criteria();
-		cri.setCurrPage(2);
-//		cri.setAmount(20);
-		cri.setSort("views");
+		Integer post_no = 1;
 		
-		List<QnaBoard_CommentCountVO> list = this.mapper.selectAll(cri);
+		List<QnaBoardCommentVO> list = this.mapper.selectAll(post_no);
+		
+		Integer cnt = this.mapper.countComment(post_no);
+		
 		assertNotNull(list);
 		
 		list.forEach(log::info);
 	
-		
-	} // qnaBoardMapperSelectAllTest
+	} // commentTest
 		
 }
