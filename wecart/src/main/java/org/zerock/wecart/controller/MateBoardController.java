@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.board.mateboard.MateBoardService;
@@ -34,19 +35,18 @@ public class MateBoardController {		//JavaBeans, POJO
 	private MateBoardService service;
 	
 	@GetMapping("/matelist")
-	public void mateList(Model model) throws ControllerException{ //게시판 전체 목록 조회 요청 처리 핸들러
-		log.trace("matelist({}) invoked", model);
+	public void mateList(Criteria cri, Model model) throws ControllerException{ //게시판 전체 목록 조회 요청 처리 핸들러
+		log.trace("matelist({}, {}) invoked", cri, model);
 		
 		//게시판 전체 목록 로직을 처리하는 메소드가 비즈니스계층에 있기 때문에
 		//이 주입받은 service객체를 가지고 하면 된다.
-		
 		Objects.requireNonNull(this.service);
 		log.info("\t+this.service:{}", this.service);
 		
 		try {
-			//Step1. 게시글 목록 받아옴 
-			List<MateBoardVO> list = this.service.getList();
-			model.addAttribute("list", list);
+			//Step1. 페이징 처리된 현재 currPage에 해당하는게시글 목록 받아옴 
+			List<MateBoardVO> list = this.service.getList(cri);
+			model.addAttribute("__MATELIST__", list);
 			
 			//Step2. 
 		}catch (Exception e) {

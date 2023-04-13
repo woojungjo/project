@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.board.mateboard.MateBoardMapper;
@@ -38,11 +39,11 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 	}//afterPropertiesSet() 
 
 	@Override
-	public List<MateBoardVO> getList() throws ServiceException {
+	public List<MateBoardVO> getList(Criteria cri) throws ServiceException {
 		log.trace("getList()invoked");
 		
 		try {
-			return this.mapper.selectAll();
+			return this.mapper.selectAll(cri);
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}
