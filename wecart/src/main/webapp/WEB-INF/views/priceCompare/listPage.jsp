@@ -375,9 +375,12 @@
                     <div class="article">
                         <div class="goods_sort">
                             <ul class="nav goods_sort_ul">
-                                <li class="nav_item goods_sort_li"><a href="#" class="goods_sort_a">인기순</a></li>
-                                <li class="nav_item goods_sort_li"><a href="#" class="goods_sort_a">낮은 가격순</a></li>
-                                <li class="nav_item goods_sort_li"><a href="#" class="goods_sort_a">높은 가격순</a></li>
+                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("popular")}"
+                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">인기순</a></li>
+                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("low")}"
+                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">낮은 가격순</a></li>
+                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("high")}"
+                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">높은 가격순</a></li>
                             </ul>
                         </div>
                                              

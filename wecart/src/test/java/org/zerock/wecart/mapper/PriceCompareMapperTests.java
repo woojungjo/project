@@ -47,6 +47,7 @@ public class PriceCompareMapperTests {
 		log.info("\t+ this.mapper: {}", this.mapper);
 	} //beforeAll
 	
+	//1. 상품 전체조회(+페이징처리 +정렬)
 //	@Disabled
 	@Test
 	@Order(1)
@@ -58,6 +59,10 @@ public class PriceCompareMapperTests {
 		GoodsCriteria cri = new GoodsCriteria();
 		cri.setCurrPage(1);
 		cri.setAmount(20);
+//		cri.setSort("popular");
+//		cri.setSort("low");
+//		cri.setSort("high");
+		
 		
 		List<GoodsVO> list = this.mapper.selectAll(cri);
 		assertNotNull(list);
@@ -86,7 +91,7 @@ public class PriceCompareMapperTests {
 //	@Disabled
 	@Test
 	@Order(3)
-	@DisplayName("Test1: selectAll")
+	@DisplayName("Test3: selectSearch")
 	@Timeout(value=4, unit=TimeUnit.SECONDS)
 	void selectSearch() {
 		log.trace("selectSearch() invoked.");
@@ -95,6 +100,9 @@ public class PriceCompareMapperTests {
 		cri.setCurrPage(1);
 		cri.setAmount(20);
 		cri.setKeyword("product_1");
+//		cri.setSort("popular");
+//		cri.setSort("low");
+		cri.setSort("high");
 		
 		List<GoodsVO> list = this.mapper.selectSearch(cri);
 		assertNotNull(list);
