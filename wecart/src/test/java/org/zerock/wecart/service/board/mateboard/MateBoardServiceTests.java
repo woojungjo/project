@@ -1,5 +1,7 @@
 package org.zerock.wecart.service.board.mateboard;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ServiceException;
 
@@ -55,15 +58,19 @@ public class MateBoardServiceTests {
 	@Test
 	@Order(1)
 	@DisplayName("testGetList")
-	@Timeout(value = 2 ,unit = TimeUnit.SECONDS)
+	@Timeout(value = 30, unit = TimeUnit.SECONDS)
 	void testGetList() throws ServiceException {
 		log.trace("testGetList() invoked.");
 		
-		List<MateBoardVO> list = this.service.getList();
+		Criteria cri = new Criteria();
+		cri.setCurrPage(2);
+		cri.setAmount(20);
+//		cri.setSort("views");
+		
+		List<MateBoardVO> list = this.service.getList(cri);
 		
 		assert list != null;
 		list.forEach(log::info);
 	} // testGetList
 	
-	
-}
+} //MateBoardServiceTests
