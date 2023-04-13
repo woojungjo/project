@@ -26,11 +26,13 @@
             <div id="content">
 
                 <nav>
-                    <a href="#" id="tab" class="tablinks active" onclick="openTab(event, 'tab1')">아이디 찾기</a>
-                    <a href="#" id="tab" class="tablinks" onclick="openTab(event, 'tab2')">비밀번호 찾기</a>
+                    <ul>
+                        <li class="tablinks active" onclick="search_check(1)">아이디 찾기</li>
+                        <li class="tablinks" onclick="search_check(2)">비밀번호 찾기</li>
+                    </ul>
                 </nav>
 
-                <div id="tab1" class="tabcontent show">
+                <div id="searchI" class="tabcontent">
 
                     <div class="table_wrap">
 
@@ -46,7 +48,7 @@
                     </div>
                 </div>
 
-                <div id="tab2" class="tabcontent">
+                <div id="searchP" class="tabcontent">
 
                     <div class="table_wrap">
 
@@ -100,19 +102,22 @@
 </body>
 
 	<script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
+        function search_check(num) {
+            if (num == '1') {
+                document.getElementById("searchP").style.display = "none";
+                document.getElementById("searchI").style.display = "block";
+            } else {
+                document.getElementById("searchI").style.display = "none";
+                document.getElementById("searchP").style.display = "block";
             }
+
             tablinks = document.getElementsByClassName("tablinks");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
+            // num.currentTarget.className += " active";
+            event.currentTarget.className += " active";
         }
-    </script>
+    </script>    
 
 </html>

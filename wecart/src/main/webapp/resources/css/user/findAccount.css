@@ -45,7 +45,7 @@ nav {
     padding-bottom: 50px;
 }
 
-a#tab {
+nav>ul>li {
     display: inline-block;
     width: 200px;
 
@@ -77,11 +77,6 @@ a#tab {
 .tabcontent {
     display: none;
     padding: 10px;
-}
-
-/* 선택된 탭 내용 스타일링 */
-.tabcontent.show {
-    display: block;
 }
 
 .article {
