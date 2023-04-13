@@ -16,4 +16,5 @@ public interface PriceCompareService {
 	
 	//3. 상품 검색 목록
 	public abstract List<GoodsVO> getSearchList(GoodsCriteria cri) throws ServiceException;
+
 } //end interface

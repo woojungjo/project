@@ -6,7 +6,7 @@
 
 <mapper namespace="org.zerock.wecart.mapper.pricecompare.PriceCompareMapper">
     <select id="selectAll" resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
-        <![CDATA[ 
+
             SELECT 
                 t1.*, t2.price
             FROM 
@@ -19,10 +19,24 @@
                                 FROM sale 
                                 WHERE goods_id = t2.goods_id
                                 )
-            ORDER BY t1.goods_id
+            ORDER BY 
+                <choose>
+                    <when test="sort == 'popular'">
+                        t1.readcnt DESC
+                    </when>
+                    <when test="sort == 'low'">
+                        t2.price ASC
+                    </when>
+                    <when test="sort == 'high'">
+                        t2.price DESC
+                    </when>
+                    <otherwise>
+                        t1.goods_id ASC
+                    </otherwise>
+                </choose>
             OFFSET (#{currPage} - 1) * #{amount} ROWS
 			FETCH NEXT #{amount} ROWS ONLY
-        ]]>
+
     </select>
 
     <select id="selectTotalCount">
@@ -35,25 +49,39 @@
         </where>
     </select>
 
-    <select id="selectSearch" resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
-        <![CDATA[ 
-            SELECT 
-                t1.*, t2.price
-            FROM 
-                goods t1,
-                sale t2
-            WHERE 
-                t1.goods_id = t2.goods_id
-                AND t2.price = (
-                                SELECT min(price)
-                                FROM sale 
-                                WHERE goods_id = t2.goods_id
-                                )
-                AND t1.goods_name LIKE '%'||#{keyword}||'%'
-            ORDER BY t1.goods_id
-            OFFSET (#{currPage} - 1) * #{amount} ROWS
-            FETCH NEXT #{amount} ROWS ONLY
-        ]]>
+    <select id="selectSearch" resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">      
+        SELECT 
+            t1.*, t2.price
+        FROM 
+            goods t1,
+            sale t2
+        WHERE 
+            t1.goods_id = t2.goods_id
+            AND t2.price = (
+                            SELECT min(price)
+                            FROM sale 
+                            WHERE goods_id = t2.goods_id
+                            )
+            <if test="keyword != null">
+                AND (t1.goods_name LIKE '%'||#{keyword}||'%')
+            </if>                
+        ORDER BY 
+            <choose>
+                <when test="sort == 'popular'">
+                    t1.readcnt DESC
+                </when>
+                <when test="sort == 'low'">
+                    t2.price ASC
+                </when>
+                <when test="sort == 'high'">
+                    t2.price DESC
+                </when>
+                <otherwise>
+                    t1.goods_id ASC
+                </otherwise>
+            </choose>
+        OFFSET (#{currPage} - 1) * #{amount} ROWS
+        FETCH NEXT #{amount} ROWS ONLY        
     </select>
 
 </mapper>

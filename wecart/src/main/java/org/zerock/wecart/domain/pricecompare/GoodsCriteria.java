@@ -14,6 +14,7 @@ public class GoodsCriteria {
 	private Integer pagesPerPage = 10;
 	
 	private String keyword;
+	private String sort;
 	
 	public String getPagingUri() {
 		log.trace("getPagingUri() invoked.");
@@ -23,10 +24,24 @@ public class GoodsCriteria {
 		builder.queryParam("currPage", this.currPage);
 		builder.queryParam("amount", this.amount);
 		builder.queryParam("pagesPerPage", this.pagesPerPage);		
+		if(sort != null) builder.queryParam("sort", this.sort);
 		
 		String queryString = builder.toUriString();
 		log.info("\t+ queryString: {}", queryString);
 		
 		return queryString;
 	} //getPagingUri
+	
+	public String getSearchPagingUri() {
+		log.trace("getSearchPagingUri() invoked.");
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
+		if(keyword != null) builder.queryParam("keyword", this.keyword);
+		builder.queryParam("sort", this.sort);
+		
+		String queryString = builder.toUriString();
+		log.info("\t+ queryString: {}", queryString);
+		
+		return queryString;
+	} //getSearchPagingUri
 } //end class

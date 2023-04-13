@@ -57,6 +57,9 @@ public class PriceCompareServiceTests {
 		GoodsCriteria cri = new GoodsCriteria();
 		cri.setCurrPage(1);
 		cri.setAmount(20);
+		cri.setSort("popular");
+//		cri.setSort("low");
+//		cri.setSort("high");
 		
 		List<GoodsVO> list = this.service.getList(cri);
 		
