@@ -1,6 +1,8 @@
 @charset "utf-8";
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
+
+
 body {
     margin: 0;
 }
@@ -317,4 +319,9 @@ a {
 a {
     text-decoration: none;
     color: black;
+}
+
+img{
+	width: 290px;
+	height: 260px;
 }

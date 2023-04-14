@@ -8,4 +8,7 @@ public interface PriceCompareMapper {
 
 	//1. 상품 전체 조회
 	public abstract List<GoodsVO> selectAll();
+	
+	// 한 가지 상품을 조회
+	public abstract GoodsVO select(Integer goods_id);
 } //end interface

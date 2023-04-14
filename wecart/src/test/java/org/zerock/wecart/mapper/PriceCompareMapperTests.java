@@ -61,6 +61,21 @@ public class PriceCompareMapperTests {
 		
 	} //selectAll
 	
+	@Test
+	@Order(2)
+	@DisplayName("Test2: select")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void select() {
+		log.trace("select() invoked. ");
+		
+		GoodsVO goods = this.mapper.select(77);
+		assertNotNull(goods);
+		
+		log.trace("goods: {}", goods);
+		
+		
+	}
+	
 } //end class
 
 
