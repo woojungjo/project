@@ -46,7 +46,7 @@ public class MateBoardController {		//JavaBeans, POJO
 		try {
 			//Step1. 페이징 처리된 현재 currPage에 해당하는게시글 목록 받아옴 
 			List<MateBoardVO> list = this.service.getList(cri);
-			model.addAttribute("__MATELIST__", list);
+			model.addAttribute("__MATE_LIST__", list);
 			
 			//Step2. 
 		}catch (Exception e) {
