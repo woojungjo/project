@@ -9,14 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>장메이트100p</title>
+    
 
-    <script src="/Board/YJ_Resources/js/script.js" defer></script>
-    <script src="/Board/YS_Resources/js/script2.js" defer></script>
+    <script src="/resources/js/board/qna/board.js" defer ></script>
+     
+	<script src="../../resources/js/board/mate/script.js" defer></script>
 
-    <link rel="stylesheet" href="/Board/YS_Resources/css/style.css">
-    <link rel="stylesheet" href="/Board/YJ_Resources/css/style.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="/Board/YS_Resources/css/style2.css">
+	<link rel="stylesheet" href="../../resources/css/board/qna/style.css">
+	<link rel="stylesheet" href="../../resources/css/board/mate/style.css">
+	
 	
     <!-- <script src="https://kit.fontawesome.com/78271596c1.js" crossorigin="anonymous"></script> -->
 

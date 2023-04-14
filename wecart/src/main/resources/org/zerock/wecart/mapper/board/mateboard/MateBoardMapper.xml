@@ -10,7 +10,7 @@
   	<select id="selectAll" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
   		SELECT *
   		FROM mate_board
-  		WHERE post_no>=99990
+  		WHERE post_no>=90000
   	</select>
   </mapper>
   

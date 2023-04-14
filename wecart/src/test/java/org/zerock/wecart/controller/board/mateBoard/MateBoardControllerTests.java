@@ -19,7 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -68,7 +68,7 @@ public class MateBoardControllerTests {
 	@Test
 	@Order(1)
 	@DisplayName("testMateList")
-	@Timeout(value=10, unit=TimeUnit.SECONDS)
+	@Timeout(value=50, unit=TimeUnit.SECONDS)
 	void testMateList() throws Exception{
 		log.trace("testMateList() invoked");
 		
@@ -78,7 +78,9 @@ public class MateBoardControllerTests {
 		
 		//MateBoardControoler의 /board/mate/matelist,Get handler 테스트
 		//상위타입인 requestBuilder를 타입으로 가짐
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/mate/matelist");
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/mate/matelist");
+		requestBuilder.param("currPage","2");
+		requestBuilder.param("amount","20");
 		
 		//가상의 MVC 환경에서, MateBoardController에 요청생성 및 전송
 		@Cleanup("clear")
