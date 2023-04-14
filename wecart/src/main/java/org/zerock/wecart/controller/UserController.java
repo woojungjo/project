@@ -1,17 +1,17 @@
 package org.zerock.wecart.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
 import org.zerock.wecart.exception.ControllerException;
+import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.user.UserService;
 
 import lombok.AllArgsConstructor;
@@ -72,5 +72,17 @@ public class UserController {
 	public void findAccount() {
 		
 	} // findAccount
+	
+	@PostMapping("/serachId")
+	@ResponseBody
+	public String searchId(@RequestParam("alias") String alias, @RequestParam("email") String email) throws ControllerException {
+		try {
+			String result = this.service.searchId(alias, email);
+			
+			return result;
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch		
+	} // searchId
 	
 } // end class

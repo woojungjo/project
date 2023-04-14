@@ -25,8 +25,22 @@ public class UserServiceImpl implements UserService {
 			return this.mapper.selectUser(dto);
 		} catch(Exception e) {
 			throw new ServiceException(e);
-		} // try-catch
+		} // try - catch
 		
 	} // login
+
+	@Override
+	public String searchId(String alias, String email) throws ServiceException {
+		log.trace("searchId() invoked.");
+		
+		try {
+			return this.mapper.selectID(alias, email);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+	} // searchId
+
+
 
 } // end class

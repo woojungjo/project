@@ -26,11 +26,13 @@
             <div id="content">
 
                 <nav>
-                    <a href="#" id="tab" class="tablinks active" onclick="openTab(event, 'tab1')">아이디 찾기</a>
-                    <a href="#" id="tab" class="tablinks" onclick="openTab(event, 'tab2')">비밀번호 찾기</a>
+                    <ul>
+                        <li class="tablinks active" onclick="search_check(1)">아이디 찾기</li>
+                        <li class="tablinks" onclick="search_check(2)">비밀번호 찾기</li>
+                    </ul>
                 </nav>
 
-                <div id="tab1" class="tabcontent show">
+                <div id="searchI" class="tabcontent" style="display: block;">
 
                     <div class="table_wrap">
 
@@ -46,7 +48,7 @@
                     </div>
                 </div>
 
-                <div id="tab2" class="tabcontent">
+                <div id="searchP" class="tabcontent">
 
                     <div class="table_wrap">
 
@@ -96,23 +98,77 @@
         &copy; 2023 WeCart, Inc. All Rights Reserved
 
     </footer>
+
+    <div id="background_modal" class="background_modal">
+        <div class="modal_contents">
+            <h4>
+                <b>손님 아이디는?</b><span class="close">&times;</span>
+            </h4><br>
+                <h2 id="id_value"></h2>
+            <br>
+            <button type="button" id="pwSearch_btn" class="btn peach-gradient btn-rounded waves-effect">
+            <i class="fa fa-envelope"></i>비밀번호 찾기</button>
+        </div>
+    </div>
     
 </body>
 
 	<script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
+        function search_check(num) {
+            if (num == '1') {
+                document.getElementById("searchI").style.display = "block";
+                document.getElementById("searchP").style.display = "none";             
+            } else {
+                document.getElementById("searchI").style.display = "none";
+                document.getElementById("searchP").style.display = "block";
             }
+
             tablinks = document.getElementsByClassName("tablinks");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
+            
+            event.currentTarget.className += " active";
         }
-    </script>
+
+        $(document).ready(function () {
+            /////////모///달///기///능///////////
+            // 1. 모달창 히든 불러오기
+            $('#searchBtn').click(function () {
+                $('#background_modal').show();
+            });
+            // 2. 모달창 닫기 버튼
+            $('.close').on('click', function () {
+                $('#background_modal').hide();
+            });
+            // 3. 모달창 위도우 클릭 시 닫기
+            $(window).on('click', function () {
+                if (event.target == $('#background_modal').get(0)) {
+                    $('#background_modal').hide();
+                }
+            });
+        });
+
+        // 아이디 & 스토어 값 저장하기 위한 변수
+        var idV = "";
+        // 아이디 값 받고 출력하는 ajax
+        var idSearch_click = function () {
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/user/userSearch?inputName_1="
+                    + $('#inputName_1').val() + "&inputPhone_1=" + $('#inputPhone_1').val(),
+                success: function (data) {
+                    if (data == 0) {
+                        $('#id_value').text("회원 정보를 확인해주세요!");
+                    } else {
+                        $('#id_value').text(data);
+                        // 아이디값 별도로 저장
+                        idV = data;
+                    }
+                }
+            });
+        }
+
+    </script>    
 
 </html>
