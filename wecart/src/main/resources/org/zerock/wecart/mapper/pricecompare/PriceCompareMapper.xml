@@ -87,14 +87,10 @@
     
 	<select id="select"
 		resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
-  		<![CDATA[
 	  		SELECT *
 	  		FROM  goods
 	  		WHERE
-	  			goods_id <= 500
-	  			AND goods_id = #{goods_id}
-  		]]>
-
+	  			goods_id = #{goods_id}
 	</select>
 
 

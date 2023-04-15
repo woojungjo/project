@@ -95,11 +95,15 @@ public class PriceCompareController {
 		log.trace("showPrd() invoked. ");
 
 		try {
+			log.trace("1. 여기까지는 이상 없습니다. ");
 			GoodsVO goods = this.service.select(goods_id);
+			
+			log.trace("2. 여기까지는 이상 없습니다. ");
 			log.trace("goods: {}", goods);
 			
 			model.addAttribute("goods", goods);
 			
+			log.trace("3.. 여기까지는 이상 없습니다. ");
 			return "priceCompare/showPrd";
 		} catch (Exception e) {
 			throw new ControllerException(e);

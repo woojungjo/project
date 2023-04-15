@@ -43,7 +43,6 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 		log.trace("select({}) invoked. ", goods_id);
 		
 		try {
-			
 			return this.mapper.select(goods_id);
 		} catch(Exception e) {
 			

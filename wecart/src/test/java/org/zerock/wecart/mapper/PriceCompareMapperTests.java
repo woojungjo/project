@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
+import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
 
 import lombok.NoArgsConstructor;
@@ -87,7 +88,7 @@ public class PriceCompareMapperTests {
 		
 	}
 	
-=======
+
 //	@Disabled
 	@Test
 	@Order(3)
