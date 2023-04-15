@@ -47,7 +47,7 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 		} catch(Exception e) {
 			
 			throw new ServiceException(e);
-		}
+		} // try-catch
 	} //getList
 
 	@Override
