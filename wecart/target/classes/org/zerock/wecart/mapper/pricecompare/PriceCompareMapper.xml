@@ -87,10 +87,24 @@
     
 	<select id="select"
 		resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
-	  		SELECT *
-	  		FROM  goods
-	  		WHERE
-	  			goods_id = #{goods_id}
+        <!-- SELECT *
+        FROM  goods
+        WHERE
+            goods_id = #{goods_id} -->
+        
+        SELECT 
+            t1.*, t2.price
+        FROM 
+            goods t1,
+            sale t2
+        WHERE 
+            t1.goods_id = t2.goods_id
+            AND t2.price = (
+                            SELECT min(price)
+                            FROM sale 
+                            WHERE goods_id = t2.goods_id
+                            )
+            AND t1.goods_id = #{goods_id}
 	</select>
 
 
