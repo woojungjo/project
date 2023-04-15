@@ -24,8 +24,10 @@
 	crossorigin="anonymous"></script>
 
 
-
 <script>
+		
+		// AJAX로 모델 가져오고
+		
 		
 		// 장바구니
 		// 장바구니 버튼을 클릭 시, 
@@ -116,29 +118,8 @@
 </head>
 
 <body>
-	<div id="wrap">
-		<div class="widthfix header_color">
-			<div id="header">
-				<span>우리동네<br>장바구니
-				</span>
-				<div id="gnb">
-					<ul class="nav gnb">
-						<li class="nav_item gnb_li"><span class="nav_text">가격비교</span></li>
-						<li class="nav_item gnb_li"><span class="nav_text">커뮤니티</span>
-						</li>
-						<li class="nav_item gnb_li"><span class="nav_text">QNA</span></li>
-					</ul>
-				</div>
+		<jsp:include page="../header_footer/home_header.jsp" flush="true" />
 
-				<div id="info">
-					<ul class="nav">
-						<li class="nav_item"><span class="nav_text">개포동</span></li>
-						<li class="nav_item"><button onclick=window.location.href=
-								'#' id="login_bt">로그인</button></li>
-					</ul>
-				</div>
-			</div>
-		</div>
 
 		<div class="widthfix">
 			<div id="search">
@@ -172,10 +153,10 @@
 
 			<div id="middleContainer">
 				<div class="leftFromUser">
-					<h3>과일류 > 수박</h3>
-					<h3>1통</h3>
-					<img src="/resources/imgs/mypageCart/waterMelon.PNG"
-						alt="waterMelon.PNG" />
+					<h3>과일류 > ${goods.goods_id}</h3>
+					<h3>용량: ${ goods.capacity }</h3>
+					<img src= ${goods.goods_pic}
+						alt= ${goods.goods_name} />
 				</div>
 
 				<div class="rightFromUser">
@@ -239,15 +220,9 @@
 
 				</div>
 			</div>
-			<p>상품설명: Lorem ipsum dolor, sit amet consectetur adipisicing
-				elit. At rem earum exercitationem iste doloribus culpa minima
-				suscipit .</p>
 		</article>
 
-		<div class="widthfix">
-			<div id="footer"></div>
-		</div>
-	</div>
+		<jsp:include page="../header_footer/footer.jsp" flush="true" />
 
 </body>
 

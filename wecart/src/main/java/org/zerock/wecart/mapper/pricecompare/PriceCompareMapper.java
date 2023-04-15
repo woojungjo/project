@@ -16,4 +16,8 @@ public interface PriceCompareMapper {
 	
 	//3. 상품 검색
 	public abstract List<GoodsVO> selectSearch(GoodsCriteria cri);
+  
+  //4. 한 가지 상품을 조회
+	public abstract GoodsVO select(Integer goods_id);
+
 } //end interface

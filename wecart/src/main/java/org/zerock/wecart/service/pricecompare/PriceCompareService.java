@@ -8,6 +8,8 @@ import org.zerock.wecart.exception.ServiceException;
 
 public interface PriceCompareService {
 
+
+
 	//1. 상품 전체 목록 조회
 	public abstract List<GoodsVO> getList(GoodsCriteria cri) throws ServiceException;
 	
@@ -16,5 +18,8 @@ public interface PriceCompareService {
 	
 	//3. 상품 검색 목록
 	public abstract List<GoodsVO> getSearchList(GoodsCriteria cri) throws ServiceException;
+  
+  //4. id에 해당하는 상품 조회
+	public abstract GoodsVO select(Integer goods_id) throws ServiceException;
 
 } //end interface

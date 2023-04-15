@@ -71,10 +71,27 @@ public class PriceCompareMapperTests {
 		
 	} //selectAll
 	
-//	@Disabled
+
 	@Test
 	@Order(2)
-	@DisplayName("Test2: selectTotalCount")
+	@DisplayName("Test2: select")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void select() {
+		log.trace("select() invoked. ");
+		
+		GoodsVO goods = this.mapper.select(77);
+		assertNotNull(goods);
+		
+		log.trace("goods: {}", goods);
+		
+		
+	}
+	
+=======
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("Test3: selectTotalCount")
 	@Timeout(value=4, unit=TimeUnit.SECONDS)
 	void selectTotalCount() {
 		log.trace("selectTotalCount() invoked.");
@@ -90,7 +107,7 @@ public class PriceCompareMapperTests {
 	
 //	@Disabled
 	@Test
-	@Order(3)
+	@Order(4)
 	@DisplayName("Test3: selectSearch")
 	@Timeout(value=4, unit=TimeUnit.SECONDS)
 	void selectSearch() {
@@ -110,6 +127,7 @@ public class PriceCompareMapperTests {
 		list.forEach(log::info);	
 		
 	} //selectSearch
+
 } //end class
 
 

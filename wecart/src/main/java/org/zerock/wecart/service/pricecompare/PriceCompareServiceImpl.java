@@ -36,6 +36,19 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch
+	}
+
+	@Override
+	public GoodsVO select(Integer goods_id) throws ServiceException {
+		log.trace("select({}) invoked. ", goods_id);
+		
+		try {
+			
+			return this.mapper.select(goods_id);
+		} catch(Exception e) {
+			
+			throw new ServiceException(e);
+		}
 	} //getList
 
 	@Override
