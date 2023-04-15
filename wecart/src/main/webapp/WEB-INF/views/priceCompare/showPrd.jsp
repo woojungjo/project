@@ -129,7 +129,7 @@
 				<div class="search_bar">
 					<form action="/priceCompare/search" method="get">
 						<div class="search_form">
-							<input type="text" name="search_item" placeholder="검색어를 입력해주세요"
+							<input type="text" name="keyword" placeholder="검색어를 입력해주세요"
 								class="search_input">
 							<button type="submit" class="submit_bt">
 								<i class="fa-solid fa-magnifying-glass fa-lg"></i>

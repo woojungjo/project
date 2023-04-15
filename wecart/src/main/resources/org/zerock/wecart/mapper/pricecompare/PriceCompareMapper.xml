@@ -4,11 +4,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="org.zerock.wecart.mapper.pricecompare.PriceCompareMapper">
-	<select id="selectAll"
-		resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
-        <![CDATA[ 
+
+<mapper namespace="org.zerock.wecart.mapper.pricecompare.PriceCompareMapper">
+    <select id="selectAll" resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
             SELECT 
                 t1.*, t2.price
             FROM 
@@ -16,15 +14,77 @@
                 sale t2
             WHERE 
                 t1.goods_id = t2.goods_id
-                AND t1.goods_id <= 50
                 AND t2.price = (
                                 SELECT min(price)
                                 FROM sale 
                                 WHERE goods_id = t2.goods_id
                                 )
-        ]]>
-	</select>
+            ORDER BY 
+                <choose>
+                    <when test="sort == 'popular'">
+                        t1.readcnt DESC
+                    </when>
+                    <when test="sort == 'low'">
+                        t2.price ASC
+                    </when>
+                    <when test="sort == 'high'">
+                        t2.price DESC
+                    </when>
+                    <otherwise>
+                        t1.goods_id ASC
+                    </otherwise>
+                </choose>
+            OFFSET (#{currPage} - 1) * #{amount} ROWS
+			FETCH NEXT #{amount} ROWS ONLY
 
+    </select>
+
+    <select id="selectTotalCount">
+        SELECT count(goods_id)
+        FROM goods
+        <where>
+            <if test="keyword != null">
+                goods_name LIKE '%'||#{keyword}||'%'
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSearch" resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">      
+        SELECT 
+            t1.*, t2.price
+        FROM 
+            goods t1,
+            sale t2
+        WHERE 
+            t1.goods_id = t2.goods_id
+            AND t2.price = (
+                            SELECT min(price)
+                            FROM sale 
+                            WHERE goods_id = t2.goods_id
+                            )
+            <if test="keyword != null">
+                AND (t1.goods_name LIKE '%'||#{keyword}||'%')
+            </if>                
+        ORDER BY 
+            <choose>
+                <when test="sort == 'popular'">
+                    t1.readcnt DESC
+                </when>
+                <when test="sort == 'low'">
+                    t2.price ASC
+                </when>
+                <when test="sort == 'high'">
+                    t2.price DESC
+                </when>
+                <otherwise>
+                    t1.goods_id ASC
+                </otherwise>
+            </choose>
+        OFFSET (#{currPage} - 1) * #{amount} ROWS
+        FETCH NEXT #{amount} ROWS ONLY        
+    </select>
+    
+    
 	<select id="select"
 		resultType="org.zerock.wecart.domain.pricecompare.GoodsVO">
   		<![CDATA[
@@ -36,5 +96,6 @@
   		]]>
 
 	</select>
+
 
 </mapper>

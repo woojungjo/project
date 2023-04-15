@@ -112,7 +112,7 @@
                 <div class="search_bar">
                     <form action="/priceCompare/search" method="get">
                         <div class="search_form">
-                            <input type="text" name="search_item" placeholder="검색어를 입력해주세요" class="search_input">
+                            <input type="text" name="keyword" placeholder="검색어를 입력해주세요" class="search_input">
                             <button type="submit"class="submit_bt"><i class="fa-solid fa-magnifying-glass fa-lg"></i></button>
                         </div>                    
                     </form>                          
@@ -375,9 +375,12 @@
                     <div class="article">
                         <div class="goods_sort">
                             <ul class="nav goods_sort_ul">
-                                <li class="nav_item goods_sort_li"><a href="#" class="goods_sort_a">인기순</a></li>
-                                <li class="nav_item goods_sort_li"><a href="#" class="goods_sort_a">낮은 가격순</a></li>
-                                <li class="nav_item goods_sort_li"><a href="#" class="goods_sort_a">높은 가격순</a></li>
+                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("popular")}"
+                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">인기순</a></li>
+                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("low")}"
+                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">낮은 가격순</a></li>
+                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("high")}"
+                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">높은 가격순</a></li>
                             </ul>
                         </div>
                                              
@@ -386,7 +389,7 @@
                                 <a href="/priceCompare/showPrd/${list.goods_id}" class="goods_img_a">
                                     <div class="goods_img">
                                         <div class="goods_img_content">
-                                            <img src="${list.goods_pic}" alt="상품">
+                                            <img src="${list.goods_pic}" alt="${list.goods_name}">
                                         </div>
                                         
                                     </div>
@@ -407,23 +410,35 @@
                         </div>                        
 
                         <div class="page_index">
-                            <a href="#" class="page_index_item"><i class="fa-solid fa-angles-left"></i></a>
-                            <a href="#" class="page_index_item"><i class="fa-solid fa-angle-left"></i></a>
-                            <a href="#" class="page_index_item">1</a>
-                            <a href="#" class="page_index_item">2</a>
-                            <a href="#" class="page_index_item">3</a>
-                            <a href="#" class="page_index_item">4</a>
-                            <a href="#" class="page_index_item">5</a>
-                            <a href="#" class="page_index_item">6</a>
-                            <a href="#" class="page_index_item">7</a>
-                            <a href="#" class="page_index_item">8</a>
-                            <a href="#" class="page_index_item">9</a>
-                            <a href="#" class="page_index_item">10</a>
-                            <a href="#" class="page_index_item"><i class="fa-solid fa-angle-right"></i></i></a>
-                            <a href="#" class="page_index_item"><i class="fa-solid fa-angles-right"></i></a>
+                            <c:set var="currPage" value="${not empty param.currPage ? param.currPage : 1}"/>
+                            <!-- 1. first -->
+                            <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(1)}"
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" 
+                                class="page_index_item"><i class="fa-solid fa-angles-left"></i></a>
+
+                            <!-- 2. prev -->
+                            <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(currPage eq 1 ? 1 : currPage - 1)}"
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" class="page_index_item"><i class="fa-solid fa-angle-left"></i></a>
+
+                            <!-- 3. 페이지번호 목록 -->
+                            <c:forEach var="pageNum" begin="${__GOODSPAGEMAKER__.startPage}" end="${__GOODSPAGEMAKER__.endPage}">
+                                <a data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(pageNum)}"
+                                   href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" 
+                                   class="page_index_item ${currPage eq pageNum ? 'currPage' : ''}">
+                                   ${pageNum}
+                                </a>
+                            </c:forEach>
+
+                            <!-- 4. next -->
+                            <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(currPage eq __GOODSPAGEMAKER__.realEndPage ? __GOODSPAGEMAKER__.realEndPage : currPage + 1)}"
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" class="page_index_item"><i class="fa-solid fa-angle-right"></i></a>
+
+                            <!-- 5. last  -->
+                            <a  data-temp="${__GOODSPAGEMAKER__.cri.setCurrPage(__GOODSPAGEMAKER__.realEndPage)}"
+                                href="${request.requestURI}${__GOODSPAGEMAKER__.cri.pagingUri}" 
+                                class="page_index_item"><i class="fa-solid fa-angles-right"></i></a>    
                         </div>
-                    </div>
-                    
+                    </div>                   
                 </div>
             </div>
         </div>

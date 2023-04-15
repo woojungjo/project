@@ -16,4 +16,14 @@
       pwd = #{pwd}
   </select>
 
+  <select id="selectId" resultType="String">
+    SELECT
+      NVL(login_id, 0)
+    FROM
+      member
+    WHERE
+      alias = #{alias} AND
+      email = #{email}
+  </select>
+
 </mapper>

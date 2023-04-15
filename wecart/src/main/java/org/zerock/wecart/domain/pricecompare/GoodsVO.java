@@ -11,5 +11,6 @@ public class GoodsVO {
 	public String goods_manufacturer;
 	public String capacity;
 	public String category_id;
+	public Integer readcnt;
 	public Integer low_price;
 } //end class

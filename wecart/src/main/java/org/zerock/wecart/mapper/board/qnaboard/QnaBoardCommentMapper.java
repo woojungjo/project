@@ -11,11 +11,11 @@ import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 public interface QnaBoardCommentMapper {
 	
 	// 게시글 댓글 조회
-	@Select("SELECT * FROM qna_board_comment WHERE post_no = #{post_no}")
+	@Select("SELECT * FROM qna_board_comment WHERE post_no = #{post_no} ORDER BY comment_no")
 	public abstract List<QnaBoardCommentVO> selectAll(Integer post_no);
 	
 	@Select("SELECT COUNT(*) FROM qna_board_comment WHERE post_no = #{post_no}")
-	public abstract Integer selectTotalCount();
+	public abstract Integer countComment(Integer post_no);
 	
 	
 } // end interface

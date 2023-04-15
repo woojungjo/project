@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
+import org.zerock.wecart.domain.pricecompare.GoodsPageDTO;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
@@ -28,28 +30,58 @@ public class PriceCompareController {
 	@Autowired
 	public PriceCompareController(PriceCompareService service) {
 		this.service = service;
-	} // Constructor
 
-	// 전체 상품 조회
+	} //Constructor
+	
+	@GetMapping("/listPage")
+	public void listPage() {
+		log.trace("listPage() invoked.");
+	} //listPage
+	
+	//전체 상품 조회(페이징 처리)
 	@GetMapping("/list")
-	public void list(Model model) throws ControllerException {
-		log.trace("list() invoked.");
+	public String list(GoodsCriteria cri, Model model) throws ControllerException {
+		log.trace("list({}, model) invoked.", cri);
+		
 
 		try {
-			List<GoodsVO> list = this.service.getList();
+			List<GoodsVO> list = this.service.getList(cri);
 			model.addAttribute("__GOODSLIST__", list);
-		} catch (Exception e) {
+
+			
+			int totalAmount = this.service.getTotalAmount(cri.getKeyword());
+			GoodsPageDTO pageDTO = new GoodsPageDTO(cri, totalAmount);
+			log.info("\t+ pageDTO: {}", pageDTO);
+			
+			model.addAttribute("__GOODSPAGEMAKER__", pageDTO);	
+		} catch(Exception e) {
 			throw new ControllerException(e);
-		} // try-catch
-
-	} // list
-
-	// 상품 검색 시 화면
+		} //try-catch
+		
+		return "forward:listPage";
+	} //list
+	
+	//상품 검색 시 화면
 	@GetMapping("/search")
-	public void search(String search_item) {
-		log.trace("search() invoked.");
-		log.info("\t+ search_item: {}", search_item);
-	} // search
+	public String search(GoodsCriteria cri, Model model) throws ControllerException {
+		log.trace("search({}, model) invoked.", cri);
+		
+		try {
+			List<GoodsVO> list = this.service.getSearchList(cri);
+			model.addAttribute("__GOODSLIST__", list);
+			
+			int totalAmount = this.service.getTotalAmount(cri.getKeyword());
+			GoodsPageDTO pageDTO = new GoodsPageDTO(cri, totalAmount);
+			log.info("\t+ pageDTO: {}", pageDTO);
+			
+			model.addAttribute("__GOODSPAGEMAKER__", pageDTO);
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
+		
+		return "forward:listPage";
+	} //search
+
 
 	// 한 상품을 디테일하게 보여줌
 	// showPrd/{mainCategory} 식으로 보여줘야 할 것 같음 => RestFUL API 공부 후 파악하기

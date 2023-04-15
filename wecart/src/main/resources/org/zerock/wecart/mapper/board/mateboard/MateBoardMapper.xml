@@ -3,3 +3,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.zerock.wecart.mapper.board.mateboard.MateBoardMapper">
+  	<!-- 각각의 SQL 문장을 저장하는 태그의 ID 속성값은 위 namespace에 
+  	지정한 mapper에 속한 메소드명으로 지정하는게 관례 -->
+  	<select id="selectAll" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
+  		SELECT *
+  		FROM mate_board
+  		WHERE post_no>=90000
+  	</select>
+  </mapper>
+  

@@ -19,12 +19,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
-import org.zerock.wecart.exception.ControllerException;
 
 import lombok.Cleanup;
 import lombok.NoArgsConstructor;
@@ -66,7 +65,12 @@ public class PriceCompareControllerTests {
 		MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
 		MockMvc mockMvc = mockMvcBuilder.build();
 		
-		RequestBuilder requestBuilder =	MockMvcRequestBuilders.get("/priceCompare/list"); 
+		MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.get("/priceCompare/list"); 
+		requestBuilder.param("currPage", "11");
+		requestBuilder.param("amount", "40");
+//		requestBuilder.param("sort", "popular");
+		requestBuilder.param("sort", "low");
+//		requestBuilder.param("sort", "high");
 		
 		@Cleanup("clear")
 		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
@@ -74,6 +78,29 @@ public class PriceCompareControllerTests {
 		log.info("\t+ viewName: {}", modelAndView.getViewName());
 		log.info("\t+ model: {}", modelAndView.getModel());		
 	} //list
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("TEST2: search")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void search() throws Exception {
+		log.trace("search() invoked.");
+		
+		MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+		
+		MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.get("/priceCompare/search"); 
+		requestBuilder.param("currPage", "1");
+		requestBuilder.param("amount", "40");
+		requestBuilder.param("keyword", "product_1");
+		
+		@Cleanup("clear")
+		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		
+		log.info("\t+ viewName: {}", modelAndView.getViewName());
+		log.info("\t+ model: {}", modelAndView.getModel());		
+	} //search
 } //end class
 
 

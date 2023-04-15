@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
@@ -27,11 +28,11 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 
 	@Transactional
 	@Override
-	public List<GoodsVO> getList() throws ServiceException {
-		log.trace("getList() invoked.");
+	public List<GoodsVO> getList(GoodsCriteria cri) throws ServiceException {
+		log.trace("getList({}) invoked.", cri);
 		
 		try {
-			return this.mapper.selectAll();
+			return this.mapper.selectAll(cri);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch
@@ -49,6 +50,28 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 			throw new ServiceException(e);
 		}
 	} //getList
+
+	@Override
+	public Integer getTotalAmount(String keyword) throws ServiceException {
+		log.trace("getTotalAmount() invoked.");
+		
+		try {
+			return this.mapper.selectTotalCount(keyword);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //getTotalAmount
+
+	@Override
+	public List<GoodsVO> getSearchList(GoodsCriteria cri) throws ServiceException {
+		log.trace("getSearchList({}) invoked.", cri);
+		
+		try {
+			return this.mapper.selectSearch(cri);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //getSearchList
 
 	
 	

@@ -1,5 +1,6 @@
 package org.zerock.wecart.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -7,11 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.PageDTO;
-import org.zerock.wecart.domain.board.QnaBoardVO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.board.qnaboard.QnaBoardService;
@@ -43,6 +42,12 @@ public class QnaBoardController {
 			
 			model.addAttribute("pageMaker", pageDTO);
 			
+			// 현재시간 확인
+	        Date now = new Date();
+	        model.addAttribute("currentTime", now);
+	        log.info("date now : {}", now);
+			
+			
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
@@ -54,8 +59,8 @@ public class QnaBoardController {
 		log.trace("read({}, {}) invoked.", post_no, model);
 		
 		try {
-			QnaBoardVO vo = this.service.get(post_no);
-			model.addAttribute("vo", vo);
+			List<Object> readVO = this.service.get(post_no);
+			model.addAttribute("readVO", readVO);
 			
 			return "/board/qna/read";
 		} catch(Exception e) {
