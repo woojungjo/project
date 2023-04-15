@@ -1,0 +1,331 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body {
+    margin: 0;
+}
+#wrap {
+    font-family: 'Jeju Gothic', sans-serif;
+    overflow: hidden;
+    min-width: 1190px;
+}
+/* .widthfix {
+    overflow: hidden;
+    min-width: 1190px;
+} */
+.header_color {
+    background-color: #53917E; 
+    height: 100px; 
+}
+#header {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+    /* padding: 0px 100px; */
+    /* background-color: #7cb342; */
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#header > span {
+    color: white;
+    font-size: 22px;   
+}
+.nav_item {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    margin-right: 10px;
+    cursor: pointer;
+    list-style: none;
+
+    color: white;
+}
+#gnb {
+    margin-left: 100px;
+}
+.gnb {   
+    padding: 0;
+    margin-bottom: 16px;
+    font-size: 1.5em;
+}
+.gnb_li {
+    margin-right: 50px;
+}
+.gnb_li:last-of-type {
+    margin-right: 0;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.nav_text {
+    height: fit-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+#search {
+    width: 1130px;
+    height: 70px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: sticky;
+    z-index: 1;
+}
+.search_fix {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}
+#container {   
+    width: 1130px;
+    margin: 0 auto;
+    position: relative;
+}
+#login_bt {
+    border-radius: 20px;
+    width: 70px;
+    height: 30px;
+    border: 0;
+    margin-left: 10px;
+
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-family: 'Jeju Gothic', sans-serif;
+
+    cursor: pointer;
+}
+#info li:last-of-type {
+    margin-right: 0;
+}
+.fa-bars {
+    display: inline-block;
+    font-size: 16px;
+}
+#info li:first-of-type::after {
+    content: "";
+    background-image: url("/resources/imgs/priceCompare/pin-8-16.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -10%;
+}
+.cate {
+    display: flex;    
+    width: 120px;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: pointer;
+}
+.cate > span {
+    font-size: 20px;
+    align-self: center;
+}
+.cate_hover_div {
+    box-sizing: border-box;
+    width: 151px;
+    height: 490px;
+    padding: 0 5px;
+    border: 1px solid lightgray;
+
+    position: absolute;
+    top: 53px;
+    z-index: 1;
+    background-color: #dbe5df;
+}
+.cate_hover_ul {
+    padding-left: 0;
+    margin-top: 10px;
+}
+.cate_hover_li {
+    margin-bottom: 16px;
+    font-size: 12px;
+
+    cursor: pointer;
+}
+.cate_hover_li_text {
+    padding: 7px;
+}
+.cate_hover_li_selected {
+    background-color: rgba(182, 182, 182, 0.507);
+    border-radius: 3px;
+    
+}
+.cate_in_ul {
+    box-sizing: border-box;
+    width: 150px;
+    height: 100%; 
+    padding: 15px;
+    border: 1px solid lightgray;
+    z-index: 2;
+    display: none;
+
+    position: absolute;
+    top: 0px;
+    left: 149px;
+    
+    background-color: #e1e3e0;
+}
+.cate_in_li {
+    margin-bottom: 10px;
+    font-size: 12px;
+
+    z-index: 3;
+}
+/* .cate_in_li_selected {
+    
+} */
+.cate_in_li_a:hover {
+    color: #53917E;
+    text-decoration: underline;
+}
+.search_form {
+    width: 400px;
+    height: 40px;
+    border: 1px solid #53917E;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-around;
+}
+.search_bar {
+    width: 400px;
+}
+.submit_bt {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background-color: white;
+    color: #53917E;
+
+    align-self: center;
+    cursor: pointer;
+}
+.search_input {
+    width: 300px;
+    border: 0;
+
+    font-family: 'Jeju Gothic', sans-serif;
+}
+.mypick_bt {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    margin-left: 20px;
+    
+    background-color: white;
+    color: #53917E;
+    cursor: pointer;
+}
+.mypick_bt:first-of-type {
+    margin-left: 0;
+}
+#section {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.cate_ul {
+    padding: 0;
+}
+.cate_nav_item {
+    width: 220px;
+    height: 35px;
+
+    /* display: flex;
+    text-align: center;
+    vertical-align: middle;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; */
+
+    margin-bottom: 17px;
+    list-style: none;
+}
+/* .cate_nav_item::after {
+    content: "\f078";
+    display: inline-block;
+    font: var(--fa-font-solid);
+    font-weight: 900;
+    color: grey;
+
+    font-size: 0.75em;
+    line-height: -8px;
+    margin-left: 10px;
+} */
+a {
+    text-decoration: none;
+    color: black;
+}
+.cate_nav_bt {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    background-color: white;
+    color: rgb(189, 185, 185);
+
+    align-self: center;
+    cursor: pointer;
+}
+.nonedeco_li {
+    list-style: none;
+}
+.cate_nav_item input {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+
+    position: absolute;
+}
+.cate_title {
+    width: 220px;
+
+    display: flex;
+    justify-content: space-between;
+}
+.cate_title > label {
+    padding-top: 5px;
+}
+#top_bt {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid lightgray;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    right: 24px;
+    bottom: 20px;
+    z-index: 100;
+}
+#top_bt:hover {
+    background-color: #53917E;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
