@@ -38,7 +38,8 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 		}//try-catch
 	}//afterPropertiesSet() 
 
-	@Override
+	//게시판 목록조회 
+	@Override 
 	public List<MateBoardVO> getList(Criteria cri) throws ServiceException {
 		log.trace("getList()invoked");
 		
@@ -46,8 +47,19 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 			return this.mapper.selectAll(cri);
 		}catch(Exception e) {
 			throw new ServiceException(e);
-		}
-	}//POJO
+		}//try-catch 
+	}//getList
 	
+	@Override 
+	public Integer getTotalAmount() throws ServiceException { 
+		log.trace("getTotalAmount() invoked.");
+		
+		try {
+			return this.mapper.selectTotalCount();
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // getTotalAmount
  
-}
+}//end class 

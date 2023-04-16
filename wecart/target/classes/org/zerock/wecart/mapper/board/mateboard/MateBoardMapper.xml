@@ -10,7 +10,9 @@
   	<select id="selectAll" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
   		SELECT *
   		FROM mate_board
-  		WHERE post_no>=90000
+  		ORDER BY post_no DESC
+		OFFSET (#{currPage}-1) * #{amount} ROWS
+		FETCH NEXT #{amount} ROWS ONLY
   	</select>
   </mapper>
   
