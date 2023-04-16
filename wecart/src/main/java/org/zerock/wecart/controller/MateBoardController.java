@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.PageDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.board.mateboard.MateBoardService;
@@ -48,7 +49,13 @@ public class MateBoardController {		//JavaBeans, POJO
 			List<MateBoardVO> list = this.service.getList(cri);
 			model.addAttribute("__MATE_LIST__", list);
 			
-			//Step2. 
+			//Step2. Pagination 위한 각종 변수값 계산 
+			int totalAmount = this.service.getTotalAmount();
+			PageDTO pageDTO = new PageDTO(cri, totalAmount); //모든 값은 이미 필드에 계산되어 있음
+			
+			log.info("\t+pageDTO: {}", pageDTO);
+			//모델상자 안에 넣을 pageDTO
+			model.addAttribute("__PAGE_MAKER__", pageDTO);
 		}catch (Exception e) {
 			throw new ControllerException(e);
 		}
