@@ -34,12 +34,23 @@ public class UserServiceImpl implements UserService {
 		log.trace("searchId() invoked.");
 		
 		try {
-			return this.mapper.selectID(alias, email);
+			return this.mapper.selectId(alias, email);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try - catch
 		
 	} // searchId
+	
+	public String searchPw(String user_id, String alias, String email) throws ServiceException {
+		log.trace("searhPw() invoked.");
+		
+		try {
+			return this.mapper.updatePw(user_id, alias, email);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // searchPw
 
 
 

@@ -10,6 +10,9 @@ public interface UserMapper {
 	public abstract UserVO selectUser(LoginDTO dto);
 	
 	// 아이디 찾기
-	public abstract String selectID(@Param("alias") String alias, @Param("email") String email);
+	public abstract String selectId(@Param("alias") String alias, @Param("email") String email);
+	
+	// 비밀번호 찾기
+	public abstract String updatePw(@Param("user_id") String user_id, @Param("alias") String alias, @Param("email") String email);
 
 } // end interface

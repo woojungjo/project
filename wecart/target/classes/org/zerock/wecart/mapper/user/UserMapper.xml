@@ -26,4 +26,15 @@
       email = #{email}
   </select>
 
+  <update id="updatePw" parameterType="Map">
+    UPDATE
+      member
+    SET
+      user_pw = #{user_pw}
+    WHERE
+      user_id = #{user_id} AND
+      alias = #{alias} AND
+      email = #{email}
+  </update>
+
 </mapper>
