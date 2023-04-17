@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
     <header>
         <div id="logo">
             우리동네 장바구니
@@ -25,7 +24,7 @@
         <form action="/user/loginPost" method="post">
             <div id="panel_out">
                 <div id="panel_in">
-    
+
                     <div id="id_box">
                         <input type="text" id="id" name="login_id" placeholder="아이디">
                     </div>
@@ -41,7 +40,6 @@
                 </div>           
             </div>
         </form>
-        
 
         <div id="login_bottom">
             <div id="sns_login">
@@ -71,6 +69,7 @@
             <li><a href="">개인정보처리방침</a></li>            
         </ul>
 
+
         <ul id="footer_2">
             <li><a href="https://github.com/woojungjo">Woojungjo</a></li>
             <li><a href="https://github.com/zuxico123">감성현</a></li>
@@ -79,6 +78,7 @@
             <li><a href="https://github.com/comdesk">김지연</a></li>
             <li><a href="https://github.com/Juyeonjoo">조연주</a></li>            
         </ul>
+
         
         <br>
 
