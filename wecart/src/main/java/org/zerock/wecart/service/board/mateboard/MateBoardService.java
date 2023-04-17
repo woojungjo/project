@@ -10,4 +10,10 @@ public interface MateBoardService {
 
 	// 1. 게시물 전체목록 조회 (LIST)
 	public abstract List<MateBoardVO> getList(Criteria cri) throws ServiceException;
+	
+	// 6. 현재 총 게시물 건수 반환
+	public abstract Integer getTotalAmount() throws ServiceException;
+	
+	// 2. 특정 게시물 상세 조회 (Get)
+	public abstract MateBoardVO get(Integer post_no) throws ServiceException;
 }//MateBoardService

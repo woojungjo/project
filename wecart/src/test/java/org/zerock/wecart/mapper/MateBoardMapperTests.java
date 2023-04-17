@@ -71,5 +71,41 @@ public class MateBoardMapperTests {
 		
 	}//mateBoardMapperSelectAllTest() 
 	
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("testSelectTotalCount()")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testSelectTotalCount() {
+		
+		log.trace("testSelectTotalCount() invoked" );
+		
+		Integer totalCount = this.mapper.selectTotalCount();
+		
+		//DML문장이아니라서 affectedLines이 아님
+		Objects.requireNonNull(totalCount);
+		log.info("totalCount:{}", totalCount);
+	}//testSelectTotalCount
+	
+	
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("게시물 상세 조회: mateBoardMapperSelectTest")
+	@Timeout(value=50, unit=TimeUnit.SECONDS)
+	void mateBoardMapperSelectTest() {
+		log.trace("mateBoardMapperSelectTest() invoked.");
+		
+		Integer post_no=77;
+		
+		MateBoardVO vo = this.mapper.select(post_no);
+		assertNotNull(vo);
+		
+		log.info("vo:{}", vo);
+		
+	}//mateBoardMapperSelectTest() 
+	
+	
 }//MateBoardMapperTests
  

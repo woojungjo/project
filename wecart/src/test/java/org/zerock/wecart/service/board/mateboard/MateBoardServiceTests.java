@@ -1,7 +1,5 @@
 package org.zerock.wecart.service.board.mateboard;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -72,5 +70,39 @@ public class MateBoardServiceTests {
 		assert list != null;
 		list.forEach(log::info);
 	} // testGetList
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("testGetTotalAmount()")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testGetTotalAmount() throws ServiceException {
+		log.trace("testGetTotalAmount() invoked");
+		
+		int totalAmount= this.service.getTotalAmount();
+		
+		log.info("\\t+totalAmount:{}", totalAmount);
+			
+	}//testGetTotalAmount
+	
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("testGet")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void testGet() throws ServiceException {
+		log.trace("testGet() invoked.");
+		
+//		Integer post_no = 77;
+		int  post_no = 77;//autoboxing
+		MateBoardVO vo = this.service.get(post_no);
+		
+		if(vo !=null) {
+			log.info("\t+vo:{}", vo);
+		}else {
+			throw new ServiceException("MateBoardVO is null");
+		}//if-else
+	} // testGet
+	
 	
 } //MateBoardServiceTests

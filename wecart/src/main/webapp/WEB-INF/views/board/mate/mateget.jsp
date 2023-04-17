@@ -8,9 +8,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장메이트</title>
+    <title>장메이트 게시판 상세보기</title>
 
-    <script src="/Board/YJ_Resources/js/script.js" defer></script>
+	<script src="/resources/js/board/mate/script.js" defer></script>
+	<link rel="stylesheet" href="/resources/css/board/mate/style.css">
 
     <!-- <script src="https://kit.fontawesome.com/78271596c1.js" crossorigin="anonymous"></script> -->
 
@@ -20,9 +21,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
         rel="stylesheet">
-        
-    <link rel="stylesheet" href="/Board/YS_Resources/css/style.css">
-    <link rel="stylesheet" href="/Board/YJ_Resources/css/style.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.css" integrity="sha512-NvuRGlPf6cHpxQqBGnPe7fPoACpyrjhlSNeXVUY7BZAj1nNhuNpRBq3osC4yr2vswUEuHq2HtCsY2vfLNCndYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -37,19 +35,10 @@
 
 </head>
 <body>
-    	<jsp:include page="/Woojung_JSP/afterlogin_header.jsp" flush="true" />
+    	<jsp:include page="../../header_footer/main_header.jsp" flush="true" />
     	
         <main id="board_main">
 
-<!-- 
-            <div class="board_change">
-                <input type="button" value="지역">
-                <input type="button" value="중고거래">
-                <input type="button" value="장메이트">
-                <input type="button" value="크롤링">
-                <input type="button" value="세일정보">
-            </div>
- -->
                 <div class="board_change">
                     <a href="RegionBoard.html"><button id="region">지역</button></a>
                     <a href="UsedBoard.html"><button id="used">중고거래</button></a>
@@ -175,7 +164,7 @@
             </article>
         </main>
 
-       <jsp:include page="/Woojung_JSP/footer.jsp" flush="true" />
+        <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 </body>
 
 
