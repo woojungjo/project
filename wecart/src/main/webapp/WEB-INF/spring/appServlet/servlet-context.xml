@@ -34,7 +34,6 @@
 	<view-controller path="/user/signupTerms" 	view-name="/user/signupTerms"	status-code="200" />
 
 	<!-- 인터셉터 설정 -->
-
 	<interceptors>
 		<interceptor>
 			<mapping path="/user/loginPost" />

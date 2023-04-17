@@ -28,7 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.trace("======================================================================================");
 		log.trace("preHandle(request, response, {}", handler);
 		log.trace("======================================================================================");
-	
+		
 		HttpSession session = request.getSession();		
 		Object auth = session.getAttribute("__AUTH__");
 		
