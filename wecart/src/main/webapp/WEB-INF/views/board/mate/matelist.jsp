@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장메이트100p</title>
+    <title>장메이트 게시판 목록</title>
     
 
     <!--  script src="/resources/js/board/qna/board.js" defer ></script-->
@@ -59,19 +59,42 @@
 	                        <div class="board_head">
 	                           <div class="mate_board_writer">
 	                            <button type="button" value=""><i class="fa-solid fa-piggy-bank"></i>￦3500 </button>
-	                            ${MateBoardVO.member_id}
-	                        	</div>
-	                            <div>WRITE_DT</div>
+	                            ${MateBoardVO.member_id}</div>
+	                            
+	                           		<fmt:formatDate value="${MateBoardVO.write_dt}" pattern="yyyyMMddHHmmss" var="write_dt" />
+                                    <fmt:formatDate value="${MateBoardVO.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
+                                    <c:set var="currentLocalDateTime" value="${LocalDateTime.parse(currDate, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                    <c:set var="writeLocalDateTime" value="${LocalDateTime.parse(write_dt, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                    <c:set var="diffMinutes" value="${Duration.between(writeLocalDateTime, currentLocalDateTime).toMinutes()}"/>
+                                    
+                                    <c:choose>
+                                        <c:when test="${diffMinutes < 1}">
+                                            <div>&nbsp;&nbsp;방금 전</div>
+                                        </c:when>
+                                        <c:when test="${diffMinutes < 60}">
+                                            <div>&nbsp;&nbsp;${diffMinutes}분 전</div>
+                                        </c:when>
+                                        <c:when test="${diffMinutes < 1440}">
+                                            <fmt:formatNumber value="${diffMinutes div 60}" pattern="##" var="minutestoTime"/>
+                                            <div>&nbsp;&nbsp;${minutestoTime}시간 전</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div>&nbsp;&nbsp;${formatDate}</div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                
 	                            <button type=button value="recruiting" >모집중</button>
 	
 	                        </div>
 	                        <div id="mate_board_container1">
-	                        <div class="board_title"><a href="QnaBoardRead.html">TITLE</a></div>
+	                        <div class="board_title"><a href="/board/mate/mateget/${MateBoardVO.post_no}">${MateBoardVO.title}</a></div> 
 	                        <div class="fas fa-paperclip"></div>
 	                        
 	                        </div>
 	                        
 	                        <div id="mate_board_container2">
+	                        
 	                        <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i>롯데마트 송파점</div>
 	                    	<div id="mate_board_contents_dt_and_members">
 	                        <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;만남 예정 시간</div>
@@ -109,6 +132,7 @@
                     </div>
                     <a href="BoardWrite.html"><button type="button"><span class="fas fa-pen-to-square" />글쓰기</button></a>
                 </div>
+                
             </form>
 
    			 <div id="move_page">

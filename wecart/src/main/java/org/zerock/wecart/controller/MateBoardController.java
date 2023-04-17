@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -60,16 +61,27 @@ public class MateBoardController {		//JavaBeans, POJO
 			throw new ControllerException(e);
 		}
 	}//list()
-	
-	@GetMapping("/mateget")
-	public void mateGet() {
-		log.trace("mateget() invoked");
-	}//get
+
+	//reuqstURI에서 특정 경로에 있는 단어를 내가 매개변수에다가 집어 넣어주기 
+	@GetMapping(path="/mateget/{post_no}")
+	public String mateGet(@PathVariable("post_no") Integer post_no, Model model)throws ControllerException {
+		log.trace("mateget({}, {}) invoked", post_no, model);
+		
+		try {
+			MateBoardVO vo = this.service.get(post_no);
+			model.addAttribute("__MateBoard__", vo);
+			
+			return "/board/mate/mateget";
+		}catch(Exception e) {
+			throw new ControllerException(e);
+		}//try-catch
+
+	}//mateGet()
 	
 	@GetMapping("/matemodify")
 	public void mateModify() {
 		log.trace("matemodify() invoked");
-	}//modify 
+	}//mateModify() 
 	
 	@PostMapping("/matemodify")
 	public String mateModify(RedirectAttributes rttrs) {
@@ -77,7 +89,7 @@ public class MateBoardController {		//JavaBeans, POJO
 		
 		return "redirect:/board/mateboard/matelist";
 		
-	}//modify 
+	}//mateModify()
 	
 	
 	@PostMapping("/mateRemove")
@@ -85,6 +97,6 @@ public class MateBoardController {		//JavaBeans, POJO
 		log.trace("mateRemove({}) invoked", rttrs);
 		
 		return "redirect:/board/mateboard/matelist";
-	}//remove 
+	}//mateRemove()
 	
 }//MateBoardController

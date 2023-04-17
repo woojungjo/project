@@ -14,4 +14,6 @@ public interface MateBoardService {
 	// 6. 현재 총 게시물 건수 반환
 	public abstract Integer getTotalAmount() throws ServiceException;
 	
+	// 2. 특정 게시물 상세 조회 (Get)
+	public abstract MateBoardVO get(Integer post_no) throws ServiceException;
 }//MateBoardService
