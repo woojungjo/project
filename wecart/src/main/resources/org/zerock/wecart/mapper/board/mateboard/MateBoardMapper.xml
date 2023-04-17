@@ -14,5 +14,12 @@
 		OFFSET (#{currPage}-1) * #{amount} ROWS
 		FETCH NEXT #{amount} ROWS ONLY
   	</select>
+  	
+  	<select id="select" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
+  		SELECT *
+  		FROM mate_board
+		WHERE post_no = #{post_no}
+  	</select>
+  	
   </mapper>
   

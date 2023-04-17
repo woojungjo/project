@@ -60,6 +60,18 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 			throw new ServiceException(e);
 		} // try-catch
 		
+	}
+
+	@Override
+	public MateBoardVO get(Integer post_no) throws ServiceException {
+		log.trace("get() invoked.");
+		try {
+			return this.mapper.select(post_no);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}//try-catch
 	} // getTotalAmount
+	
+	
  
 }//end class 

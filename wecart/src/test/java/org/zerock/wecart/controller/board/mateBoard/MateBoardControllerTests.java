@@ -83,10 +83,27 @@ public class MateBoardControllerTests {
 		requestBuilder.param("amount","20");
 		
 		//가상의 MVC 환경에서, MateBoardController에 요청생성 및 전송
-		@Cleanup("clear")
 		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
 		log.info("\t+modelAndView:{}, type:{}, model:{}", modelAndView.getViewName(), modelAndView.getClass().getName(), modelAndView.getModel());
 
 	}//testMateList() 
+	
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("testGet")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testGet() throws Exception {
+		log.trace("testGet() invoked.");
+
+		DefaultMockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/mate/mateget/{post_no}", 166);
+		
+		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		log.info("\t+viewName:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
+
+	}//testGet()
 	
 }//MateBoardControllerTests
