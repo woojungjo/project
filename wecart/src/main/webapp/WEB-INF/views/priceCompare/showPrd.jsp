@@ -23,9 +23,9 @@
 <script src="https://kit.fontawesome.com/f55d6db1b8.js"
 	crossorigin="anonymous"></script>
 
-
+   
 <script>
-		
+		//
 		// AJAX로 모델 가져오고
 		
 		
