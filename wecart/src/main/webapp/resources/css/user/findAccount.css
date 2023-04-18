@@ -96,13 +96,13 @@ nav>ul>li {
     margin: 0px, 0px, 0px, 10px;
 }
 
-#next {
+.next {
     text-align: center;    
     margin-top: 40px;
     margin-bottom: 30px;
 }
 
-#next_button {
+.next_button {
     display: inline-block;
     position: relative;
     width: 340px;
