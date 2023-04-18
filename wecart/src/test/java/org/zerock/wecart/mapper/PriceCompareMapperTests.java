@@ -18,8 +18,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
-import org.zerock.wecart.mapper.pricecomapre.PriceCompareMapper;
+import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
+import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,6 +48,7 @@ public class PriceCompareMapperTests {
 		log.info("\t+ this.mapper: {}", this.mapper);
 	} //beforeAll
 	
+	//1. 상품 전체조회(+페이징처리 +정렬)
 //	@Disabled
 	@Test
 	@Order(1)
@@ -54,13 +57,78 @@ public class PriceCompareMapperTests {
 	void selectAll() {
 		log.trace("selectAll() invoked.");
 		
-		List<GoodsVO> list = this.mapper.selectAll();
+		GoodsCriteria cri = new GoodsCriteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
+//		cri.setSort("popular");
+//		cri.setSort("low");
+//		cri.setSort("high");
+		
+		
+		List<GoodsVO> list = this.mapper.selectAll(cri);
 		assertNotNull(list);
 		
 		list.forEach(log::info);	
 		
 	} //selectAll
 	
+
+	@Test
+	@Order(2)
+	@DisplayName("Test2: select")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void select() {
+		log.trace("select() invoked. ");
+		
+		GoodsVO goods = this.mapper.select(77);
+		assertNotNull(goods);
+		
+		log.trace("goods: {}", goods);
+		
+		
+	}
+	
+
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("Test3: selectTotalCount")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectTotalCount() {
+		log.trace("selectTotalCount() invoked.");
+		
+//		String keyword = "product_1";
+		String keyword = null;
+		
+		Integer totalCount = this.mapper.selectTotalCount(keyword);
+		
+		log.info("\t+ totalCount: {}", totalCount);
+		
+	} //selectTotalCount
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("Test3: selectSearch")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectSearch() {
+		log.trace("selectSearch() invoked.");
+		
+		GoodsCriteria cri = new GoodsCriteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
+		cri.setKeyword("product_1");
+//		cri.setSort("popular");
+//		cri.setSort("low");
+		cri.setSort("high");
+		
+		List<GoodsVO> list = this.mapper.selectSearch(cri);
+		assertNotNull(list);
+		
+		list.forEach(log::info);	
+		
+	} //selectSearch
+
 } //end class
 
 

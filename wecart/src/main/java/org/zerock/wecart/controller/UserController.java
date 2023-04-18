@@ -1,11 +1,17 @@
 package org.zerock.wecart.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.wecart.domain.UserVO;
+import org.zerock.wecart.domain.user.LoginDTO;
+import org.zerock.wecart.exception.ControllerException;
+import org.zerock.wecart.service.user.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,27 +23,82 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class UserController {
 	
-	@PostMapping("/loginPost")
-	public String login() {
-		
-		
-		return null;
-	} // login
+	private UserService service;
 	
-	@GetMapping("/logout")
-	@PostMapping("/logout")
-	public String logout(HttpServletRequest request) {
-//		HttpSession session = request.getSession(false);
-//		
-//		session.invalidate();
+	// 로그인 처리
+	@PostMapping("/loginPost")
+	public String loginPost(LoginDTO dto, RedirectAttributes rttrs, Model model) throws ControllerException{
 		
-		return "redirect:/";
+		try {
+			UserVO vo = this.service.login(dto);
+			log.info("\t+ vo: {}", vo);
+			
+			if(vo != null) {
+				model.addAttribute("__AUTH__", vo);
+				
+//				model.addAttribute("alias", vo.getAlias() );
+				
+				return null;
+			} else {
+				rttrs.addAttribute("result", "Login Failed");
+				
+				return "redirect:/user/login";
+			} // if - else
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch
+	} // loginPost
+	
+
+	// 로그아웃
+	@GetMapping("/logout")
+	public void logout() {
+		log.info("오류 메시지");
+		
 	} // logout
 	
+	// 회원가입
 	@GetMapping("/signup")
 	public String signup() {
 		
 		return null;
 	} // signup
+	
+	// 회원가입 약관
+	@GetMapping("/signupTerms")
+	public String signupTerms() {
+		
+		return null;
+	} // signup
+	
+	// 아이디&비밀번호 찾기화면
+	@GetMapping("/findAccount")
+	public void findAccount() {
+		
+	} // findAccount
+	
+	// 아이디 찾기
+	@PostMapping("/searchId")
+	@ResponseBody
+	public String searchId(@RequestParam("alias") String alias, @RequestParam("email") String email) throws ControllerException {
+		try {
+			String result = this.service.searchId(alias, email);
+			
+			return result;
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch		
+	} // searchId
+	
+	@PostMapping("/searchPw")
+	public String searchPw(String user_id, String alias, String email, String temp_pwd) throws ControllerException {
+		try {
+			String result = this.service.searchPw(user_id, alias, email, temp_pwd);
+			
+			return result;
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch	
+	}
 	
 } // end class

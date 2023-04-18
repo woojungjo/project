@@ -23,14 +23,49 @@
 	
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
-	</view-resolvers>
-	
-	<!-- 뷰 컨트롤러 설정 -->
-	<view-controller path="/user/login" 		view-name="/user/login"			status-code="200" />
-	<view-controller path="/user/signupTerms" 	view-name="/user/signupTerms"	status-code="200" />
+	</view-resolvers>	
 
 	<context:component-scan base-package="org.zerock.wecart.controller" />
 	<context:component-scan base-package="org.zerock.wecart.exception" />
 	<context:component-scan base-package="org.zerock.wecart.interceptor" />
+
+	<!-- 뷰 컨트롤러 설정 -->
+	<view-controller path="/user/login" 		view-name="/user/login"			status-code="200" />
+	<view-controller path="/user/signupTerms" 	view-name="/user/signupTerms"	status-code="200" />
+
+	<!-- 인터셉터 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/loginPost" />
+
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/user/logout" />
+
+			<beans:ref bean="logoutInterceptor" />
+		</interceptor>
+		
+	</interceptors>
+
+	<!-- 메일 보내기 빈 -->
+	<!-- <beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="username" value="이메일" />
+		<beans:property name="password" value="비밀번호" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.required">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean> -->
+
 	
 </beans:beans>

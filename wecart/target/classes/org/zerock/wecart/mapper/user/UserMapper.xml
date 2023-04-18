@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.wecart.mapper.user.UserMapper">
+
+  <select id="selectUser" resultType="org.zerock.wecart.domain.UserVO">
+    SELECT
+      *
+    FROM
+      member
+    WHERE
+      login_id = #{login_id} AND
+      pwd = #{pwd}
+  </select>
+
+  <select id="selectId" resultType="String">
+    SELECT
+      NVL(login_id, 0)
+    FROM
+      member
+    WHERE
+      alias = #{alias} AND
+      email = #{email}
+  </select>
+
+  <update id="updatePw" parameterType="Map">
+    UPDATE
+      member
+    SET
+      pwd = #{temp_pwd}
+    WHERE
+      user_id = #{user_id} AND
+      alias = #{alias} AND
+      email = #{email}
+  </update>
+
+</mapper>

@@ -23,10 +23,13 @@
 <script src="https://kit.fontawesome.com/f55d6db1b8.js"
 	crossorigin="anonymous"></script>
 
-
-
+   
 <script>
+		//
+		// AJAX로 모델 가져오고
 		
+		var user = '<%= session.getAttribute("__AUTH__") %>'; 
+
 		// 장바구니
 		// 장바구니 버튼을 클릭 시, 
 		// 오늘에 카트로 해당 상품을 담는디
@@ -35,6 +38,7 @@
     		
             console.log(input);
             if (input) {
+            	/*
     	    	const url = 'http://localhost:8080/todayCart/register';
     	        const data = { item: '수박', id: 1237 };
     	        const xhr = new XMLHttpRequest();
@@ -51,7 +55,28 @@
     	    	} // function
             
             
-	    		xhr.send(JSON.stringify(data));
+	    		xhr.send(JSON.stringify(data));*/
+	    		
+	    		$.ajax('/todayCart/register',
+	    		{
+	    			type: 'post',
+	    			//url: '/todayCart/register',
+	    			data: {goods_id: '${__GOODS__.goods_id}'},
+	    			contentType: "application/json; charset=utf-8",
+	    			success: function(object){
+
+	    				console.log("success의 경우를 확인합니다. ");
+	    				console.log("user: " + user);
+	    				console.log("object: " + object);
+	    			},
+	    			error: function(){
+
+	    				console.log("error의 경우를 확인합니다.");
+	    				console.log("user: "+ user);
+	    				console.log("object: " + object);
+
+	    			}
+	    		})
             } // if 
 
         } // addPrdToTodayCart
@@ -111,34 +136,20 @@
         	
         } // locationOfMarts()
         
-    </script>
+    </script>	
 
 </head>
 
 <body>
-	<div id="wrap">
-		<div class="widthfix header_color">
-			<div id="header">
-				<span>우리동네<br>장바구니
-				</span>
-				<div id="gnb">
-					<ul class="nav gnb">
-						<li class="nav_item gnb_li"><span class="nav_text">가격비교</span></li>
-						<li class="nav_item gnb_li"><span class="nav_text">커뮤니티</span>
-						</li>
-						<li class="nav_item gnb_li"><span class="nav_text">QNA</span></li>
-					</ul>
-				</div>
 
-				<div id="info">
-					<ul class="nav">
-						<li class="nav_item"><span class="nav_text">개포동</span></li>
-						<li class="nav_item"><button onclick=window.location.href=
-								'#' id="login_bt">로그인</button></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<% Object auth = session.getAttribute("__AUTH__"); %>
+		
+		<% if(auth != null) { %>
+			<jsp:include page="../header_footer/main_header.jsp" flush="true" />
+		<% } else { %>
+			<jsp:include page="../header_footer/home_header.jsp" flush="true" />
+		<% } %>
+
 
 		<div class="widthfix">
 			<div id="search">
@@ -148,7 +159,7 @@
 				<div class="search_bar">
 					<form action="/priceCompare/search" method="get">
 						<div class="search_form">
-							<input type="text" name="search_item" placeholder="검색어를 입력해주세요"
+							<input type="text" name="keyword" placeholder="검색어를 입력해주세요"
 								class="search_input">
 							<button type="submit" class="submit_bt">
 								<i class="fa-solid fa-magnifying-glass fa-lg"></i>
@@ -172,10 +183,10 @@
 
 			<div id="middleContainer">
 				<div class="leftFromUser">
-					<h3>과일류 > 수박</h3>
-					<h3>1통</h3>
-					<img src="/resources/imgs/mypageCart/waterMelon.PNG"
-						alt="waterMelon.PNG" />
+					<h3>과일류 > ${__GOODS__.goods_id}</h3>
+					<h3>용량: ${ __GOODS__.capacity }</h3>
+					<img src= ${__GOODS__.goods_pic}
+						alt= ${__GOODS__.goods_name} />
 				</div>
 
 				<div class="rightFromUser">
@@ -190,7 +201,7 @@
                             <i class="fa-solid fa-heart fa-2xl"></i></button> -->
 						<button type="button" onclick="addPrdToTodayCart()">장바구니</button>
 					</div>
-					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; 13000</p>
+					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; ???</p>
 					<table class="tableToShowPrice">
 						<tr>
 							<td>마트 1&emsp;
@@ -239,15 +250,9 @@
 
 				</div>
 			</div>
-			<p>상품설명: Lorem ipsum dolor, sit amet consectetur adipisicing
-				elit. At rem earum exercitationem iste doloribus culpa minima
-				suscipit .</p>
 		</article>
 
-		<div class="widthfix">
-			<div id="footer"></div>
-		</div>
-	</div>
+		<jsp:include page="../header_footer/footer.jsp" flush="true" />
 
 </body>
 

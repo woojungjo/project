@@ -16,15 +16,15 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class BoardController {
 
-	
+
 	@GetMapping("/register")
 	public void boardRegister(){
 		log.trace("boardRegister() invoked");
 	}//boardRegister()
-	
-	@PostMapping()
-	public String boardRegister(RedirectAttributes rttrs){
-		log.trace("boardRegister() invoked");
+
+	@PostMapping("/register")
+	public String boardRegister(RedirectAttributes rttrs){//
+		log.trace("boardRegister({}) invoked", rttrs);
 		
 		return "redirect:/board/mateboard/matelist";
 	}//boardRegister()

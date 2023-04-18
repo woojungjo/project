@@ -349,7 +349,7 @@ a {
 .page_index {
     width: 100%;
     margin-left: 17px;
-    margin-top: 40px;
+    margin-bottom: 40px;
 
     display: flex;
     justify-content: center;
@@ -370,6 +370,10 @@ a {
 }
 .page_index_item:hover {
     background-color: rgb(233, 233, 233);
+}
+.currPage {
+    background-color: #53917E;
+    color: white;
 }
 #top_bt {
     width: 50px;

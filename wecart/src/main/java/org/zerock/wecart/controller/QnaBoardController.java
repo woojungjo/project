@@ -54,7 +54,7 @@ public class QnaBoardController {
 			model.addAttribute("pageMaker", pageDTO);
 			
 			// 현재시간 확인
-	        Date now = new Date();
+	        Date now = new Date();   
 	        model.addAttribute("currentTime", now);
 	        log.info("date now : {}", now); 
 			
