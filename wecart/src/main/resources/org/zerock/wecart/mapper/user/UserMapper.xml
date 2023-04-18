@@ -30,7 +30,7 @@
     UPDATE
       member
     SET
-      user_pw = #{user_pw}
+      pwd = #{temp_pwd}
     WHERE
       user_id = #{user_id} AND
       alias = #{alias} AND

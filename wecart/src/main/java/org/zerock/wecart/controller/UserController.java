@@ -90,9 +90,10 @@ public class UserController {
 		} // try-catch		
 	} // searchId
 	
-	public String searchPw(String user_id, String alias, String email) throws ControllerException {
+	@PostMapping("/searchPw")
+	public String searchPw(String user_id, String alias, String email, String temp_pwd) throws ControllerException {
 		try {
-			String result = this.service.searchPw(user_id, alias, email);
+			String result = this.service.searchPw(user_id, alias, email, temp_pwd);
 			
 			return result;
 		} catch(Exception e) {

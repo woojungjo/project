@@ -34,6 +34,7 @@
                         </ul>
                     </nav>
 
+                    <!-- 아이디 찾기 -->
                     <div id="searchI" class="tabcontent" style="display: block;">
 
                         <div class="table_wrap">
@@ -50,10 +51,11 @@
                         </div>
 
                         <div class="next" id="id_next">
-                            <button id="next_button" type="button" onclick="idSearch_click()">다음</button>
+                            <button class="next_button" type="button" onclick="idSearch_click()">다음</button>
                         </div>
                     </div>
 
+                    <!-- 비밀번호 찾기 -->
                     <div id="searchP" class="tabcontent">
 
                         <div class="table_wrap">
@@ -75,11 +77,9 @@
                         </div>
 
                         <div class="next" id="pw_next">
-                            <a href="#" id="next_button">다음</a>
+                            <button class="next_button" type="button" onclick="pwSearch_click()">다음</button>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </main>
@@ -104,14 +104,12 @@
             <br>
 
             &copy; 2023 WeCart, Inc. All Rights Reserved
-
         </footer>
 
-        <div id="background_modal" class="background_modal">
+        <div id="idsearch_modal" class="idsearch_modal" style="display: none;">
             <div class="modal_contents">
-                <h4>
-                    <b>손님 아이디는?</b><span class="close">&times;</span>
-                </h4><br>
+                <h4><b>손님 아이디는?</b><span class="close">&times;</span></h4>
+                <br>
                 <h2 id="id_value"></h2>
                 <br>
                 <button type="button" id="pwSearch_btn" class="btn peach-gradient btn-rounded waves-effect">
@@ -119,8 +117,14 @@
             </div>
         </div>
 
+        <div id="pwsearch_modal" class="pwsearch_modal" style="display: none;">
+            <div class="modal_contents">
+                <h4><b>회원님의 계정으로 임시비밀번호를 보내드렸습니다.</b><span class="close">&times;</span></h4>
+            </div>
+        </div>
     </body>
 
+    <!-- 스크립트 -->
     <script>
         function search_check(num) {
             if (num == '1') {
@@ -143,16 +147,16 @@
             /////////모///달///기///능///////////
             // 1. 모달창 히든 불러오기
             $('#id_next').click(function () {
-                $('#background_modal').show();
+                $('#idsearch_modal').show();
             });
             // 2. 모달창 닫기 버튼
             $('.close').on('click', function () {
-                $('#background_modal').hide();
+                $('#idsearch_modal').hide();
             });
             // 3. 모달창 위도우 클릭 시 닫기
             $(window).on('click', function () {
-                if (event.target == $('#background_modal').get(0)) {
-                    $('#background_modal').hide();
+                if (event.target == $('#idsearch_modal').get(0)) {
+                    $('#idsearch_modal').hide();
                 }
             });
         });
@@ -170,13 +174,7 @@
                 type: "POST",
                 url: "/user/searchId",
                 data: data,
-                success: function (data) {
-                    var $idValue = $('#id_value');
-                    if (!$idValue.length) {
-                        console.error("#id_value 요소를 찾을 수 없습니다.");
-                        return;
-                    }
-                    
+                success: function (data) {                    
                     if (data == 0 || !data) {
                         $('#id_value').text("회원 정보를 확인해주세요!");
                     } else {

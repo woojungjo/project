@@ -102,7 +102,7 @@ nav>ul>li {
     margin-bottom: 30px;
 }
 
-#next_button {
+.next_button {
     display: inline-block;
     position: relative;
     width: 340px;
