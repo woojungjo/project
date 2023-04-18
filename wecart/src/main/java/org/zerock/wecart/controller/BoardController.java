@@ -17,7 +17,7 @@ import lombok.extern.log4j.Log4j2;
 public class BoardController {
 
 	
-	@GetMapping()
+	@GetMapping("/register")
 	public void boardRegister(){
 		log.trace("boardRegister() invoked");
 	}//boardRegister()
