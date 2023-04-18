@@ -28,7 +28,8 @@
 		//
 		// AJAX로 모델 가져오고
 		
-		
+		var user = '<%= session.getAttribute("__AUTH__") %>'; 
+
 		// 장바구니
 		// 장바구니 버튼을 클릭 시, 
 		// 오늘에 카트로 해당 상품을 담는디
@@ -37,6 +38,7 @@
     		
             console.log(input);
             if (input) {
+            	/*
     	    	const url = 'http://localhost:8080/todayCart/register';
     	        const data = { item: '수박', id: 1237 };
     	        const xhr = new XMLHttpRequest();
@@ -53,7 +55,28 @@
     	    	} // function
             
             
-	    		xhr.send(JSON.stringify(data));
+	    		xhr.send(JSON.stringify(data));*/
+	    		
+	    		$.ajax('/todayCart/register',
+	    		{
+	    			type: 'post',
+	    			//url: '/todayCart/register',
+	    			data: {goods_id: '${__GOODS__.goods_id}'},
+	    			contentType: "application/json; charset=utf-8",
+	    			success: function(object){
+
+	    				console.log("success의 경우를 확인합니다. ");
+	    				console.log("user: " + user);
+	    				console.log("object: " + object);
+	    			},
+	    			error: function(){
+
+	    				console.log("error의 경우를 확인합니다.");
+	    				console.log("user: "+ user);
+	    				console.log("object: " + object);
+
+	    			}
+	    		})
             } // if 
 
         } // addPrdToTodayCart
@@ -113,12 +136,19 @@
         	
         } // locationOfMarts()
         
-    </script>
+    </script>	
 
 </head>
 
 <body>
-		<jsp:include page="../header_footer/home_header.jsp" flush="true" />
+
+		<% Object auth = session.getAttribute("__AUTH__"); %>
+		
+		<% if(auth != null) { %>
+			<jsp:include page="../header_footer/main_header.jsp" flush="true" />
+		<% } else { %>
+			<jsp:include page="../header_footer/home_header.jsp" flush="true" />
+		<% } %>
 
 
 		<div class="widthfix">
@@ -153,10 +183,10 @@
 
 			<div id="middleContainer">
 				<div class="leftFromUser">
-					<h3>과일류 > ${goods.goods_id}</h3>
-					<h3>용량: ${ goods.capacity }</h3>
-					<img src= ${goods.goods_pic}
-						alt= ${goods.goods_name} />
+					<h3>과일류 > ${__GOODS__.goods_id}</h3>
+					<h3>용량: ${ __GOODS__.capacity }</h3>
+					<img src= ${__GOODS__.goods_pic}
+						alt= ${__GOODS__.goods_name} />
 				</div>
 
 				<div class="rightFromUser">
@@ -171,7 +201,7 @@
                             <i class="fa-solid fa-heart fa-2xl"></i></button> -->
 						<button type="button" onclick="addPrdToTodayCart()">장바구니</button>
 					</div>
-					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; 13000</p>
+					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; ???</p>
 					<table class="tableToShowPrice">
 						<tr>
 							<td>마트 1&emsp;
