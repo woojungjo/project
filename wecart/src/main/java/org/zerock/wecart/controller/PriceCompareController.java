@@ -16,6 +16,7 @@ import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @NoArgsConstructor
@@ -24,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/priceCompare")
 @Controller
 public class PriceCompareController {
-
+	
 	private PriceCompareService service;
 
 	@Autowired
@@ -101,7 +102,7 @@ public class PriceCompareController {
 			log.trace("2. 여기까지는 이상 없습니다. ");
 			log.trace("goods: {}", goods);
 			
-			model.addAttribute("goods", goods);
+			model.addAttribute("__GOODS__", goods);
 			
 			log.trace("3.. 여기까지는 이상 없습니다. ");
 			return "priceCompare/showPrd";
