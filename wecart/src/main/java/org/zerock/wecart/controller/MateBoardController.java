@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.PageDTO;
+import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.board.mateboard.MateBoardService;
@@ -66,6 +67,20 @@ public class MateBoardController {		//JavaBeans, POJO
 	@GetMapping(path="/mateget/{post_no}")
 	public String mateGet(@PathVariable("post_no") Integer post_no, Model model)throws ControllerException {
 		log.trace("mateget({}, {}) invoked", post_no, model);
+		try {
+			MateBoardVO vo = this.service.get(post_no);
+			model.addAttribute("__MateBoard__", vo);
+			
+			return "/board/mate/mateget";
+		}catch(Exception e) {
+			throw new ControllerException(e);
+		}//try-catch
+	}//mateGet()
+	
+
+	@GetMapping(path="/matemodify/{post_no}")
+	public String mateModify(@PathVariable("post_no") Integer post_no, Model model)throws ControllerException {
+		log.trace("mateget({}, {}) invoked", post_no, model);
 		
 		try {
 			MateBoardVO vo = this.service.get(post_no);
@@ -75,22 +90,30 @@ public class MateBoardController {		//JavaBeans, POJO
 		}catch(Exception e) {
 			throw new ControllerException(e);
 		}//try-catch
-
-	}//mateGet()
-	
-	@GetMapping("/matemodify")
-	public void mateModify() {
-		log.trace("matemodify() invoked");
 	}//mateModify() 
-	
+
 	@PostMapping("/matemodify")
-	public String mateModify(RedirectAttributes rttrs) {
-		log.trace("matemodify({}) invoked", rttrs);
+	public String mateModify(RedirectAttributes rttrs, MateBoardDTO dto, Criteria cri) throws ControllerException {
+		log.trace("matemodify({}, {}, {}) invoked", rttrs, dto, cri);
 		
-		return "redirect:/board/mateboard/matelist";
+		try {
+			boolean success = this.service.modify(dto);
+			log.info("\t+success",success);
+			
+			//페이징처리용 전송파라미터도 함게 전송처리
+			rttrs.addAttribute("currPage", cri.getCurrPage());
+			rttrs.addAttribute("amount", cri.getAmount());
+			 
+			//Model 전송처리 
+			rttrs.addAttribute("result", (success)? "success": "failure");
+			
+			return "redirect:/board/mate/matelist";
+		}catch(Exception e) {
+			throw new ControllerException(e);
+		}//try-catch 
 		
 	}//mateModify()
-	
+
 	
 	@PostMapping("/mateRemove")
 	public String mateRemove(RedirectAttributes rttrs) {

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ page import="java.util.List" %> 
 
 <!DOCTYPE html>
@@ -8,8 +12,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장메이트 게시판 상세보기</title>
-
+    <title>장메이트 게시판 ${param.currPage}</title>
+	
+	<!-- script src="/resources/js/board/mate/list.js" defer></script-->
 	<script src="/resources/js/board/mate/script.js" defer></script>
 	<link rel="stylesheet" href="/resources/css/board/mate/style.css">
 
@@ -27,11 +32,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.js" integrity="sha512-eN8dd/MGUx/RgM4HS5vCfebsBxvQB2yI0OS5rfmqfTo8NIseU+FenpNoa64REdgFftTY4tm0w8VMj5oJ8t+ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 
 </head>
 <body>
@@ -42,31 +47,26 @@
                 <div class="board_change">
                     <a href="RegionBoard.html"><button id="region">지역</button></a>
                     <a href="UsedBoard.html"><button id="used">중고거래</button></a>
-                    <a href="MateBoard.html"><button id="mate">장메이트</button></a>
+                    <a href="/board/mate/matelist"><button id="mate">장메이트</button></a>
                     <a href="CrawlingBoard.html"><button id="crawling">크롤링</button></a>
                     <a href="SaleBoard.html"><button id="sale">세일정보</button></a>
                 </div>
             <div id="mate_board_read">
 
-                    <div class="mate_board_name">장메이트 게시판</div>
+               <div class="mate_board_name">장메이트 게시판</div>
                 <div id="mate_board_info">
-                    <!-- <button type="button" class="mate_board_recruiting" >모집중</button> -->
-                    
+
                     <div class="mate_board_recruiting">
                         <select class="mate_board_recruiting_option">
                             <option value="recruiting" >모집중</option >
                             <option value="completed"  >참여완료</option>
                         </select>
                     </div>
-                        <!-- <ul class="dropdown-menu"  style="display: none;">
-                            <li><a href="#">모집중</a></li>
-                            <li><a href="#">참여완료</a></li>
-                        </ul> -->
-
+                    
                     <div id="mate_board_writer_and_bookMark">
                         <div class="mate_board_writer">
                             <button type="button" value=""><i class="fa-solid fa-piggy-bank"></i>￦3500 </button>
-                            작성자(닉네임)
+                            작성자: ${__MateBoard__.member_id}
                         </div>
                         <div class="mate_board_bookMark"><i class="fa-regular fa-bookmark"></i></div>
                     </div>
@@ -76,18 +76,41 @@
                     <!-- <fmt:formatDate pattern ="yyyy/MM/dd HH:mm:ss" value="${boardVO.insert_ts}"/> -->
 
                     <div id="mate_board_writedt_and_views">
-                        <div class="mate_board_writedt">작성일자</div>
-                        <div class="mate_board_views"><div class="fas fa-eye"></div>조회수</div>
+                        <div class="mate_board_writedt">
+                        	<fmt:formatDate value="${__MateBoard__.write_dt}" pattern="yyyyMMddHHmmss" var="write_dt" />
+                                    <fmt:formatDate value="${__MateBoard__.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
+                                    <c:set var="currentLocalDateTime" value="${LocalDateTime.parse(currDate, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                    <c:set var="writeLocalDateTime" value="${LocalDateTime.parse(write_dt, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                    <c:set var="diffMinutes" value="${Duration.between(writeLocalDateTime, currentLocalDateTime).toMinutes()}"/>
+                                    
+                                    <c:choose>
+                                        <c:when test="${diffMinutes < 1}">
+                                            <div>&nbsp;&nbsp;방금 전</div>
+                                        </c:when>
+                                        <c:when test="${diffMinutes < 60}">
+                                            <div>&nbsp;&nbsp;${diffMinutes}분 전</div>
+                                        </c:when>
+                                        <c:when test="${diffMinutes < 1440}">
+                                            <fmt:formatNumber value="${diffMinutes div 60}" pattern="##" var="minutestoTime"/>
+                                            <div>&nbsp;&nbsp;${minutestoTime}시간 전</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div>&nbsp;&nbsp;${formatDate}</div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    
+                                    </div>
+                        <div class="mate_board_views"><div class="fas fa-eye"></div>${__MateBoard__.views}</div>
                     </div>    
-                    <div class="mate_board_title"><!--div class="fas fa-lock"--></div> 글제목</div>
+                    <div class="mate_board_title"><!--div class="fas fa-lock"--></div>${__MateBoard__.title}</div>
                 </div> <!--mate_board_info-->
 
                 <div id="mate_board_contents">
                     
                     <div class="mate_board_contents_wrapper">
-                    <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i>롯데마트 송파점</div>
+                    <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i>${__MateBoard__.meeting_area}</div>
                     <div id="mate_board_contents_dt_and_members">
-                        <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;만남 예정 시간</div>
+                        <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;${__MateBoard__.meeting_time}</div>
                         
                         <div id="member">
                             <div class="mate_board_contents_members"><i class="fa-solid fa-people-group"></i></div>
@@ -126,7 +149,7 @@
                     <hr>
 
                     <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam itaque reiciendis totam suscipit? Corrupti ipsam dolorum ut sint nesciunt non, ex aperiam facere nostrum. Reprehenderit, officia. Quod minima quis et!
+                   	${__MateBoard__.content}
                     </p>  
 
                     <div id="map" style="width:500px;height:400px; margin: 0 auto; "></div>
@@ -151,18 +174,18 @@
                             </ul>
                         </div>
                     </div> <!--qna_board_attach-->
-
+	
                     <div id="mate_board_modify_and_delete">
                         <button type="button" class="mate_board_modify" >수정</button>
                         <button type="button" class="mate_board_delete" >삭제</button>
+                        <button type="button" class="mate_board_list" >목록</button>
                     </div>
-
+                   
+</div>
             </div> <!--mate_board_info_below-->
 
-            <article id="board_read">
-                
-            </article>
-        </main>
+						<!-- 답글 넣기 -->
+      	  </main>
 
         <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 </body>
@@ -170,7 +193,23 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0be8f3b8bf2f892c159cfeb384998199"></script>	
 	
+<!--  script>
+	var mateListBtn = document.querySelector('.mate_board_list');
+	var mateModifyBtn = document.querySelector('.mate_board_modify');
+	
+	mateListBtn.addEventListener('click', function(){
+		/*location.href='/board/mate/matelist?currPage=${param.currPage}&amount=${param.amount}';*/
+	    var url = '/board/mate/matelist?currPage=' + encodeURIComponent('${param.currPage}') + '&amount=' + encodeURIComponent('${param.amount}');
+	    location.href = url;
+	});
+	
+	mateModifyBtn.addEventListener('click', function(){
+	    location.href='/board/mate/matemodify?currPage=${param.currPage}&amount=${param.amount}&post_no=${post_no}';
+	});//.addEventListener
+</script-->
 <script>
+
+	//==================KAKAO API==================
     var container = document.getElementById('map');
     var options = {
         center: new kakao.maps.LatLng(34.8861, 127.5091),
@@ -192,6 +231,8 @@
 
     // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
     // marker.setMap(null);   
+    
+    
 </script>
 
 </html>

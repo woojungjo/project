@@ -74,7 +74,7 @@ header .headerbar_menu{
     color: white;
 }
 header .header_login{
-    flex:2;
+    flex:2.3;
      
     display: flex;
     justify-content: space-evenly;

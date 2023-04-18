@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.mapper.board.mateboard.MateBoardMapper;
 
@@ -106,6 +107,35 @@ public class MateBoardMapperTests {
 		
 	}//mateBoardMapperSelectTest() 
 	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("게시물 수정 : mateBoardMapperuUpdateTest")
+	@Timeout(value=50, unit=TimeUnit.SECONDS)
+	void mateBoardMapperuUpdateTest() {
+		log.trace("mateBoardMapperuUpdateTest() invoked.");
+		
+		//모든 컬럼을 수정하지 않는 경우
+		MateBoardVO vo = this.mapper.select(301);
+		MateBoardDTO dto = new MateBoardDTO();
+		
+		dto.setPost_no(vo.getPost_no());
+		dto.setTitle("NEW TITLE");
+		dto.setContent("NEW_NEW_NEW_NEW_NEW");
+		dto.setViews(vo.getViews());
+		dto.setMember_id(vo.getMember_id());
+		dto.setMeeting_status('0');
+		dto.setMeeting_area("Jamsil");
+		dto.setParticipant_id_1(300);
+		dto.setParticipant_id_2(301);
+		dto.setParticipant_id_3(303);
+		 
+		Integer affectedLines = this.mapper.update(dto);
+		
+		assertNotNull(affectedLines);
+		log.info("***********afftedLines:{}", affectedLines);
+	}//mateBoardMapperuUpdateTest()
 	
-}//MateBoardMapperTests
+	
+}//end class 
  

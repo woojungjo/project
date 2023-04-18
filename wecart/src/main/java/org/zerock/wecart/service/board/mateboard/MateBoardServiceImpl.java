@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.board.mateboard.MateBoardMapper;
@@ -70,7 +71,19 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}//try-catch
-	} // getTotalAmount
+	}
+
+	@Override
+	public boolean modify(MateBoardDTO dto) throws ServiceException {
+		log.trace("modify() invoked.");
+		
+		try {
+			return this.mapper.update(dto)==1;
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}//try-catch
+		
+	} // modify() 
 	
 	
  

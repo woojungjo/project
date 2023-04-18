@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ServiceException;
 
@@ -104,5 +105,31 @@ public class MateBoardServiceTests {
 		}//if-else
 	} // testGet
 	
+	//Disabled
+	@Test
+	@Order(4)
+	@DisplayName("testUpdate")
+	@Timeout(value=10, unit=TimeUnit.SECONDS)
+	void testModify() throws ServiceException {
+		log.trace("testModify() invoked.");
+		
+		MateBoardVO vo = this.service.get(77);
+		MateBoardDTO dto = new MateBoardDTO();
+		
+		dto.setPost_no(vo.getPost_no());
+		dto.setTitle("NEW 77 TITLE");
+		dto.setContent("77");
+		dto.setViews(vo.getViews());
+		dto.setMember_id(vo.getMember_id());
+		dto.setMeeting_status('0');
+		dto.setMeeting_area("Newyork");
+		dto.setParticipant_id_1(300);
+		dto.setParticipant_id_2(301);
+		dto.setParticipant_id_3(303);
+		
+		boolean success = this.service.modify(dto);
+		log.info("\t+success", success);
+		
+	}//testModify()
 	
 } //MateBoardServiceTests

@@ -16,9 +16,9 @@
     
 
     <!--  script src="/resources/js/board/qna/board.js" defer ></script-->
-     
 	<!--script src="/resources/js/board/mate/script.js" defer></script-->
-
+	
+	<!-- script src="/resources/js/board/mate/list.js" defer></script-->
 	<link rel="stylesheet" href="/resources/css/board/qna/style.css">
 	<link rel="stylesheet" href="/resources/css/board/mate/style.css">
 	
@@ -84,7 +84,7 @@
                                     </c:choose>
                                 </div>
                                 
-	                            <button type=button value="recruiting" >모집중</button>
+	                            <button type=button value="recruiting" >모집중 </button>
 	
 	                        </div>
 	                        <div id="mate_board_container1">
@@ -95,9 +95,9 @@
 	                        
 	                        <div id="mate_board_container2">
 	                        
-	                        <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i>롯데마트 송파점</div>
+	                        <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i>${MateBoardVO.meeting_area}</div>
 	                    	<div id="mate_board_contents_dt_and_members">
-	                        <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;만남 예정 시간</div>
+	                        <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;${MateBoardVO.meeting_time}</div>
 	                        <div class="mate_board_contents_members"><i class="fa-solid fa-people-group"></i></div>
 	                        <div class="currentMemberNum">2</div>
 	                        <div>/</div>
@@ -107,7 +107,7 @@
 	                        
 	                        
 	                        <div class="board_tail">
-	                            <div><span class="fas fa-eye"></span>VIEWS</div>
+	                            <div><span class="fas fa-eye"></span>${MateBoardVO.views}</div>
 	                            <div><span class="fas fa-comment-dots"></span>댓글</div>
 	                        </div>
 	                    </div>
@@ -136,6 +136,7 @@
             </form>
 
    			 <div id="move_page">
+   			 	<form id="">
                     <c:choose>
                         <c:when test="${__PAGE_MAKER__.prev}">
                             <a data-temp="${__PAGE_MAKER__.cri.setCurrPage(__PAGE_MAKER__.startPage-1)}"
@@ -168,9 +169,20 @@
                             <div>다음&nbsp;<span class="fas fa-arrow-right-long"/></div>
                         </c:otherwise>
                     </c:choose>
+                    
+                    <!-- Pagination에서 Prev or Next 버튼 클릭했을 때, 자바스크립트로
+                   		우리가 직접 form 태그를 조작해서 전송하기 위해 필요한 기준 전송파라미터
+                   		Criteria를 위한 전송파라미터들  
+                     -->
+                     <input type="hidden" name="currPage">
+                     <input type="hidden" name="amount">
+                     <input type="hidden" name="pagesPerPage">
+                     <input type="hidden" name="type">
+                     <input type="hidden" name="keyword">
+                 </form>
                 </div>
                 
-            </div>
+          	  </div>
 
         </article>
 
@@ -179,7 +191,7 @@
         <!--*********************************************메인 내용은 여기까지*********************************************-->
     </main>
 	    <jsp:include page="../../header_footer/footer.jsp" flush="true" />
-
+		
 </body>
 
 
