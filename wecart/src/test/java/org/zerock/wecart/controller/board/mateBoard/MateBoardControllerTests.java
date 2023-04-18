@@ -23,10 +23,11 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
+import org.zerock.wecart.domain.mateboard.MateBoardVO;
 
-import lombok.Cleanup;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -98,12 +99,71 @@ public class MateBoardControllerTests {
 
 		DefaultMockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
 		MockMvc mockMvc = mockMvcBuilder.build();
-
+		
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/mate/mateget/{post_no}", 166);
 		
 		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
 		log.info("\t+viewName:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
 
 	}//testGet()
+	
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("testModify")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testModify() throws Exception {
+		log.trace("testModify() invoked.");
+		
+		DefaultMockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+		
+		//Step.1 post_no 305게시글 상세히 조회 
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/mate/mateget/{post_no}", 305);
+		
+		//가상의 MVC 환경에서 BoardController요청생성 및 전송 
+		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		log.info("modelAndView: {}", modelAndView);
+		
+		log.info("\t+viewName:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
+
+		ModelMap model = modelAndView.getModelMap();
+		log.info("\t+model:{}, type:{}", model, model.getClass().getName());
+		
+		MateBoardVO vo = (MateBoardVO) model.getAttribute("__MateBoard__");
+		
+		assertNotNull(vo);
+		log.info("vo:{}", vo);
+		
+		//Step.2 305 게시글 수정 
+		Integer post_no = vo.getPost_no();
+		Integer member_id = vo.getMember_id();
+		Integer views = vo.getViews();
+		Character meeting_status = vo.getMeeting_status();
+		String meeting_area = vo.getMeeting_area();
+//		Integer participant_id1 = vo.getParticipant_id_1();
+//		Integer participant_id2 = vo.getParticipant_id_2();
+//		Integer participant_id3 = vo.getParticipant_id_3();
+		
+		requestBuilder = MockMvcRequestBuilders.post("/board/mate/matemodify");
+		requestBuilder.param("post_no", post_no.toString());
+		requestBuilder.param("member_id", member_id.toString());
+		requestBuilder.param("views", views.toString());
+		requestBuilder.param("meeting_status", meeting_status.toString());
+		requestBuilder.param("meeting_area", meeting_area.toString());
+//		requestBuilder.param("participant_id1", participant_id1.toString());
+//		requestBuilder.param("participant_id2", participant_id2.toString());
+//		requestBuilder.param("participant_id3", participant_id3.toString());
+		requestBuilder.param("title", "*******수정*******"); //수정항목1
+		requestBuilder.param("content", "*******수정*******"); //수정항목2
+		
+		//가상의 MVC 환경에서, BoardController에 요청생성 및 전송
+		modelAndView = 
+				mockMvc.
+					perform(requestBuilder).
+					andReturn().
+					getModelAndView();
+	}//testModify()
+	
 	
 }//MateBoardControllerTests

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 
 public interface MateBoardMapper {
@@ -18,4 +19,8 @@ public interface MateBoardMapper {
 	
 	//2. 게시물 상세 조회
 	public abstract MateBoardVO select(Integer post_no);
+	
+	//3. 기존 게시물 수정 
+	public abstract Integer update(MateBoardDTO dto);
+	
 }//MateBoardMapper

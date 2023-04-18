@@ -20,6 +20,24 @@
   		FROM mate_board
 		WHERE post_no = #{post_no}
   	</select>
-  	
+
+  	<update id="update">
+  		UPDATE 
+  			mate_board
+  			
+  		SET
+  			title=#{title},
+		    content=#{content},
+		    views=#{views},
+		    member_id=#{member_id},
+		    meeting_status=#{meeting_status},
+		    meeting_area=#{meeting_area},
+		    participant_id_1=#{participant_id_1},
+		    participant_id_2=#{participant_id_2},
+		    participant_id_3=#{participant_id_3}
+		    
+		WHERE post_no = #{post_no}
+  	</update>  	
+		    
   </mapper>
   
