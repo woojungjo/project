@@ -57,6 +57,13 @@
             
 	    		xhr.send(JSON.stringify(data));*/
 	    		
+	    		// auth가 안 올라왔을 시에는 redirect
+	    		if(user == null){
+	    			alert("로그인을 부탁드립니다. ");
+	    			window.location.href = "localhost:8080/user/login";
+	    		} // if
+	    		
+	    		
 	    		$.ajax('/todayCart/register',
 	    		{
 	    			type: 'post',
@@ -185,8 +192,8 @@
 				<div class="leftFromUser">
 					<h3>과일류 > ${__GOODS__.goods_id}</h3>
 					<h3>용량: ${ __GOODS__.capacity }</h3>
-					<img src= ${__GOODS__.goods_pic}
-						alt= ${__GOODS__.goods_name} />
+					<img src= ${__GOODS__.goods_pic }
+						alt= ${__GOODS__.goods_name } />
 				</div>
 
 				<div class="rightFromUser">
