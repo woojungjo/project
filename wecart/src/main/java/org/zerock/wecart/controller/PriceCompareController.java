@@ -97,9 +97,10 @@ public class PriceCompareController {
 
 		try {
 			GoodsVO goods = this.service.select(goods_id);
-			
 			log.trace("goods: {}", goods);
 			
+			
+			// 회원의 id와 
 			model.addAttribute("__GOODS__", goods);
 			
 			return "priceCompare/showPrd";

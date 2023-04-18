@@ -44,7 +44,6 @@ public class TodayCartController {
 		
 		GoodsVO goodsVO = service.select(goods_id);
 		
-		
 		UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
 		log.trace("UserVO: {}", userVO);
 		
