@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
@@ -34,10 +35,13 @@ public class TodayCartController {
 	} //get
 	
 	@PostMapping("/register")
+	@ResponseBody
 	public GoodsVO register(Model model) throws ServiceException{
 		log.trace("register({}) invoked.", model);
 		
 		Integer goods_id = (Integer)model.getAttribute("goods_id");
+		log.trace("goods_id: {}", goods_id);
+		
 		GoodsVO goodsVO = service.select(goods_id);
 		
 		
