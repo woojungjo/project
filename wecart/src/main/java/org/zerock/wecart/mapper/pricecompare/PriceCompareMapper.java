@@ -19,5 +19,11 @@ public interface PriceCompareMapper {
   
     //4. 한 가지 상품을 조회
 	public abstract GoodsVO select(Integer goods_id);
+	
+	
+	
+
+	
+
 
 } //end interface
