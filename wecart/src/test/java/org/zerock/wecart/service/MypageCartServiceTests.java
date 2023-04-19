@@ -96,4 +96,36 @@ public class MypageCartServiceTests {
 			throw new ServiceException(e);
 		}
 	} //MemberGoodsCartListForMember
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("Test4: saveGoodsIntoWishList()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void saveGoodsIntoWishList() throws ServiceException {
+		log.trace("saveGoodsIntoWishList() invoked.");
+		
+		try {
+			this.service.saveGoodsIntoWishList(198, 3);
+			
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} //MemberGoodsCartListForMember
+	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("Test5: deleteGoodsFromWishList()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void deleteGoodsFromWishList() throws ServiceException {
+		log.trace("deleteGoodsFromWishList() invoked.");
+		
+		try {
+			
+			this.service.deleteGoodsFromWishList(198, 3);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} //MemberGoodsCartListForMember
 }

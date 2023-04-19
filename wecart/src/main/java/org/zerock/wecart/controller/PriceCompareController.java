@@ -1,5 +1,6 @@
 package org.zerock.wecart.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsPageDTO;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
@@ -16,12 +20,12 @@ import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @NoArgsConstructor
 @Log4j2
 
+@SessionAttributes({"__AUTH__"})
 @RequestMapping("/priceCompare")
 @Controller
 public class PriceCompareController {
@@ -109,18 +113,16 @@ public class PriceCompareController {
 		} // try - catch
 	} // showPrd/{goods_id}
 
+	/*
+	 * MypageCartController의 /saveGoodsIntoTodayCart 로 이동
 	// 카트를 누르면 상품을 오늘의 카트에 담는다.
+	// Deprecated
 	@PostMapping("/addPrdToCart")
 	public void addPrdToCart() {
 		log.trace("addPrdToCart() invoked. ");
 	} // addPrdToCart Jhwan
+	*/
+	
 
-	// 해당 상품을 찜할 수 있음
-	@PostMapping("/addPrd")
-	public String addPrd() {
-		log.trace("addPrd() invoked. ");
-
-		return "redirect:product";
-	} // addPrd Jhwan
 
 } // end class
