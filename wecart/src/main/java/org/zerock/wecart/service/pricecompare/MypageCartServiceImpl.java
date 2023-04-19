@@ -16,11 +16,11 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class MypageCartServiceImpl implements MypageCartService{
 
-	private MemberGoodsCartMapper memberGoodsCartMapper; 
+	private MemberGoodsCartMapper mapper; 
 
 	@Autowired
-	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper) {
-		this.memberGoodsCartMapper = memberGoodsCartMapper;
+	public MypageCartServiceImpl(MemberGoodsCartMapper mapper) {
+		this.mapper = mapper;
 
 	}
 	
@@ -29,7 +29,7 @@ public class MypageCartServiceImpl implements MypageCartService{
 		log.trace("getMemberGoodsCartListForMember() invoked. ");
 		
 		try {
-			return this.memberGoodsCartMapper.selecAllInstalledCartOfMember(member_id);
+			return this.mapper.selecAllInstalledCartOfMember(member_id);
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}
@@ -41,7 +41,7 @@ public class MypageCartServiceImpl implements MypageCartService{
 		log.trace("getTodayCartIdOfMember({}) invoked ", member_id);
 		
 		try {
-			Integer check = this.memberGoodsCartMapper.selectTodayCartOfMember(member_id);
+			Integer check = this.mapper.selectTodayCartOfMember(member_id);
 			log.trace("check:{}", check);
 			return check;
 		}catch(Exception e) {
@@ -54,7 +54,7 @@ public class MypageCartServiceImpl implements MypageCartService{
 		log.trace("saveGoodsIntoTodayCart({}, {}, {}) invoked. ", member_id, goods_id, cart_id);
 		
 		try {
-			this.memberGoodsCartMapper.insertRowIntoTodayCart(member_id, goods_id, cart_id);
+			this.mapper.insertRowIntoTodayCart(member_id, goods_id, cart_id);
 			
 		}catch(Exception e) {
 			throw new ServiceException(e);
