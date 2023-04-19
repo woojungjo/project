@@ -233,14 +233,12 @@
 			</div>
 		</div>
 
-		<div class="widthfix">
-			<div id="footer"></div>
-		</div>
+		 <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 
 		<a href="#TOP" id="top_bt" class="a_black_text"> <i
 			class="fa-solid fa-arrow-up fa-lg"></i>
 		</a>
-	</div>
+	
 
 	<script>
 

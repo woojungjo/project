@@ -120,13 +120,8 @@
                 </div>
             </div>
         </article>
-
-        <div class="widthfix">
-            <div id="footer">
-
-            </div>
-        </div>
     </div>
+     <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 
 </body>
 

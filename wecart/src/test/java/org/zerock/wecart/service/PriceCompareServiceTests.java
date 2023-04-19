@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
+import org.zerock.wecart.domain.pricecompare.MemberGoodsCartVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
@@ -112,6 +113,64 @@ public class PriceCompareServiceTests {
 		} //if-else
 		
 	} //getSearchList
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("Test4: getMemberGoodsCartListForMember()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void getMemberGoodsCartListForMember(Integer member_id) throws ServiceException {
+		log.trace("getMemberGoodsCartListForMember() invoked.");
+		
+		
+		List<Integer> list = this.service.getInstalledCartIdsOfMember(198);
+		
+		if(list != null) {
+			log.info("\t + list: {}", list);
+		}else {
+			throw new ServiceException("MemberGoodsCartVO is null");
+		} // if - else
+		
+	} //MemberGoodsCartListForMember
+	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("Test5: getTodayCartIdOfMember()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void getTodayCartIdOfMember() throws ServiceException {
+		log.trace("getTodayCartIdOfMember() invoked.");
+		
+		Integer member_id = 198;
+		
+		Integer cart_id = this.service.getTodayCartIdOfMember(member_id);
+		
+		if(cart_id != null) {
+			log.info("\t + list: {}", cart_id);
+		}else {
+			log.info("해당 회원은 TodayCart를 가지고 있지 않습니다.");
+		} // if - else
+		
+	} //MemberGoodsCartListForMember
+	
+//	@Disabled
+	@Test
+	@Order(6)
+	@DisplayName("Test6: getTodayCartIdOfMember()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void saveGoodsIntoTodayCart() throws ServiceException {
+		log.trace("getTodayCartIdOfMember() invoked.");
+		
+		try {
+			
+			this.service.saveGoodsIntoTodayCart(198, 100, 2295427);
+			
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} //MemberGoodsCartListForMember
+	
+	
 } //end class
 
 
