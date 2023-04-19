@@ -10,4 +10,4 @@ public class CartVO {
 	Timestamp cart_creation_date;
 	Timestamp API_date;
 	String status;
-}
+} // CartVO
