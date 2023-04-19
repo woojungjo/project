@@ -1,8 +1,8 @@
 package org.zerock.wecart.mapper.user;
 
-import org.apache.ibatis.annotations.Param;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
+import org.zerock.wecart.domain.user.UserDTO;
 
 public interface UserMapper {
 	
@@ -10,9 +10,10 @@ public interface UserMapper {
 	public abstract UserVO selectUser(LoginDTO dto);
 	
 	// 아이디 찾기
-	public abstract String selectId(@Param("alias") String alias, @Param("email") String email);
+	public abstract String selectId(UserDTO dto);
 	
 	// 비밀번호 찾기
-	public abstract String updatePw(@Param("user_id") String user_id, @Param("alias") String alias, @Param("email") String email, @Param("temp_pwd") String pwd);
+	public abstract Integer updatePw(UserDTO dto);
+
 
 } // end interface

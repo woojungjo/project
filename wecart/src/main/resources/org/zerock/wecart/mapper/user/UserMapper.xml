@@ -16,7 +16,7 @@
       pwd = #{pwd}
   </select>
 
-  <select id="selectId" resultType="String">
+  <select id="selectId">
     SELECT
       NVL(login_id, 0)
     FROM
@@ -26,13 +26,13 @@
       email = #{email}
   </select>
 
-  <update id="updatePw" parameterType="Map">
+  <update id="updatePw">
     UPDATE
       member
     SET
-      pwd = #{temp_pwd}
+      pwd = #{pwd}
     WHERE
-      user_id = #{user_id} AND
+      login_id = #{login_id} AND
       alias = #{alias} AND
       email = #{email}
   </update>
