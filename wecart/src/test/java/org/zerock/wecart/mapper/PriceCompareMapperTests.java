@@ -128,6 +128,7 @@ public class PriceCompareMapperTests {
 		list.forEach(log::info);	
 		
 	} //selectSearch
+	
 
 } //end class
 

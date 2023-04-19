@@ -57,17 +57,24 @@
             
 	    		xhr.send(JSON.stringify(data));*/
 	    		
+	    		// auth가 안 올라왔을 시에는 redirect
+	    		if(user == "null"){
+	    			alert("로그인을 부탁드립니다. ");
+	    			window.location = "/user/login";
+	    		} // if
+	    		
+	    		var json = {goods_id: '${__GOODS__.goods_id}'};
 	    		$.ajax('/todayCart/register',
 	    		{
 	    			type: 'post',
 	    			//url: '/todayCart/register',
-	    			data: {goods_id: '${__GOODS__.goods_id}'},
+	    			data: JSON.stringify({goods_id: '${__GOODS__.goods_id}'}),
 	    			contentType: "application/json; charset=utf-8",
 	    			success: function(object){
 
 	    				console.log("success의 경우를 확인합니다. ");
 	    				console.log("user: " + user);
-	    				console.log("object: " + object);
+	    				console.log("object: " + data);
 	    			},
 	    			error: function(){
 
@@ -76,7 +83,7 @@
 	    				console.log("object: " + object);
 
 	    			}
-	    		})
+	    		}) // ajax
             } // if 
 
         } // addPrdToTodayCart
@@ -185,8 +192,8 @@
 				<div class="leftFromUser">
 					<h3>과일류 > ${__GOODS__.goods_id}</h3>
 					<h3>용량: ${ __GOODS__.capacity }</h3>
-					<img src= ${__GOODS__.goods_pic}
-						alt= ${__GOODS__.goods_name} />
+					<img src= ${__GOODS__.goods_pic }
+						alt= ${__GOODS__.goods_name } />
 				</div>
 
 				<div class="rightFromUser">
@@ -201,7 +208,7 @@
                             <i class="fa-solid fa-heart fa-2xl"></i></button> -->
 						<button type="button" onclick="addPrdToTodayCart()">장바구니</button>
 					</div>
-					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; ???</p>
+					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; ${ __GOODS__.low_price }</p>
 					<table class="tableToShowPrice">
 						<tr>
 							<td>마트 1&emsp;

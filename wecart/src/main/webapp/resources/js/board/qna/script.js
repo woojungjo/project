@@ -10,44 +10,99 @@ downloadBtn.onclick = function() {
   }
 };
 
-const commant = document.querySelector(".board_commant_commant_write");
+const commantForm = document.querySelectorAll(".board_commant_commant_write");
+const commantBtn = document.querySelectorAll(".board_commant_commant");
 
-document.querySelector(".board_commant_commant").onclick = function() {
-  const style = window.getComputedStyle(commant);
-  if (style.display === "none") {
-    commant.style.display = "block";
-  } else {
-    commant.style.display = "none";
-  }
+for (let i = 0 ; i < commantForm.length; i++) {
+  commantBtn[i].addEventListener('click', function() {
+    const style = window.getComputedStyle(commantForm[i]);
+    if (style.display === "none") {
+      commantForm[i].style.display = "block";
+    } else {
+      commantForm[i].style.display = "none";
+    }  
+  });
+}
+
+const commant_ud = document.querySelectorAll(".board_commant_ud");
+const dlBars = document.querySelectorAll(".fas.fa-bars");
+
+for(let i = 0; i < commant_ud.length; i++){
+  dlBars[i].addEventListener('click', function() {
+    const style = window.getComputedStyle(commant_ud[i]);
+    if (style.display === "none") {
+      commant_ud[i].style.display = "block";
+    } else {
+      commant_ud[i].style.display = "none";
+    }
+  });
+}
+
+const icon = document.querySelectorAll('.board_commant_write_footer > .fas.fa-unlock');
+const commentsecret = document.querySelectorAll('form input[name="seclet_yn"]');
+
+for(let i = 0; i < icon.length; i ++){
+  icon[i].onclick = function() {
+    if (icon[i].classList.contains('fa-unlock')) {
+      commentsecret[i].value = "1";
+      icon[i].classList.remove('fa-unlock');
+      icon[i].classList.add('fa-lock');
+      
+    } else{
+      commentsecret[i].value = "0";
+        icon[i].classList.remove('fa-lock');
+        icon[i].classList.add('fa-unlock');
+
+      }
 };
+}
 
-const commant_ud = document.querySelector(".board_commant_ud");
-
-document.querySelector(".fas.fa-bars").onclick = function() {
-  const style = window.getComputedStyle(commant_ud);
-  if (style.display === "none") {
-    commant_ud.style.display = "block";
-  } else {
-    commant_ud.style.display = "none";
-  }
-};
+var oEditors = [];
+        nhn.husky.EZCreator.createInIFrame({
+         oAppRef: oEditors,
+         elPlaceHolder: document.getElementById("ir1"),
+         sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",
+         fCreator: "createSEditor2"
+        });
 
 
-const icon = document.querySelector('.board_commant_write_footer > .fas.fa-lock');
 
 
-icon.onclick = function() {
-  icon.classList.toggle('fa-lock');
-  icon.classList.toggle('fa-unlock');
-};
+$('button.board_commant_submit').on('click', function(event) {
+  console.clear(); console.group("Ajax Request");
 
+  event.preventDefault(); // 폼 전송을 막음
+	
+  var form = $('#comment-form');
+  console.log('1. form:', form);
 
-// var oEditors = [];
-//         nhn.husky.EZCreator.createInIFrame({
-//          oAppRef: oEditors,
-//          elPlaceHolder: document.getElementById("ir1"),
-//          sSkinURI: "wecart/src/main/webapp/WEB-INF/views/board/smarteditor/SmartEditor2Skin.html",
-//          fCreator: "createSEditor2"
-//         });
+  var jsonData = form.serializeJSON();
+  console.log(`2. jsonData:`, jsonData);
+  console.log(`2-1. content: ${jsonData.content}`);
 
+  var jsonStr = JSON.stringify(jsonData);
+  console.log(`3. jsonStr: ${jsonStr}`);
 
+  $.ajax({
+    url: '/board/qna/read/commentwrite',
+    type: 'POST',
+    contentType: 'application/json',
+    dataType: 'json',
+    data: jsonStr,
+
+      success: function(data) {
+        console.info('**** success called back:', data);
+
+        // DOM tree 조작
+
+      } // success
+    }); // .ajax
+
+    console.groupEnd();
+}); // .onclick
+
+function sleep(millis) {
+  let dt = new Date();
+
+  while((new Date() - dt) < millis);
+} // sleep

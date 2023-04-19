@@ -16,13 +16,14 @@
             <script src="https://kit.fontawesome.com/a623128410.js" crossorigin="anonymous"></script>
             <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
             rel="stylesheet">
-            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/3.2.1/jquery.serializejson.min.js" defer></script>
+
             <link rel="stylesheet" href="/resources/css/header_footer/main_header.css">
             <link rel="stylesheet" href="/resources/css/header_footer/home_header.css">
             <link rel="stylesheet" href="/resources/css/header_footer/footer.css">
             <link rel="stylesheet" href="/resources/css/board/qna/style.css">
             <script src="/resources/js/board/qna/script.js" defer ></script>
-            
             
 </head>
 <body>
@@ -63,12 +64,17 @@
             <main id="board_main">
                 <div id="qna_board_read">
                     <div class="qna_board_name">문의게시판</div>
-                    <div class="qna_board_writer">${readVO[0].member_id}</div>
-                    <fmt:formatDate value="${readVO[0].write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
+                    <div class="qna_board_writer">${readVO.member_id}</div>
+                    <fmt:formatDate value="${readVO.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
                     <div class="qna_board_writedt">${formatDate}</div>
-                    <div class="qnd_board_views"><span class="fas fa-eye"></span>${readVO[0].views}</div>
-                    <div class="qna_board_title"><span class="fas fa-lock"></span>${readVO[0].title}</div>
-                    <div class="qna_board_contents">${readVO[0].content}</div>
+                    <div class="qnd_board_views"><span class="fas fa-eye"></span>${readVO.views}</div>
+                    <div class="qna_board_title">
+                        <c:if test="${readVO.secret_yn == 1}">
+                            <span class="fas fa-lock"></span>
+                        </c:if>
+                        ${readVO.title}
+                    </div>
+                    <div class="qna_board_contents">${readVO.content}</div>
                     <div class="qna_board_attach"><button id="download_button"><span class="fas fa-paperclip"></span>첨부파일</button>
                         <div id="qna_board_attach_download">
                             <ul>
@@ -84,27 +90,29 @@
                 <div class="board_commant">
     
                     <div id="board_commant_head">
-                        <div>${readVO[2]}개의 댓글</div>
+                        <div>${commnetCnt}개의 댓글</div>
                         <div>
                             <div><span class="fas fa-arrow-left-long"/>&nbsp;이전&nbsp;</div>
                             <div>다음&nbsp;<span class="fas fa-arrow-right-long"/></div>
                         </div>
                     </div>
     
-                    <form class="board_commant_write" action="" method="post">
-                        <input type="hidden" name="post_no" value="">
-                        <input type="hidden" name="user_id" value=""> 
-                        <input type="hidden" name="high_comment_no" value=""> 
-                        <input type="hidden" name="comment_lv" value="">
-                        <div>댓글작성자</div>
+                    <form id="comment-form" class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
+                        <input type="hidden" name="post_no" value="${readVO.post_no}">
+                        <input type="hidden" name="member_id" value="334"> 
+                        <!-- 멤버아이디는 세션에 올라간 로그인된 사용자아이디 사용, 밑에 댓글작성자(로그인된유저)도 같은데이터사용 -->
+                        <input type="hidden" name="secret_yn" value="0">
+                        <input type="hidden" name="like_cnt" value="0">
+                        <input type="hidden" name="comment_lv" value="0">
+                        <input type="hidden" name="high_comment_no" value="0">
+                        <div>댓글작성자(로그인된유저)</div>
                         <input type="text" name="content" placeholder="댓글을 남겨보세요.">
-                        <input type="hidden" name="seclet_yn" value="n">
                         <div class="board_commant_write_footer" >
-                            <div class="fas fa-lock"></div>
-                            <input type="submit" value="등록">
+                            <div class="fas fa-unlock"></div>
+                            <button class="board_commant_submit">등록</button>
                         </div>
                     </form>
-                    <c:forEach items="${readVO[1]}" var="commentList">
+                    <c:forEach items="${commentVO}" var="commentList">
                         <div class="board_commant_read">
                             <div class="board_commant_read_header">
                                 <div class="board_commant_read_header_namegroup">
@@ -135,17 +143,18 @@
                         <hr>
                         
                         <div class="board_commant_commant_write">
-                            <form class="board_commant_write" action="" method="post">
-                                <input type="hidden" name="post_no" value="">
-                                <input type="hidden" name="user_id" value=""> 
-                                <input type="hidden" name="high_comment_no" value=""> 
-                                <input type="hidden" name="comment_lv" value="">
-                                <div>댓글작성자</div>
+                            <form class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
+                                <input type="hidden" name="post_no" value="${readVO.post_no}">
+                                <input type="hidden" name="member_id" value="123"> 
+                                <input type="hidden" name="seclet_yn" value="0">
+                                <input type="hidden" name="like_cnt" value="0">
+                                <input type="hidden" name="comment_lv" value="${commentList.comment_lv + 1}">
+                                <input type="hidden" name="high_comment_no" value="${commentList.comment_no}">
+                                <div>댓글작성자(로그인된유저)</div>
                                 <input type="text" name="content" placeholder="댓글을 남겨보세요.">
-                                <input type="hidden" name="seclet_yn" value="n">
                                 <div class="board_commant_write_footer" >
-                                    <div class="fas fa-lock"></div>
-                                    <input type="submit" value="등록">
+                                    <div class="fas fa-unlock"></div>
+                                    <button class="board_commant_submit" onclick="commant_submit">등록</button>
                                 </div>
                             </form>
                         </div>

@@ -33,7 +33,7 @@
         </choose>
       </where>
     </if>
-    ORDER BY a.post_no DESC
+    ORDER BY a.${sort} DESC
     OFFSET (#{currPage}-1) * #{amount} ROWS
     FETCH NEXT #{amount} ROWS ONLY
   </select>
