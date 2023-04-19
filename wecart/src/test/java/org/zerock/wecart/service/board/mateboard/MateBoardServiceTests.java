@@ -1,5 +1,6 @@
 package org.zerock.wecart.service.board.mateboard;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -131,5 +132,33 @@ public class MateBoardServiceTests {
 		log.info("\t+success", success);
 		
 	}//testModify()
+	
+	//Disabled
+	@Test
+	@Order(4)
+	@DisplayName("testRegister")
+	@Timeout(value=10, unit=TimeUnit.SECONDS)
+	void testRegister() throws ServiceException {
+		log.trace("testRegister() invoked.");
+		
+		MateBoardDTO dto = new MateBoardDTO();
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		dto.setTitle("Ju's");
+		dto.setContent("Ju_New_Content");
+		dto.setViews(1000000000);
+		dto.setMember_id(333);
+		dto.setMeeting_status(String.valueOf(0).charAt(0));
+		dto.setMeeting_area("NY");
+		dto.setMeeting_time(now);
+		dto.setReport_cnt(0);
+		dto.setParticipant_id_1(335);
+		dto.setParticipant_id_2(337);
+		dto.setParticipant_id_3(379);
+		
+		boolean success = this.service.register(dto);
+		log.info("\t+success", success);
+		
+	}//testRegister()
 	
 } //MateBoardServiceTests

@@ -18,7 +18,7 @@
     <!--  script src="/resources/js/board/qna/board.js" defer ></script-->
 	<!--script src="/resources/js/board/mate/script.js" defer></script-->
 	
-	<!-- script src="/resources/js/board/mate/list.js" defer></script-->
+	<!--script src="/resources/js/board/mate/list.js" defer></script-->
 	<link rel="stylesheet" href="/resources/css/board/qna/style.css">
 	<link rel="stylesheet" href="/resources/css/board/mate/style.css">
 	
@@ -130,7 +130,8 @@
                         <input type="text">
                         <button type="submit">검색</button>
                     </div>
-                    <a href="BoardWrite.html"><button type="button"><span class="fas fa-pen-to-square" />글쓰기</button></a>
+                    <button type="button" id="registerBtn"><span class="fas fa-pen-to-square" />글쓰기</button>
+                    <!--a href="/board/register"></a-->
                 </div>
                 
             </form>
@@ -190,6 +191,19 @@
 
         <!--*********************************************메인 내용은 여기까지*********************************************-->
     </main>
+    <script>
+        var registerBtn = document.querySelector('#registerBtn');
+        registerBtn.addEventListener('click', function () {
+        	var url = '/board/register?currPage='+encodeURIComponent('${param.currPage}')+'&amount='+encodeURIComponent('${param.amount}');
+            location.href = url; 
+        }); //.addEventListener
+        
+        var result = "${param.result}";
+        if(result != null && result != "") {
+            alert('result: ' + result);
+        }
+    </script>
+    
 	    <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 		
 </body>

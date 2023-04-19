@@ -23,4 +23,7 @@ public interface MateBoardMapper {
 	//3. 기존 게시물 수정 
 	public abstract Integer update(MateBoardDTO dto);
 	
+	
+	//4. 신규 게시물 등록
+	public abstract Integer insert(MateBoardDTO dto);
 }//MateBoardMapper
