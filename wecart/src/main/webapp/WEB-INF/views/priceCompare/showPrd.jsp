@@ -64,7 +64,7 @@
 	    		} // if
 	    		
 	    		var json = {goods_id: '${__GOODS__.goods_id}'};
-	    		$.ajax('/todayCart/register',
+	    		$.ajax('/mypage/cart/saveGoodsIntoTodayCart',
 	    		{
 	    			type: 'post',
 	    			//url: '/todayCart/register',
