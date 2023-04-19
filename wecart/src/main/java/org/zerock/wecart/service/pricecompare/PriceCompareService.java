@@ -23,4 +23,6 @@ public interface PriceCompareService {
 	public abstract GoodsVO select(Integer goods_id) throws ServiceException;
 	
 
+	
+
 } //end interface

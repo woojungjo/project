@@ -68,6 +68,8 @@ public class MypageCartController {
 		log.trace("wishedPrds() invoked.");
 	} // wishedPrds  jhwan
 	
+	/*
+	 * => PriceCompareController의 /removeWishedGoods로 변경 
 	// 찜한 상품 삭제
 	@GetMapping("/wishedPrdsRemoved")
 	public String wishedPrdsRemoved() {
@@ -75,6 +77,7 @@ public class MypageCartController {
 		
 		return "redirect:wishedPrds";
 	} // wishedProdsRemoved   jhwan
+	*/
 	
 	@PostMapping("/saveGoodsIntoTodayCart")
 	@ResponseBody
@@ -109,6 +112,47 @@ public class MypageCartController {
 			// return true;
 		} // if - else
 		
-		return "Success";
-	}
+		return "Successfully save goods into todayCart";
+	} //saveGoodsIntoTodayCart
+	
+	// 해당 상품을 찜할 수 있음
+//	@PostMapping("/addPrd")
+	@PostMapping("/saveGoodsIntoWishedGoods")
+	@ResponseBody
+	public String saveGoodsIntoWishedGoods(Model model, @RequestBody HashMap<String, Integer> goods) throws ServiceException{
+		log.trace("saveGoodsIntoWishedGoods() invoked. ");
+		
+		try {
+			Integer goods_id = goods.get("goods_id");
+			UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
+			Integer member_id = Integer.parseInt(userVO.getMember_id());
+			
+			this.service.saveGoodsIntoWishList(member_id, goods_id);
+			
+			return "Successfully save goods into wishList"; 
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+		
+		
+	} // addPrd Jhwan
+	
+	// 찜한 상품 삭제
+	@PostMapping("/removeWishedGoods")
+	@ResponseBody
+	public String removeWishedGoods(Model model, @RequestBody HashMap<String, Integer> goods) throws ServiceException{
+		log.trace("removeWishedGoods() invoked. ");
+		
+		try {
+			Integer goods_id = goods.get("goods_id");
+			UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
+			Integer member_id = Integer.parseInt(userVO.getMember_id());
+			
+			this.service.deleteGoodsFromWishList(member_id, goods_id);
+			
+			return "Successfully save goods into wishList";
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} // wishedProdsRemoved   jhwan
 } //end class

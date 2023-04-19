@@ -24,32 +24,31 @@
 		// 버튼 옆에 있는 찜한 상품을 카트로 보내는 함수
 	    // 담기에 해당하는 객체를 받아 
 	    // /todayCart/register 로 보내는 방법
-	    function addPrdToCart(){
+	    function saveGoodsToTodayCart(){
 	    	alert("상품이 카트에 담겼습니다");
 	    	
-	    	 const url = 'http://localhost:8080/todayCart/register';
-	         const data = { item: '수박', id: 1237 };
-	         const xhr = new XMLHttpRequest();
-	         xhr.open('POST', url);
-	         xhr.setRequestHeader('Content-Type', 'application/json');
-	        
-	    	
-	    	xhr.onload = function(){
-	    		if(xhr.status === 200 ){
-	    			console.log(xhr.response);
-	    		} else {
-					console.error(xhr.statusText);        			
-	    		}
-	    	};
-	    	
-	    	xhr.onerror = function(){
-	    		
-	    		console.error('Error: Network Error');
-	    	};
-	    	
-	    	xhr.send(JSON.stringify(data));
-	    	
-	    } // addPrdToCart()
+    		var json = {goods_id: '${__GOODS__.goods_id}'};
+    		$.ajax('/mypage/cart/saveGoodsIntoTodayCart',
+			{
+    			type: 'post',
+    			//url: '/todayCart/register',
+    			data: JSON.stringify({goods_id: '${__GOODS__.goods_id}'}),
+    			contentType: "application/json; charset=utf-8",
+    			success: function(object){
+
+    				console.log("success의 경우를 확인합니다. ");
+    				console.log("user: " + user);
+    				console.log("object: " + object);
+    			},
+    			error: function(object){
+
+    				console.log("error의 경우를 확인합니다.");
+    				console.log("user: "+ user);
+    				console.log("object: " + object);
+
+    			}
+			});
+	    } // saveGoodsToTodayCart()
 	    
 	    
 	    // 해당 상품을 찜목록에서 삭제하는 함수
@@ -91,6 +90,10 @@
 			<jsp:include page="../../header_footer/main_header.jsp" flush="true" />
 		<% } else { %>
 			<jsp:include page="../../header_footer/home_header.jsp" flush="true" />
+			<script>
+				alert("로그인을 해주세요.");
+				window.location = "/user/login";
+			</script>
 		<% } %>
 
 		<div class="widthfix">
@@ -149,7 +152,7 @@
 
 							<div class="rightAsUserStandard">
 								<button onclick="deleteDiv(this)">삭제</button>
-								<button class="mypick_bt" onclick="addPrdToCart()">
+								<button class="mypick_bt" onclick="saveGoodsToTodayCart()">
 									<i class="fa-solid fa-cart-shopping fa-1x"></i> 담기
 								</button>
 							</div>
