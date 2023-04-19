@@ -83,8 +83,17 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 			throw new ServiceException(e);
 		}//try-catch
 		
-	} // modify() 
-	
-	
+	}//modify
+
+	@Override
+	public boolean register(MateBoardDTO dto) throws ServiceException {
+		log.trace("register() invoked.");
+		
+		try {
+			return this.mapper.insert(dto)==1;
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}//try-catch
+	} // register() 
  
 }//end class 

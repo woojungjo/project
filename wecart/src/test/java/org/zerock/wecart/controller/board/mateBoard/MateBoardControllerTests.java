@@ -2,6 +2,7 @@ package org.zerock.wecart.controller.board.mateBoard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -165,5 +166,37 @@ public class MateBoardControllerTests {
 					getModelAndView();
 	}//testModify()
 	
+	//@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("testRegister()")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testRegister() throws Exception {
+		log.trace("testRegister() invoked.");
+		
+		DefaultMockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+		
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/board/register");
+		
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		requestBuilder.param("post_no", "100000001");
+		requestBuilder.param("member_id", "333");
+		requestBuilder.param("views", "100000");
+		requestBuilder.param("meeting_status", "0");
+		requestBuilder.param("meeting_area", "NY");
+		requestBuilder.param("meeting_time", now.toString());
+		requestBuilder.param("report_cnt", "0");
+		requestBuilder.param("participant_id_1", "335");
+		requestBuilder.param("participant_id_2", "337");
+		requestBuilder.param("participant_id_3", "339");
+		requestBuilder.param("title", "******JU NEW*******"); 
+		requestBuilder.param("content", "*******JU NEW*******");
+		
+		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		log.info("\t+modelAndView:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
+
+	}//testRegister()
 	
 }//MateBoardControllerTests

@@ -1,5 +1,7 @@
 package org.zerock.wecart.domain.mateboard;
 
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 @Data
@@ -14,6 +16,9 @@ public class MateBoardDTO { //전송파라미터 저장, 전송파라미터를 �
     private int member_id;
     private char meeting_status;
     private String meeting_area;
+    private Timestamp meeting_time;
+    
+    private int report_cnt;
     
     private int participant_id_1;
     private int participant_id_2;
