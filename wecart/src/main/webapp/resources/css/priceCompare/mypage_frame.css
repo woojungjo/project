@@ -143,10 +143,10 @@ body {
     color: white;
 }
 /* 해당 마이페이지 영역으로 이동했을 때 nav가 굵어지도록 */
-.mypage_nav_li:nth-of-type(3) {
+.mypage_nav_li_selected {
     background-color: rgb(236, 233, 233);
 }
-.mypage_nav_li:nth-of-type(3) .nav_text span {
+.mypage_nav_li_selected .nav_text span {
     color: rgb(85, 84, 84);
     font-weight: bold;
 }

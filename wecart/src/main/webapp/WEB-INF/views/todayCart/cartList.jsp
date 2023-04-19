@@ -20,25 +20,13 @@
 </head>
 <body>
     <div id="wrap">
-        <div class="widthfix header_color">    
-            <div id="header">
-                <span>우리동네<br>장바구니</span>
-                <div id="gnb">
-                    <ul class="nav gnb">
-                        <li class="nav_item gnb_li"><a href="/priceCompare/list" class="nav_text">가격비교</a></li>
-                        <li class="nav_item gnb_li"><a href="#" class="nav_text">커뮤니티</a> </li>
-                        <li class="nav_item gnb_li"><a href="#" class="nav_text">QNA</a></li>
-                    </ul>
-                </div>
-
-                <div id="info">
-                    <ul class="nav">
-                        <li class="nav_item"><span class="nav_text">개포동</span></li>
-                        <li class="nav_item"><button onclick=window.location.href='#' id="login_bt">로그인</button></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      <% Object auth = session.getAttribute("__AUTH__"); %>
+      
+      <% if(auth != null) { %>
+         <jsp:include page="../header_footer/main_header.jsp" flush="true" />
+      <% } else { %>
+         <jsp:include page="../header_footer/home_header.jsp" flush="true" />
+      <% } %>
 
         <div class="widthfix">    
             <div id="search">
@@ -347,11 +335,7 @@
             <i class="fa-solid fa-arrow-up fa-lg"></i>
         </a>
 
-        <div class="widthfix"> 
-            <div id="footer">
-            
-            </div>
-        </div>
+        <jsp:include page="../header_footer/footer.jsp" flush="true" />
     </div>
 </body>
 </html>
