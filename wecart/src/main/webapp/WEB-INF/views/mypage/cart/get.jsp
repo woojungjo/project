@@ -19,25 +19,13 @@
 </head>
 <body>
     <div id="wrap">
-        <div class="widthfix header_color">    
-            <div id="header">
-                <span>우리동네<br>장바구니</span>
-                <div id="gnb">
-                    <ul class="nav gnb">
-                        <li class="nav_item gnb_li"><a href="/priceCompare/list" class="nav_text">가격비교</a></li>
-                        <li class="nav_item gnb_li"><a href="#" class="nav_text">커뮤니티</a></li>
-                        <li class="nav_item gnb_li"><a href="#" class="nav_text">QNA</a></li>
-                    </ul>
-                </div>
-
-                <div id="info">
-                    <ul class="nav">
-                        <li class="nav_item"><span class="nav_text">개포동</span></li>
-                        <li class="nav_item"><button onclick=window.location.href='#' id="login_bt">로그인</button></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      <% Object auth = session.getAttribute("__AUTH__"); %>
+      
+      <% if(auth != null) { %>
+         <jsp:include page="../../header_footer/main_header.jsp" flush="true" />
+      <% } else { %>
+         <jsp:include page="../../header_footer/home_header.jsp" flush="true" />
+      <% } %>
 
         <div class="widthfix">
             <div id="container">
@@ -45,8 +33,8 @@
                     <div id="mypage_nav">
                         <ul class="mypage_nav_ul">
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>마이페이지</span></a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text"><span>개인정보 수정</span></a></li>
-                            <li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text"><span>장바구니 목록</span></a></li>
+                            <li class="mypage_nav_li"><a href="/mypage/edit/check_password" class="nav_text"><span>개인정보 수정</span></a></li>
+                            <li class="mypage_nav_li mypage_nav_li_selected"><a href="/mypage/cart/list" class="nav_text"><span>장바구니 목록</span></a></li>
                             <li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text"><span>찜한 상품</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>즐겨찾는 마트</span></a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text"><span>내 활동 내역</span></a></li>
@@ -315,11 +303,7 @@
             </div>
         </div>
 
-        <div class="widthfix">        
-            <div id="footer">
-            
-            </div>
-        </div>
+        <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 
         <a href="#TOP" id="top_bt" class="a_black_text">
             <i class="fa-solid fa-arrow-up fa-lg"></i>

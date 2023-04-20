@@ -65,11 +65,15 @@ public class MateBoardController {		//JavaBeans, POJO
 
 	//reuqstURI에서 특정 경로에 있는 단어를 내가 매개변수에다가 집어 넣어주기 
 	@GetMapping(path="/mateget/{post_no}")
-	public String mateGet(@PathVariable("post_no") Integer post_no, Model model)throws ControllerException {
+	public String mateGet(@PathVariable("post_no") Integer post_no, Model model, Criteria cri, RedirectAttributes rttrs)throws ControllerException {
 		log.trace("mateget({}, {}) invoked", post_no, model);
 		try {
 			MateBoardVO vo = this.service.get(post_no);
 			model.addAttribute("__MateBoard__", vo);
+			
+			//실험 
+			rttrs.addAttribute("currPage", cri.getCurrPage());
+			rttrs.addAttribute("amount", cri.getAmount());
 			
 			return "/board/mate/mateget";
 		}catch(Exception e) {

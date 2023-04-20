@@ -4,7 +4,7 @@ import lombok.Value;
 
 
 @Value
-public class WishedListVO {
+public class WishListVO {
 
 	// 찜목록 VO
 	private Integer member_id;

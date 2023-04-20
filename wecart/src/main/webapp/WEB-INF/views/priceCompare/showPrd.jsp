@@ -64,7 +64,7 @@
 	    		} // if
 	    		
 	    		var json = {goods_id: '${__GOODS__.goods_id}'};
-	    		$.ajax('/todayCart/register',
+	    		$.ajax('/mypage/cart/saveGoodsIntoTodayCart',
 	    		{
 	    			type: 'post',
 	    			//url: '/todayCart/register',
@@ -74,7 +74,7 @@
 
 	    				console.log("success의 경우를 확인합니다. ");
 	    				console.log("user: " + user);
-	    				console.log("object: " + data);
+	    				console.log("object: " + object);
 	    			},
 	    			error: function(){
 
@@ -117,22 +117,23 @@
 	        xhr.open('POST', url);
 	        xhr.setRequestHeader('Content-Type', 'application/json');
 	        
-	    	
-	    	xhr.onload = function(){
-	    		if(xhr.status === 200 ){
-	    			console.log(xhr.response);
-	    		} else {
-					console.error(xhr.statusText);        			
-	    		}
-	    	};
-	    	
-	    	xhr.onerror = function(){
+	        var json = {goods_id: '${__GOODS__.goods_id}'};
+	    	$.ajax('/mypage/cart/saveGoodsIntoWishGoods', {
 	    		
-	    		console.error('Error: Network Error');
-	    	};
-	    	
-	    	xhr.send(JSON.stringify(data));
-        } // addPrdToLike
+	    		type: 'post',
+	    		data: JSON.stringify(json),
+    			contentType: "application/json; charset=utf-8",
+				success: function(object){
+    				console.log("success의 경우를 확인합니다. ");
+					console.log("object: " + object);
+				},
+				error: function(object){
+    				console.log("error의 경우를 확인합니다.");
+    				console.log("object: " + object);
+				}
+	    	}); //AJAX
+	    
+        } // saveGoodsIntoWishGoods
         
         // 마트 위치
         // 위치 아이콘을 누를 시

@@ -2,6 +2,7 @@ package org.zerock.wecart.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -111,7 +112,7 @@ public class MateBoardMapperTests {
 	@Test
 	@Order(4)
 	@DisplayName("게시물 수정 : mateBoardMapperuUpdateTest")
-	@Timeout(value=50, unit=TimeUnit.SECONDS)
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void mateBoardMapperuUpdateTest() {
 		log.trace("mateBoardMapperuUpdateTest() invoked.");
 		
@@ -136,6 +137,36 @@ public class MateBoardMapperTests {
 		log.info("***********afftedLines:{}", affectedLines);
 	}//mateBoardMapperuUpdateTest()
 	
+	
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("신규 게시물 등록 : mateBoardMapperInsertTest")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void mateBoardMapperInsertTest() {
+		log.trace("mateBoardMapperInsertTest() invoked.");
+		
+		MateBoardDTO dto = new MateBoardDTO();
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		dto.setTitle("Ju's");
+		dto.setContent("Ju_New_Content");
+		dto.setViews(1000000000);
+		dto.setMember_id(333);
+		dto.setMeeting_status(String.valueOf(0).charAt(0));
+		dto.setMeeting_area("NY");
+		dto.setMeeting_time(now);
+		dto.setReport_cnt(0);
+		dto.setParticipant_id_1(335);
+		dto.setParticipant_id_2(337);
+		dto.setParticipant_id_3(379);
+		
+		Integer afftectedLines = this.mapper.insert(dto);
+		assertNotNull(afftectedLines);
+		
+		log.info("afftectedLines:{}", afftectedLines);
+		
+	}//mateBoardMapperInsertTest() 
 	
 }//end class 
  

@@ -1,3 +1,8 @@
+var listBtn = document.querySelector('#listBtn');
+listBtn.addEventListener('click', function(){
+  location.href='/board/mate/matelist';
+  //?currPage=${param.currPage}&amount=${param.amount}
+});
 
 var mateDeleteBtn = document.querySelector('.mate_board_delete');
 

@@ -185,9 +185,11 @@
             </div> <!--mate_board_info_below-->
 
 						<!-- 답글 넣기 -->
+			 
       	  </main>
 
         <jsp:include page="../../header_footer/footer.jsp" flush="true" />
+    
 </body>
 
 
@@ -208,6 +210,14 @@
 	});//.addEventListener
 </script-->
 <script>
+
+ 	var listBtn = document.querySelector('.mate_board_list');
+ 
+ 	listBtn.addEventListener('click', function(){
+ 		location.href='/board/mate/matelist';
+ 		//var url = '/board/mate/matelist?currPage='+encodeURIComponent('${param.currPage}');
+	 	//location.href = url;
+	});
 
 	//==================KAKAO API==================
     var container = document.getElementById('map');
