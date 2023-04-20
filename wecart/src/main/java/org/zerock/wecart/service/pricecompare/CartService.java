@@ -12,7 +12,7 @@ public interface CartService {
 			Timestamp cart_creation_date,
 			Timestamp API_date,
 			String status) throws ServiceException;
-	
+	/*
 	// 회원이 가지고 있는 오늘의 장바구니를 반환
 	public abstract CartVO searchTodayCart(Integer member_id, Integer cart_id) throws ServiceException;
 	
@@ -21,5 +21,5 @@ public interface CartService {
 	
 	// 회원이 가지고 있는 저장된 장바구니를 반환 (회원 id, 카트 id, 장바구니 상태) 
 	public abstract List<CartVO> searchInstalledCart(Integer member_id, String status) throws ServiceException;
-	
+	*/
 } // CartService

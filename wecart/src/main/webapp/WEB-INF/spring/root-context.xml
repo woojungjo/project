@@ -40,6 +40,24 @@
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
 		<!-- <property name="mapperLocations" value="classpath*:mappers/SQL*.xml"/> -->
 	</bean>
+	
+	<!-- 메일 보내기 빈 -->
+	<bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="이메일" />
+		<property name="password" value="비밀번호" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.starttls.required">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
 
 
 	<context:component-scan base-package="org.zerock.wecart.domain" />

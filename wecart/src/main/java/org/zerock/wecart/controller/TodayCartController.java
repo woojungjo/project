@@ -1,15 +1,18 @@
 package org.zerock.wecart.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.wecart.domain.UserVO;
-import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
@@ -35,20 +38,8 @@ public class TodayCartController {
 	} //get
 	
 	@PostMapping("/register")
-	@ResponseBody
-	public GoodsVO register(Model model) throws ServiceException{
-		log.trace("register({}) invoked.", model);
-		
-		Integer goods_id = (Integer)model.getAttribute("goods_id");
-		log.trace("goods_id: {}", goods_id);
-		
-		GoodsVO goodsVO = service.select(goods_id);
-		
-		
-		UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
-		log.trace("UserVO: {}", userVO);
-		
-		return goodsVO;
+	public void register() {
+		log.trace("register() invoked.");
 	} //register
 	
 //	@PostMapping("/remove")		Ajax일 때 PostMapping으로

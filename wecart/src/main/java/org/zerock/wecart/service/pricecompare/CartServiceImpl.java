@@ -36,11 +36,18 @@ public class CartServiceImpl implements CartService{
 		
 	};
 	
-		
+		/*
 	// 회원이 가지고 있는 오늘의 장바구니를 반환
 	public CartVO searchTodayCart(Integer member_id, Integer cart_id) throws ServiceException{
+		log.trace("searchTodayCart() invoked. ");
 		
-		return null;
+		try {
+			this.mapper.insertCart(null, null, null);
+			
+			return null;
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
 	} // searchTodayCart
 	
 	// 회원이 가지고 있는 오늘의 장바구니를 저장
@@ -56,6 +63,8 @@ public class CartServiceImpl implements CartService{
 		
 		return null;
 	} //searchInstalledCart
+	
+	*/
 	
 	
 } // CartService

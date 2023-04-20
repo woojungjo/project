@@ -52,7 +52,7 @@
             <div id="mypage_nav">
                 <ul class="mypage_nav_ul">
                     <li class="mypage_nav_li"><a href="#" class="nav_text">마이페이지</a></li>
-                    <li class="mypage_nav_li"><a href="#" class="nav_text">개인정보 수정</a></li>
+                    <li class="mypage_nav_li"><a href="/mypage/edit/check_password" class="nav_text">개인정보 수정</a></li>
                     <li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text">장바구니 목록</a></li>
                     <li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text">찜한 상품</a></li>
                     <li class="mypage_nav_li"><a href="#" class="nav_text">즐겨찾는 마트</a></li>
@@ -120,13 +120,8 @@
                 </div>
             </div>
         </article>
-
-        <div class="widthfix">
-            <div id="footer">
-
-            </div>
-        </div>
     </div>
+     <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 
 </body>
 

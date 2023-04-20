@@ -5,11 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
+import org.zerock.wecart.domain.user.UserDTO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.user.UserService;
 
@@ -80,9 +80,9 @@ public class UserController {
 	// 아이디 찾기
 	@PostMapping("/searchId")
 	@ResponseBody
-	public String searchId(@RequestParam("alias") String alias, @RequestParam("email") String email) throws ControllerException {
+	public String searchId(UserDTO dto) throws ControllerException {
 		try {
-			String result = this.service.searchId(alias, email);
+			String result = this.service.searchId(dto);
 			
 			return result;
 		} catch(Exception e) {
@@ -91,9 +91,9 @@ public class UserController {
 	} // searchId
 	
 	@PostMapping("/searchPw")
-	public String searchPw(String user_id, String alias, String email, String temp_pwd) throws ControllerException {
+	public Integer searchPw(UserDTO dto) throws ControllerException {
 		try {
-			String result = this.service.searchPw(user_id, alias, email, temp_pwd);
+			Integer result = this.service.searchPw(dto);
 			
 			return result;
 		} catch(Exception e) {

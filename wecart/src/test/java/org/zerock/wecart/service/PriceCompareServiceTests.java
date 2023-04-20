@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
+import org.zerock.wecart.domain.pricecompare.MemberGoodsCartVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
@@ -112,6 +113,7 @@ public class PriceCompareServiceTests {
 		} //if-else
 		
 	} //getSearchList
+	
 } //end class
 
 

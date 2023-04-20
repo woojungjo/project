@@ -21,5 +21,8 @@ public interface PriceCompareService {
   
   //4. id에 해당하는 상품 조회
 	public abstract GoodsVO select(Integer goods_id) throws ServiceException;
+	
+
+	
 
 } //end interface

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ServiceException;
+import org.zerock.wecart.mapper.pricecompare.MemberGoodsCartMapper;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
 
 import lombok.NoArgsConstructor;
@@ -22,8 +23,8 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	private PriceCompareMapper mapper;
 	
 	@Autowired
-	public PriceCompareServiceImpl(PriceCompareMapper mapper) {
-		this.mapper = mapper;
+	public PriceCompareServiceImpl(PriceCompareMapper priceCompareMapper) {
+		this.mapper = priceCompareMapper;
 	}	//Constructor
 
 	@Transactional
@@ -54,6 +55,8 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	public Integer getTotalAmount(String keyword) throws ServiceException {
 		log.trace("getTotalAmount() invoked.");
 		
+		
+		
 		try {
 			return this.mapper.selectTotalCount(keyword);
 		} catch(Exception e) {
@@ -72,8 +75,7 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 		} //try-catch
 	} //getSearchList
 
-	
-	
+
 } //end class
 
 
