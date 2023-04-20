@@ -79,7 +79,7 @@ public class MypageCartController {
 	} // wishedProdsRemoved   jhwan
 	*/
 	
-	// 상품을 오늘의 장바구니에 보관 (미완)
+	// 상품을 오늘의 장바구니에 보관 (완)
 	@PostMapping("/saveGoodsIntoTodayCart")
 	@ResponseBody
 	public String saveGoodsIntoTodayCart(Model model, @RequestBody HashMap<String, Integer> map) throws ServiceException{
@@ -100,18 +100,21 @@ public class MypageCartController {
 		// 만약 TodayCartId가 반환되면
 		if(todayCartId != null) {
 			
-			// (1) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
+			// (1) 만약 오늘의 장바구니에 goods_id가 이미 있다면 1 return
+			if(this.service.checkGoodsIdInTodayCart(todayCartId, goods_id) != null)
+				return "false";
+			
+			// (2) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
 			this.service.saveGoodsIntoTodayCart(member_id, goods_id, todayCartId);
 			// return true;
 		} 
 		// 만약 가지고 있는 TodayCart가 없다면.
 		else {
-			// (1) 판매 테이블에서 최신 api 날짜를 가져오고
-			// (2) TodayCart 생성
+			// (1)  판매 테이블에서 최신 api 날짜를 가져오고 TodayCart 생성하고 TodayCart_id를 받기
+			todayCartId = this.service.createAndReturnTodayCartId();
+			// (2) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
+			this.service.saveGoodsIntoTodayCart(member_id, goods_id, todayCartId);
 			
-			
-			// (3) TodayCart_id를 받고
-			// (4) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
 			// return true;
 		} // if - else
 		

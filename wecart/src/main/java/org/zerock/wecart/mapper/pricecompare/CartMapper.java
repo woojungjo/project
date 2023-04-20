@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.zerock.wecart.domain.pricecompare.CartVO;
 
 public interface CartMapper {
@@ -11,15 +12,26 @@ public interface CartMapper {
 	
 	// 장바구니를 생성
 	@Insert("""
-			INSERT INTO cart(cart_creation_date, API_date, status)
+			INSERT INTO cart (cart_creation_date, API_date, status)
 			VALUES (#{cart_creation_date}, #{API_date}, #{status})
 			""")
-	public abstract void insertCart(
+	public abstract void insertAndSelectCartId(
 			Timestamp cart_creation_date,
 			Timestamp API_date,
 			String status
 			);
 	
+	// 가장 최근 장바구니 가져오기
+	@Select("""
+			SELECT cart_id
+			FROM cart c
+			JOIN
+			(
+				SELECT max(API_date) AS latest_date
+				FROM cart
+			) a ON c.API_date = a.latest_date
+			""")
+	public abstract Integer selectCartIdOfLatestAPI();
 	
 	// 장바구니를 선택
 	public abstract CartVO selectCart(Integer cart_id);

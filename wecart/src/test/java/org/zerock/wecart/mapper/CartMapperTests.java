@@ -46,13 +46,13 @@ public class CartMapperTests {
 //	@Disable
 	@Test
 	@Order(1)
-	@DisplayName("Test: insertCart")
+	@DisplayName("Test: insertAndSelectCartId")
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
-	void insertCart() {
+	void insertAndSelectCartId() {
 		log.trace("insertCart() invoked.");
 		
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-		this.mapper.insertCart(currentTime, currentTime, "NotYet");
+		this.mapper.insertAndSelectCartId(currentTime, currentTime, "NotYet");
 		
 		log.trace("insertCart 실행 후 log 입니다.");
 	}// insertCart
