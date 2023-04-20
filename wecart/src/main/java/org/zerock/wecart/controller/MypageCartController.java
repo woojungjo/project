@@ -47,13 +47,13 @@ public class MypageCartController {
 		log.trace("currentPrice() invoked.");
 	} //currentPrice
 	
-	// 카트 리스트들을 일주일, 한달, 3개월 6개월 순으로 보여주기
+	// 장바구니 리스트들을 일주일, 한달, 3개월 6개월 순으로 보여주기 (미완)
 	@PostMapping("/arrangeByMonth")
 	public void arrangeByMonth() {
 		log.trace("arrangeByMonth() invoked. ");
 	}// arrangeByMonth  jhwan
-	
-	// 카트 리스트 보여주기
+	 
+	// 장바구니 리스트 보여주기 (미완)
 	@GetMapping("/list")
 	public void list(String period) {
 		log.trace("list() invoked. ");
@@ -62,7 +62,7 @@ public class MypageCartController {
 		// period에 따라서 view에 보여줄 데이터 범위를 한정시킴
 	} // list  jhwan
 	
-	// 찜한 상품들 표시
+	// 찜한 상품들 표시 (미완) 
 	@GetMapping("/wishedPrds")
 	public void wishedPrds() {
 		log.trace("wishedPrds() invoked.");
@@ -79,11 +79,12 @@ public class MypageCartController {
 	} // wishedProdsRemoved   jhwan
 	*/
 	
+	// 상품을 오늘의 장바구니에 보관 (미완)
 	@PostMapping("/saveGoodsIntoTodayCart")
 	@ResponseBody
 	public String saveGoodsIntoTodayCart(Model model, @RequestBody HashMap<String, Integer> map) throws ServiceException{
 		log.trace("register({}) invoked.", model);
-		log.trace("HashMap<String, Object> param: {}", map);
+		log.trace("HashMap<String, Object> map: {}", map);
 		
 //	    String goods_id;
 //		log.trace("goods_id: {}", goods_id);
@@ -98,24 +99,26 @@ public class MypageCartController {
 		
 		// 만약 TodayCartId가 반환되면
 		if(todayCartId != null) {
+			
 			// (1) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
 			this.service.saveGoodsIntoTodayCart(member_id, goods_id, todayCartId);
 			// return true;
 		} 
 		// 만약 가지고 있는 TodayCart가 없다면.
 		else {
-			// (1) TodayCart 생성
+			// (1) 판매 테이블에서 최신 api 날짜를 가져오고
+			// (2) TodayCart 생성
 			
 			
-			// (2) TodayCart_id를 받고
-			// (3) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
+			// (3) TodayCart_id를 받고
+			// (4) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
 			// return true;
 		} // if - else
 		
 		return "Successfully save goods into todayCart";
 	} //saveGoodsIntoTodayCart
 	
-	// 해당 상품을 찜할 수 있음
+	// 해당 상품을 상품 찜목록에 저장 (완)
 //	@PostMapping("/addPrd")
 	@PostMapping("/saveGoodsIntoWishedGoods")
 	@ResponseBody
@@ -127,17 +130,16 @@ public class MypageCartController {
 			UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
 			Integer member_id = Integer.parseInt(userVO.getMember_id());
 			
+			// wish_list row에 추가
 			this.service.saveGoodsIntoWishList(member_id, goods_id);
 			
 			return "Successfully save goods into wishList"; 
 		}catch(Exception e) {
 			throw new ServiceException(e);
-		}
-		
-		
+		} // try - catch
 	} // addPrd Jhwan
 	
-	// 찜한 상품 삭제
+	// 찜한 상품 목록에서 상품 삭제 (완)
 	@PostMapping("/removeWishedGoods")
 	@ResponseBody
 	public String removeWishedGoods(Model model, @RequestBody HashMap<String, Integer> goods) throws ServiceException{
@@ -148,11 +150,12 @@ public class MypageCartController {
 			UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
 			Integer member_id = Integer.parseInt(userVO.getMember_id());
 			
+			// wish_list row에 삭제
 			this.service.deleteGoodsFromWishList(member_id, goods_id);
 			
-			return "Successfully save goods into wishList";
+			return "Successfully remove goods into wishList";
 		}catch(Exception e) {
 			throw new ServiceException(e);
-		}
+		} // try - catch
 	} // wishedProdsRemoved   jhwan
 } //end class

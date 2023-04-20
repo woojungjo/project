@@ -20,4 +20,6 @@ public interface MypageCartService {
 	//wishlist에서 a row 삭제
 	public abstract void deleteGoodsFromWishList(Integer member_id, Integer goods_id) throws ServiceException;
 
+	//오늘의 장바구니를 생성
+	public abstract void createTodayCart();
 }

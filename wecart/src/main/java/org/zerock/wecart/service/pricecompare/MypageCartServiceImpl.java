@@ -1,11 +1,14 @@
 package org.zerock.wecart.service.pricecompare;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.MemberGoodsCartMapper;
+import org.zerock.wecart.mapper.pricecompare.SaleMapper;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
 
 import lombok.NoArgsConstructor;
@@ -20,11 +23,13 @@ public class MypageCartServiceImpl implements MypageCartService{
 
 	private MemberGoodsCartMapper memberGoodsCartMapper; 
 	private WishListMapper wishListMapper;
+	private SaleMapper saleMapper;
 
 	@Autowired
-	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper) {
+	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper, SaleMapper salemapper) {
 		this.memberGoodsCartMapper = memberGoodsCartMapper;
 		this.wishListMapper = wishListMapper;
+		this.saleMapper = saleMapper;
 	} // Constructor
 	
 	@Override
@@ -88,5 +93,17 @@ public class MypageCartServiceImpl implements MypageCartService{
 		}
 	} // deleteGoodsFromWishlist
 	
+	@Override
+	public void createTodayCart() {
+		log.trace("createTodayCart() invoked. ");
+		
+		//최신 API날짜를 가져오고
+		Date value = this.saleMapper.selectAPIDate();
+		Timestamp latestAPIDate = new Timestamp(value.getTime()); 
+		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+		
+		
+		
+	} // createTodayCart
 	
 }
