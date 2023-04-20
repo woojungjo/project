@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.exception.ServiceException;
+import org.zerock.wecart.mapper.pricecompare.CartMapper;
 import org.zerock.wecart.mapper.pricecompare.MemberGoodsCartMapper;
 import org.zerock.wecart.mapper.pricecompare.SaleMapper;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
@@ -24,12 +26,14 @@ public class MypageCartServiceImpl implements MypageCartService{
 	private MemberGoodsCartMapper memberGoodsCartMapper; 
 	private WishListMapper wishListMapper;
 	private SaleMapper saleMapper;
+	private CartMapper cartMapper;
 
 	@Autowired
-	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper, SaleMapper salemapper) {
+	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CartMapper cartMapper) {
 		this.memberGoodsCartMapper = memberGoodsCartMapper;
 		this.wishListMapper = wishListMapper;
 		this.saleMapper = saleMapper;
+		this.cartMapper = cartMapper;
 	} // Constructor
 	
 	@Override
@@ -57,13 +61,27 @@ public class MypageCartServiceImpl implements MypageCartService{
 		}// try-catch
 	} // getTodayCartIdOfMember
 	
+	public Integer checkGoodsIdInTodayCart(Integer cart_id, Integer goods_id) throws ServiceException{
+		log.trace("checkGoodsIdInTodayCart(cart_id: {}, goods_id: {}) invoked. ", cart_id, goods_id);
+		
+		try {
+			// cart_id에 goods_id가 이미 존재한다면 false
+			// 없다면 true
+			Integer goodsIdInTodayCart = null;
+			goodsIdInTodayCart = this.memberGoodsCartMapper.selectCartIdForCheckingGoods(cart_id, goods_id);
+			
+			return goodsIdInTodayCart;
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} // checkGoodsIdInTodayCart
+	
 	@Override
 	public void saveGoodsIntoTodayCart(Integer member_id, Integer goods_id, Integer cart_id) throws ServiceException{
 		log.trace("saveGoodsIntoTodayCart({}, {}, {}) invoked. ", member_id, goods_id, cart_id);
 		
 		try {
 			this.memberGoodsCartMapper.insertRowIntoTodayCart(member_id, goods_id, cart_id);
-			
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		} // try - catch;
@@ -93,8 +111,10 @@ public class MypageCartServiceImpl implements MypageCartService{
 		}
 	} // deleteGoodsFromWishlist
 	
+	// 최신 API날짜로 장바구니를 생성
 	@Override
-	public void createTodayCart() {
+	@Transactional
+	public Integer createAndReturnTodayCartId() {
 		log.trace("createTodayCart() invoked. ");
 		
 		//최신 API날짜를 가져오고
@@ -102,8 +122,11 @@ public class MypageCartServiceImpl implements MypageCartService{
 		Timestamp latestAPIDate = new Timestamp(value.getTime()); 
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 		
+		// 장바구니를 생성
+		this.cartMapper.insertAndSelectCartId(latestAPIDate, currentTimestamp, "NotYet");
+		Integer cartId = this.cartMapper.selectCartIdOfLatestAPI();
 		
-		
+		return cartId;
 	} // createTodayCart
 	
 }

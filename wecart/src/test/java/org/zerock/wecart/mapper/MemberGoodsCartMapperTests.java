@@ -77,7 +77,7 @@ public class MemberGoodsCartMapperTests {
 		
 		if(todayCartNumber != null){
 			log.trace("todayCartNumber: {}", todayCartNumber);
-		}
+		} // if
 	} // selectAllCartOfMember
 	
 	@Test
@@ -91,10 +91,6 @@ public class MemberGoodsCartMapperTests {
 			mapper.insertRowIntoTodayCart(198, 77, 2295427);
 		}catch(Exception e) {
 			throw new ServiceException(e);
-		}
-		
-
+		} // try-catch
 	} // selectAllCartOfMember
-	
-
 } // end class

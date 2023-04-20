@@ -128,4 +128,21 @@ public class MypageCartServiceTests {
 			throw new ServiceException(e);
 		}
 	} //MemberGoodsCartListForMember
+	
+//	@Disabled
+	@Test
+	@Order(6)
+	@DisplayName("Test5: createAndReturnTodayCartId()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void createAndReturnTodayCartId() throws ServiceException {
+		log.trace("deleteGoodsFromWishList() invoked.");
+		
+		try {
+			
+			Integer cartId = this.service.createAndReturnTodayCartId();
+			log.trace("cartId: {}", cartId);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} //MemberGoodsCartListForMember
 }

@@ -72,8 +72,15 @@
 	    			contentType: "application/json; charset=utf-8",
 	    			success: function(object){
 
+	    				if(object == "false"){
+	    					alert('이미 등록된 상품 입니다.');
+	    				}else{
+	    					alert('성공적으로 등록되었습니다.');
+	    				}
+	    				
 	    				console.log("success의 경우를 확인합니다. ");
 	    				console.log("user: " + user);
+	    				
 	    				console.log("object: " + object);
 	    			},
 	    			error: function(){
