@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ServiceException;
-import org.zerock.wecart.mapper.pricecompare.MemberGoodsCartMapper;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
 
 import lombok.NoArgsConstructor;

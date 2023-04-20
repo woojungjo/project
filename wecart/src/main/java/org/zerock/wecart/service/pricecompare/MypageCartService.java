@@ -11,6 +11,9 @@ public interface MypageCartService {
 	// 멤버 아이디로 TodayCart_id들을 반환
 	public abstract Integer getTodayCartIdOfMember(Integer member_id) throws ServiceException;
 	
+	// cart_id와 goods_id로 member_goods_cart 테이블을 확인하여, 없다면 true 있다면 false
+	public abstract Integer checkGoodsIdInTodayCart(Integer cart_id, Integer goods_id) throws ServiceException;
+	
 	// member_id, goods_id, cart_id를 받아 물건을 member_goods_cart 테이블에 저장
 	public abstract void saveGoodsIntoTodayCart(Integer member_id, Integer goods_id, Integer cart_id) throws ServiceException;
 	
@@ -20,6 +23,6 @@ public interface MypageCartService {
 	//wishlist에서 a row 삭제
 	public abstract void deleteGoodsFromWishList(Integer member_id, Integer goods_id) throws ServiceException;
 
-	//오늘의 장바구니를 생성
-	public abstract void createTodayCart();
+	//오늘의 장바구니를 생성하고 해당 장바구니의 Id를 반환
+	public abstract Integer createAndReturnTodayCartId();
 }
