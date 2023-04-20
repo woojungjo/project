@@ -10,10 +10,11 @@ public interface CartMapper {
 
 	
 	// 장바구니를 생성
-	@Insert("""
-			INSERT INTO cart(cart_creation_date, API_date, status)
-			VALUES (#{cart_creation_date}, #{API_date}, #{status})
-			""")
+	//CartMapper.xml 과 중복되어 있습니다. 그래서 오류가 나 임시 주석 처리했습니다. 취사선택 해아할 것 같습니다.
+//	@Insert("""
+//			INSERT INTO cart(cart_creation_date, API_date, status)
+//			VALUES (#{cart_creation_date}, #{API_date}, #{status})
+//			""")
 	public abstract void insertCart(
 			Timestamp cart_creation_date,
 			Timestamp API_date,

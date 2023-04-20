@@ -14,7 +14,7 @@ public interface PriceCompareService {
 	public abstract List<GoodsVO> getList(GoodsCriteria cri) throws ServiceException;
 	
 	//2. 총 상품 개수 반환
-	public abstract Integer getTotalAmount(String keyword) throws ServiceException;
+	public abstract Integer getTotalAmount(String keyword, Integer category) throws ServiceException;
 	
 	//3. 상품 검색 목록
 	public abstract List<GoodsVO> getSearchList(GoodsCriteria cri) throws ServiceException;
