@@ -91,14 +91,15 @@ public class UserController {
 	} // searchId
 	
 	@PostMapping("/searchPw")
-	public Integer searchPw(UserDTO dto) throws ControllerException {
+	public String searchPw(UserDTO dto) throws ControllerException {
 		try {
-			Integer result = this.service.searchPw(dto);
+			boolean success = this.service.searchPw(dto);			
+			log.trace("result: {}", success);
 			
-			return result;
+			return null;			
 		} catch(Exception e) {
 			throw new ControllerException(e);
-		} // try-catch	
-	}
+		} // try-catch
+	} // searchPw
 	
 } // end class

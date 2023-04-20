@@ -61,18 +61,18 @@
                         <div class="table_wrap">
 
                             <div class="article">
-                                <h3 class="input_title"><label for="id">아이디</label></h3>
-                                <input type="text" id="id" name="id" class="input" maxlength="20">
+                                <h3 class="input_title"><label for="login_id">아이디</label></h3>
+                                <input type="text" id="login_id" name="login_id" class="input" maxlength="20">
                             </div>
 
                             <div class="article">
-                                <h3 class="input_title"><label for="alias">닉네임</label></h3>
-                                <input type="text" id="alias" name="alias" class="input" maxlength="20">
+                                <h3 class="input_title"><label for="alias2">닉네임</label></h3>
+                                <input type="text" id="alias2" name="alias2" class="input" maxlength="20">
                             </div>
 
                             <div class="article">
-                                <h3 class="input_title"><label for="email">이메일</label></h3>
-                                <input type="text" id="email" name="email" class="input" maxlength="100">
+                                <h3 class="input_title"><label for="email2">이메일</label></h3>
+                                <input type="text" id="email2" name="email2" class="input" maxlength="100">
                             </div>
                         </div>
 
@@ -144,25 +144,39 @@
         }
 
         $(document).ready(function () {
-            /////////모///달///기///능///////////
-            // 1. 모달창 히든 불러오기
+            // ID 찾기 모달
+            // 1. 보여주기
             $('#id_next').click(function () {
                 $('#idsearch_modal').show();
             });
-            // 2. 모달창 닫기 버튼
+            // 2. 닫기
             $('.close').on('click', function () {
                 $('#idsearch_modal').hide();
             });
-            // 3. 모달창 위도우 클릭 시 닫기
+            // 3. 윈도우 클릭 시 닫기
             $(window).on('click', function () {
                 if (event.target == $('#idsearch_modal').get(0)) {
                     $('#idsearch_modal').hide();
                 }
             });
+
+            // 비밀번호 찾기 모달
+            // 1. 보여주기
+            $('#pw_next').click(function () {
+                $('#pwsearch_modal').show();
+            });
+            // 2. 닫기
+            $('.close').on('click', function () {
+                $('#pwsearch_modal').hide();
+            });
+            // 3. 윈도우 클릭 시 닫기
+            $(window).on('click', function () {
+                if (event.target == $('#pwsearch_modal').get(0)) {
+                    $('#pwsearch_modal').hide();
+                }
+            });
         });
 
-        // 아이디 & 스토어 값 저장하기 위한 변수
-        var idV = "";
         // 아이디 값 받고 출력하는 ajax
         var idSearch_click = function () {
             var data = {
@@ -179,9 +193,25 @@
                         $('#id_value').text("회원 정보를 확인해주세요!");
                     } else {
                         $('#id_value').text(data);
-                        // 아이디값 별도로 저장
-                        idV = data;
                     }
+                }
+            });
+        }
+
+        // 비밀번호 ajax
+        var pwSearch_click = function () {
+            var data = {
+                login_id: $('#login_id').val(),
+                alias: $('#alias2').val(),
+                email: $('#email2').val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/user/searchPw",
+                data: data,
+                success: function (data) {
+                    
                 }
             });
         }
