@@ -14,7 +14,7 @@ public interface UserService {
 	public abstract String searchId(UserDTO dto) throws ServiceException;
 	
 	// 비밀번호 찾기
-	public abstract Integer searchPw(UserDTO dto) throws ServiceException;
+	public abstract Boolean searchPw(UserDTO dto) throws ServiceException;
 
 } // end interface
 

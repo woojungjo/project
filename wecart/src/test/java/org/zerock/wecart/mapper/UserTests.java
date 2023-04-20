@@ -51,13 +51,14 @@ public class UserTests {
 		String alias = "ali1";
 		String email = "email_1@.com";
 		
+		// 비밀번호 변경
 		String pwd = "temp_pwd1";
 		
 		UserDTO dto = new UserDTO();
 		
 		dto.setLogin_id(login_id);
 		dto.setAlias(alias);
-		dto.setEmail(email);		
+		dto.setEmail(email);
 		dto.setPwd(pwd);
 		
 		this.mapper.updatePw(dto);
