@@ -19,6 +19,9 @@
                                 FROM sale 
                                 WHERE goods_id = t2.goods_id
                                 )
+                <if test="category != null">
+                	AND category_id = #{category}
+            	</if>  
             ORDER BY 
                 <choose>
                     <when test="sort == 'popular'">
@@ -36,7 +39,6 @@
                 </choose>
             OFFSET (#{currPage} - 1) * #{amount} ROWS
 			FETCH NEXT #{amount} ROWS ONLY
-
     </select>
 
     <select id="selectTotalCount">
@@ -46,6 +48,9 @@
             <if test="keyword != null">
                 goods_name LIKE '%'||#{keyword}||'%'
             </if>
+            <if test="category != null">
+                	AND category_id = #{category}
+           	</if>
         </where>
     </select>
 
@@ -64,7 +69,10 @@
                             )
             <if test="keyword != null">
                 AND (t1.goods_name LIKE '%'||#{keyword}||'%')
-            </if>                
+            </if>
+            <if test="category != null">
+                	AND category_id = #{category}
+           	</if>                
         ORDER BY 
             <choose>
                 <when test="sort == 'popular'">

@@ -48,7 +48,7 @@ public class PriceCompareMapperTests {
 		log.info("\t+ this.mapper: {}", this.mapper);
 	} //beforeAll
 	
-	//1. 상품 전체조회(+페이징처리 +정렬)
+	//1. 상품 전체조회(+페이징처리 +정렬 + 카테고리)
 //	@Disabled
 	@Test
 	@Order(1)
@@ -60,6 +60,7 @@ public class PriceCompareMapperTests {
 		GoodsCriteria cri = new GoodsCriteria();
 		cri.setCurrPage(1);
 		cri.setAmount(20);
+		cri.setCategory(1);
 //		cri.setSort("popular");
 //		cri.setSort("low");
 //		cri.setSort("high");
@@ -99,8 +100,10 @@ public class PriceCompareMapperTests {
 		
 //		String keyword = "product_1";
 		String keyword = null;
+//		Integer category = 1;
+		Integer category = null;
 		
-		Integer totalCount = this.mapper.selectTotalCount(keyword);
+		Integer totalCount = this.mapper.selectTotalCount(keyword, category);
 		
 		log.info("\t+ totalCount: {}", totalCount);
 		
@@ -117,6 +120,7 @@ public class PriceCompareMapperTests {
 		GoodsCriteria cri = new GoodsCriteria();
 		cri.setCurrPage(1);
 		cri.setAmount(20);
+//		cri.setCategory(1);
 		cri.setKeyword("product_1");
 //		cri.setSort("popular");
 //		cri.setSort("low");

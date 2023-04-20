@@ -58,6 +58,7 @@ public class PriceCompareServiceTests {
 		GoodsCriteria cri = new GoodsCriteria();
 		cri.setCurrPage(1);
 		cri.setAmount(20);
+		cri.setCategory(10);
 		cri.setSort("popular");
 //		cri.setSort("low");
 //		cri.setSort("high");
@@ -83,8 +84,10 @@ public class PriceCompareServiceTests {
 		
 		String keyword = "product_1";
 //		String keyword = null;
+//		Integer category = 10;
+		Integer category = null;
 		
-		Integer totalAmount = this.service.getTotalAmount(keyword);
+		Integer totalAmount = this.service.getTotalAmount(keyword, category);
 		
 		log.info("\t+ totalAmount: {}", totalAmount);
 		
@@ -103,6 +106,7 @@ public class PriceCompareServiceTests {
 		cri.setCurrPage(1);
 		cri.setAmount(20);
 		cri.setKeyword("product_1");
+		cri.setCategory(10);
 		
 		List<GoodsVO> list = this.service.getSearchList(cri);
 		
