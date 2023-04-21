@@ -17,7 +17,10 @@
         rel="stylesheet">
         
     <link rel="stylesheet" href="../../resources/css/main/main.css">
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+	
 </head>
 <body>
 	<jsp:include page="../header_footer/main_header.jsp" flush="true" />
@@ -47,23 +50,53 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
-      	/*
+      	
     	new daum.Postcode({
             oncomplete: function (data) {
             	
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-				document.querySelector(".adr").value = data.bname;
+                // Create a JSON object with the bname value
+                var dongInfo = {
+                    'bname': data.bname
+                };
                 
-	            // Get the address link element
-	            const addressLink = document.querySelector("#dong-info a");
-	            // Update the link text with the new address value
-	            addressLink.textContent = data.bname + " ";
-	            // Create a new location icon element
-	            const locationIcon = document.createElement("i");
-	            locationIcon.classList.add("fa-solid", "fa-location-dot");
-	            // Append the location icon element to the link
-	            addressLink.appendChild(locationIcon);
-	            
+                // Convert the JSON object to a string
+                var jsondongInfo = JSON.stringify(dongInfo);
+                console.log(jsondongInfo);
+
+                // Update the input field value with the bname value
+                document.querySelector(".adr").value = data.bname;
+
+                // Get the address link element
+                const addressLink = document.querySelector("#dong-info a");
+                // Update the link text with the new address value
+                addressLink.textContent = data.bname + " ";
+                // Create a new location icon element
+                const locationIcon = document.createElement("i");
+                locationIcon.classList.add("fa-solid", "fa-location-dot");
+                // Append the location icon element to the link
+                addressLink.appendChild(locationIcon);
+                
+                // Send an Ajax request to store the value of data.bname
+                $.ajax({
+                  type: 'POST',
+                  url: '/main',
+                  /*
+                  data: {
+                    'bname': data.bname
+                  },
+                  */
+                  data: JSON.stringify({
+                      'bname': data.bname
+                    }),
+                  contentType: "application/json; charset=utf-8",
+                  dataType: 'json',// 추가 
+                  success: function(response) {
+                    console.log('Successfully stored bname: ' + response);
+                  },
+                  error: function(xhr, status, error) {
+                    console.error('Failed to store bname: ' + error);
+                  }
+                });//ajax
             }
         }).open();
     }
