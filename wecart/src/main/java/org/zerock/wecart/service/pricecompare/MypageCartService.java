@@ -2,6 +2,7 @@ package org.zerock.wecart.service.pricecompare;
 
 import java.util.List;
 
+import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 
 public interface MypageCartService {
@@ -24,5 +25,11 @@ public interface MypageCartService {
 	public abstract void deleteGoodsFromWishList(Integer member_id, Integer goods_id) throws ServiceException;
 
 	//오늘의 장바구니를 생성하고 해당 장바구니의 Id를 반환
-	public abstract Integer createAndReturnTodayCartId();
+	public abstract Integer createAndReturnTodayCartId() throws ServiceException;
+	
+	// GooodsVO를 반환
+	public abstract GooodsVO selectGooodsVO(Integer goods_id) throws ServiceException;
+	
+	// 멤버의 Id를 받아서 List<GooodsVO>를 반환한다.
+	public abstract List<GooodsVO> selectGooodsVoOfMember(Integer goods_id) throws ServiceException;
 }

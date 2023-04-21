@@ -1,6 +1,10 @@
 package org.zerock.wecart.controller;
 
 import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.wecart.domain.UserVO;
+import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.MypageCartService;
 
@@ -62,12 +67,26 @@ public class MypageCartController {
 		// period에 따라서 view에 보여줄 데이터 범위를 한정시킴
 	} // list  jhwan
 	
-	// 찜한 상품들 표시 (미완) 
+	// 찜한 상품들 표시 (controller 완) => UI에 데이터가 잘 뿌려졌는지 확인 
 	@GetMapping("/wishedPrds")
-	public void wishedPrds() {
+	public void wishedPrds(HttpServletRequest req, Model model) throws ServiceException{
 		log.trace("wishedPrds() invoked.");
+		
+		// 1. get userVO from session
+		HttpSession session = req.getSession(false);
+		UserVO userVO = (UserVO)session.getAttribute("__AUTH__");
+		log.trace("userVO: {}", userVO);
+		Integer member_id = Integer.parseInt(userVO.getMember_id());
+		
+		try {
+			List<GooodsVO> goodsObject = this.service.selectGooodsVoOfMember(member_id);
+			model.addAttribute("__GOODS_OBJECT_LIST__", goodsObject);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
 	} // wishedPrds  jhwan
 	
+//		Integer cartId = this.service.getTodayCartIdOfMember(member_id);
 	/*
 	 * => PriceCompareController의 /removeWishedGoods로 변경 
 	// 찜한 상품 삭제

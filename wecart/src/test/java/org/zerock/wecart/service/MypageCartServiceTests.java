@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.MypageCartService;
 
@@ -141,6 +142,24 @@ public class MypageCartServiceTests {
 			
 			Integer cartId = this.service.createAndReturnTodayCartId();
 			log.trace("cartId: {}", cartId);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} //MemberGoodsCartListForMember
+	
+	
+//	@Disabled
+	@Test
+	@Order(7)
+	@DisplayName("Test5: selectGooodsVoOfMember()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectGooodVoOfMember() throws ServiceException {
+		log.trace("selectGooodVoOfMember() invoked.");
+		
+		try {
+			
+			List<GooodsVO> gooodsVO = this.service.selectGooodsVoOfMember(198);
+			log.trace("GooodsVO: {}", gooodsVO);
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}

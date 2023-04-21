@@ -7,8 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.CartMapper;
+import org.zerock.wecart.mapper.pricecompare.GooodsMapper;
 import org.zerock.wecart.mapper.pricecompare.MemberGoodsCartMapper;
 import org.zerock.wecart.mapper.pricecompare.SaleMapper;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
@@ -27,13 +29,15 @@ public class MypageCartServiceImpl implements MypageCartService{
 	private WishListMapper wishListMapper;
 	private SaleMapper saleMapper;
 	private CartMapper cartMapper;
+	private GooodsMapper gooodsMapper;
 
 	@Autowired
-	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CartMapper cartMapper) {
+	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CartMapper cartMapper, GooodsMapper gooodsMapper) {
 		this.memberGoodsCartMapper = memberGoodsCartMapper;
 		this.wishListMapper = wishListMapper;
 		this.saleMapper = saleMapper;
 		this.cartMapper = cartMapper;
+		this.gooodsMapper = gooodsMapper;
 	} // Constructor
 	
 	@Override
@@ -114,7 +118,7 @@ public class MypageCartServiceImpl implements MypageCartService{
 	// 최신 API날짜로 장바구니를 생성
 	@Override
 	@Transactional
-	public Integer createAndReturnTodayCartId() {
+	public Integer createAndReturnTodayCartId() throws ServiceException{
 		log.trace("createTodayCart() invoked. ");
 		
 		//최신 API날짜를 가져오고
@@ -129,4 +133,28 @@ public class MypageCartServiceImpl implements MypageCartService{
 		return cartId;
 	} // createTodayCart
 	
-}
+	@Override
+	public GooodsVO selectGooodsVO(Integer goods_id) throws ServiceException {
+
+		try {
+			return this.gooodsMapper.selectGooodsVO(goods_id);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
+	} // selectGooodsVo
+	
+	@Override
+	public List<GooodsVO> selectGooodsVoOfMember(Integer goods_id) throws ServiceException{
+		log.trace("selectGooodsVoOfMember(gooods_id: {}) invoked", goods_id);
+		
+		
+		try {
+			return this.wishListMapper.selectGooodVoOfMember(goods_id);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
+		
+		
+				
+	} // selectGooodsVoOfMember
+} // end class

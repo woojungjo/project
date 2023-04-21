@@ -1,6 +1,5 @@
 package org.zerock.wecart.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsPageDTO;
@@ -88,9 +84,9 @@ public class PriceCompareController {
 	} //search
 
 
-	// 한 상품을 디테일하게 보여줌
+	// 한 상품을 디테일하게 보여줌 (완)
 	// showPrd/{mainCategory} 식으로 보여줘야 할 것 같음 => RestFUL API 공부 후 파악하기
-	// ResponseEntity로 바꿔야 함
+	// ResponseEntity로 바꿔야 함 
 	@GetMapping("/showPrd/{goods_id}")
 	public String showPrd(
 		@PathVariable("goods_id") Integer goods_id,
