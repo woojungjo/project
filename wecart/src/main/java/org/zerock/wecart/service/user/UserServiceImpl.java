@@ -67,16 +67,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Boolean searchPw(UserDTO dto) throws ServiceException {
-		log.trace(">>>>>>>>>>>>>>>> searchPw({}) invoked.", dto);
 
 		String login_id = dto.getLogin_id();
 		String email = dto.getEmail();
 
 		// 임시 비밀번호 생성
 		String temp_pwd = getTempPassword();
-				
+
 		// 생성한 임시비밀번호로 변경
 		dto.setPwd(temp_pwd);
+
+		// 비밀번호 암호화해주는 메서드
+//				pwd = UserSha256.encrypt(pwd);
 
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>안녕하세요 '" + login_id + "' 님</h2><br><br>" + "<p>비밀번호 찾기를 신청해주셔서 임시 비밀번호를 발급해드렸습니다.</p>"
@@ -91,15 +93,13 @@ public class UserServiceImpl implements UserService {
 			mailSender.send(mail);
 		} catch (MessagingException e) {
 			e.printStackTrace();
-		}
-		// 비밀번호 암호화해주는 메서드
-//		pwd = UserSha256.encrypt(pwd);
-		
+		} // try-catch
+
 		try {
 			return this.mapper.updatePw(dto) == 1;
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
 	} // searchPw
-	
+
 } // end class

@@ -61,8 +61,8 @@
                         <div class="table_wrap">
 
                             <div class="article">
-                                <h3 class="input_title"><label for="login_id">아이디</label></h3>
-                                <input type="text" id="login_id" name="login_id" class="input" maxlength="20">
+                                <h3 class="input_title"><label for="login_id2">아이디</label></h3>
+                                <input type="text" id="login_id2" name="login_id2" class="input" maxlength="20">
                             </div>
 
                             <div class="article">
@@ -106,20 +106,21 @@
             &copy; 2023 WeCart, Inc. All Rights Reserved
         </footer>
 
-        <div id="idsearch_modal" class="idsearch_modal" style="display: none;">
-            <div class="modal_contents">
-                <h4><b>손님 아이디는?</b><span class="close">&times;</span></h4>
+        <!-- 모달 창 -->
+        <div id="idsearch_modal" class="modal" style="display: none;">
+            <div class="modal_content">
+                <h4 id="id_header"><b></b><span class="close">&times;</span></h4>                
                 <br>
                 <h2 id="id_value"></h2>
                 <br>
-                <button type="button" id="pwSearch_btn" class="btn peach-gradient btn-rounded waves-effect">
-                    <i class="fa fa-envelope"></i>비밀번호 찾기</button>
+                <h4 id="id_footer"><b></b></h4>
             </div>
         </div>
 
-        <div id="pwsearch_modal" class="pwsearch_modal" style="display: none;">
-            <div class="modal_contents">
-                <h4><b>회원님의 계정으로 임시비밀번호를 보내드렸습니다.</b><span class="close">&times;</span></h4>
+        <div id="pwsearch_modal" class="modal" style="display: none;">
+            <div class="modal_content">
+                <h4><b id="pw_value"></b></h4>
+                <span class="close">&times;</span>
             </div>
         </div>
     </body>
@@ -190,9 +191,13 @@
                 data: data,
                 success: function (data) {                    
                     if (data == 0 || !data) {
+                        $('#id_header').text("");
                         $('#id_value').text("회원 정보를 확인해주세요!");
+                        $('#id_footer').text("");
                     } else {
+                        $('#id_header').text("회원님의 아이디는");
                         $('#id_value').text(data);
+                        $('#id_footer').text("입니다.");
                     }
                 }
             });
@@ -201,17 +206,24 @@
         // 비밀번호 ajax
         var pwSearch_click = function () {
             var data = {
-                login_id: $('#login_id').val(),
+                login_id: $('#login_id2').val(),
                 alias: $('#alias2').val(),
-                email: $('#email2').val()
+                email: $('#email2').val()                
             };
+            console.log(data);
 
             $.ajax({
                 type: "POST",
                 url: "/user/searchPw",
                 data: data,
                 success: function (data) {
-                    
+                    if (!data) {
+                    	console.log(data, "실패");
+                        $('#pw_value').text("회원 정보를 확인해주세요!");
+                    } else {
+                    	console.log(data, "성공");
+                        $('#pw_value').text("회원님의 이메일로 임시 비밀번호를 발송하였습니다.");
+                    }
                 }
             });
         }

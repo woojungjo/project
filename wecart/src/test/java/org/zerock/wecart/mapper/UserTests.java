@@ -1,5 +1,7 @@
 package org.zerock.wecart.mapper;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -51,6 +53,7 @@ public class UserTests {
 		String alias = "ali1";
 		String email = "email_1@.com";
 		
+		
 		// 비밀번호 변경
 		String pwd = "temp_pwd1";
 		
@@ -61,7 +64,10 @@ public class UserTests {
 		dto.setEmail(email);
 		dto.setPwd(pwd);
 		
-		this.mapper.updatePw(dto);
+		log.info("\t dto:{}", dto);
 
+		assertNotNull(dto);
+		
+		this.mapper.updatePw(dto);
 	} // updatePwTest
 } // end class

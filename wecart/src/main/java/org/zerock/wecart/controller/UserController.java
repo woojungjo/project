@@ -93,10 +93,10 @@ public class UserController {
 	@PostMapping("/searchPw")
 	public String searchPw(UserDTO dto) throws ControllerException {
 		try {
-			boolean success = this.service.searchPw(dto);			
-			log.trace("result: {}", success);
-			
-			return null;			
+			boolean result = this.service.searchPw(dto);
+			log.trace("result: {}", result);
+							
+			return "redirect:/user/findAccount";	
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
