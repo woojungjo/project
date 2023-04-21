@@ -1,7 +1,6 @@
 package org.zerock.wecart.mapper;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -17,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.wecart.domain.pricecompare.GoodsVO;
+import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
 
 import lombok.NoArgsConstructor;
@@ -67,6 +66,21 @@ public class WishListMapperTests {
 		log.trace("deleteGoodsFromWishedCart() invoked. ");
 		
 		this.mapper.deleteGoodsFromWishedCart(198, 100);
+		
+		
+	} // deleteGoodsFromWishedCart
+	
+	
+//	@Disable
+	@Test
+	@Order(3)
+	@DisplayName("Test3: selectGooodVoOfMember")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectGooodVoOfMember() {
+		log.trace("selectGooodVoOfMember() invoked. ");
+		
+		List<GooodsVO> goodsObject = this.mapper.selectGooodVoOfMember(198);
+		
 		
 		
 	} // deleteGoodsFromWishedCart
