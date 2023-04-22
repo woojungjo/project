@@ -23,19 +23,13 @@
                 // 기간 설정 후 버튼 클릭하여 이 페이지를 다시 리로드하고 그때
                 // 기간에 따라 쇼핑 리스트를 정렬
                 function sendPeriod() {
-                    console.log("hello");
 
-                    //var cartVOs = ${__CARTVOS__};
+                    var select = document.getElementById('selectedPeriod');
+    				var option = select.value;
 
-                    //for(var i = 0; i < cartVOs.length; i++){
-                    //var cartVO = cartVOs[i];
-
-                    //console.log("cart_id: "+ cartVO.cart_id);
-                    //console.log("cart_creation_date: "+ cartVO.cart_creation_date);
-                    //console.log("API_date: "+ cartVO.API_date);
-                    //console.log("status: "+ cartVO.status);
-
-                    //} // for
+    				console.log(option);
+    				
+    				window.location = "/mypage/cart/list?period=" + option
 
 
                 } // sendPeriod()
