@@ -26,5 +26,22 @@
 		INSERT INTO member_goods_cart(member_id, goods_id, cart_id)
 		VALUES (#{member_id}, #{goods_id}, #{cart_id})
 	</insert>	
-
+	
+	<select id="selectNumberOfGoods">
+		SELECT count(*)
+		FROM member_goods_cart mgc
+		WHERE
+			mgc.member_id = #{member_id}
+		AND
+			mgc.cart_id = #{cart_id}
+	</select>
+	
+	<select id="selectPicOfGoods">
+		SELECT g.goods_pic
+		FROM goods g	
+		JOIN member_goods_cart mgc on mgc.goods_id = g.goods_id
+		WHERE mgc.member_id = #{member_id}
+		AND mgc.cart_id = #{cart_id}		
+        AND ROWNUM = 1
+	</select>
 </mapper>

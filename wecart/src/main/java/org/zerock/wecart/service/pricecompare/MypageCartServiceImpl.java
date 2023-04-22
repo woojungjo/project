@@ -25,7 +25,6 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class MypageCartServiceImpl implements MypageCartService{
 
-
 	private MemberGoodsCartMapper memberGoodsCartMapper; 
 	private WishListMapper wishListMapper;
 	private SaleMapper saleMapper;
@@ -165,4 +164,27 @@ public class MypageCartServiceImpl implements MypageCartService{
 			throw new ServiceException(e);
 		} // try - catch
 	} // selectCartVOsOfMemberFromCart
+	
+
+	@Override
+	public Integer selectNumberOfGoods(Integer member_id, Integer cart_id) throws ServiceException {
+		log.trace("selectNumberOfGoods(member_id:{}, cart_id: {}) invoked. ", member_id, cart_id);
+		
+		try {
+			return this.memberGoodsCartMapper.selectNumberOfGoods(member_id, cart_id);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}// try - catch
+	} // selectNumberOfGoods
+
+	@Override
+	public String selectPicOfGoods(Integer member_id, Integer cart_id) throws ServiceException {
+		log.trace("selectPicOfGoods( member_id:{}, cart_id:{} ) invoked. ", member_id, cart_id);
+		
+		try {
+			return this.memberGoodsCartMapper.selectPicOfGoods(member_id, cart_id);
+		}catch(Exception e){
+			throw new ServiceException(e);
+		}
+	} //selectNumberOfGoods
 } // end class
