@@ -23,7 +23,7 @@
 	
 </head>
 <body>
-	<jsp:include page="../header_footer/main_header.jsp" flush="true" />
+	<jsp:include page="header_footer/main_header.jsp" flush="true" />
 	
 	
         <main>
@@ -43,14 +43,13 @@
             <!--*********************************************메인 내용은 여기까지*********************************************-->
         </main>
         
-        <jsp:include page="../header_footer/footer.jsp" flush="true" />
+        <jsp:include page="header_footer/footer.jsp" flush="true" />
         
 </body>
 <!-- 카카오API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
-      	
     	new daum.Postcode({
             oncomplete: function (data) {
             	
@@ -61,7 +60,7 @@
                 
                 // Convert the JSON object to a string
                 var jsondongInfo = JSON.stringify(dongInfo);
-                console.log(jsondongInfo);
+                console.log('jsondongInfo : ', jsondongInfo);
 
                 // Update the input field value with the bname value
                 document.querySelector(".adr").value = data.bname;
@@ -78,28 +77,33 @@
                 
                 // Send an Ajax request to store the value of data.bname
                 $.ajax({
-                  type: 'POST',
                   url: '/main',
-                  /*
-                  data: {
-                    'bname': data.bname
+                  type: 'POST',
+                  data : jsondongInfo,
+                  contentType: "application/json; charset=utf-8",
+                  dataType: 'json',// 추가 
+                  success: function(data) {
+                    console.log('Successfully stored bname: ' + data);
                   },
-                  */
+                  error: function() {
+                    console.error('Failed to store bname.');
+                  }
+                });//ajax
+            } 
+        }).open();
+    } //sample6_execDaumPostcode()
+    
+                  /*
                   data: JSON.stringify({
                       'bname': data.bname
                     }),
-                  contentType: "application/json; charset=utf-8",
-                  dataType: 'json',// 추가 
-                  success: function(response) {
-                    console.log('Successfully stored bname: ' + response);
-                  },
-                  error: function(xhr, status, error) {
-                    console.error('Failed to store bname: ' + error);
-                  }
-                });//ajax
-            }
-        }).open();
-    }
+
+                  data : jsondongInfo,
+                  
+                  data: {
+                      'bname': data.bname
+                    },
+                    */
 </script>
 
 </html>
