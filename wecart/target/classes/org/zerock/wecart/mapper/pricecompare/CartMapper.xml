@@ -27,8 +27,12 @@
 	</delete>
 
 	<select id="selectInstalledCart" resultType="org.zerock.wecart.domain.pricecompare.CartVO">
-		
-		
+		SELECT DISTINCT cart.cart_id, cart.cart_creation_date, cart.API_date, cart.status
+		FROM cart
+		INNER JOIN member_goods_cart ON cart.cart_id = member_goods_cart.cart_id
+		WHERE member_goods_cart.member_id = #{member_id} 
+		AND
+		    cart.status = #{status}
 	</select>
 
 </mapper>

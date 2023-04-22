@@ -2,6 +2,7 @@ package org.zerock.wecart.service.pricecompare;
 
 import java.util.List;
 
+import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 
@@ -31,5 +32,8 @@ public interface MypageCartService {
 	public abstract GooodsVO selectGooodsVO(Integer goods_id) throws ServiceException;
 	
 	// 멤버의 Id를 받아서 List<GooodsVO>를 반환한다.
-	public abstract List<GooodsVO> selectGooodsVoOfMember(Integer goods_id) throws ServiceException;
+	public abstract List<GooodsVO> selectGooodsVoOfMemberFromWishList(Integer goods_id) throws ServiceException;
+	
+	// 멤버 id를 받아서 저장된 cartVO값을 받는다.
+	public abstract List<CartVO> selectCartVOsOfMemberFromCart(Integer member_id, String status) throws ServiceException;
 }

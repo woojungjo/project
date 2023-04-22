@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.CartMapper;
@@ -144,17 +145,24 @@ public class MypageCartServiceImpl implements MypageCartService{
 	} // selectGooodsVo
 	
 	@Override
-	public List<GooodsVO> selectGooodsVoOfMember(Integer goods_id) throws ServiceException{
+	public List<GooodsVO> selectGooodsVoOfMemberFromWishList(Integer goods_id) throws ServiceException{
 		log.trace("selectGooodsVoOfMember(gooods_id: {}) invoked", goods_id);
-		
 		
 		try {
 			return this.wishListMapper.selectGooodVoOfMember(goods_id);
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		} // try - catch
-		
-		
-				
 	} // selectGooodsVoOfMember
+	
+	@Override
+	public List<CartVO> selectCartVOsOfMemberFromCart(Integer member_id, String status) throws ServiceException{
+		log.trace("selectCartVOsOfMemberFromCart(member_id: {}, status: {}) invoked. ", member_id, status);
+		
+		try {
+			return this.cartMapper.selectInstalledCart(member_id, status);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
+	} // selectCartVOsOfMemberFromCart
 } // end class

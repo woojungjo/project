@@ -85,8 +85,6 @@ public class PriceCompareController {
 
 
 	// 한 상품을 디테일하게 보여줌 (완)
-	// showPrd/{mainCategory} 식으로 보여줘야 할 것 같음 => RestFUL API 공부 후 파악하기
-	// ResponseEntity로 바꿔야 함 
 	@GetMapping("/showPrd/{goods_id}")
 	public String showPrd(
 		@PathVariable("goods_id") Integer goods_id,
@@ -98,7 +96,6 @@ public class PriceCompareController {
 		try {
 			GoodsVO goods = this.service.select(goods_id);
 			log.trace("goods: {}", goods);
-			
 			
 			// 회원의 id와 
 			model.addAttribute("__GOODS__", goods);

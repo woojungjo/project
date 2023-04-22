@@ -1,6 +1,7 @@
 package org.zerock.wecart.mapper;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -10,12 +11,14 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.wecart.domain.pricecompare.CartVO;
+import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.CartMapper;
 
 import lombok.NoArgsConstructor;
@@ -56,6 +59,23 @@ public class CartMapperTests {
 		
 		log.trace("insertCart 실행 후 log 입니다.");
 	}// insertCart
+	
+//	@Disable
+	@Test
+	@Order(2)
+	@DisplayName("Test: selectInstalledCart")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void selectInstalledCart() throws ServiceException{
+		log.trace("selectInstalledCart() invoked.");
+		
+		try {
+			List<CartVO> cartVOs = this.mapper.selectInstalledCart(198, "Installed");
+			
+			log.trace("cartVOs: {}", cartVOs);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
+	}// selectInstalledCart
 	
 	
 } // end class

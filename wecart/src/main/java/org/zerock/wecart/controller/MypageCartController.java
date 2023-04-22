@@ -3,9 +3,6 @@ package org.zerock.wecart.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.zerock.wecart.domain.UserVO;
+import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.MypageCartService;
@@ -58,28 +58,34 @@ public class MypageCartController {
 		log.trace("arrangeByMonth() invoked. ");
 	}// arrangeByMonth  jhwan
 	 
-	// 장바구니 리스트 보여주기 (미완)
+	// 장바구니 리스트 보여주기 (미완) => 해당 장바구니가 가지고 있는 아이템의 갯수와 사진을 view에 넘겨줘야 함.
 	@GetMapping("/list")
-	public void list(String period) {
-		log.trace("list() invoked. ");
-		log.trace("\t+ period: {} ", period);
+	public ModelAndView list(@SessionAttribute("__AUTH__") UserVO userVO) throws ServiceException{
+		log.trace("list(userVO: {}) invoked. ", userVO);
 		
-		// period에 따라서 view에 보여줄 데이터 범위를 한정시킴
+		try {
+			Integer member_id = Integer.parseInt(userVO.getMember_id());
+			List<CartVO> cartVOs = this.service.selectCartVOsOfMemberFromCart(member_id, "Installed");
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("__CARTVOS__", cartVOs);
+			mav.setViewName("mypage/cart/list");
+			
+		return mav;
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try - catch
 	} // list  jhwan
 	
 	// 찜한 상품들 표시 (controller 완) => UI에 데이터가 잘 뿌려졌는지 확인 
 	@GetMapping("/wishedPrds")
-	public void wishedPrds(HttpServletRequest req, Model model) throws ServiceException{
+	public void wishedPrds(@SessionAttribute("__AUTH__") UserVO userVO, Model model) throws ServiceException{
 		log.trace("wishedPrds() invoked.");
-		
-		// 1. get userVO from session
-		HttpSession session = req.getSession(false);
-		UserVO userVO = (UserVO)session.getAttribute("__AUTH__");
-		log.trace("userVO: {}", userVO);
+		log.trace("\t+ userVO: {}", userVO);
 		Integer member_id = Integer.parseInt(userVO.getMember_id());
 		
 		try {
-			List<GooodsVO> goodsObject = this.service.selectGooodsVoOfMember(member_id);
+			List<GooodsVO> goodsObject = this.service.selectGooodsVoOfMemberFromWishList(member_id);
 			model.addAttribute("__GOODS_OBJECT_LIST__", goodsObject);
 		}catch(Exception e) {
 			throw new ServiceException(e);

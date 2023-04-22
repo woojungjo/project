@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.MypageCartService;
@@ -151,17 +152,34 @@ public class MypageCartServiceTests {
 //	@Disabled
 	@Test
 	@Order(7)
-	@DisplayName("Test5: selectGooodsVoOfMember()")
+	@DisplayName("Test: selectGooodsVoOfMember()")
 	@Timeout(value=4, unit=TimeUnit.SECONDS)
 	void selectGooodVoOfMember() throws ServiceException {
 		log.trace("selectGooodVoOfMember() invoked.");
 		
 		try {
 			
-			List<GooodsVO> gooodsVO = this.service.selectGooodsVoOfMember(198);
+			List<GooodsVO> gooodsVO = this.service.selectGooodsVoOfMemberFromWishList(198);
 			log.trace("GooodsVO: {}", gooodsVO);
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}
 	} //MemberGoodsCartListForMember
-}
+	
+//	@Disabled
+	@Test
+	@Order(8)
+	@DisplayName("Test: selectCartVOsOfMemberFromCart()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectCartVOsOfMemberFromCart() throws ServiceException {
+		log.trace("selectGooodVoOfMember() invoked.");
+		
+		try {
+			List<CartVO> cartVOs = this.service.selectCartVOsOfMemberFromCart(198, "Installed");
+			log.trace("cartVOs: {}", cartVOs);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}
+	} //MemberGoodsCartListForMember
+	
+} // end class

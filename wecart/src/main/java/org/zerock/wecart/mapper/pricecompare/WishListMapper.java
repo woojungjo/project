@@ -34,7 +34,7 @@ public interface WishListMapper {
 			JOIN 
 				wish_list
 			ON 
-                wish_list.member_id = 198
+                wish_list.member_id = #{member_id}
             AND 
                 goods.goods_id = wish_list.goods_id
 			""" )
