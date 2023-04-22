@@ -43,7 +43,7 @@ public class TownMapperTests {
 		
 		Objects.nonNull(this.mapper);
 		assert this.mapper !=null;
-		assertNotNull(this.mapper);
+		assertNotNull(this.mapper); 
 		
 		log.info("this.mapper:{}, {}", this.mapper, this.mapper.getClass().getName());
 	}//beforeAll
@@ -51,7 +51,7 @@ public class TownMapperTests {
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("townMapperUpdateTes")
+	@DisplayName("townMapperUpdateTes") 
 	@Timeout(value=3, unit=TimeUnit.SECONDS)
 	void townMapperupdateTownNameTest() {
 		log.trace("townMapperupdateTownNameTest() invoked.");

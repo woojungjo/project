@@ -40,7 +40,7 @@ public class TownServiceTests {
 		log.trace("beforeAll() invoked");
 		
 		Objects.nonNull(this.service);
-		log.info("this.mapper:{}, {}", this.service, this.service.getClass().getName());
+		log.info("this.mapper:{}, {}", this.service, this.service.getClass().getName()); 
 	}//beforeAll
 	
 	//Disabled

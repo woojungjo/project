@@ -64,7 +64,7 @@ public class TownControllerTests {
 		@Setter(onMethod_= {@Autowired})
 		UserService userService;
 		
-		@BeforeAll //전처리 작업 
+		@BeforeAll //전처리 작업  
 		void beforeAll() { //1회성 전처리 수행 
 			log.trace("beforeAll() invoked.");
 			

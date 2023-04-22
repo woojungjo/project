@@ -30,7 +30,7 @@ public class TownServiceImpl implements TownService, InitializingBean {
 		
 		try {
 			Objects.requireNonNull(this.mapper);//ServiceException으로 매핑해서 던지도록 
-		}catch(Exception e) {
+		}catch(Exception e) { 
 			throw new ServiceException(e);
 		}//try-catch
 	}//afterPropertiesSet() 

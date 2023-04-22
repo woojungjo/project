@@ -89,7 +89,7 @@
                     console.error('Failed to store bname.');
                   }
                 });//ajax
-            }
+            } 
         }).open();
     } //sample6_execDaumPostcode()
     
