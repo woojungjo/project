@@ -18,17 +18,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
     <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
     <script src="../resources/js/priceCompare/cart.js" defer></script>
+    <script src="../resources/js/priceCompare/cart.js" defer></script>
 </head>
 <body>
     <div id="wrap">
-    
-	    <% Object auth = session.getAttribute("__AUTH__"); %>
-	     
-	    <% if(auth != null) { %>
+
+          <% Object auth = session.getAttribute("__AUTH__"); %>
+      
+	      <% if(auth != null) { %>
 	         <jsp:include page="../header_footer/main_header.jsp" flush="true" />
-	    <% } else { %>
+	      <% } else { %>
 	         <jsp:include page="../header_footer/home_header.jsp" flush="true" />
-	    <% } %>
+	      <% } %>
 
         <div class="widthfix search_fix">    
             <div id="search">
@@ -126,44 +127,25 @@
                                 </div>
                                 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(1)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">견과류</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(2)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">국수</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(3)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">냉동만두</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(4)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">당면</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(5)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">두부</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(6)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">라면</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(7)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">밀가루</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(8)}"
-                                                                                            href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">부침가루</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(9)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">빵</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(10)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">스프</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(11)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">식빵</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(12)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">시리얼</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(13)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">즉석국</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(14)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">즉석덮밥</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(15)}"
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">즉석밥</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(16)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">즉석죽</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(17)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">컵라면</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(18)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">컵밥</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(19)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">탕</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=1<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">견과류</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=2<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">국수</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=3<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">냉동만두</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=4<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">당면</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=5<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">두부</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=6<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">라면</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=7<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">밀가루</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=8<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">부침가루</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=9<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">빵</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=10<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">스프</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=11<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">식빵</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=12<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">시리얼</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=13<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">즉석국</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=14<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">즉석덮밥</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=15<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">즉석밥</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=16<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">즉석죽</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=17<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">컵라면</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=18<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">컵밥</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=19<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">탕</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -174,14 +156,10 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(20)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">계란</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(21)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">닭고기</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(22)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">돼지고기</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(23)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">쇠고기</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=20<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">계란</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=21<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">닭고기</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=22<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">돼지고기</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=23<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">쇠고기</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -192,14 +170,10 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(24)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">맛김</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(25)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">맛살</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(26)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">어묵</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(27)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">참치캔</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=24<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">맛김</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=25<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">맛살</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=26<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">어묵</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=27<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">참치캔</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -210,20 +184,13 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(28)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">마가린</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(29)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">발효유</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(30)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">분유</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(31)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">소시지</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(32)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">우유</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(33)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">치즈</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(34)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">햄</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=28<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">마가린</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=29<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">발효유</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=30<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">분유</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=31<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">소시지</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=32<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">우유</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=33<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">치즈</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=34<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">햄</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -234,38 +201,22 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(35)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">간장</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(36)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">고추장</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(37)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">된장</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(38)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">잼</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(39)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">마요네즈</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(40)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">꿀</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(41)}" 
-                                   															href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">설탕</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(42)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">소금</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(43)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">식용유</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(44)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">식초</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(45)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">쌈장</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(46)}" 
-                                   															href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">참기름</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(47)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">카레</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(48)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">케첩</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(49)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">혼합조미료</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(50)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">드레싱</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=35<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">간장</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=36<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">고추장</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=37<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">된장</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=38<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">잼</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=39<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">마요네즈</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=40<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">꿀</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=41<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">설탕</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=42<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">소금</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=43<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">식용유</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=44<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">식초</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=45<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">쌈장</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=46<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">참기름</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=47<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">카레</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=48<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">케첩</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=49<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">혼합조미료</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=50<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">드레싱</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -276,46 +227,26 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(51)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">감자</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(52)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">고구마</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(53)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">깻잎</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(54)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">단무지</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(55)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">당근</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(56)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">대파</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(57)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">마늘</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(58)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">무</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(59)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">배추</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(60)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">버섯</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(61)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">상추</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(62)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">시금치</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(63)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">양배추</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(64)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">양파</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(65)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">오이</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(66)}" 
-                                   															href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">쪽파</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(67)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">콩나물</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(68)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">포기김치</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(69)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">풋고추</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(70)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">호박</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=51<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">감자</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=52<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">고구마</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=53<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">깻잎</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=54<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">단무지</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=55<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">당근</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=56<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">대파</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=57<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">마늘</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=58<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">무</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=59<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">배추</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=60<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">버섯</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=61<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">상추</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=62<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">시금치</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=63<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">양배추</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=64<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">양파</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=65<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">오이</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=66<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">쪽파</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=67<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">콩나물</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=68<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">포기김치</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=69<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">풋고추</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=70<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">호박</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -326,30 +257,18 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(71)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">감자칩</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(72)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">껌</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(73)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">모나카류아이스크림</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(74)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">빙과류</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(75)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">새우깡</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(76)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">아이스크림</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(77)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">에너지바</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(78)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">초코바</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(79)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">초코파이</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(80)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">초콜릿</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(81)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">사탕</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(82)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">비스킷</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=71<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">감자칩</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=72<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">껌</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=73<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">모나카류아이스크림</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=74<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">빙과류</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=75<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">새우깡</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=76<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">아이스크림</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=77<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">에너지바</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=78<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">초코바</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=79<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">초코파이</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=80<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">초콜릿</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=81<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">사탕</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=82<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">비스킷</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -360,36 +279,21 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(83)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">주스</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(84)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">차</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(85)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">두유</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(86)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">막걸리</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(87)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">맥주</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(88)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">비타민음료</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(89)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">사이다</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(90)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">생수</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(91)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">소주</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(92)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">에너지음료</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(93)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">이온음료</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(94)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">캔커피</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(95)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">커피믹스</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(96)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">콜라</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(97)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">포도주</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=83<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">주스</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=84<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">차</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=85<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">두유</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=86<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">막걸리</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=87<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">맥주</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=88<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">비타민음료</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=89<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">사이다</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=90<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">생수</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=91<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">소주</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=92<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">에너지음료</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=93<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">이온음료</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=94<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">캔커피</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=95<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">커피믹스</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=96<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">콜라</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=97<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">포도주</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -400,36 +304,21 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(98)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">화장지</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(99)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">바디워시</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(100)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">로션</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(101)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">생리대</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(102)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">비누</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(103)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">손세정제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(104)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">염색약</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(105)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">면도날</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(106)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">샴푸</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(107)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">종이기저귀</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(108)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">치약</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(109)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">칫솔</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(110)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">구강청결제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(111)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">마스크</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(112)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">코로나 자가검사 키트</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=98<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">화장지</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=99<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">바디워시</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=100<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">로션</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=101<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">생리대</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=102<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">비누</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=103<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">손세정제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=104<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">염색약</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=105<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">면도날</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=106<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">샴푸</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=107<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">종이기저귀</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=108<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">치약</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=109<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">칫솔</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=110<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">구강청결제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=111<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">마스크</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=112<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">코로나 자가검사 키트</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -440,34 +329,20 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(113)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">고무장갑</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(114)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">랩</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(115)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">부탄가스</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(116)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">살균소독제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(117)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">살충제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(118)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">섬유유연제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(119)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">섬유탈취제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(120)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">세정제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(121)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">세탁세제(가루형)</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(122)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">세탁세제(액체형)</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(123)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">습기제거제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(124)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">위생백</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(125)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">주방세제</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(126)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">키친타월</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=113<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">고무장갑</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=114<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">랩</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=115<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">부탄가스</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=116<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">살균소독제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=117<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">살충제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=118<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">섬유유연제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=119<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">섬유탈취제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=120<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">세정제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=121<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">세탁세제(가루형)</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=122<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">세탁세제(액체형)</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=123<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">습기제거제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=124<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">위생백</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=125<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">주방세제</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=126<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">키친타월</a></li>
                                 </ul>
                             </li>
                             <li class="cate_nav_item">
@@ -478,14 +353,10 @@
                                 </div>
 
                                 <ul class="cate_nav_ul nonedeco_li">
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(127)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">갈치</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(128)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">고등어</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(129)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">오징어</a></li>
-                                    <li class="details_cate" style="visibility: hidden;"><a data-temp="${__GOODSPAGEMAKER__.cri.setCategory(130)}" 
-                                    														href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}">조기</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=127<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">갈치</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=128<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">고등어</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=129<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">오징어</a></li>
+                                    <li class="details_cate" style="visibility: hidden;"><a href="${request.requestURI}?category=130<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>">조기</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -494,12 +365,15 @@
                     <div class="article">
                         <div class="goods_sort">
                             <ul class="nav goods_sort_ul">
-                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("popular")}"
-                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">인기순</a></li>
-                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("low")}"
-                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">낮은 가격순</a></li>
-                                <li class="nav_item goods_sort_li"><a data-temp="${__GOODSPAGEMAKER__.cri.setSort("high")}"
-                                									  href="${request.requestURI}${__GOODSPAGEMAKER__.cri.searchPagingUri}" class="goods_sort_a">높은 가격순</a></li>
+                                <li class="nav_item goods_sort_li">
+                                    <a href="${request.requestURI}?sort=popular<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if><c:if test="${not empty __GOODSPAGEMAKER__.cri.category}">&amp;category=${__GOODSPAGEMAKER__.cri.category}</c:if>" class="goods_sort_a">인기순</a>
+                                </li>
+                                <li class="nav_item goods_sort_li">
+                                    <a href="${request.requestURI}?sort=low<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if><c:if test="${not empty __GOODSPAGEMAKER__.cri.category}">&amp;category=${__GOODSPAGEMAKER__.cri.category}</c:if>" class="goods_sort_a">낮은 가격순</a>
+                                </li>
+                                <li class="nav_item goods_sort_li">
+                                    <a href="${request.requestURI}?sort=high<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if><c:if test="${not empty __GOODSPAGEMAKER__.cri.category}">&amp;category=${__GOODSPAGEMAKER__.cri.category}</c:if>" class="goods_sort_a">높은 가격순</a>
+                                </li>
                             </ul>
                         </div>
                                              
@@ -561,7 +435,7 @@
                 </div>
             </div>
         </div>
-        <a href="#TOP" id="top_bt">
+        <a href="${request.requestURI}?category=1<c:if test="${not empty __GOODSPAGEMAKER__.cri.keyword}">&amp;keyword=${__GOODSPAGEMAKER__.cri.keyword}</c:if>TOP" id="top_bt">
             <i class="fa-solid fa-arrow-up fa-lg"></i>
         </a>
 
