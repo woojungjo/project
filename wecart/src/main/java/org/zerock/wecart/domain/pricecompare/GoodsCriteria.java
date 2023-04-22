@@ -40,7 +40,7 @@ public class GoodsCriteria {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
 		if(keyword != null) builder.queryParam("keyword", this.keyword);
 //		if(category != null) builder.queryParam("category", this.category);
-		builder.queryParam("sort", this.sort);
+	    builder.queryParam("sort", this.sort);
 		
 		String queryString = builder.toUriString();
 		log.info("\t+ queryString: {}", queryString);
