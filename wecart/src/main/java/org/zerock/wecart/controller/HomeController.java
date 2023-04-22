@@ -1,11 +1,11 @@
 package org.zerock.wecart.controller;
 
-import java.util.HashMap;
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,36 +37,58 @@ public class HomeController {
     @GetMapping("/main")   // 메인화면으로 이동
     public String main() {
     	log.trace("main () invoked.");
-       return "main/main";
+       return "main";
     }
-    /*
+
     @PostMapping("/main")   // 메인화면으로 이동
     @ResponseBody
+    public String main(
+    		Model model, 
+    		@RequestBody String jsondongInfo, 
+    		SessionStatus sessionStatus, 
+    		@SessionAttribute("__AUTH__") UserVO auth
+    		) throws ControllerException {
+    	log.trace("main ({}, {}) invoked.", jsondongInfo, model);
+    		
+    	try {
+            JSONObject jsonObject = new JSONObject(jsondongInfo);
+            String townName = jsonObject.getString("bname");
+            
+        	String loginId = auth.getLogin_id();
+          
+            if(loginId != null) {
+
+        		this.service.update(townName, loginId);
+        		
+                log.info("loginId:{}, townName:{}", loginId, townName);
+            } else {
+                log.info("loginId = null");
+            }
+            
+    		return "main";
+    	}catch(Exception e) {
+    		
+    		throw new ControllerException(e);
+    	}//try-catch
+
+    }//main
+    
+    /*
     public String main(
     		@RequestBody String bname,
     		@RequestBody HashMap<String, String> map,
     		Model model, 
     		SessionStatus sessionStatus, 
     		@SessionAttribute("__AUTH__") UserVO auth
-    		) throws ControllerException{
+    		) throws ControllerException{ 
     	
-    	log.trace("main ({}, {}, {}, {}) invoked.", bname, model, sessionStatus, auth);
     	
     	try {
     		Map<String, String> bnameMap = new HashMap<String, String>();
     		bnameMap.put("bname", "data.bname");
     		String townName = bnameMap.get("bname");
-    		
-    		String loginId = auth.getLogin_id();
-    			
-    			this.service.update(townName, loginId);
-    			
-    			return "main/main";
-    	}catch(Exception e) {
-    		throw new ControllerException(e);
-    	}//try-catch
-
-    }//main
-  */    
     
-}//RootController
+    		String loginId = auth.getLogin_id();
+    		*/	
+    
+}//HomeController
