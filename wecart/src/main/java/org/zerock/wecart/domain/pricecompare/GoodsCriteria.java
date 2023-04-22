@@ -22,7 +22,7 @@ public class GoodsCriteria {
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
 		if(keyword != null) builder.queryParam("keyword", this.keyword);
-//		if(category != null) builder.queryParam("category", this.category);
+		if(category != null) builder.queryParam("category", this.category);
 		builder.queryParam("currPage", this.currPage);
 		builder.queryParam("amount", this.amount);
 		builder.queryParam("pagesPerPage", this.pagesPerPage);		
@@ -33,18 +33,5 @@ public class GoodsCriteria {
 		
 		return queryString;
 	} //getPagingUri
-	
-	public String getSearchPagingUri() {
-		log.trace("getSearchPagingUri() invoked.");
-		
-		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
-		if(keyword != null) builder.queryParam("keyword", this.keyword);
-//		if(category != null) builder.queryParam("category", this.category);
-	    builder.queryParam("sort", this.sort);
-		
-		String queryString = builder.toUriString();
-		log.info("\t+ queryString: {}", queryString);
-		
-		return queryString;
-	} //getSearchPagingUri
+
 } //end class
