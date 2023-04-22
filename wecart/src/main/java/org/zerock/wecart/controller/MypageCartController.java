@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -62,11 +64,15 @@ public class MypageCartController {
 	public void arrangeByMonth() {
 		log.trace("arrangeByMonth() invoked. ");
 	}// arrangeByMonth  jhwan
+	
 	 
 	// 장바구니 리스트 보여주기 (완)
 	@GetMapping("/list")
-	public ModelAndView list(@SessionAttribute("__AUTH__") UserVO userVO) throws ServiceException{
-		log.trace("list(userVO: {}) invoked. ", userVO);
+	public ModelAndView list(
+			@SessionAttribute("__AUTH__") UserVO userVO, 
+			@RequestParam(value="period", required=false, defaultValue="0") String period) 
+					throws ServiceException{
+		log.trace("list(userVO: {}, period: {}) invoked. ", userVO, period);
 		
 		try {
 			Integer member_id = Integer.parseInt(userVO.getMember_id());
@@ -80,6 +86,67 @@ public class MypageCartController {
 				Date date = new Date(time);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String formattedDate = sdf.format(date);
+				
+				
+				/*
+				 * java.util.Timestamp timestamp = new java.util.Timestamp(System.currentTimeMillis());
+				java.util.Timestamp targetTimestamp = ... // Timestamp 값을 가져오는 코드가 들어갑니다.
+				
+				long diffInMilliseconds = Math.abs(timestamp.getTime() - targetTimestamp.getTime());
+				long diffInDays = TimeUnit.DAYS.convert(diffInMilliseconds, TimeUnit.MILLISECONDS);
+				
+				if (diffInDays <= 7) {
+				    return true;
+				} else {
+				    return false;
+				}
+
+				 * 
+				 */
+				boolean check = true;
+				if(!period.equals("0")) {
+					
+					Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+					long diffInMilliseconds = Math.abs(currentTime.getTime() - timestamp.getTime());
+					long diffInDays = TimeUnit.DAYS.convert(diffInMilliseconds, TimeUnit.MILLISECONDS);
+					
+					check = switch(period){
+						case "1week" -> {
+							if(diffInDays<=7) {
+								yield true;
+							}else {
+								yield false;
+							}// if-else
+						}
+						case "1month" -> {
+							if(diffInDays<=30) {
+								yield true;
+							}else {
+								yield false;
+							} // if-else
+						}
+						case "3month" -> {
+							if(diffInDays<=90) {
+								yield true;
+							}else {
+								yield false;
+							} // if-else
+						}
+						case "6month" -> {
+							if(diffInDays<=180) {
+								yield true;
+							}else {
+								yield false;
+							} // if-else
+						}
+						
+						default -> false;
+					}; // switch
+				} //
+				
+				if(!check) {
+					continue;
+				} // if
 				
 				// get number of Goods
 				Integer numberOfGoods = this.service.selectNumberOfGoods(member_id, cartvo.getCart_id());

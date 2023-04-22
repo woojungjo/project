@@ -31,7 +31,6 @@ public class PriceCompareController {
 	@Autowired
 	public PriceCompareController(PriceCompareService service) {
 		this.service = service;
-
 	} //Constructor
 	
 	@GetMapping("/listPage")
@@ -115,7 +114,4 @@ public class PriceCompareController {
 		log.trace("addPrdToCart() invoked. ");
 	} // addPrdToCart Jhwan
 	*/
-	
-
-
 } // end class
