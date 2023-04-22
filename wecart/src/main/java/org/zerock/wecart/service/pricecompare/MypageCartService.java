@@ -36,4 +36,11 @@ public interface MypageCartService {
 	
 	// 멤버 id를 받아서 저장된 cartVO값을 받는다.
 	public abstract List<CartVO> selectCartVOsOfMemberFromCart(Integer member_id, String status) throws ServiceException;
+	
+	// 해당 멤버가 가지고 있는 카트에 goods의 갯수를 반환한다.
+	public abstract Integer selectNumberOfGoods(Integer member_id, Integer cart_id) throws ServiceException;
+	
+	// 해당 멤버가 가지고 있는 카트에 임의의 goods의 사진을 반환한다.
+	public abstract String selectPicOfGoods(Integer member_id, Integer cart_id) throws ServiceException;
+
 }

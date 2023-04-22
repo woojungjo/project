@@ -52,7 +52,7 @@ public class MemberGoodsCartMapperTests {
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("Test1: selectAllInstalledCartOfMember")
+	@DisplayName("Test: selectAllInstalledCartOfMember")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void selectAllInstalledCartOfMember() {
 		log.trace("selectAllCartOfMember() invoked. ");
@@ -67,7 +67,7 @@ public class MemberGoodsCartMapperTests {
 //	@Disabled
 	@Test
 	@Order(2)
-	@DisplayName("Test1: selectAllCartOfMember")
+	@DisplayName("Test: selectAllCartOfMember")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void selectTodayCartOfMember() {
 		log.trace("selectAllCartOfMember() invoked. ");
@@ -82,13 +82,41 @@ public class MemberGoodsCartMapperTests {
 	
 	@Test
 	@Order(3)
-	@DisplayName("Test1: selectAllCartOfMember")
+	@DisplayName("Test: selectAllCartOfMember")
 	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void insertRowIntoTodayCart() throws ServiceException{
 		log.trace("insertRowIntoTodayCart() invoked. ");
 		
 		try {
 			mapper.insertRowIntoTodayCart(198, 77, 2295427);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // selectAllCartOfMember
+	
+	@Test
+	@Order(4)
+	@DisplayName("Test: selectNumberOfGoods")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void selectNumberOfGoods() throws ServiceException{
+		log.trace("selectNumberOfGoods() invoked. ");
+		
+		try {
+			mapper.selectNumberOfGoods(198, 2295427);
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // selectAllCartOfMember
+	
+	@Test
+	@Order(5)
+	@DisplayName("Test: selectPicOfGoods")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void selectPicOfGoods() throws ServiceException{
+		log.trace("selectPicOfGoods() invoked. ");
+		
+		try {
+			mapper.selectPicOfGoods(198, 2295427);
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch

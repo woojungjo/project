@@ -99,28 +99,17 @@
 
                                             <table class="shoppingBasketList">
                                                 <tbody>
-                                                    <tr>
-                                                        <td><img src="/resources/imgs/mypageCart/waterMelon.PNG"
-                                                                alt="prdPicture"></td>
-
-                                                        <td>
-                                                            <h3>장바구니 번호: 1 </h3><br>
-                                                            장바구니 등록일: 230326<br>
-                                                            상품명: 수박 외 5건 <br><br>
-
-                                                            <p><a href="/mypage/cart/get">상세보기 </a> </p>
-
-                                                        </td>
-                                                    </tr>
-                                                    <c:forEach items="${__CARTVOS__}" var="cartVO" varStatus="number">
+                                                    <c:forEach items="${__CARTDTOS__}" var="cartDTO" varStatus="number">
                                                         <tr>
                                                             <td>
+                                                            	<img alt="picOfgoods" src="${cartDTO.picOfGoods}">
                                                             </td>
                                                             <td>
                                                                 <h3>장바구니 번호: ${number.index + 1}</h3>
-                                                                장바구니 등록일: ${cartVO.cart_creation_date}<br>
+                                                                장바구니 등록일: ${cartDTO.cart_creation_date}<br>
+                                                                상품 갯수: ${cartDTO.numberOfGoods} <br><br>
 
-                                                                <p><a href="/mypage/cart/get?cart_id=${cartVO.cart_id}">상세보기 </a> </p>
+                                                                <p><a href="/mypage/cart/get?cart_id=${cartDTO.cart_id}">상세보기 </a> </p>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>

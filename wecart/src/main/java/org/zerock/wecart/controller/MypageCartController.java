@@ -1,5 +1,9 @@
 package org.zerock.wecart.controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.wecart.domain.UserVO;
+import org.zerock.wecart.domain.pricecompare.CartDTO;
 import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
@@ -58,7 +63,7 @@ public class MypageCartController {
 		log.trace("arrangeByMonth() invoked. ");
 	}// arrangeByMonth  jhwan
 	 
-	// 장바구니 리스트 보여주기 (미완) => 해당 장바구니가 가지고 있는 아이템의 갯수와 사진을 view에 넘겨줘야 함.
+	// 장바구니 리스트 보여주기 (완)
 	@GetMapping("/list")
 	public ModelAndView list(@SessionAttribute("__AUTH__") UserVO userVO) throws ServiceException{
 		log.trace("list(userVO: {}) invoked. ", userVO);
@@ -66,9 +71,33 @@ public class MypageCartController {
 		try {
 			Integer member_id = Integer.parseInt(userVO.getMember_id());
 			List<CartVO> cartVOs = this.service.selectCartVOsOfMemberFromCart(member_id, "Installed");
+			List<CartDTO> cartDTOs = new ArrayList<>();
+			
+			for(CartVO cartvo : cartVOs){
+				// Timestamp를 변환시켜서 DTO에 넘겨준다
+				Timestamp timestamp = cartvo.getCart_creation_date();
+				long time = timestamp.getTime();
+				Date date = new Date(time);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String formattedDate = sdf.format(date);
+				
+				// get number of Goods
+				Integer numberOfGoods = this.service.selectNumberOfGoods(member_id, cartvo.getCart_id());
+				
+				// get pic of Goods in cart
+				String picOfGoods = this.service.selectPicOfGoods(member_id, cartvo.getCart_id());
+				
+				CartDTO cartDTO = new CartDTO();
+				cartDTO.setCart_id(cartvo.getCart_id());
+				cartDTO.setCart_creation_date(formattedDate);
+				cartDTO.setNumberOfGoods(numberOfGoods);
+				cartDTO.setPicOfGoods(picOfGoods);
+				
+				cartDTOs.add(cartDTO);
+			};
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("__CARTVOS__", cartVOs);
+			mav.addObject("__CARTDTOS__", cartDTOs);
 			mav.setViewName("mypage/cart/list");
 			
 		return mav;
