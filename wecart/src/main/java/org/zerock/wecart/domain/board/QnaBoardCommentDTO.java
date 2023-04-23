@@ -13,7 +13,8 @@ public class QnaBoardCommentDTO {
 	private Integer secret_yn;
 	private String content;
 	private Integer like_cnt;
-	private Integer high_comment_no;
 	private Timestamp write_dt;
-	private Integer comment_lv;
+	private Integer comment_root;
+	private Integer comment_step;
+	private Integer comment_indent;
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.QnaBoardVO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
@@ -54,21 +55,15 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	} // getList
 
 
+	@Transactional
 	@Override
 	public QnaBoardVO get(Integer post_no) throws ServiceException { // 게시물 상세조회
-//		public List<Object> get(Integer post_no) throws ServiceException { // 게시물 상세조회
 		log.trace("get() invoked.");
 		
 		try {
 			
-//			List<Object> result = new ArrayList<>();
-			QnaBoardVO qnaBoardVO = mapper.read(post_no);
-//			List<QnaBoardCommentVO> commentVO = commentMapper.selectAll(post_no);
-//			Integer commentCnt = commentMapper.countComment(post_no);
-			
-//			result.add(qnaBoardVO);
-//			result.add(commentVO);
-//			result.add(commentCnt);
+			this.mapper.updateViews(post_no);
+			QnaBoardVO qnaBoardVO = this.mapper.read(post_no);
 			
 			return qnaBoardVO;
 		} catch(Exception e) {
