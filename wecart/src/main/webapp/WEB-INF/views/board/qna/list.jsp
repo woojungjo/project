@@ -30,7 +30,7 @@
     </head>
     <body>
         
-        <div class="wrapper_contatiner">
+        <!-- <div class="wrapper_contatiner">
             <div class="wrapper">
                 
                 <header>
@@ -38,14 +38,14 @@
                         <div class="site_name">
                             <div class="WeCart">
                                 <span>우리동네<br>장바구니</span>
-                            </div> <!--WeCart-->
-                        </div>  <!--site_name-->
+                            </div> 
+                        </div> 
                         
                         <ul class="headerbar_menu">
                     <li>가격비교</li>
                     <li>커뮤니티</li>
                     <li>Q&A</li>
-                </ul><!--headerbar_menu-->
+                </ul>
                 
                 <ul class="header_login">
                     <li>개포동 <i class="fa-solid fa-location-dot"></i></li>
@@ -53,12 +53,19 @@
                     <li><i class="fa-regular fa-bell"></i></li>
                     <li><i class="fa-solid fa-piggy-bank"></i></li>
                     <li>Juuu</li>
-                </ul>   <!--header_login-->
+                </ul> 
                 
-            </div> <!--container-->
+            </div>
             
-        </header>
-        
+        </header> -->
+        <% Object auth = session.getAttribute("__AUTH__"); %>
+		
+		<% if(auth != null) { %>
+			<jsp:include page="../../header_footer/main_header.jsp" flush="true" />
+		<% } else { %>
+			<jsp:include page="../../header_footer/home_header.jsp" flush="true" />
+		<% } %>
+
         
         <main>
             <!--*********************************************메인 내용은 여기부터*********************************************-->
@@ -182,7 +189,7 @@
         
 
 
-    </div> <!-- wrapper: header+main-->
+    <!-- </div>
            <footer>
                <div class="footerText">
                     <p>
@@ -205,8 +212,8 @@
                     </p>
                </div>
            </footer>
-       </div> <!--wrapper_contatiner-->
-        
+       </div> -->
+       <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 </body>
 
 
