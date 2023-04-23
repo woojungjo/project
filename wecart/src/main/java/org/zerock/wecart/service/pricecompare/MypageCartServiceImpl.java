@@ -187,4 +187,5 @@ public class MypageCartServiceImpl implements MypageCartService{
 			throw new ServiceException(e);
 		}
 	} //selectNumberOfGoods
+	
 } // end class
