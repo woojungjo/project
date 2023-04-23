@@ -15,13 +15,14 @@ public class GoodsCriteria {
 	
 	private String keyword;
 	private String sort;
-	private Integer category_id;
+	private Integer category;
 	
 	public String getPagingUri() {
 		log.trace("getPagingUri() invoked.");
 		
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
 		if(keyword != null) builder.queryParam("keyword", this.keyword);
+		if(category != null) builder.queryParam("category", this.category);
 		builder.queryParam("currPage", this.currPage);
 		builder.queryParam("amount", this.amount);
 		builder.queryParam("pagesPerPage", this.pagesPerPage);		
@@ -32,30 +33,5 @@ public class GoodsCriteria {
 		
 		return queryString;
 	} //getPagingUri
-	
-	public String getSearchPagingUri() {
-		log.trace("getSearchPagingUri() invoked.");
-		
-		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
-		if(keyword != null) builder.queryParam("keyword", this.keyword);
-		builder.queryParam("sort", this.sort);
-		
-		String queryString = builder.toUriString();
-		log.info("\t+ queryString: {}", queryString);
-		
-		return queryString;
-	} //getSearchPagingUri
-	
-	public String getCatePagingUri() {
-		log.trace("getSearchPagingUri() invoked.");
-		
-		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
-		if(keyword != null) builder.queryParam("keyword", this.keyword);
-		builder.queryParam("category_id", this.category_id);
-		
-		String queryString = builder.toUriString();
-		log.info("\t+ queryString: {}", queryString);
-		
-		return queryString;
-	} //getCatePagingUri
+
 } //end class

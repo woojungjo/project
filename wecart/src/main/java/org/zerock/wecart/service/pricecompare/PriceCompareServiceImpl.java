@@ -54,13 +54,15 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	} //getList
 
 	@Override
-	public Integer getTotalAmount(String keyword) throws ServiceException {
+	public Integer getTotalAmount(String keyword, Integer category) throws ServiceException {
 		log.trace("getTotalAmount() invoked.");
 		
 		
 		
 		try {
+
 			return this.priceCompareMapper.selectTotalCount(keyword);
+
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch

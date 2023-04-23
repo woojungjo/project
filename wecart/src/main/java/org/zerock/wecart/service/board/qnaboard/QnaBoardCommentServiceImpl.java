@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
 import org.zerock.wecart.domain.board.QnaBoardCommentVO;
 import org.zerock.wecart.exception.ServiceException;
@@ -40,8 +41,14 @@ public class QnaBoardCommentServiceImpl implements QnaBoardCommentService {
 		return commentCnt;
 	}
 
+	@Transactional
 	@Override
 	public boolean register(QnaBoardCommentDTO dto) throws ServiceException {
+		
+		
+		if(dto.getComment_root() != null) {
+			commentMapper.updateCommentStepIndent(dto);
+		}
 		
 		boolean result = commentMapper.insertComment(dto);
 		

@@ -22,12 +22,22 @@
               </ul><!--headerbar_menu-->
 
               <ul class="header_login">
-                  <li><a href="#">개포동 <i class="fa-solid fa-location-dot"></i></a></li>
+                  <li id="dong-info"><a href="/"><i class="fa-solid fa-location-dot"></i></a></li>
                   <li><a href="/user/login">로그인</a></li>
               </ul><!--header_login-->
 
           </div> <!--container-->
-      
+          
+	     	 <script>
+			  // Add an event listener to the #dong-info element
+			  document.querySelector("#dong-info").addEventListener("click", function(event) {
+			    // Prevent the default link behavior
+			    event.preventDefault();
+			    
+			    // Call the sample6_execDaumPostcode function
+			    sample6_execDaumPostcode();
+			  });
+			</script>
       </header>
 
 

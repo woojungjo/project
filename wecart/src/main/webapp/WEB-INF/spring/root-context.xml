@@ -8,13 +8,15 @@
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
+
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<!-- JDBC 연결생성을 위한 필수 4가지 정보 -->
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@khdatabasestudy_high?TNS_ADMIN=C:/opt/OracleCloudWallet/ATP" />
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:oracle:thin:@khdatabasestudy_high?TNS_ADMIN=C:/opt/OracleCloudWallet/VFX" />
 		<property name="username" value="FINAL" />
 		<property name="password" value="Oracle12345678" />
 
@@ -22,47 +24,60 @@
 		<property name="minimumIdle" value="2" />
 		<property name="idleTimeout" value="10000" />
 		<property name="connectionTimeout" value="2000" />
-		<property name="connectionTestQuery" value="SELECT 1 FROM dual" />
+		<property name="connectionTestQuery"
+			value="SELECT 1 FROM dual" />
 		<property name="connectionInitSql" value="SELECT 1 FROM dual" />
 		<property name="dataSourceJNDI" value="jdbc/HikariCP" />
 		<property name="poolName" value="* HikariDataSource *" />
 	</bean>
 
-	<bean
-		id="hikariDataSource"
-		class="com.zaxxer.hikari.HikariDataSource"
-		destroy-method="close">
+	<bean id="hikariDataSource"
+		class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="hikariDataSource" />
-		<!-- <property name="configLocation" value="classpath:mybatis-config.xml" /> -->
+		<!-- <property name="configLocation" value="classpath:mybatis-config.xml" 
+			/> -->
 		<!-- <property name="mapperLocations" value="classpath*:mappers/SQL*.xml"/> -->
 	</bean>
-	
+
 	<!-- 메일 보내기 빈 -->
-	<bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="이메일" />
-		<property name="password" value="비밀번호" />
+		<property name="username" value="" />
+		<property name="password" value="" />
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.transport.protocol">smtp</prop>
 				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.port">587</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				<prop key="mail.smtp.ssl.enable">false</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.smtp.starttls.required">true</prop>
-				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.socketFactory.class">
+					javax.net.ssl.SSLSocketFactory
+				</prop>				
 			</props>
 		</property>
 	</bean>
 
 
-	<context:component-scan base-package="org.zerock.wecart.domain" />
-	<context:component-scan base-package="org.zerock.wecart.service" />
-	<context:component-scan base-package="org.zerock.wecart.listener" />
-	<mybatis-spring:scan base-package="org.zerock.wecart.mapper" />
+	<context:component-scan
+		base-package="org.zerock.wecart.domain" />
+	<context:component-scan
+		base-package="org.zerock.wecart.service" />
+	<context:component-scan
+		base-package="org.zerock.wecart.listener" />
+	<mybatis-spring:scan
+		base-package="org.zerock.wecart.mapper" />
 
 </beans>

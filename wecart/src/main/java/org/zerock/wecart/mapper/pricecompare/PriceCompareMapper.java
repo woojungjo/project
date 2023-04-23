@@ -12,7 +12,7 @@ public interface PriceCompareMapper {
 	public abstract List<GoodsVO> selectAll(GoodsCriteria cri);
 	
 	//2. 총 상품 개수 반환
-	public abstract Integer selectTotalCount(String keyword);
+	public abstract Integer selectTotalCount(String keyword, Integer category);
 	
 	//3. 상품 검색
 	public abstract List<GoodsVO> selectSearch(GoodsCriteria cri);

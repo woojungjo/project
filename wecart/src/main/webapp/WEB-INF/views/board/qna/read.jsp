@@ -28,34 +28,41 @@
 </head>
 <body>
     
-    <div class="wrapper_contatiner">
-        <div class="wrapper">
-            
-        <header>
-            <div class="container">
-                <div class="site_name">
-                         <div class="WeCart">
-                            <span>우리동네<br>장바구니</span>
-                        </div> <!--WeCart-->
-                </div>  <!--site_name-->
-
-                <ul class="headerbar_menu">
+            <!-- <div class="wrapper_contatiner">
+            <div class="wrapper">
+                
+                <header>
+                    <div class="container">
+                        <div class="site_name">
+                            <div class="WeCart">
+                                <span>우리동네<br>장바구니</span>
+                            </div> 
+                        </div> 
+                        
+                        <ul class="headerbar_menu">
                     <li>가격비교</li>
                     <li>커뮤니티</li>
                     <li>Q&A</li>
-                </ul><!--headerbar_menu-->
-
+                </ul>
+                
                 <ul class="header_login">
                     <li>개포동 <i class="fa-solid fa-location-dot"></i></li>
                     <li><i class="fa-regular fa-comment-dots"></i></li>
                     <li><i class="fa-regular fa-bell"></i></li>
                     <li><i class="fa-solid fa-piggy-bank"></i></li>
                     <li>Juuu</li>
-                </ul>   <!--header_login-->
-
-            </div> <!--container-->
-        
-        </header>
+                </ul> 
+                
+            </div>
+            
+        </header> -->
+        <% Object auth = session.getAttribute("__AUTH__"); %>
+		
+		<% if(auth != null) { %>
+			<jsp:include page="../../header_footer/main_header.jsp" flush="true" />
+		<% } else { %>
+			<jsp:include page="../../header_footer/home_header.jsp" flush="true" />
+		<% } %>
 	
 	
         <main>
@@ -103,8 +110,9 @@
                         <!-- 멤버아이디는 세션에 올라간 로그인된 사용자아이디 사용, 밑에 댓글작성자(로그인된유저)도 같은데이터사용 -->
                         <input type="hidden" name="secret_yn" value="0">
                         <input type="hidden" name="like_cnt" value="0">
-                        <input type="hidden" name="comment_lv" value="0">
-                        <input type="hidden" name="high_comment_no" value="0">
+                        <input type="hidden" name="comment_root">
+                        <input type="hidden" name="comment_step" value="0">
+                        <input type="hidden" name="comment_indent" value="0">
                         <div>댓글작성자(로그인된유저)</div>
                         <input type="text" name="content" placeholder="댓글을 남겨보세요.">
                         <div class="board_commant_write_footer" >
@@ -113,7 +121,7 @@
                         </div>
                     </form>
                     <c:forEach items="${commentVO}" var="commentList">
-                        <div class="board_commant_read">
+                        <div class="board_commant_read" style="padding-left: ${commentList.comment_indent * 20}px;">
                             <div class="board_commant_read_header">
                                 <div class="board_commant_read_header_namegroup">
                                     <div class="fas fa-piggy-bank"></div>
@@ -142,14 +150,15 @@
                         </div>
                         <hr>
                         
-                        <div class="board_commant_commant_write">
+                        <div class="board_commant_commant_write hidden">
                             <form class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
                                 <input type="hidden" name="post_no" value="${readVO.post_no}">
-                                <input type="hidden" name="member_id" value="123"> 
-                                <input type="hidden" name="seclet_yn" value="0">
+                                <input type="hidden" name="member_id" value="334"> 
+                                <input type="hidden" name="secret_yn" value="0">
                                 <input type="hidden" name="like_cnt" value="0">
-                                <input type="hidden" name="comment_lv" value="${commentList.comment_lv + 1}">
-                                <input type="hidden" name="high_comment_no" value="${commentList.comment_no}">
+                                <input type="hidden" name="comment_root" value="${commentList.comment_root}">
+                                <input type="hidden" name="comment_step" value="${commentList.comment_step + 1}">
+                                <input type="hidden" name="comment_indent" value="${commentList.comment_indent + 1}">
                                 <div>댓글작성자(로그인된유저)</div>
                                 <input type="text" name="content" placeholder="댓글을 남겨보세요.">
                                 <div class="board_commant_write_footer" >
@@ -168,19 +177,19 @@
         
 
 
-    </div> <!-- wrapper: header+main-->
+    <!-- </div>
            <footer>
                <div class="footerText">
-                   <p>
+                    <p>
                        WeCart
                        <span>
                            <a href="">사업자 정보</a>
                            <a href="">이용약관</a>
                            <a href="">개인정보처리방침</a>
                        </span>
-                   </p>
+                    </p>
                    
-                   <p>
+                    <p>
                        Woojungjo
                        <a href="https://github.com/zuxico123">감성현</a>
                        <a href="https://github.com/KimYongSae">김용세</a>
@@ -191,7 +200,8 @@
                     </p>
                </div>
            </footer>
-       </div> <!--wrapper_contatiner-->
+       </div> -->
+       <jsp:include page="../../header_footer/footer.jsp" flush="true" />
         
 </body>
 

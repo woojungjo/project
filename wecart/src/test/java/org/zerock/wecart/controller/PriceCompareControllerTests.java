@@ -73,6 +73,7 @@ public class PriceCompareControllerTests {
 		MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.get("/priceCompare/list"); 
 		requestBuilder.param("currPage", "11");
 		requestBuilder.param("amount", "40");
+		requestBuilder.param("category", "1");
 //		requestBuilder.param("sort", "popular");
 		requestBuilder.param("sort", "low");
 //		requestBuilder.param("sort", "high");
@@ -99,6 +100,7 @@ public class PriceCompareControllerTests {
 		requestBuilder.param("currPage", "1");
 		requestBuilder.param("amount", "40");
 		requestBuilder.param("keyword", "product_1");
+		requestBuilder.param("category", "1");
 		
 		@Cleanup("clear")
 		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();

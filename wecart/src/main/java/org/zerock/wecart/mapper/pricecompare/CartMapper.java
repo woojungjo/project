@@ -11,6 +11,7 @@ public interface CartMapper {
 
 	
 	// 장바구니를 생성
+
 	@Insert("""
 			INSERT INTO cart (cart_creation_date, API_date, status)
 			VALUES (#{cart_creation_date}, #{API_date}, #{status})

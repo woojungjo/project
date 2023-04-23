@@ -8,5 +8,6 @@ public class UserDTO {
 	private String pwd;
 	private String alias;
 	private String email;
-
+	private String mobile_num;
+	
 }
