@@ -118,14 +118,8 @@
              
 	    	alert("상품이 찜목록에 담겼습니다");
 	    	
-	    	const url = 'http://localhost:8080/priceCompare/addPrd';
-	        const data = { item: '수박', id: 1237 };
-	        const xhr = new XMLHttpRequest();
-	        xhr.open('POST', url);
-	        xhr.setRequestHeader('Content-Type', 'application/json');
-	        
 	        var json = {goods_id: '${__GOODS__.goods_id}'};
-	    	$.ajax('/mypage/cart/saveGoodsIntoWishGoods', {
+	    	$.ajax('/mypage/cart/saveGoodsIntoWishedGoods', {
 	    		
 	    		type: 'post',
 	    		data: JSON.stringify(json),
