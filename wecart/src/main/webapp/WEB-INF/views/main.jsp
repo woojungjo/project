@@ -66,7 +66,7 @@
                 document.querySelector(".adr").value = data.bname;
 
                 // Get the address link element
-                const addressLink = document.querySelector("#dong-info a");
+                const addressLink = document.querySelector("#dong-info");
                 // Update the link text with the new address value
                 addressLink.textContent = data.bname + " ";
                 // Create a new location icon element
@@ -93,17 +93,6 @@
         }).open();
     } //sample6_execDaumPostcode()
     
-                  /*
-                  data: JSON.stringify({
-                      'bname': data.bname
-                    }),
-
-                  data : jsondongInfo,
-                  
-                  data: {
-                      'bname': data.bname
-                    },
-                    */
 </script>
 
 </html>

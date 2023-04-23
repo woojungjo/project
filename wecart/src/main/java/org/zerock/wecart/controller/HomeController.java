@@ -1,5 +1,8 @@
 package org.zerock.wecart.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,11 +44,12 @@ public class HomeController {
 
     @PostMapping("/main")   // 메인화면으로 이동
     @ResponseBody
-    public String main(
+    public void main(
     		Model model, 
     		@RequestBody String jsondongInfo, 
     		SessionStatus sessionStatus, 
-    		@SessionAttribute("__AUTH__") UserVO auth
+    		@SessionAttribute("__AUTH__") UserVO auth,
+    		HttpServletRequest request
     		) throws ControllerException {
     	log.trace("main ({}, {}) invoked.", jsondongInfo, model);
     		
@@ -58,13 +62,15 @@ public class HomeController {
             if(loginId != null) { 
 
         		this.service.update(townName, loginId);
-        		
                 log.info("loginId:{}, townName:{}", loginId, townName);
-            } else {
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("__TOWN_NAME__", townName);
+                } else {
                 log.info("loginId = null");
             }
             
-    		return "main";
+    		//return "main";
     	}catch(Exception e) {
     		
     		throw new ControllerException(e);

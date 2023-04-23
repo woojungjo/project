@@ -100,3 +100,7 @@ header .header_login{
 .WeCart a:link, .WeCart a:visited, .headerbar_menu a:link, .headerbar_menu a:visited, .header_login a:link, .header_login a:visited{
 	color: white;
 }
+
+#dong-info :hover{
+	cursor: pointer;
+}
