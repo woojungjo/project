@@ -92,9 +92,13 @@ public class PriceCompareController {
 	throws ControllerException {
 		log.trace("showPrd() invoked. ");
 
+		boolean checkUpdate = true;
 		try {
 			GoodsVO goods = this.service.select(goods_id);
 			log.trace("goods: {}", goods);
+			
+			checkUpdate = this.service.updateReadcntOfGoods(goods_id);
+			log.trace("상품 조회수가 +1 되었는지 여부: {}", checkUpdate);
 			
 			// 회원의 id와 
 			model.addAttribute("__GOODS__", goods);
