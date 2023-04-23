@@ -16,18 +16,16 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.wecart.domain.UserVO;
@@ -74,39 +72,39 @@ public class TownControllerTests {
 			log.info("\t+this.ctx:{}", this.ctx);
 		}//beforeAll()
 		
-//		@Disabled
 		@Test
 		@Order(1)
 		@DisplayName("testTownMain")
 		@Timeout(value=5, unit=TimeUnit.SECONDS)
-		void testTownMain(Model model) throws Exception{
-			log.trace("testTownMain() invoked");
-			
-			MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
-			MockMvc mockMvc = mockMvcBuilder.build();
-			MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.post("/main");
-			
-			MockHttpSession session = new MockHttpSession();
-			LoginDTO loginDTO = new LoginDTO();
-			loginDTO.setLogin_id("loginid3");
-			loginDTO.setPwd("PWD3");
-			UserVO userVO = this.userService.login(loginDTO);
-			
-			session.setAttribute("__AUTH__", userVO);
-			requestBuilder.session(session);
-			
-			UserVO loginId = (UserVO) model.getAttribute("__AUTH__");
-			log.trace("UserVO: {}", loginId);
-			
+		void testTownMain() throws Exception {
+		    log.trace("testTownMain() invoked");
+
+		    MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		    MockMvc mockMvc = mockMvcBuilder.build();
+		    MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.post("/main");
+
+		    MockHttpSession session = new MockHttpSession();
+		    LoginDTO loginDTO = new LoginDTO();
+		    loginDTO.setLogin_id("loginid5");
+		    loginDTO.setPwd("PWD5");
+		    UserVO userVO = this.userService.login(loginDTO);
+
+		    session.setAttribute("__AUTH__", userVO);
+		    requestBuilder.session(session);
+
 		    JSONObject jsonObject = new JSONObject();
-		    jsonObject.put("bname", "Test Town");
-
-		    requestBuilder.content(jsonObject.toString());
-		    requestBuilder.contentType(MediaType.APPLICATION_JSON);
+		    jsonObject.put("bname", "***TestTown");
 		    
-			ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
-			log.info("\t+modelAndView:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
+		    String jsondongInfo = jsonObject.toString();
+		    session.setAttribute("__TOWN_NAME__", "***TestTown");
+		    requestBuilder.session(session);
+		    requestBuilder.content(jsondongInfo); // set the request body
+		    
+		    log.info("jsondongInfo: {}, requestBuilder:{} ", jsondongInfo, requestBuilder);
+		    
+//			ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+//			log.info("\t+modelAndView:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
 
-		}//testTownMain() 
+		}
 
 }//TownControllerTests

@@ -45,8 +45,14 @@
 
 </head>
 <body>
-	<jsp:include page="../../header_footer/main_header.jsp" flush="true" />
- 	
+	<!-- jsp:include page="../../header_footer/main_header.jsp" flush="true" /-->
+ 	  <% Object auth = session.getAttribute("__AUTH__"); %>
+      
+      <% if(auth != null) { %>
+         <jsp:include page="../../header_footer/main_header.jsp" flush="true" />
+      <% } else { %>
+         <jsp:include page="../../header_footer/home_header.jsp" flush="true" />
+      <% } %>
  	 <main>
         <!--*********************************************메인 내용은 여기부터*********************************************-->
         
