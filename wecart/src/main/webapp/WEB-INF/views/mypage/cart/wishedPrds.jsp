@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -24,65 +28,65 @@
 		// 버튼 옆에 있는 찜한 상품을 카트로 보내는 함수
 	    // 담기에 해당하는 객체를 받아 
 	    // /todayCart/register 로 보내는 방법
-	    function saveGoodsToTodayCart(){
-	    	alert("상품이 카트에 담겼습니다");
+	    function saveGoodsToTodayCart(goodsIdValue){
 	    	
-    		var json = {goods_id: '${__GOODS__.goods_id}'};
+    		var json = {goods_id: goodsIdValue};
     		$.ajax('/mypage/cart/saveGoodsIntoTodayCart',
 			{
     			type: 'post',
     			//url: '/todayCart/register',
-    			data: JSON.stringify({goods_id: '${__GOODS__.goods_id}'}),
+    			data: JSON.stringify({goods_id: goodsIdValue}),
     			contentType: "application/json; charset=utf-8",
     			success: function(object){
 
     				console.log("success의 경우를 확인합니다. ");
-    				console.log("user: " + user);
     				console.log("object: " + object);
-    			},
+    				if(object == "false" ){
+    					alert("Today cart already save this goods");
+    				}else{
+    			    	alert("상품이 카트에 담겼습니다");
+    				}
+    				
+    			}, // Success
     			error: function(object){
 
     				console.log("error의 경우를 확인합니다.");
     				console.log("user: "+ user);
     				console.log("object: " + object);
 
-    			}
-			});
+    			} // Error
+			}); // AJAX
 	    } // saveGoodsToTodayCart()
 	    
 	    
 	    // 해당 상품을 찜목록에서 삭제하는 함수
-	    function deleteDiv(btn){
-            
-
+	    function deleteGoods(goodsIdValue){
             var result = confirm("해당 상품을 삭제하시겠습니까?");
 
             if(result){
                 alert("상품이 삭제되었습니다.");
-
-                var divTag = btn.parentNode.parentNode;
-                var hrTag = divTag.previousElementSibling;
-
-                var numberElement = document.getElementById("numberOfPrd");
-                var changedNumber = parseInt(numberElement.innerText);
-                changedNumber -= 1;
-                numberElement.innerText = changedNumber;
-
-
-                hrTag.remove();
-                divTag.remove();
-                console.log(hrTag) ;
-    
+				
+                var data = {goods_id : goodsIdValue};
                 
-                window.location.href = "/mypage/cart/wishedPrdsRemoved";
+				$.ajax('/mypage/cart/removeWishedGoods', 
+				{
+					type: 'post',
+					data: JSON.stringify(data),
+					contentType: "application/json; charset=utf-8",
+					success: function(object) {
+						console.log('Success of AJAX');
+						window.location = "/mypage/cart/wishedPrds";
+					},
+					error: function(){
+						console.log('Failure of AJAX');
+					}
+				}) // AJAX
             } // if
         } // deleteDiv(btn)
-
-    
+       
     </script>
 
 </head>
-
 <body>
 		<% Object auth = session.getAttribute("__AUTH__"); %>
 		
@@ -133,104 +137,36 @@
 
 						<div class="discription"
 							style="display: inline-block; font-size: 1.5em; font-weight: bold;">
-							찜한 상품(<strong id="numberOfPrd">5</strong>)
+							
+							 <c:set var="numGoods" value="${fn:length(__GOODS_OBJECT_LIST__)}" />
+							찜한 상품(<strong id="numberOfPrd">${fn:length(__GOODS_OBJECT_LIST__)}</strong>)
 						</div>
 						<span>&nbsp; &nbsp; &nbsp; &nbsp; 찜한 상품은 최대 200개까지 저장합니다.</span>
 
 
 
 						<hr>
+						<c:forEach items="${__GOODS_OBJECT_LIST__}" var="goods" varStatus="number">
 						<div class="managePrds">
 							<div class="leftAsUserStandard">
-								<img src="/resources/imgs/mypageCart/waterMelon.PNG"
+								
+								<img src="${goods.goods_pic}"
 									alt="prdPicture">
 
 								<div class="leftWordsAsUserStandard">
-									<div>[자연실록] 당도 높은 맛있는 꿀수박 1kg</div>
+									<div>상품명: ${goods.goods_name}</div>
 								</div>
 							</div>
 
 							<div class="rightAsUserStandard">
-								<button onclick="deleteDiv(this)">삭제</button>
-								<button class="mypick_bt" onclick="saveGoodsToTodayCart()">
+								<button onclick="deleteGoods('${goods.goods_id}')">삭제</button>
+								<button class="mypick_bt" onclick="saveGoodsToTodayCart('${goods.goods_id}')">
 									<i class="fa-solid fa-cart-shopping fa-1x"></i> 담기
 								</button>
 							</div>
 						</div>
 						<hr>
-						<div class="managePrds">
-							<div class="leftAsUserStandard">
-								<img src="/resources/imgs/mypageCart/waterMelon.PNG"
-									alt="prdPicture">
-
-								<div class="leftWordsAsUserStandard">
-									<div>[자연실록] 당도 높은 맛있는 꿀수박 1kg</div>
-								</div>
-							</div>
-
-							<div class="rightAsUserStandard">
-								<button onclick="deleteDiv(this)">삭제</button>
-								<button class="mypick_bt">
-									<i class="fa-solid fa-cart-shopping fa-1x"></i> 담기
-								</button>
-							</div>
-						</div>
-
-						<hr>
-						<div class="managePrds">
-							<div class="leftAsUserStandard">
-								<img src="/resources/imgs/mypageCart/waterMelon.PNG"
-									alt="prdPicture">
-
-								<div class="leftWordsAsUserStandard">
-									<div>[자연실록] 당도 높은 맛있는 꿀수박 1kg</div>
-								</div>
-							</div>
-
-							<div class="rightAsUserStandard">
-								<button onclick="deleteDiv(this)">삭제</button>
-								<button class="mypick_bt">
-									<i class="fa-solid fa-cart-shopping fa-1x"></i> 담기
-								</button>
-							</div>
-						</div>
-						<hr>
-						<div class="managePrds">
-							<div class="leftAsUserStandard">
-								<img src="/resources/imgs/mypageCart/waterMelon.PNG"
-									alt="prdPicture">
-
-								<div class="leftWordsAsUserStandard">
-									<div>[자연실록] 당도 높은 맛있는 꿀수박 1kg</div>
-								</div>
-							</div>
-
-							<div class="rightAsUserStandard">
-								<button onclick="deleteDiv(this)">삭제</button>
-								<button class="mypick_bt">
-									<i class="fa-solid fa-cart-shopping fa-1x"></i> 담기
-								</button>
-							</div>
-						</div>
-						<hr>
-						<div class="managePrds">
-							<div class="leftAsUserStandard">
-								<img src="/resources/imgs/mypageCart/waterMelon.PNG"
-									alt="prdPicture">
-
-								<div class="leftWordsAsUserStandard">
-									<div>[자연실록] 당도 높은 맛있는 꿀수박 1kg</div>
-								</div>
-							</div>
-
-							<div class="rightAsUserStandard">
-								<button onclick="deleteDiv(this)">삭제</button>
-								<button class="mypick_bt">
-									<i class="fa-solid fa-cart-shopping fa-1x"></i> 담기
-								</button>
-							</div>
-						</div>
-						<hr>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

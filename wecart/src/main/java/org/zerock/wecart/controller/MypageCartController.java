@@ -59,11 +59,12 @@ public class MypageCartController {
 		log.trace("currentPrice() invoked.");
 	} //currentPrice
 	
-	// 장바구니 리스트들을 일주일, 한달, 3개월 6개월 순으로 보여주기 (미완)
-	@PostMapping("/arrangeByMonth")
-	public void arrangeByMonth() {
-		log.trace("arrangeByMonth() invoked. ");
-	}// arrangeByMonth  jhwan
+//	/list controller에서 기능 구현 Deprecated
+//	// 장바구니 리스트들을 일주일, 한달, 3개월 6개월 순으로 보여주기 (미완)
+//	@PostMapping("/arrangeByMonth")
+//	public void arrangeByMonth() {
+//		log.trace("arrangeByMonth() invoked. ");
+//	}// arrangeByMonth  jhwan
 	
 	 
 	// 장바구니 리스트 보여주기 (완)
@@ -87,31 +88,20 @@ public class MypageCartController {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String formattedDate = sdf.format(date);
 				
-				
-				/*
-				 * java.util.Timestamp timestamp = new java.util.Timestamp(System.currentTimeMillis());
-				java.util.Timestamp targetTimestamp = ... // Timestamp 값을 가져오는 코드가 들어갑니다.
-				
-				long diffInMilliseconds = Math.abs(timestamp.getTime() - targetTimestamp.getTime());
-				long diffInDays = TimeUnit.DAYS.convert(diffInMilliseconds, TimeUnit.MILLISECONDS);
-				
-				if (diffInDays <= 7) {
-				    return true;
-				} else {
-				    return false;
-				}
-
-				 * 
-				 */
 				boolean check = true;
+				long diffInDays = 0;
 				if(!period.equals("0")) {
 					
 					Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 					long diffInMilliseconds = Math.abs(currentTime.getTime() - timestamp.getTime());
-					long diffInDays = TimeUnit.DAYS.convert(diffInMilliseconds, TimeUnit.MILLISECONDS);
+					diffInDays = TimeUnit.DAYS.convert(diffInMilliseconds, TimeUnit.MILLISECONDS);
+					int days = (int)diffInDays;
+					
+					log.trace("currentTime: {} - timestamp: {}", currentTime, timestamp);
+					log.trace("diffInDays: {}", diffInDays);
 					
 					check = switch(period){
-						case "1week" -> {
+						case "week" -> {
 							if(diffInDays<=7) {
 								yield true;
 							}else {
@@ -125,15 +115,15 @@ public class MypageCartController {
 								yield false;
 							} // if-else
 						}
-						case "3month" -> {
+						case "3months" -> {
 							if(diffInDays<=90) {
 								yield true;
 							}else {
 								yield false;
 							} // if-else
 						}
-						case "6month" -> {
-							if(diffInDays<=180) {
+						case "6months" -> {
+							if(days<=180) {
 								yield true;
 							}else {
 								yield false;
@@ -142,9 +132,10 @@ public class MypageCartController {
 						
 						default -> false;
 					}; // switch
-				} //
+				} // if
 				
 				if(!check) {
+					log.trace("diffInDays: {}, check: {}", diffInDays, check);
 					continue;
 				} // if
 				
@@ -246,12 +237,13 @@ public class MypageCartController {
 //	@PostMapping("/addPrd")
 	@PostMapping("/saveGoodsIntoWishedGoods")
 	@ResponseBody
-	public String saveGoodsIntoWishedGoods(Model model, @RequestBody HashMap<String, Integer> goods) throws ServiceException{
+	public String saveGoodsIntoWishedGoods(
+			@SessionAttribute("__AUTH__") UserVO userVO, 
+			@RequestBody HashMap<String, Integer> goods) throws ServiceException{
 		log.trace("saveGoodsIntoWishedGoods() invoked. ");
 		
 		try {
 			Integer goods_id = goods.get("goods_id");
-			UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
 			Integer member_id = Integer.parseInt(userVO.getMember_id());
 			
 			// wish_list row에 추가
@@ -266,12 +258,14 @@ public class MypageCartController {
 	// 찜한 상품 목록에서 상품 삭제 (완)
 	@PostMapping("/removeWishedGoods")
 	@ResponseBody
-	public String removeWishedGoods(Model model, @RequestBody HashMap<String, Integer> goods) throws ServiceException{
-		log.trace("removeWishedGoods() invoked. ");
+	public String removeWishedGoods(
+			@SessionAttribute("__AUTH__") UserVO userVO, 
+			@RequestBody HashMap<String, Integer> goods
+			) throws ServiceException{
+		log.trace("removeWishedGoods(userVO: {}, goods: {}) invoked. ", userVO, goods);
 		
 		try {
 			Integer goods_id = goods.get("goods_id");
-			UserVO userVO = (UserVO)model.getAttribute("__AUTH__");
 			Integer member_id = Integer.parseInt(userVO.getMember_id());
 			
 			// wish_list row에 삭제
