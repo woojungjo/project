@@ -61,7 +61,7 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 		
 		try {
 
-			return this.priceCompareMapper.selectTotalCount(keyword);
+			return this.priceCompareMapper.selectTotalCount(keyword, category);
 
 		} catch(Exception e) {
 			throw new ServiceException(e);

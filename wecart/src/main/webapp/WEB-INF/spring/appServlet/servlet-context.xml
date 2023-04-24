@@ -47,6 +47,12 @@
 			<beans:ref bean="logoutInterceptor" />
 		</interceptor>
 		
+		<interceptor>
+			<mapping path="/todayCart/cartList" />
+
+			<beans:ref bean="todayCartInterceptor" />
+		</interceptor>
+		
 	</interceptors>
 	
 </beans:beans>
