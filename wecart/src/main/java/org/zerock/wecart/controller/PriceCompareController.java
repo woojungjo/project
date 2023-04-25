@@ -25,7 +25,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/priceCompare")
 @Controller
 public class PriceCompareController {
-	
 	private PriceCompareService service;
 
 	@Autowired
@@ -81,7 +80,6 @@ public class PriceCompareController {
 		
 		return "forward:listPage";
 	} //search
-
 
 	// 한 상품을 디테일하게 보여줌 (완)
 	@GetMapping("/showPrd/{goods_id}")

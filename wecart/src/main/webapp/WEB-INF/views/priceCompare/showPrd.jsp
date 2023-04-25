@@ -116,7 +116,13 @@
                  } // if - else
              } // changedHeart
              
-	    	alert("상품이 찜목록에 담겼습니다");
+    		if(user == "null"){
+    			alert("로그인을 부탁드립니다. ");				
+    			window.location = "/user/login";
+    		} // if 
+    		else{
+	    		alert("상품이 찜목록에 담겼습니다");
+    		} // 
 	    	
 	        var json = {goods_id: '${__GOODS__.goods_id}'};
 	    	$.ajax('/mypage/cart/saveGoodsIntoWishedGoods', {
@@ -264,5 +270,4 @@
 		<jsp:include page="../header_footer/footer.jsp" flush="true" />
 
 </body>
-
 </html>

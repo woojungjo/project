@@ -42,4 +42,4 @@ public interface MypageCartService {
 	
 	// 해당 멤버가 가지고 있는 카트에 임의의 goods의 사진을 반환한다.
 	public abstract String selectPicOfGoods(Integer member_id, Integer cart_id) throws ServiceException;
-}
+} // end MypageCartService
