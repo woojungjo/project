@@ -6,7 +6,7 @@
     <div class="wrapper_contatiner">
       <div class="wrapper">
        
-        <header>
+        <header>	
             <div class="container">
                 <div class="site_name">
                          <div class="WeCart">
@@ -21,7 +21,17 @@
                 </ul><!--headerbar_menu-->
 
                 <ul class="header_login">
-                    <li id="dong-info" onclick="sample6_execDaumPostcode()"><i class="fa-solid fa-location-dot"><%= session.getAttribute("__TOWN_NAME__") %></i></a></li>
+                    <li id="dong-info" onclick="sample6_execDaumPostcode()"><i class="fa-solid fa-location-dot">
+                    <!-- %= session.getAttribute("__TOWN_NAME__") %-->
+                       <% 
+					    String townName = (String) session.getAttribute("__TOWN_NAME__");
+					    if (townName != null) {
+					        out.print(townName);
+					    } else {
+					        out.print("&nbsp;");
+					    }
+					    %>
+                    </i></li>
                     <li><a href="/"><i class="fa-regular fa-comment-dots"></i></a></li>
                     <li><a href="/"><i class="fa-regular fa-bell"></i></a></li>
                     <li><a href="/"><i class="fa-solid fa-piggy-bank"></i></a></li>
@@ -87,11 +97,13 @@
 		                  success: function(data) {
 		                    console.log('Successfully stored bname: ' + data);
 		                  },
-		                  error: function() {
-		                    console.error('Failed to store bname.');
-		                  }
+		                  error: function (jqXHR, textStatus, errorThrown) {
+		                	  console.debug('error invoked.');
+		                        console.log('textStatus: ${textStatus}, errorThrown: ${errorThrown}');
+		                    }//error
+		                  
 		                });//ajax
-		            } 
+		            }
 		        }).open();
 		    } //sample6_execDaumPostcode()
 		    </script>

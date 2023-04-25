@@ -87,6 +87,7 @@ public class TownControllerTests {
 		    LoginDTO loginDTO = new LoginDTO();
 		    loginDTO.setLogin_id("loginid5");
 		    loginDTO.setPwd("PWD5");
+		    
 		    UserVO userVO = this.userService.login(loginDTO);
 
 		    session.setAttribute("__AUTH__", userVO);
@@ -102,8 +103,11 @@ public class TownControllerTests {
 		    
 		    log.info("jsondongInfo: {}, requestBuilder:{} ", jsondongInfo, requestBuilder);
 		    
-//			ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
-//			log.info("\t+modelAndView:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
+		    //추후에 다시 테스트,
+		    //controller에서 @SessionAttributes 하지 말고>> Interceptor로 하기 !
+		    //ModelAndView = null; 
+			ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+			log.info("\t+modelAndView:{}", modelAndView);
 
 		}
 

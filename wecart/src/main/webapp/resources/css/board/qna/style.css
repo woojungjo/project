@@ -47,12 +47,14 @@ color: black;
     padding-bottom: 100px;
     width: 1130px;
 }  */
+
  #board_main{
   margin: 0 auto;
   padding-bottom: 150px;
   width: 1130px;
 
 }
+
 #qna_board_read{
   display: grid;
   margin: 100px 0px;

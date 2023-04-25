@@ -2,20 +2,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<% String ctx = request.getContextPath();    //콘텍스트명 얻어오기.%>
-
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <title>WeCart</title>
-        <script type="text/javascript" src="/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8" defer></script>
+       
         <script src="https://kit.fontawesome.com/a623128410.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
         rel="stylesheet">
         	
-        <!--  script src="/resources/js/board/mate/list.js" defer></script-->
+        <script src="/resources/js/board/mate/list.js" defer></script>
 		<script src="/resources/js/board/mate/script.js" defer></script>
 		<link rel="stylesheet" href="/resources/css/board/mate/style.css">
        
@@ -24,7 +22,7 @@
         <script src="/resources/js/board/qna/smarteditor.js" defer ></script>
         
         <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
-		<script src="<%=ctx %>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
+		 <script type="text/javascript" src="/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8" defer></script>
 		<!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
@@ -58,8 +56,8 @@
 	                        <option value="">크롤링</option>
 	                        <option value="">세일정보</option>
 	                    </select>
-	                                    <div id="mate_board_info">
-
+	                
+	              <div id="mate_board_info">
                     <div class="mate_board_recruiting">
                         <select class="mate_board_recruiting_option">
                             <option value="recruiting" >모집중</option >
