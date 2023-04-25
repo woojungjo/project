@@ -256,7 +256,7 @@ input[type="text"]{
   flex-direction: row;
   font-size: 40px;
   justify-content: space-between;
-  width: 1130px;
+  /* width: 1130px; */
 }
 .board_commant_read_header .board_commant_ud{
   width: 50px;
@@ -298,7 +298,10 @@ input[type="text"]{
   display: flex;
   justify-content: space-between;
 }
-.board_commant_commant_write{
+/* .board_commant_commant_write{
+  display: none;
+} */
+.hidden {
   display: none;
 }
 

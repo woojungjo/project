@@ -2,6 +2,7 @@ package org.zerock.wecart.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -17,57 +18,52 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.wecart.domain.user.UserDTO;
-import org.zerock.wecart.mapper.user.UserMapper;
+import org.zerock.wecart.mapper.town.TownMapper;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @NoArgsConstructor
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-**.xml")
+@ContextConfiguration(locations="file:src/main/webapp/WEB-INF/**/root-*.xml")
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class UserTests {
-	
-	@Autowired
-	private UserMapper mapper;
+public class TownMapperTests {
+
+	@Setter(onMethod_= {@Autowired})
+	private TownMapper mapper;
 	
 	@BeforeAll
 	void beforeAll() {
-		log.trace("beforeAll() invoked.");
-	} // beforeAll
+		log.trace("beforeAll() invoked");
+		
+		Objects.nonNull(this.mapper);
+		assert this.mapper !=null;
+		assertNotNull(this.mapper); 
+		
+		log.info("this.mapper:{}, {}", this.mapper, this.mapper.getClass().getName());
+	}//beforeAll
 	
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("updatePwTest")
-	@Timeout(value=1, unit = TimeUnit.MINUTES)
-	void updatePwTest() {
-		log.trace("updatePwTest() invoked.");
-
-		String login_id = "loginid1";		
-		String alias = "ali1";
-		String email = "email_1@.com";
+	@DisplayName("townMapperUpdateTes") 
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void townMapperupdateTownNameTest() {
+		log.trace("townMapperupdateTownNameTest() invoked.");
 		
+		String townName = "NY";
 		
-		// 비밀번호 변경
-		String pwd = "temp_pwd1";
+		String loginId = "loginid1";
 		
-		UserDTO dto = new UserDTO();
+		Integer affectedLines = this.mapper.updateTownName(townName, loginId);
+		assertNotNull(affectedLines);
 		
-		dto.setLogin_id(login_id);
-		dto.setAlias(alias);
-		dto.setEmail(email);
-		dto.setPwd(pwd);
-		
-		log.info("\t dto:{}", dto);
-
-		assertNotNull(dto);
-		
-		this.mapper.updatePw(dto);
-	} // updatePwTest
-} // end class
+		log.info("***********affectedLines", affectedLines);
+	}//townMapperupdateTownNameTest() 
+	
+}//TownMapperTests

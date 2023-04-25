@@ -48,7 +48,7 @@ public class PriceCompareController {
 			model.addAttribute("__GOODSLIST__", list);
 
 			
-			int totalAmount = this.service.getTotalAmount(cri.getKeyword());
+			int totalAmount = this.service.getTotalAmount(cri.getKeyword(), cri.getCategory());
 			GoodsPageDTO pageDTO = new GoodsPageDTO(cri, totalAmount);
 			log.info("\t+ pageDTO: {}", pageDTO);
 			
@@ -69,7 +69,7 @@ public class PriceCompareController {
 			List<GoodsVO> list = this.service.getSearchList(cri);
 			model.addAttribute("__GOODSLIST__", list);
 			
-			int totalAmount = this.service.getTotalAmount(cri.getKeyword());
+			int totalAmount = this.service.getTotalAmount(cri.getKeyword(), cri.getCategory());
 			GoodsPageDTO pageDTO = new GoodsPageDTO(cri, totalAmount);
 			log.info("\t+ pageDTO: {}", pageDTO);
 			

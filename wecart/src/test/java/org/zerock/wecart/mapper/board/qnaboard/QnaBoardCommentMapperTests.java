@@ -75,10 +75,10 @@ public class QnaBoardCommentMapperTests {
 		dto.setPost_no(222227);
 		dto.setMember_id(333);
 		dto.setSecret_yn(0);
-		dto.setContent("comment Test");
+		dto.setContent("comment Test pls");
 		dto.setLike_cnt(0);
-		dto.setHigh_comment_no(0);
-		dto.setComment_lv(0);
+		dto.setComment_indent(0);
+		dto.setComment_step(0);
 		
 		log.info("before DTO: {}", dto);
 		boolean result = this.mapper.insertComment(dto);

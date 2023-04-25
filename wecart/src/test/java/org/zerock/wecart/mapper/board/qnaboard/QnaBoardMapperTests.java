@@ -102,6 +102,18 @@ public class QnaBoardMapperTests {
 		
 		
 	} // qnaBoardMapperReadTest
+	@Test
+	@Order(4)
+	void qnaBoardMapperUpdateViewsTest() {
+		log.trace("qnaBoardMapperUpdateViewsTest() invoked.");
+		
+		Integer post_no = 222227;
+		
+		this.mapper.updateViews(post_no);
+		
+		
+		
+	} // qnaBoardMapperReadTest
 	
 	
 }

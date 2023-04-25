@@ -14,6 +14,9 @@ public interface UserMapper {
 	
 	// 비밀번호 찾기
 	public abstract Integer updatePw(UserDTO dto);
+	
+	// 회원가입
+	public abstract Integer insertUser(UserDTO dto);
 
 
 } // end interface

@@ -38,7 +38,7 @@ public class BoardController {
 			boolean success = this.service.register(dto);
 			log.info("\t+success",success);
 			
-			//페이징처리용 전송파라미터도 함께 전송처리
+			//페이징처리용 전송파라미터도 함께 전송처리 //
 			rttrs.addAttribute("currPage", cri.getCurrPage());
 			rttrs.addAttribute("amount", cri.getAmount());
 			 

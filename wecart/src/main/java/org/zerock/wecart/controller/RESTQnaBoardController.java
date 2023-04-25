@@ -34,6 +34,8 @@ public class RESTQnaBoardController {
 	public Boolean commentWrite(@RequestBody QnaBoardCommentDTO dto) throws ControllerException {
 		
 		try {
+			
+			
 			commentService.register(dto);
 			
 			return true;
