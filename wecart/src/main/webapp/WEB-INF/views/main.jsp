@@ -85,9 +85,16 @@
                   success: function(data) {
                     console.log('Successfully stored bname: ' + data);
                   },
+                  
+                  /*
                   error: function() {
                     console.error('Failed to store bname.');
                   }
+                  */
+                  error: function (jqXHR) {
+	                	console.log('jqXHR:', error);
+	                    //console.error('Failed to store bname.');
+	                  }
                 });//ajax
             } 
         }).open();

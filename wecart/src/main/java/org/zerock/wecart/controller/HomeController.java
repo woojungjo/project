@@ -1,8 +1,5 @@
 package org.zerock.wecart.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.town.TownService;
@@ -25,6 +22,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 
 @Controller
+@SessionAttributes({"__TOWN_NAME__"})
 public class HomeController {
 
 	@Setter(onMethod_= @Autowired)
@@ -46,13 +44,27 @@ public class HomeController {
     @ResponseBody
     public void main(
     		Model model, 
-    		@RequestBody String jsondongInfo, 
-    		SessionStatus sessionStatus, 
-    		@SessionAttribute("__AUTH__") UserVO auth,
-    		HttpServletRequest request
+    		@RequestBody String jsondongInfo,
+    		@SessionAttribute("__AUTH__") UserVO auth
     		) throws ControllerException {
-    	log.trace("main ({}, {}) invoked.", jsondongInfo, model);
+    	log.trace("main(model, {}, {}) invoked.", jsondongInfo, auth);
     		
+    	
+    	try {
+            JSONObject jsonObject = new JSONObject(jsondongInfo);
+            String townName = jsonObject.getString("bname");
+            
+        	String loginId = auth.getLogin_id();
+        	
+            if(loginId != null) { 
+        		this.service.update(townName, loginId);
+        		log.info("loginId:{}, townName:{}", loginId, townName);
+            	
+               model.addAttribute("__TOWN_NAME__", townName);
+            } else {
+                log.info("loginId = null");
+            }
+    	/*
     	try {
             JSONObject jsonObject = new JSONObject(jsondongInfo);
             String townName = jsonObject.getString("bname");
@@ -64,15 +76,13 @@ public class HomeController {
         		this.service.update(townName, loginId);
                 log.info("loginId:{}, townName:{}", loginId, townName);
                 
-                HttpSession session = request.getSession();
-                session.setAttribute("__TOWN_NAME__", townName);
+                model.addAttribute("__TOWN_NAME__", townName);
+                
                 } else {
                 log.info("loginId = null");
             }
-            
-    		//return "main";
+            */
     	}catch(Exception e) {
-    		
     		throw new ControllerException(e);
     	}//try-catch
 
