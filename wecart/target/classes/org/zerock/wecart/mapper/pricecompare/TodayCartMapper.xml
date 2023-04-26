@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.wecart.mapper.pricecompare.TodayCartMapper">
+
+  <select id="selectGoods" resultType="org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO">
+    SELECT goods_id, goods_name, goods_pic
+    FROM goods
+    WHERE goods_id = (
+    					 SELECT t2.goods_id
+						 FROM cart t1, member_goods_cart t2
+						 WHERE t1.cart_id = t2.cart_id
+						       AND t2.member_id = #{member_id}			
+						 	   AND t1.status = 'NotYet'						   	   			       
+    				 )   
+  </select>
+  
+  <select id="selectPrices" resultType="org.zerock.wecart.domain.pricecompare.TodayCartPriceVO">
+    SELECT 
+    FROM 
+    WHERE 
+  </select>
+</mapper>
