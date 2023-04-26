@@ -116,8 +116,6 @@
                  } // if - else
              } // changedHeart
              
-	    	alert("상품이 찜목록에 담겼습니다");
-	    	
 	        var json = {goods_id: '${__GOODS__.goods_id}'};
 	    	$.ajax('/mypage/cart/saveGoodsIntoWishedGoods', {
 	    		
@@ -127,6 +125,12 @@
 				success: function(object){
     				console.log("success의 경우를 확인합니다. ");
 					console.log("object: " + object);
+					
+					if(object === "false"){
+						alert("상품이 이미 찜목록에 담겨있습니다.");						
+					}else{
+						alert("상품이 찜목록에 담겼습니다");
+					}
 				},
 				error: function(object){
     				console.log("error의 경우를 확인합니다.");

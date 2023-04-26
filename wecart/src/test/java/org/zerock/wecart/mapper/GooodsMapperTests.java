@@ -71,5 +71,4 @@ public class GooodsMapperTests {
 		Integer goods_id = 77 ;
 		this.mapper.selectGooodsVO(goods_id);
 	}//selectGooodsVO() 
-
 } // end class

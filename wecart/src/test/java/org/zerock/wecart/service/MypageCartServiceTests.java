@@ -182,4 +182,17 @@ public class MypageCartServiceTests {
 		}
 	} //MemberGoodsCartListForMember
 	
+	
+//	@Disabled
+	@Test
+	@Order(9)
+	@DisplayName("Test3: checkingGoodsIdOfMember()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void checkingGoodsIdOfMember() throws ServiceException {
+		log.trace("checkingGoodsIdOfMember()() invoked.");
+		
+		boolean check = this.service.checkingGoodsIdOfMember(199, 7);
+		log.trace("check: {}", check);
+		
+	} //checkingGoodsIdOfMember()
 } // end class

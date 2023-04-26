@@ -24,5 +24,5 @@ public interface PriceCompareService {
 
 	// goods_id를 받고 해당 조회수를 ++한다. 만약 update가 안됐으면 false를 return한다.
 	public abstract boolean updateReadcntOfGoods(Integer goods_id) throws ServiceException;
-
+	
 } //end interface

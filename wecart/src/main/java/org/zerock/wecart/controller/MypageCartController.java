@@ -226,7 +226,6 @@ public class MypageCartController {
 			todayCartId = this.service.createAndReturnTodayCartId();
 			// (2) member_id, goods_id, TodayCart_id로 member_goods_cart 테이블을 생성
 			this.service.saveGoodsIntoTodayCart(member_id, goods_id, todayCartId);
-			
 			// return true;
 		} // if - else
 		
@@ -247,9 +246,13 @@ public class MypageCartController {
 			Integer member_id = Integer.parseInt(userVO.getMember_id());
 			
 			// wish_list row에 추가
-			this.service.saveGoodsIntoWishList(member_id, goods_id);
-			
-			return "Successfully save goods into wishList"; 
+			boolean check = this.service.checkingGoodsIdOfMember(member_id, goods_id);
+			if(!check) {
+				this.service.saveGoodsIntoWishList(member_id, goods_id);
+				return "Successfully save goods into wishList";
+			}else {
+				return "false";
+			}
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		} // try - catch

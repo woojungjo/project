@@ -10,6 +10,7 @@ import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.GooodsMapper;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
+import org.zerock.wecart.mapper.pricecompare.WishListMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,11 +23,13 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 
 	private PriceCompareMapper priceCompareMapper;
 	private GooodsMapper gooodsMapper;
+	private WishListMapper wishListMapper;
 	
 	@Autowired
-	public PriceCompareServiceImpl(PriceCompareMapper priceCompareMapper, GooodsMapper gooodsMapper) {
+	public PriceCompareServiceImpl(PriceCompareMapper priceCompareMapper, GooodsMapper gooodsMapper, WishListMapper wishListMapper) {
 		this.priceCompareMapper = priceCompareMapper;
 		this.gooodsMapper = gooodsMapper;
+		this.wishListMapper = wishListMapper;
 	}	//Constructor
 
 	@Transactional
@@ -86,7 +89,7 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 		
 		return numberOfUpdate == 1 ? true : false;
 	} // updateReadcntOfGoods
-
+	
 } //end class
 
 

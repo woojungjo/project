@@ -81,8 +81,23 @@ public class WishListMapperTests {
 		
 		List<GooodsVO> goodsObject = this.mapper.selectGooodVoOfMember(198);
 		
-		
+		log.trace("goodsObject: {}", goodsObject);
 		
 	} // deleteGoodsFromWishedCart
 	
-}
+
+	//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("Test: selectCheckingGooodsVoOfMember")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void selectCheckingGooodsVoOfMember() {
+		log.trace("selectCheckingGooodsVoOfMember() invoked.");
+		
+		Integer installedGoodsId = this.mapper.selectCheckingGooodsVoOfMember(199, 6);
+		Integer notInstalledGoodsId = this.mapper.selectCheckingGooodsVoOfMember(199, 77);
+		
+		log.trace("installedGoodsId: {}, notInstalledGoodsId: {}", installedGoodsId, notInstalledGoodsId);
+		
+	}//selectGooodsVO() 
+} // end class

@@ -42,4 +42,8 @@ public interface MypageCartService {
 	
 	// 해당 멤버가 가지고 있는 카트에 임의의 goods의 사진을 반환한다.
 	public abstract String selectPicOfGoods(Integer member_id, Integer cart_id) throws ServiceException;
+	
+	// goods_id와 member_id를 받고 해당 아이디가 있는지 확인하고 있으면 true 반환 없으면 false 반환한다.
+	public abstract boolean checkingGoodsIdOfMember(Integer member_id, Integer goods_id) throws ServiceException;
+
 }
