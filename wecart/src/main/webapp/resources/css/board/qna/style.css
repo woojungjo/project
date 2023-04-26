@@ -298,6 +298,14 @@ input[type="text"]{
   display: flex;
   justify-content: space-between;
 }
+
+.board_comment_deleted{
+  display: flex;
+  height: 146px;
+  align-items: center;
+  justify-content: center;
+}
+
 /* .board_commant_commant_write{
   display: none;
 } */

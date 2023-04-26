@@ -30,34 +30,6 @@
     </head>
     <body>
         
-        <!-- <div class="wrapper_contatiner">
-            <div class="wrapper">
-                
-                <header>
-                    <div class="container">
-                        <div class="site_name">
-                            <div class="WeCart">
-                                <span>우리동네<br>장바구니</span>
-                            </div> 
-                        </div> 
-                        
-                        <ul class="headerbar_menu">
-                    <li>가격비교</li>
-                    <li>커뮤니티</li>
-                    <li>Q&A</li>
-                </ul>
-                
-                <ul class="header_login">
-                    <li>개포동 <i class="fa-solid fa-location-dot"></i></li>
-                    <li><i class="fa-regular fa-comment-dots"></i></li>
-                    <li><i class="fa-regular fa-bell"></i></li>
-                    <li><i class="fa-solid fa-piggy-bank"></i></li>
-                    <li>Juuu</li>
-                </ul> 
-                
-            </div>
-            
-        </header> -->
         <% Object auth = session.getAttribute("__AUTH__"); %>
 		
 		<% if(auth != null) { %>
@@ -189,30 +161,6 @@
         
 
 
-    <!-- </div>
-           <footer>
-               <div class="footerText">
-                    <p>
-                       WeCart
-                       <span>
-                           <a href="">사업자 정보</a>
-                           <a href="">이용약관</a>
-                           <a href="">개인정보처리방침</a>
-                       </span>
-                    </p>
-                   
-                    <p>
-                       Woojungjo
-                       <a href="https://github.com/zuxico123">감성현</a>
-                       <a href="https://github.com/KimYongSae">김용세</a>
-                       <a href="https://github.com/JeongHwan95">김정환</a>
-                       <a href="https://github.com/comdesk">김지연</a>
-                       <a href="https://github.com/Juyeonjoo">조연주</a>
-                       <span class="copyright">&copy; 2023 WeCart, Inc. All Rights Reserved</span>
-                    </p>
-               </div>
-           </footer>
-       </div> -->
        <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 </body>
 

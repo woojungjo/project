@@ -55,4 +55,12 @@ public class QnaBoardCommentServiceImpl implements QnaBoardCommentService {
 		return result;
 	}
 
+	@Override
+	public boolean remove(Integer comment_no) throws ServiceException {
+		
+		boolean result = commentMapper.deleteComment(comment_no);
+		
+		return result;
+	}
+
 }

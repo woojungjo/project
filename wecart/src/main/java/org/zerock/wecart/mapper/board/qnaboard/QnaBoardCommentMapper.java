@@ -2,6 +2,7 @@ package org.zerock.wecart.mapper.board.qnaboard;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
@@ -23,6 +24,10 @@ public interface QnaBoardCommentMapper {
 	// 댓글의 step과 indent 업데이트
 	@Update(" UPDATE qna_board_comment SET comment_step = comment_step + 1 WHERE comment_root = #{comment_root} AND comment_step >= #{comment_step} ")
 	public abstract boolean updateCommentStepIndent(QnaBoardCommentDTO dto);
+	
+	// 댓글 삭제된것처럼 처리
+	@Update("UPDATE qna_board_comment SET delete_yn = 1 WHERE comment_no = #{comment_no}")
+	public abstract boolean deleteComment(Integer comment_no);
 	
 	
 	

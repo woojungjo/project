@@ -10,6 +10,7 @@ import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.board.qnaboard.QnaBoardCommentService;
 import org.zerock.wecart.service.board.qnaboard.QnaBoardService;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -44,5 +45,19 @@ public class RESTQnaBoardController {
 		} // try-catch
 		
 	} // read
+	
+	@PostMapping("/read/commentdelete")
+	public Boolean commentDelete(@RequestBody Map<String, String> requestBody) throws ControllerException {
+	    try {
+	        String comment_no = requestBody.get("comment_no");
+
+	        commentService.remove(Integer.parseInt(comment_no));
+
+	        return true;
+	    } catch(Exception e) {
+	        throw new ControllerException(e);
+	    }
+	}
+
 	
 } // end class

@@ -76,7 +76,7 @@ public class QnaBoardCommentMapperTests {
 		dto.setMember_id(333);
 		dto.setSecret_yn(0);
 		dto.setContent("comment Test pls");
-		dto.setLike_cnt(0);
+		dto.setDelete_yn(0);
 		dto.setComment_indent(0);
 		dto.setComment_step(0);
 		
@@ -86,6 +86,16 @@ public class QnaBoardCommentMapperTests {
 
 		
 		log.info("result: {}", result);
+		
+	} // insertCommentTest
+	
+	@Test
+	@Order(1)
+	void deleteCommentTest() {
+		
+		this.mapper.deleteComment(10);
+		
+	
 		
 	} // insertCommentTest
 		

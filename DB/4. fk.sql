@@ -65,6 +65,10 @@ ALTER TABLE qna_board_comment ADD CONSTRAINT qna_board_comment_post_no_fk FOREIG
 
 ALTER TABLE qna_board_comment ADD CONSTRAINT qna_board_comment_member_id_fk FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE;
 
+ALTER TABLE qna_board_comment_like ADD CONSTRAINT qna_board_comment_like_comment_no_fk FOREIGN KEY (comment_no, post_no) REFERENCES qna_board_comment (comment_no, post_no) ON DELETE CASCADE;
+
+ALTER TABLE qna_board_comment_like ADD CONSTRAINT qna_board_comment_like_member_id_fk FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE;
+
 ALTER TABLE qna_board_file ADD CONSTRAINT qna_board_file_post_no_fk FOREIGN KEY (post_no)REFERENCES qna_board (post_no) ON DELETE CASCADE;
 
 ALTER TABLE qna_board_act_not ADD CONSTRAINT qna_board_act_no_post_no_fk FOREIGN KEY (post_no)REFERENCES qna_board (post_no) ON DELETE SET NULL;
