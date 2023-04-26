@@ -19,8 +19,16 @@
   </select>
   
   <select id="selectPrices" resultType="org.zerock.wecart.domain.pricecompare.TodayCartPriceVO">
-    SELECT 
-    FROM 
-    WHERE 
+    SELECT t2.goods_id, t1.retail_id, t1.retail_name, t2.price, t2.api_date
+	FROM retail t1
+	JOIN sale t2 ON t1.retail_id = t2.retail_id
+	WHERE t1.town_id = (SELECT town_id FROM member WHERE member_id = #{member_id})
+	      AND t2.goods_id = 1
+	      AND t2.api_date = (
+					          SELECT MAX(api_date)
+					          FROM sale
+					          WHERE goods_id = #{goods_id}
+					              AND retail_id = t1.retail_id
+	      					)
   </select>
 </mapper>

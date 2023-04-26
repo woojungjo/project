@@ -22,15 +22,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.wecart.domain.UserVO;
+import org.zerock.wecart.domain.pricecompare.CartUserDTO;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
 import org.zerock.wecart.domain.user.LoginDTO;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
+import org.zerock.wecart.service.pricecompare.TodayCartService;
 import org.zerock.wecart.service.user.UserService;
 
 import lombok.Cleanup;
@@ -60,6 +62,9 @@ public class TodayCartControllerTests {
 	@Setter(onMethod_= {@Autowired})
 	UserService userService;
 	
+	@Setter(onMethod_= {@Autowired})
+	TodayCartService todayCartService;
+	
 	@BeforeAll
 	void beforeAll() {
 		log.trace("beforeAll() invoked. ");
@@ -70,6 +75,9 @@ public class TodayCartControllerTests {
 		
 		Objects.requireNonNull(priceCompareService);
 		log.info("\t+ this.priceCompareService: {}", this.priceCompareService);
+		
+		Objects.requireNonNull(todayCartService);
+		log.info("\t+ this.todayCartService: {}", this.todayCartService);
 		
 	} // beforAll
 	
@@ -110,5 +118,65 @@ public class TodayCartControllerTests {
 
 		return goodsVO;
 	}
+	
+//	@Disable
+	@Test
+	@Order(2)
+	@DisplayName("TEST2: cartList")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void cartList() throws Exception {
+		log.trace("cartList() invoked.");
+		
+		MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+//		
+//		MockHttpSession session = new MockHttpSession();
+//		LoginDTO loginDTO = new LoginDTO();
+//		loginDTO.setLogin_id("loginid10");
+//		loginDTO.setPwd("PWD10");
+//		UserVO userVO = this.userService.login(loginDTO);
+//		
+//		MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.get("/todayCart/cartList"); 
+//		requestBuilder.param("member_id", "207");
+//		
+//		@Cleanup("clear")
+//		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+//		
+//		Objects.requireNonNull(modelAndView);
+//		log.info("\t+ viewName: {}", modelAndView.getViewName());
+//		log.info("\t+ model: {}", modelAndView.getModel());		
+		
+		// 세션에 저장될 CartUserDTO 객체 생성
+        CartUserDTO cartUserDTO = new CartUserDTO();
+        cartUserDTO.setMember_id("207"); // 원하는 멤버 아이디 값으로 설정
+        
+        // 세션에 CartUserDTO 객체를 저장하기 위한 MockHttpSession 객체 생성
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("__AUTH__", cartUserDTO);
+        
+        // MockMvc를 사용하여 GET /todayCart/cartList 요청을 전송하고 응답을 검증
+        mockMvc.perform(MockMvcRequestBuilders.get("/todayCart/cartList")
+                .session(session)) // 생성한 MockHttpSession 객체를 세션으로 설정
+                .andExpect(MockMvcResultMatchers.status().isOk()) // HTTP 상태 코드 200인지 검증
+//                .andExpect(MockMvcResultMatchers.view().name("cartList")) // View의 이름이 "cartList"인지 검증
+                .andExpect(MockMvcResultMatchers.model().attributeExists("__GOODSLIST__")) // 모델에 "__GOODSLIST__" 속성이 존재하는지 검증
+                .andExpect(MockMvcResultMatchers.model().attributeExists("__PRICELIST__")); // 모델에 "__PRICELIST__" 속성이 존재하는지 검증	
+	}	//cartList
+} //end class
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

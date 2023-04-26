@@ -11,5 +11,5 @@ public interface TodayCartMapper {
 	public List<TodayCartGoodsVO> selectGoods(Integer member_id);
 	
 	//2. 오늘의 장바구니 마트별 가격 조회
-	public List<TodayCartPriceVO> selectPrices(Integer cart_id);
+	public List<TodayCartPriceVO> selectPrices(Integer goods_id, Integer member_id);
 } //end interface
