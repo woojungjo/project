@@ -22,17 +22,18 @@ public interface CartMapper {
 			String status
 			);
 	
-	// 가장 최근 장바구니 가져오기
+	// 가장 최근 생성된 장바구니 가져오기
 	@Select("""
 			SELECT cart_id
 			FROM cart c
 			JOIN
 			(
-				SELECT max(API_date) AS latest_date
+				SELECT max(cart_creation_date) AS latest_date
 				FROM cart
-			) a ON c.API_date = a.latest_date
+			) a ON c.cart_creation_date = a.latest_date
 			""")
-	public abstract Integer selectCartIdOfLatestAPI();
+	public abstract Integer selectCartIdOfCartCreationDate();
+	
 	
 	// 장바구니를 선택
 	public abstract CartVO selectCart(Integer cart_id);

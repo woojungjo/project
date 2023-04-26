@@ -40,4 +40,15 @@ public interface WishListMapper {
 			""" )
 	public abstract List<GooodsVO> selectGooodVoOfMember(Integer member_id); 
 	
-}
+	
+	
+	@Select("""
+			SELECT goods_id
+			FROM wish_list
+			WHERE 
+				goods_id = #{goods_id}
+			AND
+				member_id = #{member_id}
+			""")
+	public abstract Integer selectCheckingGooodsVoOfMember(Integer member_id, Integer goods_id);
+} // end class

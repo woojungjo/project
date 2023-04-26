@@ -20,7 +20,7 @@ public interface MemberGoodsCartMapper {
 	// member_id가 가지고 있는 installedCart List들을 return
 	public abstract List<Integer> selecAllInstalledCartOfMember(Integer member_id);
 	
-	// member_id가 가지고 있는 installedCart List들을 return
+	// member_id가 가지고 있는 TodayCart List들을 return
 	public abstract Integer selectTodayCartOfMember(Integer member_id);
 	
 	// member_id, goods_id, cart_id를 가지고 member_goods_cart의 row를 생성

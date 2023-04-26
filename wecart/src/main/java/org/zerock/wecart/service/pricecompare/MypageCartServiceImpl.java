@@ -119,16 +119,18 @@ public class MypageCartServiceImpl implements MypageCartService{
 	@Override
 	@Transactional
 	public Integer createAndReturnTodayCartId() throws ServiceException{
-		log.trace("createTodayCart() invoked. ");
+		log.trace("createAndReturnTodayCartId() invoked. ");
 		
 		//최신 API날짜를 가져오고
 		Date value = this.saleMapper.selectAPIDate();
 		Timestamp latestAPIDate = new Timestamp(value.getTime()); 
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 		
+		log.trace("latestAPIDate: {}, currentTimestamp: {}", latestAPIDate, currentTimestamp);
+		
 		// 장바구니를 생성
-		this.cartMapper.insertAndSelectCartId(latestAPIDate, currentTimestamp, "NotYet");
-		Integer cartId = this.cartMapper.selectCartIdOfLatestAPI();
+		this.cartMapper.insertAndSelectCartId(currentTimestamp, latestAPIDate, "NotYet");
+		Integer cartId = this.cartMapper.selectCartIdOfCartCreationDate();
 		
 		return cartId;
 	} // createTodayCart
@@ -188,4 +190,11 @@ public class MypageCartServiceImpl implements MypageCartService{
 		}
 	} //selectNumberOfGoods
 	
+	@Override
+	public boolean checkingGoodsIdOfMember(Integer member_id, Integer goods_id) throws ServiceException {
+		
+		Integer isGoodsId = this.wishListMapper.selectCheckingGooodsVoOfMember(member_id, goods_id);
+		
+		return isGoodsId == goods_id ? true : false;
+	}
 } // end class
