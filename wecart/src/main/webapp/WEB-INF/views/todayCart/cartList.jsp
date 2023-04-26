@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -72,10 +74,10 @@
                                                         <span>상품 정보</span>
                                                     </div>
                                                 </th>
-                                                <th scope="col"><span>GS더프레시아산탕정점</span></th>
-                                                <th scope="col"><span>GS더프레시대전도마점</span></th>
-                                                <th scope="col"><span>GS더프레시안양메가트리아점</span></th>
-                                                <th scope="col"><span>(주)농협하나로유통 광주점</span></th>
+                                                <th scope="col"><span>${__PRICELIST__[0][0].retail_name}</span></th>
+                                                <th scope="col"><span>${__PRICELIST__[0][1].retail_name}</span></th>
+                                                <th scope="col"><span>${__PRICELIST__[0][2].retail_name}</span></th>
+                                                <th scope="col"><span>${__PRICELIST__[0][3].retail_name}</span></th>
                                             </tr>
                                         </thead>
                                         <tbody>     <!--동적-->
@@ -91,7 +93,7 @@
                                                             </div>
                                                         </div>                                                        
                                                         <div class="cart_title_count">
-                                                            <a href="#" class="a_black_text"><span>오리온 포카칩 오리지널 어니언맛 치즈맛 불고기맛(66g)</span></a>
+                                                            <a href="#" class="a_black_text"><span>${__GOODSLIST__[0].goods_name}</span></a>
                                                             <div class="count_bt_delete">
                                                                 <div class="count_bt">
                                                                     <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
@@ -106,19 +108,19 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <span class="goods_price" data-price="12600">12,600</span>
+                                                    <span class="goods_price" data-price="${__PRICELIST__[0][0].price}"><fmt:formatNumber value="${__PRICELIST__[0][0].price}" pattern="#,##0" /></span>
                                                     <span>원</span>                                                
                                                 </td>   
                                                 <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
+                                                    <span class="goods_price" data-price="${__PRICELIST__[0][1].price}"><fmt:formatNumber value="${__PRICELIST__[0][1].price}" pattern="#,##0" /></span>
                                                     <span>원</span>   
                                                 </td>
                                                 <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
+                                                    <span class="goods_price" data-price="${__PRICELIST__[0][2].price}"><fmt:formatNumber value="${__PRICELIST__[0][2].price}" pattern="#,##0" /></span>
                                                     <span>원</span>   
                                                 </td>
                                                 <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
+                                                    <span class="goods_price" data-price="${__PRICELIST__[0][3].price}"><fmt:formatNumber value="${__PRICELIST__[0][3].price}" pattern="#,##0" /></span>
                                                     <span>원</span>  
                                                 </td>                                         
                                             </tr>

@@ -7,10 +7,9 @@ import lombok.Value;
 @Value
 public class TodayCartPriceVO {
 	
-	private Integer cart_id;
 	private Integer goods_id;
+	private Integer retail_id;
 	private String retail_name;
-	private Integer town_id;
 	private Integer price;
-	private Date API_date;
+	private Date api_date;
 } //end class
