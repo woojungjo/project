@@ -50,7 +50,7 @@
 		<interceptor>
 			<mapping path="/todayCart/cartList" />
 
-			<beans:ref bean="todayCartInterceptor" />
+			<beans:ref bean="authInterceptor" />
 		</interceptor>
 		
 	</interceptors>
