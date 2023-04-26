@@ -15,8 +15,8 @@ public interface QnaBoardCommentService {
 	// 2. 특정 게시물 상세조회 (READ)
 //	public abstract QnaBoardVO get(Integer post_no) throws ServiceException;
 	
-	// 3. 특정 게시물 삭제 (DELETE)
-//	public abstract boolean remove(Integer bno) throws ServiceException;
+	// 3. 특정 댓글 삭제 (DELETE)
+	public abstract boolean remove(Integer comment_no) throws ServiceException;
 	
 	// 4. 새로운 댓글 등록(CREATE)
 	public abstract boolean register(QnaBoardCommentDTO dto) throws ServiceException;

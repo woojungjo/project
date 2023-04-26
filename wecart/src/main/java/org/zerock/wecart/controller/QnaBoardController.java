@@ -78,6 +78,9 @@ public class QnaBoardController {
 			Integer commnetCnt = this.commentService.getTotalAmount(post_no);
 			model.addAttribute("commnetCnt", commnetCnt);
 			
+			// 현재시간 확인
+	        Date now = new Date();   
+	        model.addAttribute("currentTime", now);
 			
 			return "/board/qna/read";
 		} catch(Exception e) {

@@ -2,7 +2,11 @@
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.Duration" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+
+
 <!DOCTYPE html>
     <html lang="ko">
         
@@ -28,34 +32,6 @@
 </head>
 <body>
     
-            <!-- <div class="wrapper_contatiner">
-            <div class="wrapper">
-                
-                <header>
-                    <div class="container">
-                        <div class="site_name">
-                            <div class="WeCart">
-                                <span>우리동네<br>장바구니</span>
-                            </div> 
-                        </div> 
-                        
-                        <ul class="headerbar_menu">
-                    <li>가격비교</li>
-                    <li>커뮤니티</li>
-                    <li>Q&A</li>
-                </ul>
-                
-                <ul class="header_login">
-                    <li>개포동 <i class="fa-solid fa-location-dot"></i></li>
-                    <li><i class="fa-regular fa-comment-dots"></i></li>
-                    <li><i class="fa-regular fa-bell"></i></li>
-                    <li><i class="fa-solid fa-piggy-bank"></i></li>
-                    <li>Juuu</li>
-                </ul> 
-                
-            </div>
-            
-        </header> -->
         <% Object auth = session.getAttribute("__AUTH__"); %>
 		
 		<% if(auth != null) { %>
@@ -72,7 +48,7 @@
                 <div id="qna_board_read">
                     <div class="qna_board_name">문의게시판</div>
                     <div class="qna_board_writer">${readVO.member_id}</div>
-                    <fmt:formatDate value="${readVO.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
+                    <fmt:formatDate value="${readVO.write_dt}" pattern="yyyy-MM-dd HH:mm:ss" var="formatDate" />
                     <div class="qna_board_writedt">${formatDate}</div>
                     <div class="qnd_board_views"><span class="fas fa-eye"></span>${readVO.views}</div>
                     <div class="qna_board_title">
@@ -106,67 +82,140 @@
     
                     <form id="comment-form" class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
                         <input type="hidden" name="post_no" value="${readVO.post_no}">
-                        <input type="hidden" name="member_id" value="334"> 
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.__AUTH__}">
+                                <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
+                            </c:when>
+                            <c:otherwise>
+                                <input type="hidden" name="member_id" value="334"> 
+                            </c:otherwise>
+                        </c:choose>
                         <!-- 멤버아이디는 세션에 올라간 로그인된 사용자아이디 사용, 밑에 댓글작성자(로그인된유저)도 같은데이터사용 -->
                         <input type="hidden" name="secret_yn" value="0">
-                        <input type="hidden" name="like_cnt" value="0">
+                        <input type="hidden" name="delete_yn" value="0">
                         <input type="hidden" name="comment_root">
                         <input type="hidden" name="comment_step" value="0">
                         <input type="hidden" name="comment_indent" value="0">
-                        <div>댓글작성자(로그인된유저)</div>
+                        <div>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.__AUTH__}">
+                                    ${__AUTH__.member_id}
+                                </c:when>
+                                <c:otherwise>
+                                    tmp
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                         <input type="text" name="content" placeholder="댓글을 남겨보세요.">
                         <div class="board_commant_write_footer" >
                             <div class="fas fa-unlock"></div>
                             <button class="board_commant_submit">등록</button>
                         </div>
                     </form>
+                    <fmt:formatDate value="${currentTime}" pattern="yyyyMMddHHmmss" var="currDate" />
                     <c:forEach items="${commentVO}" var="commentList">
-                        <div class="board_commant_read" style="padding-left: ${commentList.comment_indent * 20}px;">
-                            <div class="board_commant_read_header">
-                                <div class="board_commant_read_header_namegroup">
-                                    <div class="fas fa-piggy-bank"></div>
+                        <c:choose>
+                            <c:when test="${commentList.delete_yn == 0}">
+                            <div class="board_commant_read" style="padding-left: ${commentList.comment_indent * 20}px;">
+
+                                <div class="board_commant_read_header">
+                                    <div class="board_commant_read_header_namegroup">
+                                        <div class="fas fa-piggy-bank"></div>
+                                        <div>
+                                            <div>${commentList.member_id}</div>
+                                            
+
+                                            <fmt:formatDate value="${commentList.write_dt}" pattern="yyyyMMddHHmmss" var="write_dt" />
+                                            <fmt:formatDate value="${commentList.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
+                                            <c:set var="currentLocalDateTime" value="${LocalDateTime.parse(currDate, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                            <c:set var="writeLocalDateTime" value="${LocalDateTime.parse(write_dt, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
+                                            <c:set var="diffMinutes" value="${Duration.between(writeLocalDateTime, currentLocalDateTime).toMinutes()}"/>
+                                            
+                                            <c:choose>
+                                                <c:when test="${diffMinutes < 1}">
+                                                    <div>&nbsp;&nbsp;방금 전</div>
+                                                </c:when>
+                                                <c:when test="${diffMinutes < 60}">
+                                                    <div>&nbsp;&nbsp;${diffMinutes}분 전</div>
+                                                </c:when>
+                                                <c:when test="${diffMinutes < 1440}">
+                                                    <fmt:formatNumber value="${diffMinutes div 60}" pattern="##" var="minutestoTime"/>
+                                                    <div>&nbsp;&nbsp;${minutestoTime}시간 전</div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div>&nbsp;&nbsp;${formatDate}</div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>
+                                    <div class="fas fa-bars">
+                                        <div class="board_commant_ud">
+                                            <ul>
+                                                <input type="hidden" name="comment_no" value="${commentList.comment_no}">
+                                                <li class="board_comment_update">수정</li>
+                                                <li class="board_comment_delete">삭제</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="board_commant_read_main">
+                                    <c:choose>
+                                        <c:when test="${commentList.secret_yn == 0}">
+                                            ${commentList.content}
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="fas fa-lock" /> 비밀댓글 입니다.
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <div class="board_commant_read_footer">
+                                    <button class="board_commant_commant">답글쓰기</button>
+                                    <div><span class="fas fa-heart"/>0</div><!-- 좋아요 수 넣자 -->
+                                </div>
+                            </div>
+                            <hr>
+                            
+                            <div class="board_commant_commant_write hidden">
+                                <form class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
+                                    <input type="hidden" name="post_no" value="${readVO.post_no}">
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.__AUTH__}">
+                                            <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
+                                        </c:when>
+                                        <c:otherwise>
+                                            <input type="hidden" name="member_id" value="334"> 
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <input type="hidden" name="secret_yn" value="0">
+                                    <input type="hidden" name="delete_yn" value="0">
+                                    <input type="hidden" name="comment_root" value="${commentList.comment_root}">
+                                    <input type="hidden" name="comment_step" value="${commentList.comment_step + 1}">
+                                    <input type="hidden" name="comment_indent" value="${commentList.comment_indent + 1}">
                                     <div>
-                                        <div>${commentList.member_id}</div>
-                                        <fmt:formatDate value="${commentList.write_dt}" pattern="yyyy-MM-dd" var="commentFormatDate" />
-                                        <div>${commentFormatDate}</div>
+                                        <c:choose>
+                                            <c:when test="${not empty sessionScope.__AUTH__}">
+                                                ${__AUTH__.member_id}
+                                            </c:when>
+                                            <c:otherwise>
+                                                tmp
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
-                                </div>
-                                <div class="fas fa-bars">
-                                    <div class="board_commant_ud">
-                                        <ul>
-                                            <li>수정</li>
-                                            <li>삭제</li>
-                                        </ul>
+                                    <input type="text" name="content" placeholder="댓글을 남겨보세요.">
+                                    <div class="board_commant_write_footer" >
+                                        <div class="fas fa-unlock"></div>
+                                        <button class="board_commant_submit" onclick="commant_submit">등록</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                            <div class="board_commant_read_main">
-                                ${commentList.content}
+                        </c:when>
+                        <c:otherwise>
+                            <div class="board_comment_deleted">
+                                삭제된 댓글입니다.
                             </div>
-                            <div class="board_commant_read_footer">
-                                <button class="board_commant_commant">답글쓰기</button>
-                                <div><span class="fas fa-heart"/>${commentList.like_cnt}</div>
-                            </div>
-                        </div>
-                        <hr>
-                        
-                        <div class="board_commant_commant_write hidden">
-                            <form class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
-                                <input type="hidden" name="post_no" value="${readVO.post_no}">
-                                <input type="hidden" name="member_id" value="334"> 
-                                <input type="hidden" name="secret_yn" value="0">
-                                <input type="hidden" name="like_cnt" value="0">
-                                <input type="hidden" name="comment_root" value="${commentList.comment_root}">
-                                <input type="hidden" name="comment_step" value="${commentList.comment_step + 1}">
-                                <input type="hidden" name="comment_indent" value="${commentList.comment_indent + 1}">
-                                <div>댓글작성자(로그인된유저)</div>
-                                <input type="text" name="content" placeholder="댓글을 남겨보세요.">
-                                <div class="board_commant_write_footer" >
-                                    <div class="fas fa-unlock"></div>
-                                    <button class="board_commant_submit" onclick="commant_submit">등록</button>
-                                </div>
-                            </form>
-                        </div>
+                            <hr>
+                        </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </div>
             </main>
@@ -174,33 +223,6 @@
 
             <!--*********************************************메인 내용은 여기까지*********************************************-->
         </main>
-        
-
-
-    <!-- </div>
-           <footer>
-               <div class="footerText">
-                    <p>
-                       WeCart
-                       <span>
-                           <a href="">사업자 정보</a>
-                           <a href="">이용약관</a>
-                           <a href="">개인정보처리방침</a>
-                       </span>
-                    </p>
-                   
-                    <p>
-                       Woojungjo
-                       <a href="https://github.com/zuxico123">감성현</a>
-                       <a href="https://github.com/KimYongSae">김용세</a>
-                       <a href="https://github.com/JeongHwan95">김정환</a>
-                       <a href="https://github.com/comdesk">김지연</a>
-                       <a href="https://github.com/Juyeonjoo">조연주</a>
-                       <span class="copyright">&copy; 2023 WeCart, Inc. All Rights Reserved</span>
-                    </p>
-               </div>
-           </footer>
-       </div> -->
        <jsp:include page="../../header_footer/footer.jsp" flush="true" />
         
 </body>

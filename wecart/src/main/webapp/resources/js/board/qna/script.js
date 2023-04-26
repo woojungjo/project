@@ -10,19 +10,7 @@ downloadBtn.onclick = function() {
   }
 };
 
-// const commantForm = document.querySelectorAll(".board_commant_commant_write");
-// const commantBtn = document.querySelectorAll(".board_commant_commant");
 
-// for (let i = 0 ; i < commantForm.length; i++) {
-//   commantBtn[i].addEventListener('click', function() {
-//     const style = window.getComputedStyle(commantForm[i]);
-//     if (style.display === "none") {
-//       commantForm[i].style.display = "block";
-//     } else {
-//       commantForm[i].style.display = "none";
-//     }  
-//   });
-// }
 document.body.addEventListener('click', function(event) {
   if (event.target.classList.contains('board_commant_commant')) {
     const commentForm = event.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
@@ -32,38 +20,33 @@ document.body.addEventListener('click', function(event) {
 
 
 
-const commant_ud = document.querySelectorAll(".board_commant_ud");
-const dlBars = document.querySelectorAll(".fas.fa-bars");
+// const commant_ud = document.querySelectorAll(".board_commant_ud");
+// const dlBars = document.querySelectorAll(".fas.fa-bars");
 
-for(let i = 0; i < commant_ud.length; i++){
-  dlBars[i].addEventListener('click', function() {
-    const style = window.getComputedStyle(commant_ud[i]);
-    if (style.display === "none") {
-      commant_ud[i].style.display = "block";
-    } else {
-      commant_ud[i].style.display = "none";
-    }
-  });
-}
-
-// const icon = document.querySelectorAll('.board_commant_write_footer > .fas.fa-unlock');
-// const commentsecret = document.querySelectorAll('form input[name="seclet_yn"]');
-
-// for(let i = 0; i < icon.length; i ++){
-//   icon[i].onclick = function() {
-//     if (icon[i].classList.contains('fa-unlock')) {
-//       commentsecret[i].value = "1";
-//       icon[i].classList.remove('fa-unlock');
-//       icon[i].classList.add('fa-lock');
-      
-//     } else{
-//       commentsecret[i].value = "0";
-//         icon[i].classList.remove('fa-lock');
-//         icon[i].classList.add('fa-unlock');
-
-//       }
-// };
+// for(let i = 0; i < commant_ud.length; i++){
+//   dlBars[i].addEventListener('click', function() {
+//     const style = window.getComputedStyle(commant_ud[i]);
+//     if (style.display === "none") {
+//       commant_ud[i].style.display = "block";
+//     } else {
+//       commant_ud[i].style.display = "none";
+//     }
+//   });
 // }
+
+document.body.addEventListener('click', function(event) {
+  if (event.target.classList.contains('fa-bars')) {
+    const commentUD = event.target.childNodes[1];
+    const style = window.getComputedStyle(commentUD);
+    if (style.display === "none") {
+      commentUD.style.display = "block";
+    } else {
+      commentUD.style.display = "none";
+    }
+  }
+});
+
+
 
 document.body.addEventListener('click', function(event) {
   if (event.target.classList.contains('fa-unlock') || event.target.classList.contains('fa-lock')) {
@@ -82,53 +65,6 @@ document.body.addEventListener('click', function(event) {
     }
   }
 });
-
-
-
-// var oEditors = [];
-//         nhn.husky.EZCreator.createInIFrame({
-//          oAppRef: oEditors,
-//          elPlaceHolder: document.getElementById("ir1"),
-//          sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",
-//          fCreator: "createSEditor2"
-//         });
-
-
-
-
-// $('button.board_commant_submit').on('click', function(event) {
-//   console.clear(); console.group("Ajax Request");
-
-//   event.preventDefault(); // 폼 전송을 막음
-	
-//   var form = $('#comment-form');
-//   console.log('1. form:', form);
-
-//   var jsonData = form.serializeJSON();
-//   console.log(`2. jsonData:`, jsonData);
-//   console.log(`2-1. content: ${jsonData.content}`);
-
-//   var jsonStr = JSON.stringify(jsonData);
-//   console.log(`3. jsonStr: ${jsonStr}`);
-
-//   $.ajax({
-//     url: '/board/qna/read/commentwrite',
-//     type: 'POST',
-//     contentType: 'application/json',
-//     dataType: 'json',
-//     data: jsonStr,
-
-//       success: function(data) {
-//         console.info('**** success called back:', data);
-//         $(".board_commant").load(location.href + " .board_commant");
-
-//         // DOM tree 조작
-
-//       } // success
-//     }); // .ajax
-
-//     console.groupEnd();
-// }); // .onclick
 
 $(function() {
   $('body').on('click', 'button.board_commant_submit', function(event) {
@@ -163,5 +99,24 @@ $(function() {
       }); // .ajax
 
       console.groupEnd();
+  }); // .onclick
+});
+
+$(function() {
+  $('body').on('click', '.board_comment_delete', function() {
+    var comment_no = $(this).siblings('input[name="comment_no"]').val()
+
+      $.ajax({
+          url: '/board/qna/read/commentdelete',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({comment_no: comment_no}),
+
+          success: function() {
+              $(".board_commant").load(location.href + " .board_commant");
+
+              // DOM tree 조작
+          } // success
+      }); // .ajax
   }); // .onclick
 });

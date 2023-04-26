@@ -11,7 +11,7 @@ public class QnaBoardCommentVO {
 	private Integer member_id;
 	private Integer secret_yn;
 	private String content;
-	private Integer like_cnt;
+	private Integer delete_yn;
 	private Timestamp write_dt;
 	private Integer comment_root;
 	private Integer comment_step;
