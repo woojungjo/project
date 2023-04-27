@@ -18,6 +18,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO;
 import org.zerock.wecart.domain.pricecompare.TodayCartPriceVO;
 import org.zerock.wecart.mapper.pricecompare.TodayCartMapper;
@@ -34,6 +36,8 @@ import lombok.extern.log4j.Log4j2;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@EnableTransactionManagement
+@Transactional
 public class TodayCartMapperTests {
 
 	@Setter(onMethod_= {@Autowired})
@@ -82,6 +86,39 @@ public class TodayCartMapperTests {
 		assertNotNull(list);		
 		list.forEach(log::info);
 	} //selectPrices
+	
+	//3. 상품 최신 api 날짜 평균 가격 조회
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("TEST 3: selectAvgPrice")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectAvgPrice() {
+		log.trace("selectAvgPrice() invoked");
+		
+		Integer goods_id = 1;
+		
+		int avg = this.mapper.selectAvgPrice(goods_id);
+		
+		log.info("\t+ avg: {}", avg);
+	} //selectAvgPrice
+	
+	//4. 장바구니 상품 삭제
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("TEST 4: delete")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void delete() {
+		log.trace("delete() invoked");
+		
+		Integer member_id = 207;
+		Integer goods_id = 4;
+		
+		int affectedLines = this.mapper.delete(goods_id, member_id);
+		
+		log.info("\t+ affectedLines: {}", affectedLines);
+	} //delete
 } //end class
 
 

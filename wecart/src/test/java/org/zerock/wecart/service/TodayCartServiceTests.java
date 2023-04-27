@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO;
 import org.zerock.wecart.domain.pricecompare.TodayCartPriceVO;
 import org.zerock.wecart.exception.ServiceException;
@@ -35,6 +36,7 @@ import lombok.extern.log4j.Log4j2;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Transactional
 public class TodayCartServiceTests {
 
 	@Setter(onMethod_= {@Autowired})
@@ -83,6 +85,23 @@ public class TodayCartServiceTests {
 		assertNotNull(list);		
 		list.forEach(log::info);
 	} //getPrices
+	
+	//3. 상품 삭제
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("TEST 3: remove")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void remove() throws ServiceException {
+		log.trace("getPrices invoked()");
+		
+		Integer goods_id = 1;
+		Integer member_id = 207;
+		
+		int affectedLines = this.service.remove(goods_id, member_id);
+		
+		log.info("\t+ affectedLines: {}", affectedLines );
+	} //remove
 } //end class
 
 

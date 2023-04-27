@@ -142,6 +142,10 @@ window.onload = function () {
     });    
 
     //선택삭제
+    let member_id = $('input[name=member_id]').val();
+
+    let goods_id = $('input[name=goods_id]').val();
+
     var allDelete = document.querySelector("#allDeletebt");
 
     allDelete.addEventListener('click', function () {      
@@ -153,9 +157,10 @@ window.onload = function () {
         // });
         var checks = document.querySelectorAll(".cart_select");
         if(confirm('삭제하시겠습니까?')) {
-            location = "/todayCart/remove";
+            location = "/todayCart/remove/" + member_id + "/" + goods_id;
         } //if
 
+        //합계 구하기
         totals.forEach((total) => {
             var tPrice = 0;
             var index = Array.from(totals).indexOf(total);

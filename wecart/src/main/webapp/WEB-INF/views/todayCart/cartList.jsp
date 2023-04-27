@@ -58,6 +58,7 @@
                         <div class="mypage_article_content">
                             <div>
                                 <h2>오늘의 장바구니</h2>
+                                <p>* 결측치(X)는 평균값을 사용하였습니다.</p>
                             </div>
                             <div class="mycart_table_div">
                                 <form action="/todayCart/register" method="post">
@@ -93,7 +94,7 @@
                                                                 </div>
                                                             </div>                                                        
                                                             <div class="cart_title_count">
-                                                                <a href="#" class="a_black_text"><span>${goodsList.goods_name}</span></a>
+                                                                <a href="/priceCompare/showPrd/${goodsList.goods_id}" class="a_black_text"><span>${goodsList.goods_name}</span></a>
                                                                 <div class="count_bt_delete">
                                                                     <div class="count_bt">
                                                                         <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
@@ -114,8 +115,12 @@
                                                             <td>
                                                                 <span class="goods_price" data-price="${not empty list.price ? list.price : list.avg_price}">
                                                                     <fmt:formatNumber value="${not empty list.price ? list.price : list.avg_price}" pattern="#,##0" />
+                                                                    
                                                                 </span>
                                                                 <span>원</span>
+                                                                <c:if test="${empty list.price}">
+                                                                	<div class="nullPrice">(X)</div>    	
+                                                                </c:if>
                                                             </td>
                                                             </c:if>
                                                         </c:forEach>
@@ -148,6 +153,8 @@
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
+                                    <input type="hidden" name="goods_id" value="${goodsList.goods_id}">                                    
 
                                     <div class="mycart_tbl_button_flex">
                                         <input type="submit" value="장바구니 저장" class="mycart_tbl_bt todayCartSave">

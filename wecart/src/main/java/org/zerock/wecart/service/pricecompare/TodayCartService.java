@@ -13,4 +13,7 @@ public interface TodayCartService {
 	
 	//2. 오늘의 장바구니 마트별 상품 가격 조회
 	public List<TodayCartPriceVO> getPrices(Integer goods_id, Integer member_id) throws ServiceException;
+	
+	//3. 상품 삭제
+	public int remove(Integer goods_id, Integer member_id) throws ServiceException;
 } //end class
