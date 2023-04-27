@@ -8,5 +8,5 @@ public class TodayCartGoodsVO {
 	private Integer goods_id;
 	private String goods_name;
 	private String goods_pic;
-	
+
 } //end class
