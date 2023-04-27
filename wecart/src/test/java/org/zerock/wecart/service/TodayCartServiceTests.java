@@ -74,7 +74,7 @@ public class TodayCartServiceTests {
 	void getPrices() throws ServiceException {
 		log.trace("getPrices invoked()");
 		
-		Integer goods_id = 1;
+		Integer goods_id = 3;
 		
 		Integer member_id = 207;
 		

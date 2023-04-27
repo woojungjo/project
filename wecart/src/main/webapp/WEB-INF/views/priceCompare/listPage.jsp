@@ -18,7 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
     <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
     <script src="../resources/js/priceCompare/cart.js" defer></script>
-    <script src="../resources/js/priceCompare/cart.js" defer></script>
 </head>
 <body>
     <div id="wrap">

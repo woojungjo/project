@@ -1,6 +1,8 @@
 package org.zerock.wecart.service.pricecompare;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,11 +43,29 @@ public class TodayCartServiceImpl implements TodayCartService {
 		log.trace("getPrices() invoked.");
 		
 		try {
+			List<TodayCartPriceVO> list = this.mapper.selectPrices(goods_id, member_id);
+
+			List<TodayCartPriceVO> modifiedList = list.stream()
+				    .map(item -> {
+				        if (item.getGoods_id() == null) {
+				            item.setGoods_id(goods_id);
+				        }
+				        if (item.getAvg_price() == null) {
+				            Optional<TodayCartPriceVO> optional = list.stream()
+				                .filter(i -> i.getAvg_price() != null)
+				                .findFirst();
+				            if (optional.isPresent()) {
+				                item.setAvg_price(optional.get().getAvg_price());
+				            }
+				        }
+				        return item;
+				    })
+				    .collect(Collectors.toList());			
 			
-			return this.mapper.selectPrices(goods_id, member_id);
+			return modifiedList;
 		} catch(Exception e) {
 			throw new ServiceException(e);
-		}
+		} //try-catch
 	} //getPrices
 
 } //end class
