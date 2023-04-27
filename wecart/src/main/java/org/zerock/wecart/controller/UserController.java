@@ -22,84 +22,88 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/user")
 @Controller
 public class UserController {
-	
+
 	private UserService service;
-	
+
 	// 로그인 처리
 	@PostMapping("/loginPost")
-	public String loginPost(LoginDTO dto, RedirectAttributes rttrs, Model model) throws ControllerException{
-		
+	public String loginPost(LoginDTO dto, RedirectAttributes rttrs, Model model) throws ControllerException {
+
 		try {
 			UserVO vo = this.service.login(dto);
 			log.info("\t+ vo: {}", vo);
-			
-			if(vo != null) {
+
+			if (vo != null) {
 				model.addAttribute("__AUTH__", vo);
-				
+
 //				model.addAttribute("alias", vo.getAlias() );
-				
+
 				return null;
 			} else {
 				rttrs.addAttribute("result", "Login Failed");
-				
+
 				return "redirect:/user/login";
 			} // if - else
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try - catch
 	} // loginPost
-	
 
 	// 로그아웃
 	@GetMapping("/logout")
 	public void logout() {
 		log.info("오류 메시지");
-		
+
 	} // logout
-	
+
 	// 회원가입
-	@GetMapping("/signup")
-	public String signup() {
-		
-		return null;
-	} // signup
-	
+	@PostMapping("/signup")
+	public String signup(UserDTO dto) throws ControllerException{
+		try {
+			boolean result = this.service.signUp(dto);
+			log.trace("result: {}", result);
+			
+			return "redirect:/main";
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try - catch
+	} // signUp
+
 	// 회원가입 약관
 	@GetMapping("/signupTerms")
 	public String signupTerms() {
-		
+
 		return null;
-	} // signup
-	
+	} // signUpTerms
+
 	// 아이디&비밀번호 찾기화면
 	@GetMapping("/findAccount")
 	public void findAccount() {
-		
+
 	} // findAccount
-	
+
 	// 아이디 찾기
 	@PostMapping("/searchId")
 	@ResponseBody
 	public String searchId(UserDTO dto) throws ControllerException {
 		try {
 			String result = this.service.searchId(dto);
-			
+
 			return result;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new ControllerException(e);
-		} // try-catch		
+		} // try-catch
 	} // searchId
-	
+
 	@PostMapping("/searchPw")
 	public String searchPw(UserDTO dto) throws ControllerException {
 		try {
 			boolean result = this.service.searchPw(dto);
 			log.trace("result: {}", result);
-							
-			return "redirect:/user/findAccount";	
-		} catch(Exception e) {
+
+			return "redirect:/user/findAccount";
+		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 	} // searchPw
-	
 } // end class

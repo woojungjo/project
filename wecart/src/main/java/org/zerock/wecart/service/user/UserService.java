@@ -15,6 +15,9 @@ public interface UserService {
 	
 	// 비밀번호 찾기
 	public abstract Boolean searchPw(UserDTO dto) throws ServiceException;
+	
+	// 회원가입
+	public abstract Boolean signUp(UserDTO dto) throws ServiceException;
 
 } // end interface
 
