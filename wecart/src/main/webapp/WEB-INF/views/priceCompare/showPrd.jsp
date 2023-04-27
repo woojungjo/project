@@ -82,6 +82,8 @@
 	    				console.log("user: " + user);
 	    				
 	    				console.log("object: " + object);
+	    				
+	    				window.location = "/todayCart/cartList";
 	    			},
 	    			error: function(){
 
@@ -131,6 +133,8 @@
 					}else{
 						alert("상품이 찜목록에 담겼습니다");
 					}
+					
+					window.location = "/mypage/cart/wishedPrds"
 				},
 				error: function(object){
     				console.log("error의 경우를 확인합니다.");
