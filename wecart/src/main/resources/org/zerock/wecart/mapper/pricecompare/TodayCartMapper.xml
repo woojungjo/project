@@ -31,4 +31,29 @@
 		)
 	WHERE t1.town_id = (SELECT town_id FROM member WHERE member_id = #{member_id})
   </select>
+  
+  <select id="selectAvgPrice" resultType="int">
+  	SELECT DISTINCT avg_price
+	FROM sale
+	WHERE goods_id = #{goods_id}
+	      AND api_date = (
+	                        SELECT MAX(api_date)
+	                        FROM sale
+	                        WHERE goods_id = #{goods_id}
+	                     )
+  </select>
+  
+  <delete id="delete">
+  	DELETE FROM member_goods_cart 
+  	WHERE cart_id = (
+				  		SELECT DISTINCT t2.cart_id
+						FROM cart t1, member_goods_cart t2
+						WHERE t1.cart_id = t2.cart_id
+							  AND t2.member_id = #{member_id}	
+							  AND t1.status = 'NotYet'
+				  	) 
+  	AND goods_id = #{goods_id}
+  </delete>
 </mapper>
+
+
