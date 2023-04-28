@@ -37,4 +37,15 @@
       email = #{email}
   </update>
 
+  <insert id="insertUser">
+    INSERT INTO
+      member (login_id, pwd, alias, email, mobile_num)    
+    VALUES
+      (#{login_id},
+       #{pwd},
+       #{alias},
+       #{email},
+       #{mobile_num})
+  </insert>
+
 </mapper>

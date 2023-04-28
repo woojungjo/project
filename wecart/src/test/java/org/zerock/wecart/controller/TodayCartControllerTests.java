@@ -162,6 +162,43 @@ public class TodayCartControllerTests {
                 .andExpect(MockMvcResultMatchers.model().attributeExists("__GOODSLIST__")) // 모델에 "__GOODSLIST__" 속성이 존재하는지 검증
                 .andExpect(MockMvcResultMatchers.model().attributeExists("__PRICELIST__")); // 모델에 "__PRICELIST__" 속성이 존재하는지 검증	
 	}	//cartList
+	
+//	@Disable
+	@Test
+	@Order(3)
+	@DisplayName("TEST1: register")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	GoodsVO remove(Model model) throws Exception {
+		log.trace("register({}) invoked. ");
+		
+		MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+		MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.post("/todayCart/register");
+		
+		
+		MockHttpSession session = new MockHttpSession();
+		LoginDTO loginDTO = new LoginDTO();
+		loginDTO.setLogin_id("loginid1");
+		loginDTO.setPwd("PWD1");
+		UserVO userVO = this.userService.login(loginDTO);
+		
+		
+		session.setAttribute("__AUTH__", userVO);
+		requestBuilder.session(session);
+		
+		@Cleanup("clear")
+		ModelAndView nodel = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		
+		
+		Integer goods_id = (Integer) model.getAttribute("goods_id");
+		log.trace("goods_id: {}", goods_id);
+		GoodsVO goodsVO = (GoodsVO) priceCompareService.select(goods_id);
+		log.trace("goodVO: {}", goodsVO);
+		UserVO userVOAtController = (UserVO) model.getAttribute("__AUTH__");
+		log.trace("UserVO: {}", userVOAtController);
+
+		return goodsVO;
+	}
 } //end class
 
 

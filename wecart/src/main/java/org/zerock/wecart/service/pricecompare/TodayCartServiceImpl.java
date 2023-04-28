@@ -1,11 +1,11 @@
 package org.zerock.wecart.service.pricecompare;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO;
 import org.zerock.wecart.domain.pricecompare.TodayCartPriceVO;
 import org.zerock.wecart.exception.ServiceException;
@@ -49,15 +49,10 @@ public class TodayCartServiceImpl implements TodayCartService {
 				    .map(item -> {
 				        if (item.getGoods_id() == null) {
 				            item.setGoods_id(goods_id);
-				        }
+				        } //if
 				        if (item.getAvg_price() == null) {
-				            Optional<TodayCartPriceVO> optional = list.stream()
-				                .filter(i -> i.getAvg_price() != null)
-				                .findFirst();
-				            if (optional.isPresent()) {
-				                item.setAvg_price(optional.get().getAvg_price());
-				            }
-				        }
+				            item.setAvg_price(this.mapper.selectAvgPrice(goods_id));
+				        } //if
 				        return item;
 				    })
 				    .collect(Collectors.toList());			
@@ -66,6 +61,16 @@ public class TodayCartServiceImpl implements TodayCartService {
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch
+	}
+
+	@Transactional
+	@Override
+	public int remove(Integer goods_id, Integer member_id) throws ServiceException {
+		try {
+			return this.mapper.delete(goods_id, member_id);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch		
 	} //getPrices
 
 } //end class

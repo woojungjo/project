@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try - catch
-
 	} // login
 
 	@Override
@@ -49,7 +48,6 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try - catch
-
 	} // searchId
 
 	// 임시 비밀번호 생성 메소드
@@ -101,5 +99,16 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		} // try-catch
 	} // searchPw
+	
+	@Override
+	public Boolean signUp(UserDTO dto) throws ServiceException {
+		log.trace("signUp() invoked.");
+		
+		try {
+			return this.mapper.insertUser(dto) == 1;
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // signUp
 
 } // end class

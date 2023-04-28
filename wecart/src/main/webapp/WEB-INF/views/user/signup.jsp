@@ -24,64 +24,64 @@
 
             <div id="content">
 
-                <div id="part_1">
+                <form action="/user/signUp" method="post">
+                    <div id="part_1">
 
-                    <div class="article">
-                        <h3 class="input_title"><label for="id">아이디</label></h3>
-                        <input type="text" id="id" class="input" placeholder="5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능" maxlength="20">
-                    </div>
-
-                    <div class="article">
-                        <h3 class="input_title"><label for="password">비밀번호</label></h3>
-                        <input type="password" id="password" placeholder="최소 8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input" maxlength="16">
-                    </div>
-
-                    <div class="article">
-                        <h3 class="input_title"><label for="password">비밀번호 확인</label></h3>
-                        <input type="password" id="password" class="input" maxlength="16">
-                    </div>
-
-                    <div class="article">
-                        <h3 class="input_title"><label for="nickname">닉네임</label></h3>
-                        <input type="text" id="nickname" class="input" placeholder="한글, 영어, 숫자 최소 3~10자로 입력" maxlength="10">
-                        
-                        <a href="#" id="nick_button" class="button" role="button">
-                            <span>중복 확인</span>
-                        </a>
+                        <div class="article">
+                            <h3 class="input_title"><label for="login_id">아이디</label></h3>
+                            <input type="text" id="login_id" name="login_id" class="input" placeholder="5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능" maxlength="20">
+                        </div>
+    
+                        <div class="article">
+                            <h3 class="input_title"><label for="pwd">비밀번호</label></h3>
+                            <input type="password" id="pwd" name="pwd" placeholder="최소 8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input" maxlength="16">
+                        </div>
+    
+                        <div class="article">
+                            <h3 class="input_title"><label for="pwdCk">비밀번호 확인</label></h3>
+                            <input type="password" id="pwdCk" name="pwdCk" class="input" maxlength="16">
+                        </div>
+    
+                        <div class="article">
+                            <h3 class="input_title"><label for="alias">닉네임</label></h3>
+                            <input type="text" id="alias" name="alias" class="input" placeholder="한글, 영어, 숫자 최소 3~10자로 입력" maxlength="10">
+                            
+                            <a href="#" id="nick_button" class="button" role="button">
+                                <span>중복 확인</span>
+                            </a>
+                        </div>
                     </div>                    
-
-                </div>
-
-                <div id="part_2">
-
-                    <div class="article">
-                        <h3 class="input_title"><label for="email">이메일(선택사항)</label></h3>
-                        <input type="text" id="email" class="input" placeholder="@부분 까지 전체 이메일 입력" maxlength="100">
+    
                     </div>
-
-                    <div class="article">
-                        <h3 class="input_title"><label for="phoneNo">휴대전화(선택사항)</label></h3>
-                        <input type="text" id="phoneNo" placeholder="-없이 숫자만" class="input" maxlength="16">
-
-                        <a href="#" id="auth_button" class="button" role="button">
-                            <span>인증번호 받기</span>
-                        </a>
+    
+                    <div id="part_2">
+    
+                        <div class="article">
+                            <h3 class="input_title"><label for="email">이메일(선택사항)</label></h3>
+                            <input type="text" id="email" name="email" class="input" placeholder="@부분 까지 전체 이메일 입력" maxlength="100">
+                        </div>
+    
+                        <div class="article">
+                            <h3 class="input_title"><label for="mobile_num">휴대전화(선택사항)</label></h3>
+                            <input type="text" id="mobile_num" name="mobile_num" placeholder="-없이 숫자만" class="input" maxlength="16">
+    
+                            <a href="#" id="auth_button" class="button" role="button">
+                                <span>인증번호 받기</span>
+                            </a>
+                        </div>
+    
+                        <div class="article" id="auth">
+                            <input type="text" id="authck" class="input" placeholder="인증번호를 입력하세요" maxlength="20">
+                        </div>    
                     </div>
-
-                    <div class="article" id="auth">
-                        <input type="text" id="authck" class="input" placeholder="인증번호를 입력하세요" maxlength="20">
+    
+                    <div id="part_3">
+                        <button id="signup_button" class="button" class="button">
+                            <span>가입하기</span>
+                        </button>
                     </div>
-
-                </div>
-
-                <div id="part_3">
-                    <button id="signup_button" class="button" class="button">
-                        <span>가입하기</span>
-                    </button>
-                </div>
-
+                </form>
             </div>
-
         </div>
 
     </main>
@@ -109,5 +109,9 @@
     </footer>
 
 </body>
+
+<script>
+
+</script>
 
 </html>
