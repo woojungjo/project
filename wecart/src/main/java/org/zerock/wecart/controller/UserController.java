@@ -68,6 +68,11 @@ public class UserController {
 			throw new ControllerException(e);
 		} // try - catch
 	} // signUp
+	
+	@GetMapping("/signup")
+	void signup() {
+		log.trace("signup-view() invoekd.");
+	} // signup - view 
 
 	// 회원가입 약관
 	@GetMapping("/signupTerms")
