@@ -22,12 +22,11 @@ public class TodayCartRestController {
 		this.service = service;
 	} //Constructor
 	
+	//상품 개별 삭제
 	@DeleteMapping("/remove/{member_id}/{goods_id}")
 	public ResponseEntity<String> remove(@PathVariable("goods_id") Integer goods_id, @PathVariable("member_id") Integer member_id) throws ControllerException{
 		try {
-			log.trace("remove(goods_id) invoked.");
-			
-			log.info("\t+ goods_id: {}", goods_id);
+			log.trace("remove({}, {}) invoked.", goods_id, member_id);
 			
 			return service.remove(goods_id, member_id) == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 			        										: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

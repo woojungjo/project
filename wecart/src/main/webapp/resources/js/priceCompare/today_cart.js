@@ -146,6 +146,30 @@ window.onload = function () {
 
     let goods_id = $('input[name=goods_id]').val();
 
+    let removeGoods = (function () {
+        //상품개별삭제
+        function removeOne(member_id, goods_id, callback, error) {
+            console.log('removeOne invoked...');
+
+            $.ajax({
+                type : 'delete',
+                url : '/todayCart/remove/' + member_id + '/' + goods_id,
+                success : function(removeResult) {
+                    if (callback) {
+                        callback(removeResult);
+                    }
+                },
+                error : function(xhr, status, er) {
+                    if (error) {
+                        error(er);
+                    }
+                }
+            });
+        }
+
+        return {removeOne : removeOne}
+    })();
+
     var allDelete = document.querySelector("#allDeletebt");
 
     allDelete.addEventListener('click', function () {      
@@ -157,7 +181,7 @@ window.onload = function () {
         // });
         var checks = document.querySelectorAll(".cart_select");
         if(confirm('삭제하시겠습니까?')) {
-            location = "/todayCart/remove/" + member_id + "/" + goods_id;
+            location = "/todayCart/remove";
         } //if
 
         //합계 구하기
@@ -181,7 +205,7 @@ window.onload = function () {
     var deleteBts = document.querySelectorAll(".delete_bt");
     var deleteOne = function (e) {
         if(confirm('삭제하시겠습니까?')) {
-            location = "/todayCart/remove";
+            location = "/todayCart/remove/" + member_id + "/" + goods_id;
         } //if  
         
         //합계 구하기
