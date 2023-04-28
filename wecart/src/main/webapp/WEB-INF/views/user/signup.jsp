@@ -25,6 +25,7 @@
             <div id="content">
 
                 <form action="/user/signUp" method="post">
+                    
                     <div id="part_1">
 
                         <div class="article">
@@ -46,12 +47,10 @@
                             <h3 class="input_title"><label for="alias">닉네임</label></h3>
                             <input type="text" id="alias" name="alias" class="input" placeholder="한글, 영어, 숫자 최소 3~10자로 입력" maxlength="10">
                             
-                            <a href="#" id="nick_button" class="button" role="button">
+                            <a href="#" id="nick_button" class="button">
                                 <span>중복 확인</span>
                             </a>
                         </div>
-                    </div>                    
-    
                     </div>
     
                     <div id="part_2">
@@ -65,7 +64,7 @@
                             <h3 class="input_title"><label for="mobile_num">휴대전화(선택사항)</label></h3>
                             <input type="text" id="mobile_num" name="mobile_num" placeholder="-없이 숫자만" class="input" maxlength="16">
     
-                            <a href="#" id="auth_button" class="button" role="button">
+                            <a href="#" id="auth_button" class="button">
                                 <span>인증번호 받기</span>
                             </a>
                         </div>
@@ -76,14 +75,13 @@
                     </div>
     
                     <div id="part_3">
-                        <button id="signup_button" class="button" class="button">
+                        <button type="submit" id="signup_button" class="button">
                             <span>가입하기</span>
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-
     </main>
 
 	<footer>
@@ -99,7 +97,7 @@
             <li><a href="https://github.com/KimYongSae">김용세</a></li>
             <li><a href="https://github.com/JeongHwan95">김정환</a></li>
             <li><a href="https://github.com/comdesk">김지연</a></li>
-            <li><a href="https://github.com/Juyeonjoo">조연주</a></li>            
+            <li><a href="https://github.com/Juyeonjoo">조연주</a></li>
         </ul>
         
         <br>
