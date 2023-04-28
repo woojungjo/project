@@ -82,7 +82,7 @@
                                         </thead>
                                         <tbody>     <!--동적-->
                                             <c:forEach var="goodsList" items="${__GOODSLIST__}">                                            
-                                                <tr class="goods_price_tr">
+                                                <tr class="goods_price_tr" data-goods_id="${goodsList.goods_id}">
                                                     <td colspan="2" class="td_cart_goods_list">
                                                         <div class="cart_goods_list">
                                                             <div class="checkBox_img">
@@ -90,7 +90,7 @@
                                                                     <input type="checkbox" name="todayCartList" class="cart_select" value="">
                                                                 </label>                                                            
                                                                 <div>
-                                                                    <a href="#"><img src="https://picsum.photos/id/684/100/100" class="cart_goods_image"></a>
+                                                                    <a href="/priceCompare/showPrd/${goodsList.goods_id}"><img src="${goodsList.goods_pic}" class="cart_goods_image"></a>
                                                                 </div>
                                                             </div>                                                        
                                                             <div class="cart_title_count">
@@ -153,8 +153,7 @@
                                             </tr>
                                         </tfoot>
                                     </table>
-                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
-                                    <input type="hidden" name="goods_id" value="${goodsList.goods_id}">                                    
+                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}">                                 
 
                                     <div class="mycart_tbl_button_flex">
                                         <input type="submit" value="장바구니 저장" class="mycart_tbl_bt todayCartSave">
