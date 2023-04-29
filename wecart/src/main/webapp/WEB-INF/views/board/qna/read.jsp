@@ -192,6 +192,31 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="board_commant_comment_update hidden">
+                                <form class="board_commant_write" action="/board/qna/read/commentupdate" method="post">
+                                    <input type="hidden" name="comment_no" value="${commentList.comment_no}">
+                                    <input type="hidden" name="post_no" value="${commentList.post_no}">
+                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
+                                    <input type="hidden" name="secret_yn" value="${commentList.secret_yn}">
+                                    <input type="hidden" name="delete_yn" value="${commentList.delete_yn}">
+                                    <input type="hidden" name="comment_root" value="${commentList.comment_root}">
+                                    <input type="hidden" name="comment_step" value="${commentList.comment_step + 1}">
+                                    <input type="hidden" name="comment_indent" value="${commentList.comment_indent + 1}">
+                                    <div>${__AUTH__.member_id}</div>
+                                    <input type="text" name="content" placeholder="댓글을 남겨보세요." value="${commentList.content}">
+                                    <div class="board_commant_write_footer" >
+                                        <c:choose>
+                                            <c:when test="${commentList.secret_yn == 0}">
+                                                <div class="fas fa-unlock"></div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="fas fa-lock"></div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <button class="board_commant_update">등록</button>
+                                    </div>
+                                </form>
+                            </div>
                             <hr>
                             
                             <div class="board_commant_commant_write hidden">
@@ -227,6 +252,24 @@
                                     </div>
                                 </form>
                             </div>
+
+                            <!-- <div class="board_commant_comment_update hidden">
+                                <form class="board_commant_write" action="/board/qna/read/commentupdate" method="post">
+                                    <input type="hidden" name="post_no" value="${commentList.post_no}">
+                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
+                                    <input type="hidden" name="secret_yn" value="${commentList.secret_yn}">
+                                    <input type="hidden" name="delete_yn" value="${commentList.delete_yn}">
+                                    <input type="hidden" name="comment_root" value="${commentList.comment_root}">
+                                    <input type="hidden" name="comment_step" value="${commentList.comment_step + 1}">
+                                    <input type="hidden" name="comment_indent" value="${commentList.comment_indent + 1}">
+                                    <div>${__AUTH__.member_id}</div>
+                                    <input type="text" name="content" placeholder="댓글을 남겨보세요." value="${commentList.content}">
+                                    <div class="board_commant_write_footer" >
+                                        <div class="fas fa-unlock"></div>
+                                        <button class="board_commant_submit">등록</button>
+                                    </div>
+                                </form>
+                            </div> -->
                         </c:when>
                         <c:otherwise>
                             <div class="board_comment_deleted">

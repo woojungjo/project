@@ -13,7 +13,7 @@ downloadBtn.onclick = function() {
 
 document.body.addEventListener('click', function(event) {
   if (event.target.classList.contains('board_commant_commant')) {
-    const commentForm = event.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
+    const commentForm = event.target.parentElement.parentElement.nextElementSibling.nextElementSibling.nextElementSibling;
     commentForm.classList.toggle('hidden');
   }
 });
@@ -156,5 +156,55 @@ $(function() {
     } else{
       window.alert('로그인이 필요합니다.');
     }
+  }); // .onclick
+});
+
+// 댓글 업데이트
+$(function() {
+  $('body').on('click', '.board_comment_update', function(event) {
+
+      const update = event.target.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
+      update.classList.toggle('hidden');
+      
+      const removeform = event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
+      removeform.classList.toggle('hidden');
+
+  }); // .onclick
+});
+
+
+$(function() {
+  $('body').on('click', 'button.board_commant_update', function(event) {
+      console.clear(); console.group("Ajax Request");
+
+      event.preventDefault(); // 폼 전송을 막음
+
+      // var form = $('#comment-form');
+      var form = $(this).closest('form');
+      console.log('1. form:', form);
+
+      var jsonData = form.serializeJSON();
+      console.log(`2. jsonData:`, jsonData);
+      console.log(`2-1. content: ${jsonData.content}`);
+
+      var jsonStr = JSON.stringify(jsonData);
+      console.log(`3. jsonStr: ${jsonStr}`);
+
+      $.ajax({
+          url: '/board/qna/read/commentupdate',
+          type: 'POST',
+          contentType: 'application/json',
+          dataType: 'json',
+          data: jsonStr,
+
+          success: function(data) {
+              console.info('**** success called back:', data);
+              $(".board_commant").load(location.href + " .board_commant");
+
+              // DOM tree 조작
+          } // success
+      }); // .ajax
+
+      console.groupEnd();
   }); // .onclick
 });

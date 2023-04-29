@@ -77,4 +77,12 @@ public class QnaBoardCommentServiceImpl implements QnaBoardCommentService {
 		
 	}
 
+	@Override
+	public void commentModify(QnaBoardCommentDTO dto) throws ServiceException {
+
+		this.commentMapper.updateComment(dto);
+	}
+	
+	
+
 }
