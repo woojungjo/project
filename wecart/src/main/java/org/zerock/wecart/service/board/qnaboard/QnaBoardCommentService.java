@@ -30,5 +30,8 @@ public interface QnaBoardCommentService {
 	// 좋아요 눌렀는지 확인하고 안눌럿으면 업 눌럿으면 다운
 	public abstract void commentLike(QnaBoardCommentDTO dto) throws ServiceException;
 	
+	// 댓글 수정
+	public abstract void commentModify(QnaBoardCommentDTO dto) throws ServiceException;
+	
 	
 } // end interface

@@ -22,6 +22,10 @@ public interface QnaBoardCommentMapper {
 	// 댓글등록
 	public abstract boolean insertComment(QnaBoardCommentDTO dto);
 	
+	// 댓글 업데이트
+	@Update("UPDATE qna_board_comment SET content = #{content}, secret_yn = #{secret_yn} WHERE comment_no = #{comment_no}")
+	public abstract boolean updateComment(QnaBoardCommentDTO dto);
+	
 	// 댓글의 step과 indent 업데이트
 	@Update(" UPDATE qna_board_comment SET comment_step = comment_step + 1 WHERE comment_root = #{comment_root} AND comment_step >= #{comment_step} ")
 	public abstract boolean updateCommentStepIndent(QnaBoardCommentDTO dto);
