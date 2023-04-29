@@ -79,39 +79,43 @@
                             <div>다음&nbsp;<span class="fas fa-arrow-right-long"/></div>
                         </div>
                     </div>
-    
-                    <form id="comment-form" class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
-                        <input type="hidden" name="post_no" value="${readVO.post_no}">
-                        <c:choose>
-                            <c:when test="${not empty sessionScope.__AUTH__}">
-                                <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
-                            </c:when>
-                            <c:otherwise>
-                                <input type="hidden" name="member_id" value="334"> 
-                            </c:otherwise>
-                        </c:choose>
-                        <!-- 멤버아이디는 세션에 올라간 로그인된 사용자아이디 사용, 밑에 댓글작성자(로그인된유저)도 같은데이터사용 -->
-                        <input type="hidden" name="secret_yn" value="0">
-                        <input type="hidden" name="delete_yn" value="0">
-                        <input type="hidden" name="comment_root">
-                        <input type="hidden" name="comment_step" value="0">
-                        <input type="hidden" name="comment_indent" value="0">
-                        <div>
+                    
+                    <c:if test="${not empty sessionScope.__AUTH__}">
+
+                        <form id="comment-form" class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
+                            <input type="hidden" name="post_no" value="${readVO.post_no}">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.__AUTH__}">
-                                    ${__AUTH__.member_id}
+                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
                                 </c:when>
                                 <c:otherwise>
-                                    tmp
+                                    <input type="hidden" name="member_id" value="334"> 
                                 </c:otherwise>
                             </c:choose>
-                        </div>
-                        <input type="text" name="content" placeholder="댓글을 남겨보세요.">
-                        <div class="board_commant_write_footer" >
-                            <div class="fas fa-unlock"></div>
-                            <button class="board_commant_submit">등록</button>
-                        </div>
-                    </form>
+                            <!-- 멤버아이디는 세션에 올라간 로그인된 사용자아이디 사용, 밑에 댓글작성자(로그인된유저)도 같은데이터사용 -->
+                            <input type="hidden" name="secret_yn" value="0">
+                            <input type="hidden" name="delete_yn" value="0">
+                            <input type="hidden" name="comment_root">
+                            <input type="hidden" name="comment_step" value="0">
+                            <input type="hidden" name="comment_indent" value="0">
+                            <div>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.__AUTH__}">
+                                        ${__AUTH__.member_id}
+                                    </c:when>
+                                    <c:otherwise>
+                                        tmp
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <input type="text" name="content" placeholder="댓글을 남겨보세요.">
+                            <div class="board_commant_write_footer" >
+                                <div class="fas fa-unlock"></div>
+                                <button class="board_commant_submit">등록</button>
+                            </div>
+                        </form>
+                    </c:if>
+                    <hr>
                     <fmt:formatDate value="${currentTime}" pattern="yyyyMMddHHmmss" var="currDate" />
                     <c:forEach items="${commentVO}" var="commentList">
                         <c:choose>
@@ -122,7 +126,7 @@
                                     <div class="board_commant_read_header_namegroup">
                                         <div class="fas fa-piggy-bank"></div>
                                         <div>
-                                            <div>${commentList.member_id}</div>
+                                            <div>&nbsp;&nbsp;${commentList.member_id}</div>
                                             
 
                                             <fmt:formatDate value="${commentList.write_dt}" pattern="yyyyMMddHHmmss" var="write_dt" />
@@ -148,6 +152,7 @@
                                             </c:choose>
                                         </div>
                                     </div>
+                                    <c:if test="${__AUTH__.member_id == commentList.member_id}">
                                     <div class="fas fa-bars">
                                         <div class="board_commant_ud">
                                             <ul>
@@ -157,6 +162,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                </c:if>
                                 </div>
                                 <div class="board_commant_read_main">
                                     <c:choose>
@@ -169,8 +175,21 @@
                                     </c:choose>
                                 </div>
                                 <div class="board_commant_read_footer">
-                                    <button class="board_commant_commant">답글쓰기</button>
-                                    <div><span class="fas fa-heart"/>0</div><!-- 좋아요 수 넣자 -->
+                                    <c:if test="${not empty sessionScope.__AUTH__}">
+                                        <button class="board_commant_commant">답글쓰기</button>
+                                    </c:if>
+                                    <c:if test="${empty sessionScope.__AUTH__}">
+                                        <div></div>
+                                    </c:if>
+                                    <div>
+                                        <input type="hidden" name="member_id" value="${commentList.member_id}">
+                                        <form>
+                                            <input type="hidden" name="post_no" value="${readVO.post_no}">
+                                            <input type="hidden" name="comment_no" value="${commentList.comment_no}">
+                                            <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
+                                            <span class="fas fa-heart"/>&nbsp;${commentList.like_count}
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
