@@ -14,6 +14,16 @@ public interface TodayCartService {
 	//2. 오늘의 장바구니 마트별 상품 가격 조회
 	public List<TodayCartPriceVO> getPrices(Integer goods_id, Integer member_id) throws ServiceException;
 	
-	//3. 상품 삭제
+	//3. 오늘의 장바구니 상품 개별 삭제
 	public int remove(Integer goods_id, Integer member_id) throws ServiceException;
+	
+	//4. 오늘의 장바구니 상품 선택 삭제
+	public int removeChecked(int[] goodsIdArr, Integer member_id) throws ServiceException;
+	
+	//5. 오늘의 장바구니 -> 마이페이지 상세 장바구니
+	public int registerMypageCart(Integer member_id) throws ServiceException;
+	
+	//6. 오늘의 장바구니 상품 수량 변화
+	public int modifyAmount(Integer amount, Integer goods_id, Integer member_id) throws ServiceException;
+	
 } //end class

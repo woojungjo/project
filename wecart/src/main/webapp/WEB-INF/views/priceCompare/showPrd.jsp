@@ -82,8 +82,6 @@
 	    				console.log("user: " + user);
 	    				
 	    				console.log("object: " + object);
-	    				
-	    				window.location = "/todayCart/cartList";
 	    			},
 	    			error: function(){
 
@@ -185,10 +183,10 @@
 					</form>
 				</div>
 				<div>
-					<button type="button" class="mypick_bt">
+					<button type="button" class="mypick_bt mypick_goods">
 						<i class="fa-regular fa-heart fa-2x"></i>
 					</button>
-					<button type="button" class="mypick_bt">
+					<button type="button" class="mypick_bt mypick_cart">
 						<i class="fa-solid fa-cart-shopping fa-2x"></i>
 					</button>
 				</div>
@@ -270,6 +268,21 @@
 		</article>
 
 		<jsp:include page="../header_footer/footer.jsp" flush="true" />
+		
+		<script>
+			//상단 찜목록, 오늘의장바구니 페이지 이동
+	        var mypickGoods = document.querySelector(".mypick_goods");
+	        console.log("mypickGoods: ", mypickGoods);
+		    mypickGoods.addEventListener('click', () => {
+		        location.href = "/mypage/cart/wishedPrds";
+		    });
+		
+		    var mypickCart = document.querySelector(".mypick_cart");
+		    mypickCart.addEventListener('click', function (e) {
+		        console.log(e.target);
+		        location = "/todayCart/cartList";
+		    });
+		</script>
 
 </body>
 
