@@ -63,4 +63,18 @@ public class QnaBoardCommentServiceImpl implements QnaBoardCommentService {
 		return result;
 	}
 
+	@Override
+	public void commentLike(QnaBoardCommentDTO dto) throws ServiceException {
+		
+		Integer result = this.commentMapper.commentAlreadyLIke(dto);
+		
+		
+		if(result != 0) {
+			this.commentMapper.commentLIkeDOWN(dto);
+		} else {
+			this.commentMapper.commentLIkeUP(dto);
+		}
+		
+	}
+
 }

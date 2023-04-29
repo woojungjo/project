@@ -58,6 +58,18 @@ public class RESTQnaBoardController {
 	        throw new ControllerException(e);
 	    }
 	}
+	
+	@PostMapping("/read/commentlike")
+	public Boolean commentLike(@RequestBody QnaBoardCommentDTO dto) throws ControllerException {
+		try {
+		
+			this.commentService.commentLike(dto);
+			
+			return true;
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		}
+	}
 
 	
 } // end class

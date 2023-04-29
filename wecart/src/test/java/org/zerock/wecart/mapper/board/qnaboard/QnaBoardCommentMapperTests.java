@@ -98,5 +98,20 @@ public class QnaBoardCommentMapperTests {
 	
 		
 	} // insertCommentTest
+	
+	@Test
+	@Order(1)
+	void alreadyLikeTest() {
+		
+		QnaBoardCommentDTO dto = new QnaBoardCommentDTO();
+		dto.setPost_no(99990);
+		dto.setComment_no(222229);
+		dto.setMember_id(198);
+		
+		Integer result = this.mapper.commentAlreadyLIke(dto);
+		log.info("result : " , result);
+		
+		
+	} // insertCommentTest
 		
 }

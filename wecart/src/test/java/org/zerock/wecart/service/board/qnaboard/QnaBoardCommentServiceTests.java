@@ -2,6 +2,9 @@ package org.zerock.wecart.service.board.qnaboard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -10,11 +13,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
+import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 import org.zerock.wecart.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -29,10 +34,10 @@ import lombok.extern.log4j.Log4j2;
 
 @ExtendWith(SpringExtension.class	)
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/**/root-*.xml")
-public class QnaBoardServiceTests {
+public class QnaBoardCommentServiceTests {
 
 	@Setter(onMethod_= {@Autowired})
-	private QnaBoardCommentService service;
+	private QnaBoardService service;
 	
 	
 	@BeforeAll
@@ -47,17 +52,19 @@ public class QnaBoardServiceTests {
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("testLike")
-	void testLike() throws ServiceException {
+	@DisplayName("testGetList")
+	@Timeout(value = 2 ,unit = TimeUnit.SECONDS)
+	void testGetList() throws ServiceException {
+		log.trace("testGetList() invoked.");
 		
-		QnaBoardCommentDTO dto = new QnaBoardCommentDTO();
-		dto.setPost_no(99990);
-		dto.setComment_no(222229);
-		dto.setMember_id(198);
+		Criteria cri = new Criteria();
+		cri.setCurrPage(1);
+		cri.setAmount(20);
 		
-		service.commentLike(dto);
+		List<QnaBoard_CommentCountVO> list = this.service.getList(cri);
 		
-		
+		assert list != null;
+		list.forEach(log::info);
 	} // testGetList
 	
 	

@@ -120,3 +120,41 @@ $(function() {
       }); // .ajax
   }); // .onclick
 });
+
+// 좋아요 에이젝스부터 구현하면됨(컨트롤러 선행된 후에)
+$(function() {
+  $('body').on('click', '.fa-heart', function(event) {
+
+    var authID = event.target.previousElementSibling;
+    console.log(authID)
+    console.log(authID.value)
+
+    // var commentWriter = event.target.parentElement.previousElementSibling;
+    // console.log(commentWriter)
+
+    if(authID.value != ""){
+
+    var form = $(this).closest('form');
+    console.log(form)
+    var jsonData = form.serializeJSON();
+    console.log(jsonData)
+    var jsonStr = JSON.stringify(jsonData); 
+    console.log(jsonStr)
+
+      $.ajax({
+          url: '/board/qna/read/commentlike',
+          type: 'POST',
+          contentType: 'application/json',
+          data: jsonStr,
+
+          success: function() {
+              $(".board_commant").load(location.href + " .board_commant");
+
+              // DOM tree 조작
+          } // success
+      }); // .ajax
+    } else{
+      window.alert('로그인이 필요합니다.');
+    }
+  }); // .onclick
+});

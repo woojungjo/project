@@ -117,7 +117,12 @@
                             <input type="text" name="keyword">
                             <button type="submit" >검색</button>
                         </div>
-                        <a href="BoardWrite.html"><button type="button"><span class="fas fa-pen-to-square" />글쓰기</button></a>
+                        <c:if test="${not empty sessionScope.__AUTH__}">
+                            <a href="BoardWrite.html"><button type="button"><span class="fas fa-pen-to-square" />글쓰기</button></a>
+                        </c:if>
+                        <c:if test="${empty sessionScope.__AUTH__}">
+                            <div></div>
+                        </c:if>
                     </div>
                 </form>
 
