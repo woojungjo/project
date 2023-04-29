@@ -37,6 +37,7 @@ public class TodayCartController {
 		this.service = service;
 	} //Constructor
 	
+	//오늘의 장바구니 목록 보여주기
 	@GetMapping("/cartList")
 	public void cartList(@SessionAttribute("__AUTH__") UserVO userVO, Model model) throws ControllerException {
 		log.trace("cartList({}, model) invoked.", userVO);
@@ -76,16 +77,15 @@ public class TodayCartController {
 		
 	} //get
 	
+	//오늘의 장바구니 -> 마이페이지 상세 장바구니
 	@PostMapping("/register")
 	public void register() {
 		log.trace("register() invoked.");
 	} //register
-	
-//	@PostMapping("/remove")		Ajax일 때 PostMapping으로
-	@GetMapping("/remove")		//현재 확인단계일 때만 임시로 겟매핑
-	public String remove() {
-		log.trace("remove() invoked.");
-		
-		return "redirect:cartList";
-	} //remove
 } //end class
+
+
+
+
+
+

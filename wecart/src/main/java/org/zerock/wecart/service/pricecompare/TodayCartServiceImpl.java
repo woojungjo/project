@@ -61,16 +61,61 @@ public class TodayCartServiceImpl implements TodayCartService {
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch
-	}
+	} //getPrices
 
 	@Transactional
 	@Override
 	public int remove(Integer goods_id, Integer member_id) throws ServiceException {
+		log.trace("remove({}, {}) invoked.", goods_id, member_id);
+		
 		try {
 			return this.mapper.delete(goods_id, member_id);
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} //try-catch		
-	} //getPrices
+	} //remove
+
+	@Transactional
+	@Override
+	public int removeChecked(int[] goodsIdArr, Integer member_id) throws ServiceException {
+		log.trace("remove({}, {}) invoked.", goodsIdArr, member_id);
+		
+		try {
+			return this.mapper.deleteChecked(goodsIdArr, member_id);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //removeChecked
+
+	@Transactional
+	@Override
+	public int registerMypageCart(Integer member_id) throws ServiceException {
+		log.trace("registerMypageCart({}) invoked.", member_id);
+		
+		try {		
+			return this.mapper.updateStatus(member_id);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //registerMypageCart
+
+	@Override
+	public int modifyAmount(Integer amount, Integer goods_id, Integer member_id) throws ServiceException {
+		log.trace("modifyAmount({}, {}, {}) invoked.", amount, goods_id,member_id);
+		
+		try {		
+			return this.mapper.updateAmount(amount, goods_id, member_id);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //modifyAmount
 
 } //end class
+
+
+
+
+
+
+
+

@@ -98,7 +98,7 @@
                                                                 <div class="count_bt_delete">
                                                                     <div class="count_bt">
                                                                         <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                        <div class="amount_div">1</div>
+                                                                        <div class="amount_div">${goodsList.amount}</div>
                                                                         <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
                                                                     </div>
                                                                     <div class="delete_bt_div">
