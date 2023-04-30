@@ -2,6 +2,7 @@ package org.zerock.wecart.service.mypage.edit;
 
 import org.springframework.stereotype.Service;
 import org.zerock.wecart.domain.UserVO;
+import org.zerock.wecart.domain.user.LoginDTO;
 import org.zerock.wecart.domain.user.UserDTO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.mypage.edit.EditMapper;
@@ -18,11 +19,11 @@ public class EditServiceImpl implements EditService {
 	private EditMapper mapper;
 	
 	@Override
-	public UserVO checkPw(UserDTO dto) throws ServiceException {
+	public UserVO checkUser(LoginDTO dto) throws ServiceException {
 		log.trace("checkPw() invoked.");
 		
 		try {
-			return this.mapper.selectPw(dto);
+			return this.mapper.selectUser(dto);
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try - catch

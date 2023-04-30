@@ -1,13 +1,14 @@
 package org.zerock.wecart.service.mypage.edit;
 
 import org.zerock.wecart.domain.UserVO;
+import org.zerock.wecart.domain.user.LoginDTO;
 import org.zerock.wecart.domain.user.UserDTO;
 import org.zerock.wecart.exception.ServiceException;
 
 public interface EditService {
 
-	// 비밀번호 확인
-	public abstract UserVO checkPw(UserDTO dto) throws ServiceException;
+	// 유저 재확인
+	public abstract UserVO checkUser(LoginDTO dto) throws ServiceException;
 
 	// 닉네임 변경
 	public abstract Boolean changeAli(UserDTO dto) throws ServiceException;

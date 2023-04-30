@@ -6,13 +6,14 @@
   
 <mapper namespace="org.zerock.wecart.mapper.mypage.edit.EditMapper">
 
-  <!-- 비밀번호 확인 -->
-  <select id="selectPw" resultType="org.zerock.wecart.domain.UserVO">
+  <!-- 유저 재확인 -->
+  <select id="selectUser" resultType="org.zerock.wecart.domain.UserVO">
     SELECT
       *
     FROM
       member
     WHERE
+      login_id = #{login_id} AND
       pwd = #{pwd}
   </select>
 

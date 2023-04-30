@@ -15,7 +15,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Jua&family=Source+Sans+Pro:ital,wght@1,700&display=swap"
             rel="stylesheet">
 
-        <link rel="stylesheet" href="/resources/css/mypageEdit/check_password.css">
+        <link rel="stylesheet" href="/resources/css/mypageEdit/changePw.css">
 
     </head>
 
@@ -28,9 +28,9 @@
                     <div id="mypage_nav">
                         <ul class="mypage_nav_ul">
                             <li class="mypage_nav_li"><a href="#" class="nav_text">마이페이지</a></li>
-                            <li class="mypage_nav_li"><a href="/mypage/edit/check_password" class="nav_text">개인정보 수정</a></li>
-                            <li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text">장바구니 목록</a></li>
-                            <li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text">찜한 상품</a></li>
+                            <li class="mypage_nav_li"><a href="#" class="nav_text">개인정보 수정</a></li>
+                            <li class="mypage_nav_li"><a href="#" class="nav_text">장바구니 목록</a></li>
+                            <li class="mypage_nav_li"><a href="#" class="nav_text">찜한 상품</a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text">즐겨찾는 마트</a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text">내 활동 내역</a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text">키워드알림</a></li>
@@ -45,26 +45,32 @@
                             <h3>개인정보 수정</h3> <!--제목 변경-->
                         </div>
                         <div class="mypage_article_content"> <!-- 탭 내용 -->
-                            <p><span class="small_title">비밀번호 재확인</span> <span class="small_content">회원님의 소중한 정보보호를 위해
-                                    비밀번호를 재확인하고 있습니다</span></p>
-                            <hr>
 
                             <div class="table_wrap">
 
                                 <div class="article">
-                                    <h3 class="input_title"><label for="id">아이디</label></h3>
-                                    <input type="text" id="id" class="input" maxlength="20">
+                                    <h3 class="input_title"><label for="pwd">기존 비밀번호</label></h3>
+                                    <input type="password" id="pwd" placeholder="현재 비밀번호를 입력하세요" class="input"
+                                        maxlength="16">
                                 </div>
 
                                 <div class="article">
-                                    <h3 class="input_title"><label for="password">비밀번호</label></h3>
-                                    <input type="password" id="password" class="input" maxlength="16">
+                                    <h3 class="input_title"><label for="change_pwd">변경 비밀번호</label></h3>
+                                    <input type="password" id="change_pwd" placeholder="새 비밀번호를 입력하세요" class="input"
+                                        maxlength="16">
+                                </div>
+
+                                <div class="article">
+                                    <h3 class="input_title"><label for="check_change_pwd">변경 비밀번호 확인</label></h3>
+                                    <input type="password" id="check_change_pwd" class="input" maxlength="16">
                                 </div>
                             </div>
 
-                            <div id="next">
-                                <a href="/mypage/edit/account" id="next_button">다음</a>
+                            <div id="button">
+                                <a href="/mypage/edit/account" id="cancel_button">변경 취소</a>
+                                <a href="#" id="save_button">확인</a>
                             </div>
+
                         </div>
                     </div>
                 </div>

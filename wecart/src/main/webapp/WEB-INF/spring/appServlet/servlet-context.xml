@@ -31,14 +31,9 @@
 
 	<!-- 뷰 컨트롤러 설정 -->
 	<view-controller path="/user/login" 					view-name="/user/login"						status-code="200" />
-	<view-controller path="/user/signUpTerms" 				view-name="/user/signUpTerms"				status-code="200" />
-	<view-controller path="/user/signUp" 					view-name="/user/signUp"					status-code="200" />
 	<view-controller path="/user/findAccount" 				view-name="/user/findAccount"				status-code="200" />
 
-	<view-controller path="/mypage/edit/check_password" 	view-name="/mypage/edit/check_password"		status-code="200" />
 	<view-controller path="/mypage/edit/account" 			view-name="/mypage/edit/account"			status-code="200" />
-	<view-controller path="/mypage/edit/change_password" 	view-name="/mypage/edit/change_password"	status-code="200" />
-	<view-controller path="/mypage/edit/withdrawal_account" view-name="/mypage/edit/withdrawal_account"	status-code="200" />
 
 	<!-- 인터셉터 설정 -->
 	<interceptors>

@@ -32,7 +32,7 @@ public class UserController {
 
 		try {
 			UserVO vo = this.service.login(dto);
-			log.info("\t+ vo: {}", vo);
+			log.trace("\t+ vo: {}", vo);
 
 			if (vo != null) {
 				model.addAttribute("__AUTH__", vo);
@@ -53,7 +53,7 @@ public class UserController {
 	// 로그아웃
 	@GetMapping("/logout")
 	public void logout() {
-		log.info("오류 메시지");
+		log.trace("오류 발생");
 
 	} // logout
 
@@ -72,11 +72,11 @@ public class UserController {
 	
 	@GetMapping("/signUp")
 	public void signUp() {
-		
+
 	} // signUp - view
 	
 	@GetMapping("/signUpTerms")
-	public void signupTerms() {
+	public void signUpTerms() {
 		
 	} // signUpTerms - view
 

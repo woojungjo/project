@@ -2,13 +2,12 @@ package org.zerock.wecart.mapper.mypage.edit;
 
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
-import org.zerock.wecart.domain.user.SignUpDTO;
 import org.zerock.wecart.domain.user.UserDTO;
 
 public interface EditMapper {
 	
-	// 비밀번호 확인
-	public abstract UserVO selectPw(UserDTO dto);
+	// 유저 재확인
+	public abstract UserVO selectUser(LoginDTO dto);
 	
 	// 닉네임 변경
 	public abstract Integer updateAli(UserDTO dto);
