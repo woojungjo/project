@@ -153,7 +153,7 @@ public class TodayCartMapperTests {
 		log.info("\t+ affectedLines: {}", affectedLines);
 	} //updateStatus
 	
-	//6. 오늘의 장바구니 상품 수량 변화
+	//7. 오늘의 장바구니 상품 수량 변화
 //	@Disabled
 	@Test
 	@Order(7)

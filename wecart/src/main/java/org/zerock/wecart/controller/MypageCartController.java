@@ -25,6 +25,7 @@ import org.zerock.wecart.domain.pricecompare.CartDTO;
 import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
 import org.zerock.wecart.exception.ServiceException;
+import org.zerock.wecart.service.pricecompare.DetailMyPageCartService;
 import org.zerock.wecart.service.pricecompare.MypageCartService;
 
 import lombok.NoArgsConstructor;
@@ -42,6 +43,14 @@ public class MypageCartController {
 	@Setter(onMethod_=@Autowired)
 	MypageCartService service;
 	
+	private DetailMyPageCartService detailService;
+	
+	@Autowired
+	public MypageCartController(DetailMyPageCartService detailService) {
+		this.detailService = detailService;
+	} //Constructor
+	
+	//마이페이지 상세 장바구니 보여주기
 	@GetMapping("/get")
 	public void get() {
 		log.trace("get() invoked.");
@@ -279,4 +288,12 @@ public class MypageCartController {
 			throw new ServiceException(e);
 		} // try - catch
 	} // wishedProdsRemoved   jhwan
+	
 } //end class
+
+
+
+
+
+
+

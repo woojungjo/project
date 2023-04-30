@@ -75,7 +75,9 @@
 	    				if(object == "false"){
 	    					alert('이미 등록된 상품 입니다.');
 	    				}else{
-	    					alert('성공적으로 등록되었습니다.');
+	    					if(confirm('성공적으로 등록되었습니다. 장바구니로 이동하시겠습니까?')) {
+	    						window.location = "/todayCart/cartList";	
+	    					}
 	    				}
 	    				
 	    				console.log("success의 경우를 확인합니다. ");

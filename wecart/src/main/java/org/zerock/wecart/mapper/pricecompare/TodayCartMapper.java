@@ -27,5 +27,8 @@ public interface TodayCartMapper {
 	
 	//7. 오늘의 장바구니 수량 변화
 	public int updateAmount(Integer amount, Integer goods_id, Integer member_id);
+
+	//8. 오늘의 장바구니 cart_id 구하기
+	public Integer selectCartId(Integer member_id);
 	
 } //end interface

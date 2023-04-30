@@ -9,5 +9,6 @@ public class TodayCartGoodsVO {
 	private String goods_name;
 	private String goods_pic;
 	private Integer amount;
+	private Integer cart_id;
 
 } //end class

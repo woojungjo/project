@@ -29,7 +29,7 @@ public class TodayCartServiceImpl implements TodayCartService {
 	
 	@Override
 	public List<TodayCartGoodsVO> getGoods(Integer member_id) throws ServiceException{
-		log.trace("getGoods() invoked.");
+		log.trace("getGoods({}) invoked.", member_id);
 		
 		try {			
 			return this.mapper.selectGoods(member_id);
@@ -40,7 +40,7 @@ public class TodayCartServiceImpl implements TodayCartService {
 
 	@Override
 	public List<TodayCartPriceVO> getPrices(Integer goods_id, Integer member_id) throws ServiceException{
-		log.trace("getPrices() invoked.");
+		log.trace("getPrices({}, {}) invoked.", goods_id, member_id);
 		
 		try {
 			List<TodayCartPriceVO> list = this.mapper.selectPrices(goods_id, member_id);

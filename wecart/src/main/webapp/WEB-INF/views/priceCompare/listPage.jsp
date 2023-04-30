@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeCart</title>
 
-    <link rel="shortcut icon" href="../ico/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../ico/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../resources/ico/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../resources/ico/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../resources/css/priceCompare/cart.css">
     <link rel="stylesheet" href="../resources/css/priceCompare/cart_frame.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>

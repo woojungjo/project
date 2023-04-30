@@ -16,6 +16,18 @@ window.onload = function () {
 
                 priceTRs.forEach((tr) => {
                     const priceSpans = tr.querySelectorAll(".goods_price");
+                    const amount = tr.querySelector(".amount_div").textContent;
+                    console.log("amount:", amount);
+
+                    priceSpans.forEach((span) => {
+                        const intialPrice = parseInt(span.dataset.price);
+            
+                        const calPrice = intialPrice * amount;
+                        console.log("calPrice: ", calPrice);
+
+                        span.textContent = calPrice.toLocaleString();
+                    });
+
                     tPrice += parseInt(priceSpans[index].textContent.replace(",", ""));
                 });
                 
