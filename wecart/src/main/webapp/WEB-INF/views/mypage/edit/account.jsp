@@ -99,7 +99,6 @@
         </a>
         </div>
 
-
         <jsp:include page="/WEB-INF/views/header_footer/footer.jsp" flush="true" />
 
     </body>

@@ -47,7 +47,7 @@
                             <h3 class="input_title"><label for="alias">닉네임</label></h3>
                             <input type="text" id="alias" name="alias" class="input" placeholder="한글, 영어, 숫자 최소 3~10자로 입력" maxlength="10">
                             
-                            <a href="#" id="nick_button" class="button">
+                            <a href="#" id="alias_button" class="button">
                                 <span>중복 확인</span>
                             </a>
                         </div>

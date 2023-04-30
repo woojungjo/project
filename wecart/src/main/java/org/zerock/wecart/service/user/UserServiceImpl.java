@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
+import org.zerock.wecart.domain.user.SignUpDTO;
 import org.zerock.wecart.domain.user.UserDTO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.user.UserMapper;
@@ -99,10 +100,10 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		} // try-catch
 	} // searchPw
-	
+
 	@Override
-	public Boolean signUp(UserDTO dto) throws ServiceException {
-		log.trace("signUp() invoked.");
+	public Boolean signUp(SignUpDTO dto) throws ServiceException {
+		log.trace("signup() invoked.");
 		
 		try {
 			return this.mapper.insertUser(dto) == 1;
@@ -110,5 +111,5 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		} // try-catch
 	} // signUp
-
+	
 } // end class
