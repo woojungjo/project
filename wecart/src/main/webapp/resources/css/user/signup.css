@@ -53,11 +53,11 @@ header {
     height: 40px;
 }
 
-#nickname {
+#alias {
     width: 350px;
 }
 
-#nick_button {
+#alias_button {
     position: relative;
     text-align: center;
     left: 15px;
@@ -66,7 +66,7 @@ header {
     font-weight: 700;
 }
 
-#phoneNo {
+#mobile_num {
     width: 315px;
 }
 

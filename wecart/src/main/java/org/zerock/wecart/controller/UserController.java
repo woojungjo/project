@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
+import org.zerock.wecart.domain.user.SignUpDTO;
 import org.zerock.wecart.domain.user.UserDTO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.user.UserService;
@@ -57,35 +58,27 @@ public class UserController {
 	} // logout
 
 	// 회원가입
-	@PostMapping("/signup")
-	public String signup(UserDTO dto) throws ControllerException{
+	@PostMapping("/signUp")
+	public String signUp(SignUpDTO dto) throws ControllerException{
 		try {
 			boolean result = this.service.signUp(dto);
 			log.trace("result: {}", result);
 			
-			return "redirect:/main";
+			return "redirect:/home";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try - catch
 	} // signUp
 	
-	@GetMapping("/signup")
-	void signup() {
-		log.trace("signup-view() invoekd.");
-	} // signup - view 
-
-	// 회원가입 약관
-	@GetMapping("/signupTerms")
-	public String signupTerms() {
-
-		return null;
-	} // signUpTerms
-
-	// 아이디&비밀번호 찾기화면
-	@GetMapping("/findAccount")
-	public void findAccount() {
-
-	} // findAccount
+	@GetMapping("/signUp")
+	public void signUp() {
+		
+	} // signUp - view
+	
+	@GetMapping("/signUpTerms")
+	public void signupTerms() {
+		
+	} // signUpTerms - view
 
 	// 아이디 찾기
 	@PostMapping("/searchId")
@@ -100,6 +93,7 @@ public class UserController {
 		} // try-catch
 	} // searchId
 
+	// 비밀번호 찾기
 	@PostMapping("/searchPw")
 	public String searchPw(UserDTO dto) throws ControllerException {
 		try {
@@ -111,4 +105,5 @@ public class UserController {
 			throw new ControllerException(e);
 		} // try-catch
 	} // searchPw
+	
 } // end class
