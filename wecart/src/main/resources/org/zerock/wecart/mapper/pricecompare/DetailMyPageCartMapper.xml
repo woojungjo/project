@@ -28,9 +28,7 @@
 			AND t2.api_date = (
 				SELECT MAX(api_date)
 				FROM sale
-				WHERE goods_id = #{goods_id}
-				AND retail_id = t1.retail_id
-				AND api_date &lt;= #{api_date}
+				WHERE api_date &lt;= #{api_date}
 			)
 		WHERE t1.town_id = (SELECT town_id FROM member WHERE member_id = #{member_id})
 	</select>
@@ -43,7 +41,7 @@
 		                        SELECT MAX(api_date)
 		                        FROM sale
 		                        WHERE goods_id = #{goods_id}
-		                        AND api_date &lt;= (SELECT cart_creation_date FROM cart WHERE cart_id = #{cart_id})
+		                        AND api_date &lt;= #{api_date}
 		                     )
 	</select>
 </mapper>

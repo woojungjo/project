@@ -2,6 +2,9 @@ package org.zerock.wecart.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -74,18 +77,42 @@ public class DetailMyPageCartMapperTests {
 	@Order(2)
 	@DisplayName("TEST 2: selectGoods")
 	@Timeout(value=4, unit=TimeUnit.SECONDS)
-	void selectPrices() {
+	void selectPrices() throws ParseException {
 		log.trace("selectPrices invoked()");
 		
-		Integer goods_id = 8;
-		Integer cart_id = 2295469;
+		Integer goods_id = 1;
+		
+		String dateString = "23/04/11";
+		SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+		Date api_date = formatter.parse(dateString);
+		
 		Integer member_id = 207;
 		
-		List<TodayCartPriceVO> list = this.mapper.selectPrices(goods_id, cart_id, member_id);
+		List<TodayCartPriceVO> list = this.mapper.selectPrices(goods_id, api_date, member_id);
 		
 		assertNotNull(list);		
 		list.forEach(log::info);
 	} //selectPrices
+	
+	//3. 상세 장바구니 마트별 상품 가격
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("TEST 3: selectAvgPrice")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectAvgPrice() throws ParseException {
+		log.trace("selectAvgPrice invoked()");
+		
+		Integer goods_id = 1;
+		
+		String dateString = "23/04/11";
+		SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+		Date api_date = formatter.parse(dateString);
+		
+		int avg_price = this.mapper.selectAvgPrice(goods_id, api_date);
+		
+		log.info("avg_price: {}", avg_price);
+	} //selectAvgPrice
 } //end class
 
 
