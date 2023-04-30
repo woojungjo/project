@@ -79,8 +79,19 @@ public class TodayCartController {
 	
 	//오늘의 장바구니 -> 마이페이지 상세 장바구니
 	@PostMapping("/register")
-	public void register() {
-		log.trace("register() invoked.");
+	public String register(String member_id) throws ControllerException {
+		log.trace("register({}) invoked.", member_id);
+		
+		try {
+			
+			Integer memberId = Integer.parseInt(member_id);
+			
+			this.service.registerMypageCart(memberId);
+			
+			return "redirect:cartList";
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
 	} //register
 } //end class
 

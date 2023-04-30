@@ -7,7 +7,7 @@
 <mapper namespace="org.zerock.wecart.mapper.pricecompare.TodayCartMapper">
 
   <select id="selectGoods" resultType="org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO">
-    SELECT DISTINCT t1.goods_id, t1.goods_name, t1.goods_pic, t2.amount
+    SELECT DISTINCT t1.goods_id, t1.goods_name, t1.goods_pic, t2.amount, t2.cart_id
     FROM goods t1, member_goods_cart t2
     WHERE t1.goods_id = t2.goods_id
     	  AND t1.goods_id IN (
@@ -17,7 +17,14 @@
 								       AND t2.member_id = #{member_id}			
 								 	   AND t1.status = 'NotYet'						   	   			       
 		    				 )   
-		 AND t2.member_id = #{member_id}
+		 AND t2.cart_id = (
+		 					SELECT DISTINCT t2.cart_id
+					        FROM cart t1, member_goods_cart t2
+					        WHERE t1.cart_id = t2.cart_id
+					              AND t2.member_id = #{member_id}				
+					              AND t1.status = 'NotYet'
+		 				  )
+	ORDER BY t1.goods_id
   </select>
   
   <select id="selectPrices" resultType="org.zerock.wecart.domain.pricecompare.TodayCartPriceVO">	
@@ -28,8 +35,6 @@
 		AND t2.api_date = (
 			SELECT MAX(api_date)
 			FROM sale
-			WHERE goods_id = #{goods_id}
-			AND retail_id = t1.retail_id
 		)
 	WHERE t1.town_id = (SELECT town_id FROM member WHERE member_id = #{member_id})
   </select>
@@ -97,6 +102,12 @@
 				  	) 
   	AND goods_id = #{goods_id}
   </update>
+  
+  <select id="selectCartId">
+  	SELECT cart_id
+  	FROM
+  	WHERE
+  </select>
 </mapper>
 
 
