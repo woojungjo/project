@@ -1,5 +1,6 @@
 package org.zerock.wecart.service.pricecompare;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,4 +67,31 @@ public class DetailMyPageCartServiceImpl implements DetailMyPageCartService {
 		} //try-catch
 	} //getGoods
 
+	@Override
+	public int removeCart(Integer cart_id) throws ServiceException {
+		try {
+			return this.mapper.deleteCart(cart_id);
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //removeCart
+
+	@Override
+	public String getCreationDate(Integer cart_id) throws ServiceException {
+		try {
+			Date date = this.mapper.selectCreationDate(cart_id);
+
+			SimpleDateFormat fomatter = new SimpleDateFormat("yyyy-MM-dd");
+			String formattedDate = fomatter.format(date);
+			
+			return formattedDate;
+		} catch(Exception e) {
+			throw new ServiceException(e);
+		} //try-catch
+	} //getCreationDate
 } //end class
+
+
+
+
+
