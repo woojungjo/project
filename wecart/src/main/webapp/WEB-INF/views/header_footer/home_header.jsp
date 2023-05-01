@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!DOCTYPE html>
+<html lang="ko">
+
 <link rel="stylesheet" href="../../resources/css/header_footer/home_header.css">
 
   <div class="wrapper_contatiner">
@@ -41,4 +44,4 @@
       </header>
 
 
-  
+</html>

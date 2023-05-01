@@ -16,4 +16,5 @@ public class QnaBoardCommentVO {
 	private Integer comment_root;
 	private Integer comment_step;
 	private Integer comment_indent;
+	private Integer like_count;
 }

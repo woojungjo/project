@@ -30,8 +30,10 @@
 	<context:component-scan base-package="org.zerock.wecart.interceptor" />
 
 	<!-- 뷰 컨트롤러 설정 -->
-	<view-controller path="/user/login" 		view-name="/user/login"			status-code="200" />
-	<view-controller path="/user/signupTerms" 	view-name="/user/signupTerms"	status-code="200" />
+	<view-controller path="/user/login" 					view-name="/user/login"						status-code="200" />
+	<view-controller path="/user/findAccount" 				view-name="/user/findAccount"				status-code="200" />
+
+	<view-controller path="/mypage/edit/account" 			view-name="/mypage/edit/account"			status-code="200" />
 
 	<!-- 인터셉터 설정 -->
 	<interceptors>
@@ -50,7 +52,7 @@
 		<interceptor>
 			<mapping path="/todayCart/cartList" />
 
-			<beans:ref bean="todayCartInterceptor" />
+			<beans:ref bean="authInterceptor" />
 		</interceptor>
 		
 	</interceptors>

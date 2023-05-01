@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<!DOCTYPE html>
+<html lang="ko"> 
     <link rel="stylesheet" href="/resources/css/header_footer/main_header.css">
     	
     <div class="wrapper_contatiner">
@@ -36,7 +38,7 @@
                     <li><a href="/"><i class="fa-regular fa-bell"></i></a></li>
                     <li><a href="/"><i class="fa-solid fa-piggy-bank"></i></a></li>
                     <li>
-                        <a href="/mypage/edit/check_password">
+                        <a href="/mypage/edit/checkUser">
                          <%= session.getAttribute("id") %>
                         </a>
                     </li>
@@ -108,3 +110,5 @@
 		    } //sample6_execDaumPostcode()
 		    </script>
         </header>
+       
+</html>

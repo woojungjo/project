@@ -6,6 +6,22 @@
 
 <mapper namespace="org.zerock.wecart.mapper.board.qnaboard.QnaBoardCommentMapper">
 	
+  <select id="selectAll">
+    SELECT a.*, coalesce(b.like_count, 0) AS like_count
+    FROM qna_board_comment a
+    LEFT OUTER JOIN (
+    SELECT comment_no AS tmp, count(*) AS like_count
+    FROM qna_board_comment_like
+    GROUP BY comment_no) b 
+    ON (a.comment_no = b.tmp)
+    WHERE post_no = #{post_no}
+    ORDER BY comment_root ASC, comment_step ASC, comment_indent ASC
+  </select>
+
+
+
+
+
   <insert id="insertComment">
   
     <selectKey keyProperty="comment_no" order="AFTER" resultType="int">

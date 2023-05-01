@@ -6,7 +6,6 @@ body {
 }
 #wrap {
     font-family: 'Jeju Gothic', sans-serif;
-    overflow: hidden;
     min-width: 1190px;
 }
 /* .widthfix {
@@ -14,7 +13,7 @@ body {
     min-width: 1190px;
 } */
 .header_color {
-    background-color: #53917E; 
+    background-color: #53917E;
     height: 100px; 
 }
 #header {

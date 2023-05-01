@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
     <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
-    <script src="../resources/js/priceCompare/today_cart.js" async></script>
+    <script src="../resources/js/priceCompare/today_cart.js" defer></script>
 </head>
 <body>
     <div id="wrap">
@@ -56,6 +58,7 @@
                         <div class="mypage_article_content">
                             <div>
                                 <h2>오늘의 장바구니</h2>
+                                <p>* (X) 표시는 마트에 존재하지 않는 상품으로 현재 상품의 평균가로 대체하였습니다.</p>
                             </div>
                             <div class="mycart_table_div">
                                 <form action="/todayCart/register" method="post">
@@ -72,253 +75,75 @@
                                                         <span>상품 정보</span>
                                                     </div>
                                                 </th>
-                                                <th scope="col"><span>GS더프레시아산탕정점</span></th>
-                                                <th scope="col"><span>GS더프레시대전도마점</span></th>
-                                                <th scope="col"><span>GS더프레시안양메가트리아점</span></th>
-                                                <th scope="col"><span>(주)농협하나로유통 광주점</span></th>
+                                                <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
+                                                	<th scope="col"><span>${priceList0.retail_name}</span></th>
+                                                </c:forEach>
                                             </tr>
                                         </thead>
                                         <tbody>     <!--동적-->
-                                            <tr class="goods_price_tr">
-                                                <td colspan="2" class="td_cart_goods_list">
-                                                    <div class="cart_goods_list">
-                                                        <div class="checkBox_img">
-                                                            <label>
-                                                                <input type="checkbox" name="todayCartList" class="cart_select" value="">
-                                                            </label>                                                            
-                                                            <div>
-                                                                <a href="#"><img src="https://picsum.photos/id/684/100/100" class="cart_goods_image"></a>
-                                                            </div>
-                                                        </div>                                                        
-                                                        <div class="cart_title_count">
-                                                            <a href="#" class="a_black_text"><span>오리온 포카칩 오리지널 어니언맛 치즈맛 불고기맛(66g)</span></a>
-                                                            <div class="count_bt_delete">
-                                                                <div class="count_bt">
-                                                                    <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                    <div class="amount_div">1</div>
-                                                                    <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
+                                            <c:forEach var="goodsList" items="${__GOODSLIST__}">                                            
+                                                <tr class="goods_price_tr" data-goods_id="${goodsList.goods_id}">
+                                                    <td colspan="2" class="td_cart_goods_list">
+                                                        <div class="cart_goods_list">
+                                                            <div class="checkBox_img">
+                                                                <label>
+                                                                    <input type="checkbox" name="todayCartList" class="cart_select" value="">
+                                                                </label>                                                            
+                                                                <div>
+                                                                    <a href="/priceCompare/showPrd/${goodsList.goods_id}"><img src="${goodsList.goods_pic}" class="cart_goods_image"></a>
                                                                 </div>
-                                                                <div class="delete_bt_div">
-                                                                    <button type="button" aria-label="장바구니삭제" class="delete_bt"></button>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>                                                    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="12600">12,600</span>
-                                                    <span>원</span>                                                
-                                                </td>   
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>  
-                                                </td>                                         
-                                            </tr>
-                                            <tr class="goods_price_tr">
-                                                <td colspan="2" class="td_cart_goods_list">
-                                                    <div class="cart_goods_list">
-                                                        <div class="checkBox_img">
-                                                            <label>
-                                                                <input type="checkbox" name="todayCartList" class="cart_select" value="">
-                                                            </label>
-                                                            <div>
-                                                                <a href="#"><img src="https://picsum.photos/id/684/100/100" class="cart_goods_image"></a>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="cart_title_count">
-                                                            <a href="#" class="a_black_text" ><span>오리온 포카칩 오리지널 어니언맛 치즈맛 불고기맛(66g)</span></a>
-                                                            <div class="count_bt_delete">
-                                                                <div class="count_bt">
-                                                                    <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                    <div class="amount_div">1</div>
-                                                                    <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
-                                                                </div>
-                                                                <div class="delete_bt_div">
-                                                                    <button type="button" aria-label="장바구니삭제" class="delete_bt"></button>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>                                                    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">5,600</span>
-                                                    <span>원</span>                                                
-                                                </td>   
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>  
-                                                </td>                                         
-                                            </tr>
-                                            <tr class="goods_price_tr">
-                                                <td colspan="2" class="td_cart_goods_list">
-                                                    <div class="cart_goods_list">
-                                                        <div class="checkBox_img">
-                                                            <label>
-                                                                <input type="checkbox" name="todayCartList" class="cart_select" value="">
-                                                            </label>
-                                                            <div>
-                                                                <a href="#"><img src="https://picsum.photos/id/684/100/100" class="cart_goods_image"></a>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="cart_title_count">
-                                                            <a href="#" class="a_black_text" ><span>오리온 포카칩 오리지널 어니언맛 치즈맛 불고기맛(66g)</span></a>
-                                                            <div class="count_bt_delete">
-                                                                <div class="count_bt">
-                                                                    <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                    <div class="amount_div">1</div>
-                                                                    <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
-                                                                </div>
-                                                                <div class="delete_bt_div">
-                                                                    <button type="button" aria-label="장바구니삭제" class="delete_bt"></button>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>                                                    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>                                                
-                                                </td>   
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>  
-                                                </td>                                         
-                                            </tr>
-                                            <tr class="goods_price_tr">
-                                                <td colspan="2" class="td_cart_goods_list">
-                                                    <div class="cart_goods_list">
-                                                        <div class="checkBox_img">
-                                                            <label>
-                                                                <input type="checkbox" name="todayCartList" class="cart_select" value="">
-                                                            </label>
-                                                            <div>
-                                                                <a href="#"><img src="https://picsum.photos/id/684/100/100" class="cart_goods_image"></a>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="cart_title_count">
-                                                            <a href="#" class="a_black_text" ><span>오리온 포카칩 오리지널 어니언맛 치즈맛 불고기맛(66g)</span></a>
-                                                            <div class="count_bt_delete">
-                                                                <div class="count_bt">
-                                                                    <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                    <div class="amount_div">1</div>
-                                                                    <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
-                                                                </div>
-                                                                <div class="delete_bt_div">
-                                                                    <button type="button" aria-label="장바구니삭제" class="delete_bt"></button>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>                                                    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>                                                
-                                                </td>   
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>  
-                                                </td>                                         
-                                            </tr>
-                                            <tr class="goods_price_tr">
-                                                <td colspan="2" class="td_cart_goods_list">
-                                                    <div class="cart_goods_list">
-                                                        <div class="checkBox_img">
-                                                            <label>
-                                                                <input type="checkbox" name="todayCartList" class="cart_select" value="">
-                                                            </label>
-                                                            <div>
-                                                                <a href="#"><img src="https://picsum.photos/id/684/100/100" class="cart_goods_image"></a>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="cart_title_count">
-                                                            <a href="#" class="a_black_text" ><span>오리온 포카칩 오리지널 어니언맛 치즈맛 불고기맛(66g)</span></a>
-                                                            <div class="count_bt_delete">
-                                                                <div class="count_bt">
-                                                                    <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                    <div class="amount_div">1</div>
-                                                                    <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
-                                                                </div>
-                                                                <div class="delete_bt_div">
-                                                                    <button type="button" aria-label="장바구니삭제" class="delete_bt"></button>
-                                                                </div>
-                                                            </div>                                                            
-                                                        </div>                                                    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>                                                
-                                                </td>   
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>   
-                                                </td>
-                                                <td>
-                                                    <span class="goods_price" data-price="2600">2,600</span>
-                                                    <span>원</span>  
-                                                </td>                                         
-                                            </tr>
+                                                            </div>                                                        
+                                                            <div class="cart_title_count">
+                                                                <a href="/priceCompare/showPrd/${goodsList.goods_id}" class="a_black_text"><span>${goodsList.goods_name}</span></a>
+                                                                <div class="count_bt_delete">
+                                                                    <div class="count_bt">
+                                                                        <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
+                                                                        <div class="amount_div">${goodsList.amount}</div>
+                                                                        <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
+                                                                    </div>
+                                                                    <div class="delete_bt_div">
+                                                                        <button type="button" aria-label="장바구니삭제" class="delete_bt"></button>
+                                                                    </div>
+                                                                </div>                                                            
+                                                            </div>                                                    
+                                                        </div>
+                                                    </td>
+	                                                
+                                                    <c:forEach var="priceLists" items="${__PRICELIST__}">
+                                                        <c:forEach var="list" items="${priceLists}">
+                                                        	<c:if test="${goodsList.goods_id eq list.goods_id}">
+                                                            <td>
+                                                                <span class="goods_price" data-price="${not empty list.price ? list.price : list.avg_price}">
+                                                                    <fmt:formatNumber value="${not empty list.price ? list.price : list.avg_price}" pattern="#,##0" />
+                                                                    
+                                                                </span>
+                                                                <span>원</span>
+                                                                <c:if test="${empty list.price}">
+                                                                	<div class="nullPrice">(X)</div>    	
+                                                                </c:if>
+                                                            </td>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </c:forEach>                                       
+	                                                
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <td colspan="2">
                                                     <span>합계</span>
                                                 </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
+                                                <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
+                                                	<td>
+	                                                    <span class="total_price"></span>
+	                                                    <span>원</span>  
+                                                	</td>
+                                                </c:forEach>
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}">                                 
 
                                     <div class="mycart_tbl_button_flex">
                                         <input type="submit" value="장바구니 저장" class="mycart_tbl_bt todayCartSave">

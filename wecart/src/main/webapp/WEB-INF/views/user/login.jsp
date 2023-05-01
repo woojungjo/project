@@ -54,7 +54,7 @@
             <ul id="find">
                 <li><a href="/user/findAccount">아이디 찾기</a></li>
                 <li><a href="/user/findAccount">비밀번호 찾기</a></li>
-                <li><a href="/user/signupTerms">회원가입</a></li>
+                <li><a href="/user/signUpTerms">회원가입</a></li>
             </ul>
 
         </div>

@@ -6,6 +6,7 @@
   
 <mapper namespace="org.zerock.wecart.mapper.user.UserMapper">
 
+  <!-- 로그인 -->
   <select id="selectUser" resultType="org.zerock.wecart.domain.UserVO">
     SELECT
       *
@@ -16,6 +17,7 @@
       pwd = #{pwd}
   </select>
 
+  <!-- 아이디 찾기 -->
   <select id="selectId">
     SELECT
       NVL(login_id, 0)
@@ -26,6 +28,7 @@
       email = #{email}
   </select>
 
+  <!-- 비밀번호 찾기 -->
   <update id="updatePw">
     UPDATE
       member
@@ -37,4 +40,21 @@
       email = #{email}
   </update>
 
+  <!-- 회원가입 -->
+  <insert id="insertUser">
+    INSERT INTO
+      member (login_id, alias, money, email, mobile_num, pwd, join_date, point, authority_code, admin_account)    
+    VALUES
+      (#{login_id},
+       #{alias},
+       3500,
+       #{email},
+       #{mobile_num},
+       #{pwd},
+       current_date,
+       0,
+       'read+write',
+       'user'
+      )
+  </insert>
 </mapper>

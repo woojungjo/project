@@ -103,7 +103,7 @@
                                                                 장바구니 등록일: ${cartDTO.cart_creation_date}<br>
                                                                 상품 갯수: ${cartDTO.numberOfGoods} <br><br>
 
-                                                                <p><a href="/mypage/cart/get?cart_id=${cartDTO.cart_id}">상세보기 </a> </p>
+                                                                <p><a href="/mypage/cart/cart_id/${cartDTO.cart_id}">상세보기 </a> </p>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>

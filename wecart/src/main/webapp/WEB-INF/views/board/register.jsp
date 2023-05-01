@@ -44,8 +44,6 @@
 	                <div id = "board_write">
 	                    <div id="board_write_top">
 	                        <div>글쓰기</div>
-	                         <button type="submit" id="submitBtn"><span class="fas fa-pen-to-square" />등록</button>
-	                       	 <button type="button" id="listBtn"><span class="fas fa-pen-to-square" />목록</button>
 	                    </div>
 	                    <div><hr></div>
 	                    <select name="">
@@ -160,9 +158,24 @@
                 </div>
                 </div><!--mate_board_contents-->
                 
-	                    <input type="text" id="title" placeholder="제목을 입력해 주세요" style="width:1130px"/>
-	                    <textarea name="ir1" id="ir1" rows="10" cols="100"></textarea>
-	
+                	<form action="register" method="post" id="register"> 
+	                  <input id="smartEditorTitle" type="text" placeholder="제목을 입력해 주세요" style="width:1128px"/>
+	                   <div id="smarteditor">
+	                    <textarea 
+	                    	name="ir1" 
+	                    	id="ir1" 
+	                    	rows="10" 
+	                    	cols="100"
+	                    	placeholder="내용을 입력해주세요"
+	                    	style="width: 1128px"
+	                    	>
+	                    </textarea>
+	                   </div>
+	                     <!-- button type="submit" id="registerBtn"><span class="fas fa-pen-to-square" />등록</button-->
+	                     <input type="button" id="registerBtn" value="등록" />
+	                     <!-- button type="button" id="listBtn"><!-- span class="fas fa-pen-to-square" /-->목록<!-- /button-->
+					</form>
+					
 	                    <div id="board_secret">
 	                        <input type="checkbox">&nbsp;비밀글을 작성합니다.
 	                    </div>
@@ -183,6 +196,27 @@
 		 var url = '/board/mate/matelist?currPage='+encodeURIComponent('${param.currPage}');
 	 	 location.href = url
 		});
+ 	   
+ 	//==================KAKAO API==================
+ 	    var container = document.getElementById('map');
+ 	    var options = {
+ 	        center: new kakao.maps.LatLng(34.8861, 127.5091),
+ 	        level: 3
+ 	    };
+
+ 	    var map = new kakao.maps.Map(container, options);
+ 	    
+ 	 // 마커가 표시될 위치입니다 
+ 	    var markerPosition  = new kakao.maps.LatLng(34.8861, 127.5091); 
+
+ 	    // 마커를 생성합니다
+ 	    var marker = new kakao.maps.Marker({
+ 	        position: markerPosition
+ 	    });
+
+ 	    // 마커가 지도 위에 표시되도록 설정합니다
+ 	    marker.setMap(map);
+
     </script>
 </body>
 

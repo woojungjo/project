@@ -2,6 +2,7 @@ package org.zerock.wecart.mapper.user;
 
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
+import org.zerock.wecart.domain.user.SignUpDTO;
 import org.zerock.wecart.domain.user.UserDTO;
 
 public interface UserMapper {
@@ -16,7 +17,6 @@ public interface UserMapper {
 	public abstract Integer updatePw(UserDTO dto);
 	
 	// 회원가입
-	public abstract Integer insertUser(UserDTO dto);
-
+	public abstract Integer insertUser(SignUpDTO dto);
 
 } // end interface
