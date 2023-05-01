@@ -4,22 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.domain.board.QnaBoardVO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
-import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -112,8 +115,29 @@ public class QnaBoardMapperTests {
 		this.mapper.updateViews(post_no);
 		
 		
-		
 	} // qnaBoardMapperReadTest
 	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("신규 게시물 등록 : qnaBoardMapperInsertTest")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void qnaBoardMapperInsertTest() {
+		log.trace("qnaBoardMapperInsertTest() invoked.");
+		
+		QnaBoardDTO dto = new QnaBoardDTO();
+
+		dto.setTitle("Ju's");
+		dto.setContent("Ju_New_Content");
+		dto.setViews(1000000000);
+		dto.setMember_id(333);
+		dto.setSecret_yn(1);
+		
+		Integer afftectedLines = this.mapper.insert(dto);
+		assertNotNull(afftectedLines);
+		
+		log.info("afftectedLines:{}", afftectedLines);
+		
+	}//mateBoardMapperInsertTest() 
 	
 }

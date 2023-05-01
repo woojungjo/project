@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.zerock.wecart.domain.board.Criteria;
-import org.zerock.wecart.domain.board.QnaBoardCommentVO;
+import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.domain.board.QnaBoardVO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 
@@ -25,5 +25,6 @@ public interface QnaBoardMapper {
 	@Update("UPDATE qna_board SET views = views + 1 WHERE post_no = #{post_no}")
 	public abstract void updateViews(Integer post_no);
 	
-	
+	//신규 게시물 등록 //added yeonjoo
+	public abstract Integer insert(QnaBoardDTO dto);
 } // end interface

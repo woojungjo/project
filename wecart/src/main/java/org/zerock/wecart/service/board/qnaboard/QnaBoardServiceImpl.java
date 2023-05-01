@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.domain.board.QnaBoardVO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 import org.zerock.wecart.exception.ServiceException;
-import org.zerock.wecart.mapper.board.qnaboard.QnaBoardCommentMapper;
 import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
 
 import lombok.NoArgsConstructor;
@@ -69,6 +69,18 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
-	} // get
+	}
+
+
+	@Override
+	public boolean register(QnaBoardDTO dto) throws ServiceException {
+		log.trace("register() invoked.");
+		
+		try {
+			return this.mapper.insert(dto)==1;
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}//try-catch
+	} // register() 
 
 } // end class

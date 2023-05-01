@@ -14,7 +14,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.QnaBoardDTO;
+import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
+
 import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
+
 import org.zerock.wecart.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -59,6 +65,27 @@ public class QnaBoardServiceTests {
 		
 		
 	} // testGetList
+	
+	//Disabled
+	@Test
+	@Order(2)
+	@DisplayName("testRegister")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testRegister() throws ServiceException {
+		log.trace("testRegister() invoked.");
+		
+		QnaBoardDTO dto = new QnaBoardDTO();
+
+		dto.setTitle("testtesttest");
+		dto.setContent("testtesttest");
+		dto.setViews(11111);
+		dto.setMember_id(33333);
+		dto.setSecret_yn(1);
+		
+		boolean success = this.service.register(dto);
+		log.info("\t+success", success);
+		
+	}//testRegister()
 	
 	
 } // end class

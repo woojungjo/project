@@ -40,7 +40,6 @@
 
 </head>
 <body>
-    	<!-- jsp:include page="../../header_footer/main_header.jsp" flush="true" /-->
     	<% Object auth = session.getAttribute("__AUTH__"); %>
 	      <% if(auth != null) { %>
 	         <jsp:include page="../../header_footer/main_header.jsp" flush="true" />
@@ -157,7 +156,7 @@
                    	${__MateBoard__.content}
                     </p>  
 
-                    <div id="map" style="width:500px;height:400px; margin: 0 auto; "></div>
+                    <div id="map" style="width:500px; height:400px; margin: 0 auto; "></div>
                     
                     <div class="mate_board_contents_join">
                         <button type="button" class="mate_board_join_button">참여하기</button>
@@ -165,8 +164,6 @@
                 </div>
                 </div><!--mate_board_contents-->
             
-				
-
                 <div id="mate_board_info_below">
                     <button type="button" class="mate_board_report">신고</button>
                     
@@ -225,6 +222,8 @@
 	});
 
 	//==================KAKAO API==================
+	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+	
     var container = document.getElementById('map');
     var options = {
         center: new kakao.maps.LatLng(34.8861, 127.5091),

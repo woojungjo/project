@@ -6,7 +6,6 @@
 
   <link rel="stylesheet" href="/resources/css/header_footer/footer.css">
 
-
 </div> <!-- wrapper: header+main-->
         <footer>
             <div class="footerText">
