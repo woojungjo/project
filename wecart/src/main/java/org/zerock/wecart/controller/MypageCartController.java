@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.pricecompare.CartDTO;
+import org.zerock.wecart.domain.pricecompare.CartUserDTO;
 import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
+import org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO;
+import org.zerock.wecart.domain.pricecompare.TodayCartPriceVO;
+import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.DetailMyPageCartService;
 import org.zerock.wecart.service.pricecompare.MypageCartService;
@@ -51,9 +57,27 @@ public class MypageCartController {
 	} //Constructor
 	
 	//마이페이지 상세 장바구니 보여주기
-	@GetMapping("/get")
-	public void get() {
-		log.trace("get() invoked.");
+	@GetMapping("/cart_id/{cart_id}")
+	public void get(@PathVariable Integer cart_id, @SessionAttribute("__AUTH__") UserVO userVO, Model model) throws ControllerException{
+		log.trace("get({}, {}, model) invoked.", cart_id, userVO);
+		
+		try {
+			CartUserDTO dto = new CartUserDTO();
+			dto.setMember_id(userVO.getMember_id());
+			dto.setLogin_id(userVO.getLogin_id());
+			dto.setPwd(userVO.getPwd());
+			dto.setAlias(userVO.getAlias());
+			dto.setEmail(userVO.getEmail());
+			dto.setMobile_num(userVO.getMobile_num());
+			
+			Integer member_id = Integer.parseInt(dto.getMember_id());
+			
+			model.addAttribute("__CARTID__", cart_id);
+			
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
+		
 	} //get
 	
 	@PostMapping("/remove")

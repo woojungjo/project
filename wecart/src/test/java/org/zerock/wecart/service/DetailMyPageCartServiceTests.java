@@ -2,6 +2,9 @@ package org.zerock.wecart.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +23,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO;
+import org.zerock.wecart.domain.pricecompare.TodayCartPriceVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.DetailMyPageCartService;
 
@@ -65,4 +69,27 @@ public class DetailMyPageCartServiceTests {
 		assertNotNull(list);
 		list.forEach(log::info);
 	} //getGoods
+	
+	//2. 상세 장바구니 상품 마트별 가격 정보
+//	@Disabled
+	@Test
+	@Order(2)
+	@DisplayName("TEST 2: getPrices")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void getPrices() throws ServiceException, ParseException {
+		log.trace("getPrices invoked()");
+		
+		Integer goods_id = 1;
+		
+		String dateString = "23/04/11";
+		SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+		Date api_date = formatter.parse(dateString);
+		
+		Integer member_id = 207;
+		
+		List<TodayCartPriceVO> list = this.service.getPrices(goods_id, api_date, member_id);
+		
+		assertNotNull(list);		
+		list.forEach(log::info);
+	} //getPrices
 } //end class
