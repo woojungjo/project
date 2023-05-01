@@ -119,11 +119,38 @@ public class MateBoardController {		//JavaBeans, POJO
 	}//mateModify()
 
 	
-	@PostMapping("/mateRemove")
+	@PostMapping("/materemove")
 	public String mateRemove(RedirectAttributes rttrs) {
 		log.trace("mateRemove({}) invoked", rttrs);
 		
 		return "redirect:/board/mateboard/matelist";
 	}//mateRemove()
-	
+
+	@GetMapping("/materegister")
+	public void boardRegister(){
+		log.trace("boardRegister() invoked");
+	}//boardRegister()
+
+	@PostMapping("/materegister")
+	public String boardRegister(RedirectAttributes rttrs, MateBoardDTO dto, Criteria cri
+			) throws ControllerException{
+		log.trace("materegister invoked. rttrs:{}, cri:{}, dto: {} ", rttrs,cri, dto);
+		
+		try {
+			boolean success = this.service.register(dto);
+			log.info("\t+success",success);
+			
+			//페이징처리용 전송파라미터도 함께 전송처리 //
+			rttrs.addAttribute("currPage", cri.getCurrPage());
+			rttrs.addAttribute("amount", cri.getAmount());
+			 
+			//Model 전송처리 , 비즈니스 요청처리용 전송파라미터 전송처리
+			rttrs.addAttribute("result", (success)? "success": "failure");
+			
+			return "redirect:/board/mate/matelist";
+		}catch(Exception e) {
+			throw new ControllerException(e);
+		}//try-catch 
+	}//boardRegister()
+
 }//MateBoardController

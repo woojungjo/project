@@ -37,11 +37,17 @@
     OFFSET (#{currPage}-1) * #{amount} ROWS
     FETCH NEXT #{amount} ROWS ONLY
   </select>
-  
-	<!-- <select id="read" resultType="org.zerock.wecart.domain.board.QnaBoardVO">
-	    SELECT * FROM qna_board WHERE post_no = #{post_no}
-	</select> -->
-
-
+	
+	<insert id="insert">
+  		INSERT INTO
+  			qna_board(title, content, views, member_id, secret_yn)
+  		VALUES(
+  			#{title},
+		    #{content},
+		    #{views},
+		    #{member_id},
+			#{secret_yn, jdbcType=VARCHAR}
+		    )
+  	</insert>  	
 
 </mapper>

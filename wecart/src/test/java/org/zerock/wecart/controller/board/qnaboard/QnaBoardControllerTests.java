@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,12 +76,29 @@ public class QnaBoardControllerTests {
 		
 	} // testList
 	
-	
-	
-	
-	
-	
-	
+	@Test
+	@Order(2)
+	@DisplayName("testRegister()")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testRegister() throws Exception {
+		log.trace("testRegister() invoked.");
+		
+		DefaultMockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+		
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/board/register");
+		
+		requestBuilder.param("post_no", "3333333");
+		requestBuilder.param("member_id", "333");
+		requestBuilder.param("views", "100000");
+		requestBuilder.param("secret_yn", "1");
+		requestBuilder.param("title", "******test*******"); 
+		requestBuilder.param("content", "*******test*******");
+		
+		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		log.info("\t+modelAndView:{}, type:{}", modelAndView.getViewName(),modelAndView.getClass().getName());
+
+	}//testRegister()
 	
 	
 	

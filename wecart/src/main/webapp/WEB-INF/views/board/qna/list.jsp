@@ -117,7 +117,7 @@
                             <input type="text" name="keyword">
                             <button type="submit" >검색</button>
                         </div>
-                        <a href="BoardWrite.html"><button type="button"><span class="fas fa-pen-to-square" />글쓰기</button></a>
+                        <a href="/board/register"><button type="button"><span class="fas fa-pen-to-square" />글쓰기</button></a>
                     </div>
                 </form>
 

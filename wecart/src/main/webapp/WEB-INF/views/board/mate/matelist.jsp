@@ -136,7 +136,7 @@
                         <input type="text">
                         <button type="submit">검색</button>
                     </div>
-                    <button type="button" id="registerBtn"><span class="fas fa-pen-to-square" />글쓰기</button>
+                    <button type="button" id="registerBtnList"><span class="fas fa-pen-to-square" />글쓰기</button>
                     <!--a href="/board/register"></a-->
                 </div>
                 
@@ -198,10 +198,10 @@
         <!--*********************************************메인 내용은 여기까지*********************************************-->
     </main>
     <script>
-        var registerBtn = document.querySelector('#registerBtn');
+        var registerBtn = document.querySelector('#registerBtnList');
         registerBtn.addEventListener('click', function () {
-        	var url = '/board/register?currPage='+encodeURIComponent('${param.currPage}')+'&amount='+encodeURIComponent('${param.amount}');
-            location.href = url; 
+        	/*var url = '/board/register?currPage='+encodeURIComponent('${param.currPage}')+'&amount='+encodeURIComponent('${param.amount}');*/
+        	location.href =  "/board/register"; 
         }); //.addEventListener
         
         var result = "${param.result}";

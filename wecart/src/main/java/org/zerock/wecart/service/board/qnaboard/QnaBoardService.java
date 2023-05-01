@@ -3,6 +3,7 @@ package org.zerock.wecart.service.board.qnaboard;
 import java.util.List;
 
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.domain.board.QnaBoardVO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 import org.zerock.wecart.exception.ServiceException;
@@ -21,7 +22,7 @@ public interface QnaBoardService {
 //	public abstract boolean remove(Integer bno) throws ServiceException;
 	
 	// 4. 새로운 게시물 등록(CREATE)
-//	public abstract boolean register(BoardDTO dto) throws ServiceException;
+	public abstract boolean register(QnaBoardDTO dto) throws ServiceException;
 	
 	// 5. 기존 게시물 수정(MODIFY)
 //	public abstract boolean modify(BoardDTO dto) throws ServiceException;

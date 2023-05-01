@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<link rel="stylesheet" href="../../resources/css/header_footer/home_header.css">
+<link rel="stylesheet" href="/resources/css/header_footer/home_header.css">
 
   <div class="wrapper_contatiner">
     <div class="wrapper">

@@ -141,12 +141,12 @@ hr{
   } */
 
 
-button{
+button, #registerBtn{
     transition: border-radius 2s ease-in-out;
     cursor:pointer;
 }
 
-button:hover{
+button:hover, #registerBtn:hover{
     transform: scale(1.05);
    background-color:  #3f4945;
    color: white;
@@ -228,3 +228,23 @@ button:hover{
     padding: 5px;
   }
 
+#smartEditorTitle, #registerBtn{
+  border: 1px solid #dcdbdb;
+  background: none;
+  text-align: center;
+  color: #3f4945;
+  border-radius: 5px;
+}
+
+#materegister_setMeetingTime{
+    display: flex;
+}
+
+.mate_board_maps{
+	display:flex;
+}
+
+#materegister_smeeting_area{
+	width:250px;
+	height:30px;
+}

@@ -1,6 +1,5 @@
 package org.zerock.wecart.service.board.mateboard;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -142,15 +141,20 @@ public class MateBoardServiceTests {
 		log.trace("testRegister() invoked.");
 		
 		MateBoardDTO dto = new MateBoardDTO();
-		Timestamp now = new Timestamp(System.currentTimeMillis());
+		//Timestamp now = new Timestamp(System.currentTimeMillis());
 
+//		String meetingTime = "2023-05-13T19:44";
+//		LocalDateTime localDateTime = LocalDateTime.parse(meetingTime);
+//		Timestamp timestamp = Timestamp.valueOf(localDateTime);
+		
 		dto.setTitle("Ju's");
 		dto.setContent("Ju_New_Content");
 		dto.setViews(1000000000);
 		dto.setMember_id(333);
 		dto.setMeeting_status(String.valueOf(0).charAt(0));
 		dto.setMeeting_area("NY");
-		dto.setMeeting_time(now);
+		dto.setMeeting_time("2023/04/30 10:30 AM");
+		//dto.setMeeting_time_temp(localDateTime);
 		dto.setReport_cnt(0);
 		dto.setParticipant_id_1(335);
 		dto.setParticipant_id_2(337);

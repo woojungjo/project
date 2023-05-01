@@ -15,7 +15,7 @@ $(function(){
 	 console.log("NAVER SmartEditor")
       nhn.husky.EZCreator.createInIFrame({
           oAppRef: oEditors,
-          elPlaceHolder: "ir1", //textarea에서 지정한 id와 일치해야 합니다. 
+          elPlaceHolder: "content", //textarea에서 지정한 id와 일치해야 합니다. 
           //SmartEditor2Skin.html 파일이 존재하는 경로
           sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",  
           fCreator: "createSEditor2",
@@ -39,12 +39,12 @@ $(function(){
       
       //버튼 클릭시 form 전송
      $("#registerBtn").click(function(){
-          oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-          let content = document.getElementById("ir1").value
+          oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+          let content = document.getElementById("content").value
           
 		    if(content == '<p><br></p>') { //비어있어도 기본 P태그가 붙더라.
 		        alert("내용을 입력해주세요.")
-		        oEditors.getById["ir1"].exec("FOCUS")
+		        oEditors.getById["content"].exec("FOCUS")
 		        return
 		    } else {
 		        console.log(content)
@@ -54,7 +54,9 @@ $(function(){
        			 }
        			let test = JSON.stringify(writePost);
        			console.log(writePost)
-       			        //ajax 통신으로 서버로 보내 데이터 저장함
+       			
+       			//ajax 통신으로 서버로 보내 데이터 저장함
+       			/*
 		        $.ajax({
 		            url: "register"
 		            , data: test
@@ -70,9 +72,11 @@ $(function(){
 		                alert('오류가 발생하였습니다.')
 		            }
 		        })
+		        */
+		        
+		        $('#register').submit();
 		    }
     
-          $("#register").submit();
       });    
 });
  

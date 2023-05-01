@@ -4,6 +4,14 @@ listBtn.addEventListener('click', function(){
   //?currPage=${param.currPage}&amount=${param.amount}
 });
 
+/*
+var listBtn = document.querySelector('#listBtn');
+
+listBtn.addEventListener('click', function () {
+    var url = '/board/mate/matelist?currPage=' + encodeURIComponent('${param.currPage}');
+    location.href = url
+});
+            */
 var mateDeleteBtn = document.querySelector('.mate_board_delete');
 
 /*
