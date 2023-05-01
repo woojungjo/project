@@ -1,6 +1,6 @@
 package org.zerock.wecart.controller;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class MypageCartController {
 	
 	//마이페이지 상세 장바구니 보여주기
 	@GetMapping("/cart_id/{cart_id}")
-	public void get(@PathVariable Integer cart_id, @SessionAttribute("__AUTH__") UserVO userVO, Model model) throws ControllerException{
+	public String get(@PathVariable String cart_id, @SessionAttribute("__AUTH__") UserVO userVO, Date api_date, Model model) throws ControllerException{
 		log.trace("get({}, {}, model) invoked.", cart_id, userVO);
 		
 		try {
@@ -70,15 +70,45 @@ public class MypageCartController {
 			dto.setEmail(userVO.getEmail());
 			dto.setMobile_num(userVO.getMobile_num());
 			
+			Date defaultApiDate = new Date();
+			Integer cartId = Integer.parseInt(cart_id);			
 			Integer member_id = Integer.parseInt(dto.getMember_id());
+			
+			List<TodayCartGoodsVO> goodsList = this.detailService.getGoods(cartId);
+			
+			model.addAttribute("__GOODSLIST__", goodsList);
+			
+			List<List<TodayCartPriceVO>> priceList = goodsList.stream()
+															  .map(goods -> {
+															      Integer goodsId = goods.getGoods_id(); // goodsList의 요소에서 goods_id 추출
+															      try {
+															    	  if(api_date == null) {
+															    		  return this.detailService.getPrices(goodsId, defaultApiDate, member_id); // getPrices() 메소드 호출 결과를 리턴
+															    	  } else {
+															    		  return this.detailService.getPrices(goodsId, api_date, member_id);
+															    	  }															    	  
+															          
+															      } catch (ServiceException e) {
+															          e.printStackTrace();
+															          return null;
+															      }
+															  })
+															  .collect(Collectors.toList());
+			
+			model.addAttribute("__PRICELIST__", priceList);
+			
+			String creationDate = this.detailService.getCreationDate(cartId);
+			model.addAttribute("__CREATIONDATE__", creationDate);
 			
 			model.addAttribute("__CARTID__", cart_id);
 			
+			return "/mypage/cart/get";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} //try-catch
 		
 	} //get
+	
 	
 	@PostMapping("/remove")
 	public String remove() {

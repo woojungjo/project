@@ -44,6 +44,17 @@
 		                        AND api_date &lt;= #{api_date}
 		                     )
 	</select>
+	
+	<delete id="deleteCart">
+		DELETE FROM cart
+		WHERE cart_id = #{cart_id}
+	</delete>
+	
+	<select id="selectCreationDate" resultType="java.util.Date">
+		SELECT cart_creation_date
+		FROM cart
+		WHERE cart_id = #{cart_id}
+	</select>
 </mapper>
 
 

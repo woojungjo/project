@@ -16,4 +16,10 @@ public interface DetailMyPageCartMapper {
 	
 	//3. 상품 선택 api 날짜 평균 가격 조회
 	public int selectAvgPrice(Integer goods_id, Date api_date);
+	
+	//4. 장바구니 삭제
+	public int deleteCart(Integer cart_id);
+	
+	//5. 카트 생성 날짜 구하기
+	public Date selectCreationDate(Integer cart_id);
 } //end interface

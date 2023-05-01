@@ -113,6 +113,36 @@ public class DetailMyPageCartMapperTests {
 		
 		log.info("avg_price: {}", avg_price);
 	} //selectAvgPrice
+	
+	//4. 장바구니 삭제
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("TEST 4: deleteCart")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void deleteCart() throws ParseException {
+		log.trace("deleteCart invoked()");
+		
+		Integer cart_id = 2295469;
+		
+		int affectedLines = this.mapper.deleteCart(cart_id);
+		log.info("affectedLines: {}", affectedLines);
+	} //deleteCart
+	
+	//5. 카트 생성날짜
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("TEST 4: selectCreationDate")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectCreationDate() throws ParseException {
+		log.trace("selectCreationDate invoked()");
+		
+		Integer cart_id = 2295469;
+		
+		Date date = this.mapper.selectCreationDate(cart_id);
+		log.info("date: {}", date);
+	} //selectCreationDate
 } //end class
 
 

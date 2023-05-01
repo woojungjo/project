@@ -92,4 +92,34 @@ public class DetailMyPageCartServiceTests {
 		assertNotNull(list);		
 		list.forEach(log::info);
 	} //getPrices
+	
+	//3. 장바구니 삭제
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("TEST 3: removeCart")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void removeCart() throws ParseException, ServiceException {
+		log.trace("removeCart invoked()");
+		
+		Integer cart_id = 2295469;
+		
+		int affectedLines = this.service.removeCart(cart_id);
+		log.info("affectedLines: {}", affectedLines);
+	} //deleteCart
+	
+	//4. 카트 생성날짜
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("TEST 4: getCreationDate")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void getCreationDate() throws ParseException, ServiceException {
+		log.trace("selectCreationDate invoked()");
+		
+		Integer cart_id = 2295469;
+		
+		String date = this.service.getCreationDate(cart_id);
+		log.info("date: {}", date);
+	} //getCreationDate
 } //end class
