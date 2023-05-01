@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.wecart.mapper.mypage.edit.EditMapper">
+
+  <!-- 유저 재확인 -->
+  <select id="selectUser" resultType="org.zerock.wecart.domain.UserVO">
+    SELECT
+      *
+    FROM
+      member
+    WHERE
+      login_id = #{login_id} AND
+      pwd = #{pwd}
+  </select>
+
+  <!-- 닉네임 변경 -->
+  <update id="updateAli" >
+    UPDATE
+      member
+    SET
+      alias = #{alias}
+    WHERE
+      login_id = #{login_id}
+  </update>
+
+  <!-- 비밀번호 변경 -->
+  <update id="updatePw2">
+    UPDATE
+      member
+    SET
+      pwd = #{pwd}
+    WHERE
+      login_id = #{login_id}
+  </update>
+
+  <!-- 이메일 변경 -->
+  <update id="updateEmail">
+    UPDATE
+      member
+    SET
+      email = #{email}
+    WHERE
+      login_id = #{login_id}
+  </update>
+
+  <!-- 휴대전화 인증 -->
+
+  <!-- 회원 탈퇴 -->
+  <delete id="deleteUser">
+    DELETE FROM
+      member
+    WHERE
+      member_id = #{member_id}
+  </delete>
+
+
+</mapper>

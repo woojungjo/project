@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,6 +52,7 @@ import lombok.extern.log4j.Log4j2;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Transactional
 public class TodayCartControllerTests {
 	
 	@Setter(onMethod_= {@Autowired})
@@ -166,7 +168,7 @@ public class TodayCartControllerTests {
 //	@Disable
 	@Test
 	@Order(3)
-	@DisplayName("TEST1: register")
+	@DisplayName("TEST3: remove")
 	@Timeout(value = 3, unit = TimeUnit.SECONDS)
 	GoodsVO remove(Model model) throws Exception {
 		log.trace("register({}) invoked. ");
@@ -198,7 +200,43 @@ public class TodayCartControllerTests {
 		log.trace("UserVO: {}", userVOAtController);
 
 		return goodsVO;
-	}
+	} //remove
+	
+//	@Disable
+	@Test
+	@Order(4)
+	@DisplayName("TEST4: removeChecked")
+	@Timeout(value = 3, unit = TimeUnit.SECONDS)
+	void removeChecked(Model model) throws Exception {
+		log.trace("register({}) invoked. ");
+		
+		MockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
+		MockMvc mockMvc = mockMvcBuilder.build();
+		MockHttpServletRequestBuilder requestBuilder =	MockMvcRequestBuilders.post("/todayCart/register");
+		
+		
+		MockHttpSession session = new MockHttpSession();
+		LoginDTO loginDTO = new LoginDTO();
+		loginDTO.setLogin_id("loginid1");
+		loginDTO.setPwd("PWD1");
+		UserVO userVO = this.userService.login(loginDTO);
+		
+		
+		session.setAttribute("__AUTH__", userVO);
+		requestBuilder.session(session);
+		
+		@Cleanup("clear")
+		ModelAndView nodel = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
+		
+		
+		Integer goods_id = (Integer) model.getAttribute("goods_id");
+		log.trace("goods_id: {}", goods_id);
+		GoodsVO goodsVO = (GoodsVO) priceCompareService.select(goods_id);
+		log.trace("goodVO: {}", goodsVO);
+		UserVO userVOAtController = (UserVO) model.getAttribute("__AUTH__");
+		log.trace("UserVO: {}", userVOAtController);
+
+	} //remove
 } //end class
 
 

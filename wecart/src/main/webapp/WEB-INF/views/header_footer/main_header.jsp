@@ -38,7 +38,7 @@
                     <li><a href="/"><i class="fa-regular fa-bell"></i></a></li>
                     <li><a href="/"><i class="fa-solid fa-piggy-bank"></i></a></li>
                     <li>
-                        <a href="/mypage/edit/check_password">
+                        <a href="/mypage/edit/checkUser">
                          <%= session.getAttribute("id") %>
                         </a>
                     </li>

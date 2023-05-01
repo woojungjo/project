@@ -1,17 +1,19 @@
 package org.zerock.wecart.controller;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +24,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.pricecompare.CartDTO;
+import org.zerock.wecart.domain.pricecompare.CartUserDTO;
 import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
+import org.zerock.wecart.domain.pricecompare.TodayCartGoodsVO;
+import org.zerock.wecart.domain.pricecompare.TodayCartPriceVO;
+import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.exception.ServiceException;
+import org.zerock.wecart.service.pricecompare.DetailMyPageCartService;
 import org.zerock.wecart.service.pricecompare.MypageCartService;
 
 import lombok.NoArgsConstructor;
@@ -42,10 +49,66 @@ public class MypageCartController {
 	@Setter(onMethod_=@Autowired)
 	MypageCartService service;
 	
-	@GetMapping("/get")
-	public void get() {
-		log.trace("get() invoked.");
+	private DetailMyPageCartService detailService;
+	
+	@Autowired
+	public MypageCartController(DetailMyPageCartService detailService) {
+		this.detailService = detailService;
+	} //Constructor
+	
+	//마이페이지 상세 장바구니 보여주기
+	@GetMapping("/cart_id/{cart_id}")
+	public String get(@PathVariable String cart_id, @SessionAttribute("__AUTH__") UserVO userVO, Date api_date, Model model) throws ControllerException{
+		log.trace("get({}, {}, model) invoked.", cart_id, userVO);
+		
+		try {
+			CartUserDTO dto = new CartUserDTO();
+			dto.setMember_id(userVO.getMember_id());
+			dto.setLogin_id(userVO.getLogin_id());
+			dto.setPwd(userVO.getPwd());
+			dto.setAlias(userVO.getAlias());
+			dto.setEmail(userVO.getEmail());
+			dto.setMobile_num(userVO.getMobile_num());
+			
+			Date defaultApiDate = new Date();
+			Integer cartId = Integer.parseInt(cart_id);			
+			Integer member_id = Integer.parseInt(dto.getMember_id());
+			
+			List<TodayCartGoodsVO> goodsList = this.detailService.getGoods(cartId);
+			
+			model.addAttribute("__GOODSLIST__", goodsList);
+			
+			List<List<TodayCartPriceVO>> priceList = goodsList.stream()
+															  .map(goods -> {
+															      Integer goodsId = goods.getGoods_id(); // goodsList의 요소에서 goods_id 추출
+															      try {
+															    	  if(api_date == null) {
+															    		  return this.detailService.getPrices(goodsId, defaultApiDate, member_id); // getPrices() 메소드 호출 결과를 리턴
+															    	  } else {
+															    		  return this.detailService.getPrices(goodsId, api_date, member_id);
+															    	  }															    	  
+															          
+															      } catch (ServiceException e) {
+															          e.printStackTrace();
+															          return null;
+															      }
+															  })
+															  .collect(Collectors.toList());
+			
+			model.addAttribute("__PRICELIST__", priceList);
+			
+			String creationDate = this.detailService.getCreationDate(cartId);
+			model.addAttribute("__CREATIONDATE__", creationDate);
+			
+			model.addAttribute("__CARTID__", cart_id);
+			
+			return "/mypage/cart/get";
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} //try-catch
+		
 	} //get
+	
 	
 	@PostMapping("/remove")
 	public String remove() {
@@ -278,5 +341,14 @@ public class MypageCartController {
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		} // try - catch
-	} // wishedProdsRemoved   jhwan
+
+	} // wishedProdsRemoved   jhwan 
+
 } //end class
+
+
+
+
+
+
+

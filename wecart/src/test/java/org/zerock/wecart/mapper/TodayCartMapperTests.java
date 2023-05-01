@@ -103,7 +103,7 @@ public class TodayCartMapperTests {
 		log.info("\t+ avg: {}", avg);
 	} //selectAvgPrice
 	
-	//4. 장바구니 상품 삭제
+	//4. 장바구니 상품 개별 삭제
 //	@Disabled
 	@Test
 	@Order(4)
@@ -119,6 +119,57 @@ public class TodayCartMapperTests {
 		
 		log.info("\t+ affectedLines: {}", affectedLines);
 	} //delete
+	
+	//5. 장바구니 상품 선택 삭제
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("TEST 5: deleteChecked")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void deleteChecked() {
+		log.trace("deleteChecked() invoked");
+		
+		int[] goodsIdArr = {1, 2};
+		Integer member_id = 207;
+		
+		int affectedLines = this.mapper.deleteChecked(goodsIdArr, member_id);
+		
+		log.info("\t+ affectedLines: {}", affectedLines);
+	} //deleteChecked
+	
+	//6. 오늘의 장바구니 -> 마이페이지 상세 장바구니
+//	@Disabled
+	@Test
+	@Order(6)
+	@DisplayName("TEST 6: updateStatus")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void updateStatus() {
+		log.trace("updateStatus() invoked");
+		
+		Integer member_id = 207;
+		
+		int affectedLines = this.mapper.updateStatus(member_id);
+		
+		log.info("\t+ affectedLines: {}", affectedLines);
+	} //updateStatus
+	
+	//7. 오늘의 장바구니 상품 수량 변화
+//	@Disabled
+	@Test
+	@Order(7)
+	@DisplayName("TEST 7: updateAmount")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void updateAmount() {
+		log.trace("updateAmount() invoked");
+		
+		Integer amount = 2;
+		Integer goods_id = 1;
+		Integer member_id = 207;
+		
+		int affectedLines = this.mapper.updateAmount(amount, goods_id, member_id);
+		
+		log.info("\t+ affectedLines: {}", affectedLines);
+	} //updateAmount
 } //end class
 
 

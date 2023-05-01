@@ -2,9 +2,6 @@ package org.zerock.wecart.service.board.qnaboard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -13,14 +10,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
+
+import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
+
 import org.zerock.wecart.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -38,7 +38,7 @@ import lombok.extern.log4j.Log4j2;
 public class QnaBoardServiceTests {
 
 	@Setter(onMethod_= {@Autowired})
-	private QnaBoardService service;
+	private QnaBoardCommentService service;
 	
 	
 	@BeforeAll
@@ -53,19 +53,17 @@ public class QnaBoardServiceTests {
 //	@Disabled
 	@Test
 	@Order(1)
-	@DisplayName("testGetList")
-	@Timeout(value = 2 ,unit = TimeUnit.SECONDS)
-	void testGetList() throws ServiceException {
-		log.trace("testGetList() invoked.");
+	@DisplayName("testLike")
+	void testLike() throws ServiceException {
 		
-		Criteria cri = new Criteria();
-		cri.setCurrPage(1);
-		cri.setAmount(20);
+		QnaBoardCommentDTO dto = new QnaBoardCommentDTO();
+		dto.setPost_no(99990);
+		dto.setComment_no(222229);
+		dto.setMember_id(198);
 		
-		List<QnaBoard_CommentCountVO> list = this.service.getList(cri);
+		service.commentLike(dto);
 		
-		assert list != null;
-		list.forEach(log::info);
+		
 	} // testGetList
 	
 	//Disabled

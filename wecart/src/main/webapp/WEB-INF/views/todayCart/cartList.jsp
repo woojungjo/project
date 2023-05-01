@@ -58,7 +58,7 @@
                         <div class="mypage_article_content">
                             <div>
                                 <h2>오늘의 장바구니</h2>
-                                <p>* 결측치(X)는 평균값을 사용하였습니다.</p>
+                                <p>* (X) 표시는 마트에 존재하지 않는 상품으로 현재 상품의 평균가로 대체하였습니다.</p>
                             </div>
                             <div class="mycart_table_div">
                                 <form action="/todayCart/register" method="post">
@@ -98,7 +98,7 @@
                                                                 <div class="count_bt_delete">
                                                                     <div class="count_bt">
                                                                         <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                        <div class="amount_div">1</div>
+                                                                        <div class="amount_div">${goodsList.amount}</div>
                                                                         <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
                                                                     </div>
                                                                     <div class="delete_bt_div">
@@ -134,22 +134,12 @@
                                                 <td colspan="2">
                                                     <span>합계</span>
                                                 </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
-                                                <td>
-                                                    <span class="total_price"></span>
-                                                    <span>원</span>  
-                                                </td>
+                                                <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
+                                                	<td>
+	                                                    <span class="total_price"></span>
+	                                                    <span>원</span>  
+                                                	</td>
+                                                </c:forEach>
                                             </tr>
                                         </tfoot>
                                     </table>

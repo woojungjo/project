@@ -93,7 +93,7 @@ public class TodayCartServiceTests {
 	@DisplayName("TEST 3: remove")
 	@Timeout(value=4, unit=TimeUnit.SECONDS)
 	void remove() throws ServiceException {
-		log.trace("getPrices invoked()");
+		log.trace("remove invoked()");
 		
 		Integer goods_id = 1;
 		Integer member_id = 207;
@@ -102,6 +102,24 @@ public class TodayCartServiceTests {
 		
 		log.info("\t+ affectedLines: {}", affectedLines );
 	} //remove
+	
+	//5. 상품 수량 변화
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("TEST 5: modifyAmount")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void modifyAmount() throws ServiceException {
+		log.trace("modifyAmount invoked()");
+		
+		Integer amount = 2;
+		Integer goods_id = 1;
+		Integer member_id = 207;
+		
+		int affectedLines = this.service.modifyAmount(amount, goods_id, member_id);
+		
+		log.info("\t+ affectedLines: {}", affectedLines );
+	} //modifyAmount
 } //end class
 
 
