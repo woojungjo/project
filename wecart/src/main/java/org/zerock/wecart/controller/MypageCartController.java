@@ -341,8 +341,9 @@ public class MypageCartController {
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		} // try - catch
-	} // wishedProdsRemoved   jhwan
-	
+
+	} // wishedProdsRemoved   jhwan 
+
 } //end class
 
 
