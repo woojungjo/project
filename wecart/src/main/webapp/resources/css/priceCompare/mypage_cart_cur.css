@@ -1,9 +1,14 @@
 @charset "utf-8";
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
-.price_compare_value {
+.compare_pluszero {
     color: red;
-    /* color: blue; */
+
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+.compare_minus {
+    color: blue;
 
     margin-top: 5px;
     margin-bottom: 15px;

@@ -14,6 +14,7 @@
     <link rel="icon" href="/resources/ico/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/resources/css/priceCompare/mypage_frame.css">
     <link rel="stylesheet" href="/resources/css/priceCompare/mypage_cart.css">
+    <link rel="stylesheet" href="/resources/css/priceCompare/mypage_cart_cur.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
     <script src="https://kit.fontawesome.com/3a5b85a601.js" crossorigin="anonymous"></script>
@@ -55,94 +56,90 @@
 
                         <div class="mypage_article_content">
                             <div class="mycart_table_div">
-                                <form action="/mypage/cart/currentPrice" method="post">
-                                    <table id="mycart_tbl">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" colspan="2">
-                                                    <div class="cart_tbl_date">
-                                                        <span>장바구니</span>
-                                                        <input type="date" data-placeholder="날짜 선택" required
-                                                        aria-required="true" name="cartDate" id="cartDate" value="${__CREATIONDATE__}"> <!-- value 장바구니 담은 날로 지정-->
-                                                    </div>
-                                                </th>
-                                                <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
-                                                	<th scope="col"><span>${priceList0.retail_name}</span></th>
-                                                </c:forEach>
-                                            </tr>
-                                        </thead>
-                                        <tbody>     <!--동적-->
-                                            <c:forEach var="goodsList" items="${__GOODSLIST__}">                                            
-                                                <tr class="goods_price_tr" data-goods_id="${goodsList.goods_id}">
-                                                    <td colspan="2" class="td_cart_goods_list">
-                                                        <div class="cart_goods_list">
-                                                                                                                      
-                                                            <div>
-                                                                <a href="/priceCompare/showPrd/${goodsList.goods_id}"><img src="${goodsList.goods_pic}" class="cart_goods_image"></a>
-                                                            </div>
-                                                                                                                    
-                                                            <div class="cart_title_count">
-                                                                <a href="/priceCompare/showPrd/${goodsList.goods_id}" class="a_black_text"><span>${goodsList.goods_name}</span></a>
-                                                                <div class="count_bt_delete">
-                                                                    <div class="count_bt">
-                                                                        <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
-                                                                        <div class="amount_div">${goodsList.amount}</div>
-                                                                        <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
-                                                                    </div>
-                                                                    <div class="delete_bt_div">
-                                                                        <button type="button" aria-label="장바구니삭제" class="delete_bt"></button>
-                                                                    </div>
-                                                                </div>                                                            
-                                                            </div>                                                    
-                                                        </div>
-                                                    </td>
-	                                                
-                                                    <c:forEach var="priceLists" items="${__PRICELIST__}">
-                                                        <c:forEach var="list" items="${priceLists}">
-                                                        	<c:if test="${goodsList.goods_id eq list.goods_id}">
-                                                            <td>
-                                                                <span class="goods_price" data-price="${not empty list.price ? list.price : list.avg_price}">
-                                                                    <fmt:formatNumber value="${not empty list.price ? list.price : list.avg_price}" pattern="#,##0" />
-                                                                    
-                                                                </span>
-                                                                <span>원</span>
-                                                                <c:if test="${empty list.price}">
-                                                                	<div class="nullPrice">(X)</div>    	
-                                                                </c:if>
-                                                            </td>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </c:forEach>    
-                                                </tr>
+                                <table id="mycart_tbl">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" colspan="2">
+                                                <div class="cart_tbl_date">
+                                                    <span>장바구니</span>
+                                                    <input type="date" data-placeholder="날짜 선택" required
+                                                    aria-required="true" name="cartDate" id="cartDate" value="${__CREATIONDATE__}"> <!-- value 장바구니 담은 날로 지정-->
+                                                </div>
+                                            </th>
+                                            <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
+                                                <th scope="col"><span>${priceList0.retail_name}</span></th>
                                             </c:forEach>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <span>합계</span>
+                                        </tr>
+                                    </thead>
+                                    <tbody>     <!--동적-->
+                                        <c:forEach var="goodsList" items="${__GOODSLIST__}">                                            
+                                            <tr class="goods_price_tr" data-goods_id="${goodsList.goods_id}">
+                                                <td colspan="2" class="td_cart_goods_list">
+                                                    <div class="cart_goods_list">
+                                                                                                                    
+                                                        <div>
+                                                            <a href="/priceCompare/showPrd/${goodsList.goods_id}"><img src="${goodsList.goods_pic}" class="cart_goods_image"></a>
+                                                        </div>
+                                                                                                                
+                                                        <div class="cart_title_count">
+                                                            <a href="/priceCompare/showPrd/${goodsList.goods_id}" class="a_black_text"><span>${goodsList.goods_name}</span></a>
+                                                            <div class="count_bt_delete">
+                                                                <div class="count_bt">
+                                                                    <button type="button" aria-label="수량내리기" class="count_minus_plus_bt count_minus_bt"></button>
+                                                                    <div class="amount_div">${goodsList.amount}</div>
+                                                                    <button type="button" aria-label="수량올리기" class="count_minus_plus_bt count_plus_bt"></button>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </div>                                                    
+                                                    </div>
                                                 </td>
-                                                <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
-                                                	<td>
-	                                                    <span class="total_price"></span>
-	                                                    <span>원</span>  
-                                                	</td>
-                                                </c:forEach>
+                                                
+                                                <c:forEach var="priceLists" items="${__PRICELIST__}">
+                                                    <c:forEach var="list" items="${priceLists}">
+                                                        <c:if test="${goodsList.goods_id eq list.goods_id}">
+                                                        <td>
+                                                            <span class="goods_price" data-price="${not empty list.price ? list.price : list.avg_price}">
+                                                                <fmt:formatNumber value="${not empty list.price ? list.price : list.avg_price}" pattern="#,##0" />
+                                                                
+                                                            </span>
+                                                            <span>원</span>
+                                                            <c:if test="${empty list.price}">
+                                                                <div class="nullPrice">(X)</div>    	
+                                                            </c:if>
+                                                            <div class="price_compare"></div>
+                                                        </td>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </c:forEach>    
                                             </tr>
-                                        </tfoot>
-                                    </table>
-                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
-                                    <input type="hidden" name="cart_id" value="${__CARTID__}">        
+                                        </c:forEach>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="total_tr">
+                                            <td colspan="2">
+                                                <span>합계</span>
+                                            </td>
+                                            <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
+                                                <td>
+                                                    <span class="total_price"></span>
+                                                    <span>원</span>  
+                                                </td>
+                                            </c:forEach>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
+                                <input type="hidden" name="cart_id" value="${__CARTID__}">        
 
-                                    <div id="mycart_tbl_button">
-                                        <button type="button" id="cart_remove_bt" class="mycart_tbl_bt">장바구니 삭제</button>
+                                <div id="mycart_tbl_button">
+                                    <button type="button" id="cart_remove_bt" class="mycart_tbl_bt">장바구니 삭제</button>
 
-                                        <div>
-                                            <input type="submit" value="현재 가격 비교" class="mycart_tbl_bt">
+                                    <div>
+                                        <button type="button" id="current_price_bt" class="mycart_tbl_bt">현재 가격 비교</button>
 
-                                            <button type="button" id="cart_list_bt" class="mycart_tbl_bt">장바구니 목록</button>
-                                        </div>                                        
-                                    </div>
-                                </form>                        
+                                        <button type="button" id="cart_list_bt" class="mycart_tbl_bt">장바구니 목록</button>
+                                    </div>                                        
+                                </div>                       
                             </div>                            
                         </div>
                     </div>

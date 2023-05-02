@@ -1,5 +1,7 @@
 window.onload = function () {
     let cart_id = $('input[name=cart_id]').val();
+    let member_id = $('input[name=member_id]').val();
+    let api_date = new Date($('#cartDate').val());
 
     //합계 구하기
     let count = (function () {
@@ -70,10 +72,29 @@ window.onload = function () {
             });
         } //removeCart
 
+        function currentCompare(cart_id, member_id, api_date, callback, error) {
+            $.ajax({
+                type : 'get',
+                url : '/mypageCart/getCurrent/member/' + member_id + '/cart/' + cart_id + '/date/' + api_date,
+                success : function (currentPrices) {
+                    if(callback) {
+                        console.log(currentPrices);
+                        callback(currentPrices);
+                    }
+                },
+                error : function (xhr, status, er) {
+                    if(error) {
+                        error(er);
+                    }
+                }
+            });
+        } //currentCompare
+
         return {
             totalPrice : totalPrice,
             minusImage : minusImage,
-            removeCart : removeCart
+            removeCart : removeCart,
+            currentCompare : currentCompare
         }
     })();
 
@@ -154,34 +175,34 @@ window.onload = function () {
         bt.addEventListener('click', minus);
     });
 
-    //상품 개별 삭제(자바스크립트 상 삭제)
-    var deleteBts = document.querySelectorAll(".delete_bt");
-    var deleteOne = function (e) {      
-        if(confirm('삭제하시겠습니까?')) {
-            var tr = e.target.closest(".goods_price_tr");
-            tr.remove();
-        } //if 
+    // //상품 개별 삭제(자바스크립트 상 삭제)
+    // var deleteBts = document.querySelectorAll(".delete_bt");
+    // var deleteOne = function (e) {      
+    //     if(confirm('삭제하시겠습니까?')) {
+    //         var tr = e.target.closest(".goods_price_tr");
+    //         tr.remove();
+    //     } //if 
 
-        const totals = document.querySelectorAll(".total_price");
-        totals.forEach((total) => {
-            var tPrice = 0;
-            var index = Array.from(totals).indexOf(total);
+    //     const totals = document.querySelectorAll(".total_price");
+    //     totals.forEach((total) => {
+    //         var tPrice = 0;
+    //         var index = Array.from(totals).indexOf(total);
 
-            const priceTRs = document.querySelectorAll(".goods_price_tr");
-            console.log("index:", index);
+    //         const priceTRs = document.querySelectorAll(".goods_price_tr");
+    //         console.log("index:", index);
 
-            priceTRs.forEach((tr) => {
-                const priceSpans = tr.querySelectorAll(".goods_price");
-                tPrice += parseInt(priceSpans[index].textContent.replace(",", ""));
-            });
+    //         priceTRs.forEach((tr) => {
+    //             const priceSpans = tr.querySelectorAll(".goods_price");
+    //             tPrice += parseInt(priceSpans[index].textContent.replace(",", ""));
+    //         });
             
-            total.textContent = tPrice.toLocaleString();
-        });
-    };
+    //         total.textContent = tPrice.toLocaleString();
+    //     });
+    // };
 
-    deleteBts.forEach((bt) => {
-        bt.addEventListener('click', deleteOne)
-    });
+    // deleteBts.forEach((bt) => {
+    //     bt.addEventListener('click', deleteOne)
+    // });
 
 	//장바구니 삭제 버튼 (DB 삭제)
 	const cartRemoveBt = document.querySelector("#cart_remove_bt");
@@ -191,7 +212,7 @@ window.onload = function () {
                 alert(removeResult);
 
                 window.location = "/mypage/cart/list";
-            })
+            });
         } //if              
     });
 
@@ -199,6 +220,130 @@ window.onload = function () {
     const cartListBt = document.querySelector("#cart_list_bt");
     cartListBt.addEventListener("click", function () {
        location = "/mypage/cart/list"; 
+    });
+
+    let compare = (function () {
+        function currentList(currentPrices) {
+            console.log("currentList invoked....");
+
+            let priceTRs = document.querySelectorAll(".goods_price_tr");
+
+            for (let i = 0; i < currentPrices.length; i++) {
+                for (let j = 0; j < currentPrices[i].length; j++) {
+                    let str = "";
+                    let curDiv = priceTRs[i].querySelectorAll(".price_compare");
+                    let amount = priceTRs[i].querySelector(".amount_div").textContent;
+                    console.log("curDiv:", curDiv[j], "i:", i, "j:", j);
+                    console.log("amount:", amount);
+
+                    str += "<div class='curPrice'>";
+                    str += "  <div class='curPrice_text'>현재가격</div>";
+                    str += "  <div><span class='curPrice_number'>"+(currentPrices[i][j].price != null ? (currentPrices[i][j].price * amount).toLocaleString() : (currentPrices[i][j].avg_price * amount).toLocaleString())+"</span>";
+                    str += "       <span>원</span></div>";
+                    curDiv[j].innerHTML = str;
+                    console.log("str:", str);
+                } //inner for
+            } //outer for
+        } //currentList
+
+        function comparePrice() {
+            console.log('comparePrice invoked...');
+
+            let priceTRs = document.querySelectorAll(".goods_price_tr");
+
+            priceTRs.forEach((tr) => {
+                let curPriceSpans = tr.querySelectorAll('.curPrice_number');
+                let goodsPrices = tr.querySelectorAll('.goods_price');
+                let curDivs = tr.querySelectorAll('.price_compare');
+
+                for(let i = 0; i < curPriceSpans.length; i++) {
+                    let str = "";
+                    console.log("goodsPrices:", goodsPrices[i].textContent);
+                    console.log("curPriceSpans:", curPriceSpans[i].textContent);
+                    console.log("minus:", parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent));
+
+                    if(parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent) >= 0) {
+                        str += "    <div class='compare_pluszero'>+";
+                    } else {
+                        str += "    <div class='compare_minus'>";
+                    } //if-else                    
+                    str += parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent);
+                    str += "    </div>";
+                    
+                    curDivs[i].innerHTML = str + curDivs[i].innerHTML;
+                } //for
+
+            });
+        } //comparePrice
+
+        function comparePriceTotal() {
+            console.log("comparePriceTotal invoked...");
+
+            const totals = document.querySelectorAll(".total_price");
+            const priceTRs = document.querySelectorAll(".goods_price_tr");
+            let curPriceArr = new Array();
+
+            for(let i = 0; i < totals.length; i++) {
+                let curTPrice = 0;
+
+                priceTRs.forEach((tr) => {
+                    let curPrices = tr.querySelectorAll('.curPrice_number');
+                    curTPrice += parseInt(curPrices[i].textContent.replace(",", "")); 
+                });
+
+                curPriceArr.push(curTPrice);
+            } //for
+
+            console.log("curPriceArr:", curPriceArr);
+            return curPriceArr;
+        } //comparePriceTotal
+
+        function curPriceTotalList(curPriceArr) {
+            console.log("curPriceTotalList invoked...");
+
+            let str = "";
+
+            str += "<tr aria-label='현재 가격 합계' class='curPriceTR'>";
+            str += "    <td colspan='2'>";
+            str += "        <span>현재 가격 합계</span></td>";
+
+            for(let i = 0; i < curPriceArr.length; i++) {
+                str += "    <td>";
+                str += "        <span class='curPrice_total'>" + curPriceArr[i].toLocaleString() + "원</span>";
+                str += "    </td>";
+            } //for
+
+            str += "</tr>";
+
+            if(document.querySelector('.curPriceTR') == null) {
+                document.querySelector("tfoot").innerHTML = document.querySelector("tfoot").innerHTML + str;
+            } else {
+                document.querySelector('.curPriceTR').remove();
+                document.querySelector("tfoot").innerHTML = document.querySelector("tfoot").innerHTML + str;
+            } //if-else
+            
+        } //curPriceTotalList
+
+        return {
+            currentList : currentList,
+            comparePrice : comparePrice,
+            comparePriceTotal : comparePriceTotal,
+            curPriceTotalList : curPriceTotalList
+        }
+
+    })();
+
+    
+    //현재 가격 비교 버튼
+    const currentPriceBt = document.querySelector("#current_price_bt");
+    currentPriceBt.addEventListener('click', function () {
+        count.currentCompare(cart_id, member_id, api_date, function (currentPrices) {
+            console.log('currentPrices:', currentPrices);
+            compare.currentList(currentPrices);
+            compare.comparePrice();
+            const curPriceArr = compare.comparePriceTotal();
+            compare.curPriceTotalList(curPriceArr);
+        });
     });
 };  //.onload
 
