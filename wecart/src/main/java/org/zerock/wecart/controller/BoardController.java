@@ -87,6 +87,6 @@ public class BoardController {
 			}catch(Exception e) {
 					throw new ControllerException(e);
 			}//try-catch 
-		return "redirect:/main";
+		return "redirect:/board/register";
 	}//boardRegister()
 }	

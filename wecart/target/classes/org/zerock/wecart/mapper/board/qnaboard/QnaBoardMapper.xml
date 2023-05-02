@@ -46,7 +46,7 @@
 		    #{content},
 		    #{views},
 		    #{member_id},
-			#{secret_yn, jdbcType=VARCHAR}
+			#{secret_yn, jdbcType=CHAR}
 		    )
   	</insert>  	
 

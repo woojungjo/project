@@ -45,6 +45,6 @@ window.onload = function() {
     if (this.checked) {
       charinput.value = "1";
     } else {
-      //charinput.value = "0";
+      charinput.value = "0";
     }
   });

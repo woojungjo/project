@@ -52,11 +52,12 @@
 
                     <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
                     <input type="hidden" name="meeting_status" value="1">
-                    <input type="hidden" name="report_cnt" value="1">
-                    <input type="hidden" name="views" value="1">
-                    <input type="hidden" name="participant_id_1" value="1">
+                    <input type="hidden" name="report_cnt" value="0">
+                    <input type="hidden" name="views" value="0">
+                    <input type="hidden" id="secret_yn" name="secret_yn" value="0">
+             <!-- <input type="hidden" name="participant_id_1" value="1">
                     <input type="hidden" name="participant_id_2" value="1">
-                    <input type="hidden" name="participant_id_3" value="1">
+                     <input type="hidden" name="participant_id_3" value="1"> -->
                     
                     
                     <div id="board_write">
@@ -106,7 +107,7 @@
 
 				<!-- QnA -->
                     <div id="board_secret">
-                        <input type="checkbox" id="secret_yn" name="secret_yn" >&nbsp;비밀글을 작성합니다.
+                        <input type="checkbox">&nbsp;비밀글을 작성합니다.
                     </div>
 
 				<!-- MateBoard -->
