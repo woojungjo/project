@@ -104,18 +104,23 @@ public class MypageEditController {
 //
 //			return "redirect:/edit/account";
 //	} // authMobileNum
+	
+	@GetMapping("withdrawal")
+	public void withdrawal() {
+		;;
+	} // withdrawal - view
 
 	// 회원 탈퇴
-	@GetMapping("/withdrawal")
-	public String withdrawal(Integer member_id) throws ControllerException {
-		try {
-			boolean result = this.service.withdrawal(member_id);
-			log.trace("result: {}", result);
-
-			return "redirect:/";
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
-	} // withdrawal
+//	@GetMapping("/withdrawal")
+//	public String withdrawal(Integer member_id) throws ControllerException {
+//		try {
+//			boolean result = this.service.withdrawal(member_id);
+//			log.trace("result: {}", result);
+//
+//			return "redirect:/";
+//		} catch (Exception e) {
+//			throw new ControllerException(e);
+//		} // try-catch
+//	} // withdrawal
 
 } // end class

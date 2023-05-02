@@ -22,7 +22,7 @@
 
     <div class="container">
 
-        <form id="signup_form" method="get" action="/user/signup">
+        <form id="signup_form" method="get" action="/user/signUp">
 
             <div id="wrap">
 

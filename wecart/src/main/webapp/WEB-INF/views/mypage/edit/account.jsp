@@ -59,7 +59,7 @@
 
                                 <div class="article">
                                     <h3 class="input_title">비밀번호</h3>
-                                    <a href="/mypage/edit/change_password" id="change_button" class="button"
+                                    <a href="/mypage/edit/changePw" id="change_button" class="button"
                                         role="button">
                                         <span>변경하기</span>
                                     </a>
@@ -80,7 +80,7 @@
                                 </div>
 
                                 <div id="withdrawal">
-                                    <a href="/mypage/edit/withdrawal_account" id="withdrawal_button">탈퇴하기</a>
+                                    <a href="/mypage/edit/withdrawal" id="withdrawal_button">탈퇴하기</a>
                                 </div>
 
                             </div>
