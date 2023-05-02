@@ -126,14 +126,18 @@ document.querySelector('.mate_board_modify').addEventListener('click', function(
   location.reload();
 });
 
-// '삭제' 버튼 클릭 이벤트 처리
+/* '삭제' 버튼 클릭 이벤트 처리 수정하기 
+
 document.querySelector('.mate_board_delete').addEventListener('click', function() {
   if (confirm('정말 삭제하시겠습니까?')) {
+  
     // 삭제 작업 수행 코드
-    
-    alert('삭제되었습니다.');
+
+    alert('삭제되었습니다.');	
   }
-});
+});//confirm
+*/
+ 	
 const subDivs = document.querySelectorAll('#sub > div');
 const currentMemberNum = document.querySelector('.currentMemberNum');
 

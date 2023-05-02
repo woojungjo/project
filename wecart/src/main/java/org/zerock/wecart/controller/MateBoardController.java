@@ -118,13 +118,27 @@ public class MateBoardController {		//JavaBeans, POJO
 		
 	}//mateModify()
 
-	
 	@PostMapping("/materemove")
-	public String mateRemove(RedirectAttributes rttrs) {
-		log.trace("mateRemove({}) invoked", rttrs);
+	public String mateRemove(Criteria cri, Integer post_no, RedirectAttributes rttrs) throws ControllerException{
+		log.trace("remove:{}, {}, {}", cri, post_no, rttrs);
 		
-		return "redirect:/board/mateboard/matelist";
-	}//mateRemove()
+		try {
+			boolean success =this.service.remove(post_no);
+			log.info("\t+success:{}", success);
+			
+			rttrs.addAttribute("currPage", cri.getCurrPage());
+			rttrs.addAttribute("amount", cri.getAmount());
+			
+			//Model 전송처리 
+			rttrs.addAttribute("result", (success)? "success": "failure");
+			
+			return "redirect:/board/mate/matelist";
+			
+		}catch(Exception e) {
+			throw new ControllerException(e);
+		}//try-catch
+	}//remove
+	
 
 	@GetMapping("/materegister")
 	public void boardRegister(){

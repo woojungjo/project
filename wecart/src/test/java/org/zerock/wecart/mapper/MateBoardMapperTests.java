@@ -173,6 +173,23 @@ public class MateBoardMapperTests {
 		log.info("afftectedLines:{}", afftectedLines);
 		
 	}//mateBoardMapperInsertTest() 
+
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("testDelete()")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testDelete() {
+		
+		log.trace("testDelete() invoked" );
+		
+		Integer post_no = 305;
+		Integer affectedLines = this.mapper.delete(post_no);
+		assertNotNull(affectedLines);
+		
+		Objects.requireNonNull(affectedLines);
+		log.info("afftedLines:{}", affectedLines);
+	}//testDelete
 	
 }//end class 
  

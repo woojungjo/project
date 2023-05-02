@@ -23,4 +23,7 @@ public interface MateBoardService {
 	
 //	4. 신규 게시물 등록 (CREATE)
 	public abstract boolean register(MateBoardDTO dto) throws ServiceException;
+	
+//	5. 특정 게시물 삭제(DELETE)
+	public abstract boolean remove(Integer post_no) throws ServiceException;
 }//MateBoardService
