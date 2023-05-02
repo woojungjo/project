@@ -106,8 +106,7 @@
                                                             <c:if test="${empty list.price}">
                                                                 <div class="nullPrice">(X)</div>    	
                                                             </c:if>
-                                                            <div class="price_compare">
-                                                            </div>
+                                                            <div class="price_compare"></div>
                                                         </td>
                                                         </c:if>
                                                     </c:forEach>
@@ -116,7 +115,7 @@
                                         </c:forEach>
                                     </tbody>
                                     <tfoot>
-                                        <tr>
+                                        <tr class="total_tr">
                                             <td colspan="2">
                                                 <span>합계</span>
                                             </td>

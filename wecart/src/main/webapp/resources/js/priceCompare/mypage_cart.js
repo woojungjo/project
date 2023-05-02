@@ -224,30 +224,125 @@ window.onload = function () {
 
     let compare = (function () {
         function currentList(currentPrices) {
-            let str = "";
-            let curDiv = document.querySelectorAll('.price_compare');
+            console.log("currentList invoked....");
+
+            let priceTRs = document.querySelectorAll(".goods_price_tr");
 
             for (let i = 0; i < currentPrices.length; i++) {
                 for (let j = 0; j < currentPrices[i].length; j++) {
-                  console.log(currentPrices[i][j]);
-                  str += "<div class='curPrice'>";
-                  str += "  <div class='curPrice_text'>현재가격</div>"
-                  str += "  <div><span>"+currentPrices[i][j]+"</span>"
-                  str += "       <span>원</span></div>"
+                    let str = "";
+                    let curDiv = priceTRs[i].querySelectorAll(".price_compare");
+                    let amount = priceTRs[i].querySelector(".amount_div").textContent;
+                    console.log("curDiv:", curDiv[j], "i:", i, "j:", j);
+                    console.log("amount:", amount);
+
+                    str += "<div class='curPrice'>";
+                    str += "  <div class='curPrice_text'>현재가격</div>";
+                    str += "  <div><span class='curPrice_number'>"+(currentPrices[i][j].price != null ? (currentPrices[i][j].price * amount).toLocaleString() : (currentPrices[i][j].avg_price * amount).toLocaleString())+"</span>";
+                    str += "       <span>원</span></div>";
+                    curDiv[j].innerHTML = str;
+                    console.log("str:", str);
                 } //inner for
             } //outer for
-        } //currentPrices
+        } //currentList
 
-        return {currentList : currentList}
+        function comparePrice() {
+            console.log('comparePrice invoked...');
+
+            let priceTRs = document.querySelectorAll(".goods_price_tr");
+
+            priceTRs.forEach((tr) => {
+                let curPriceSpans = tr.querySelectorAll('.curPrice_number');
+                let goodsPrices = tr.querySelectorAll('.goods_price');
+                let curDivs = tr.querySelectorAll('.price_compare');
+
+                for(let i = 0; i < curPriceSpans.length; i++) {
+                    let str = "";
+                    console.log("goodsPrices:", goodsPrices[i].textContent);
+                    console.log("curPriceSpans:", curPriceSpans[i].textContent);
+                    console.log("minus:", parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent));
+
+                    if(parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent) >= 0) {
+                        str += "    <div class='compare_pluszero'>+";
+                    } else {
+                        str += "    <div class='compare_minus'>";
+                    } //if-else                    
+                    str += parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent);
+                    str += "    </div>";
+                    
+                    curDivs[i].innerHTML = str + curDivs[i].innerHTML;
+                } //for
+
+            });
+        } //comparePrice
+
+        function comparePriceTotal() {
+            console.log("comparePriceTotal invoked...");
+
+            const totals = document.querySelectorAll(".total_price");
+            const priceTRs = document.querySelectorAll(".goods_price_tr");
+            let curPriceArr = new Array();
+
+            for(let i = 0; i < totals.length; i++) {
+                let curTPrice = 0;
+
+                priceTRs.forEach((tr) => {
+                    let curPrices = tr.querySelectorAll('.curPrice_number');
+                    curTPrice += parseInt(curPrices[i].textContent.replace(",", "")); 
+                });
+
+                curPriceArr.push(curTPrice);
+            } //for
+
+            console.log("curPriceArr:", curPriceArr);
+            return curPriceArr;
+        } //comparePriceTotal
+
+        function curPriceTotalList(curPriceArr) {
+            console.log("curPriceTotalList invoked...");
+
+            let str = "";
+
+            str += "<tr aria-label='현재 가격 합계' class='curPriceTR'>";
+            str += "    <td colspan='2'>";
+            str += "        <span>현재 가격 합계</span></td>";
+
+            for(let i = 0; i < curPriceArr.length; i++) {
+                str += "    <td>";
+                str += "        <span class='curPrice_total'>" + curPriceArr[i].toLocaleString() + "원</span>";
+                str += "    </td>";
+            } //for
+
+            str += "</tr>";
+
+            if(document.querySelector('.curPriceTR') == null) {
+                document.querySelector("tfoot").innerHTML = document.querySelector("tfoot").innerHTML + str;
+            } else {
+                document.querySelector('.curPriceTR').remove();
+                document.querySelector("tfoot").innerHTML = document.querySelector("tfoot").innerHTML + str;
+            } //if-else
+            
+        } //curPriceTotalList
+
+        return {
+            currentList : currentList,
+            comparePrice : comparePrice,
+            comparePriceTotal : comparePriceTotal,
+            curPriceTotalList : curPriceTotalList
+        }
 
     })();
 
+    
     //현재 가격 비교 버튼
     const currentPriceBt = document.querySelector("#current_price_bt");
     currentPriceBt.addEventListener('click', function () {
         count.currentCompare(cart_id, member_id, api_date, function (currentPrices) {
             console.log('currentPrices:', currentPrices);
             compare.currentList(currentPrices);
+            compare.comparePrice();
+            const curPriceArr = compare.comparePriceTotal();
+            compare.curPriceTotalList(curPriceArr);
         });
     });
 };  //.onload
