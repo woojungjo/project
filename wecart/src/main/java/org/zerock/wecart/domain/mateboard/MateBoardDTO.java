@@ -1,5 +1,9 @@
 package org.zerock.wecart.domain.mateboard;
 
+import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -14,7 +18,6 @@ public class MateBoardDTO {
     private Integer member_id;
     private Character meeting_status;
     private String meeting_area;
-    private String meeting_time;
     
     private Integer report_cnt;
     
@@ -22,4 +25,8 @@ public class MateBoardDTO {
     private Integer participant_id_2;
     private Integer participant_id_3;
     
+//    @DateTimeFormat(pattern = "yyyy/MM/dd h:mm a")
+//    private Timestamp meeting_time_temp;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime meeting_time;    
 }//MateBoardDTO

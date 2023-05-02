@@ -1,5 +1,8 @@
 package org.zerock.wecart.service.board.mateboard;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -143,18 +146,21 @@ public class MateBoardServiceTests {
 		MateBoardDTO dto = new MateBoardDTO();
 		//Timestamp now = new Timestamp(System.currentTimeMillis());
 
-//		String meetingTime = "2023-05-13T19:44";
+//		String meetingTime = "2023-05-15T19:44 AM";
 //		LocalDateTime localDateTime = LocalDateTime.parse(meetingTime);
 //		Timestamp timestamp = Timestamp.valueOf(localDateTime);
 		
-		dto.setTitle("Ju's");
-		dto.setContent("Ju_New_Content");
-		dto.setViews(1000000000);
-		dto.setMember_id(333);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+		LocalDateTime dateTime = LocalDateTime.parse("2023-05-15 07:44 PM", formatter);
+		Timestamp timestamp = Timestamp.valueOf(dateTime);
+		
+		dto.setTitle("test777");
+		dto.setContent("0502test_CONTENT");
+		dto.setViews(1000);
+		dto.setMember_id(777);
 		dto.setMeeting_status(String.valueOf(0).charAt(0));
-		dto.setMeeting_area("NY");
-		dto.setMeeting_time("2023/04/30 10:30 AM");
-		//dto.setMeeting_time_temp(localDateTime);
+		dto.setMeeting_area("JeJu");
+		dto.setMeeting_time(dateTime);
 		dto.setReport_cnt(0);
 		dto.setParticipant_id_1(335);
 		dto.setParticipant_id_2(337);

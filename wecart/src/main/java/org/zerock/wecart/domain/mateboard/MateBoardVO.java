@@ -2,6 +2,8 @@ package org.zerock.wecart.domain.mateboard;
 
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Value;
 
 @Value
@@ -20,5 +22,6 @@ public class MateBoardVO { //테이블 스키마대로 채워야 하는 것.
     private Integer participant_id_1;
     private Integer participant_id_2;
     private Integer participant_id_3;
-    private String meeting_time;
+    @DateTimeFormat(pattern = "yyyy/MM/dd h:mm a")
+    private Timestamp meeting_time;
 }//MateBoardVO
