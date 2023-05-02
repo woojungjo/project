@@ -1,5 +1,8 @@
 package org.zerock.wecart.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,15 +61,11 @@ public class BoardController {
 			}else if(dto.getSortOfBoard()==3) {
 	
 					MateBoardDTO mateBoardDTO = new MateBoardDTO();
-					//log.trace("dto.getMeeting_time_temp(): {}", dto.getMeeting_time_temp());
-					//java.time.LocalDateTime
-					//log.trace("dto.getMeeting_time_temp(): {}", dto.getMeeting_time_temp().getClass().getName());
 					
-//					Timestamp timestamp = Timestamp.valueOf(dto.getMeeting_time_temp());
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+					LocalDateTime meetingTime = LocalDateTime.parse(dto.getMeeting_time_temp().toString(), formatter);
 					
-//					log.trace("timestamp(): {}", timestamp.getClass().getName());//java.sql.Timestamp
-					
-//					mateBoardDTO.setPost_no(dto.getPost_no());
+					mateBoardDTO.setPost_no(dto.getPost_no());
 					mateBoardDTO.setMember_id(dto.getMember_id());
 					mateBoardDTO.setTitle(dto.getTitle());
 					mateBoardDTO.setContent(dto.getContent());
@@ -74,10 +73,10 @@ public class BoardController {
 					mateBoardDTO.setReport_cnt(dto.getReport_cnt());
 					mateBoardDTO.setMeeting_status(dto.getMeeting_status());
 					mateBoardDTO.setMeeting_area(dto.getMeeting_area());
-					mateBoardDTO.setMeeting_time(dto.getMeeting_time());
 					mateBoardDTO.setParticipant_id_1(dto.getParticipant_id_1());
 					mateBoardDTO.setParticipant_id_2(dto.getParticipant_id_2());
 					mateBoardDTO.setParticipant_id_3(dto.getParticipant_id_3());
+					mateBoardDTO.setMeeting_time(meetingTime);
 					
 					log.info("mateBoardDTO:{}", mateBoardDTO);
 					this.mateService.register(mateBoardDTO);

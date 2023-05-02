@@ -2,6 +2,9 @@ package org.zerock.wecart.controller.board.mateBoard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -180,16 +183,20 @@ public class MateBoardControllerTests {
 		
 		//Timestamp now = new Timestamp(System.currentTimeMillis());
 		
-		requestBuilder.param("post_no", "3333333");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+		LocalDateTime dateTime = LocalDateTime.parse("2023-05-15 07:44 PM", formatter);
+//		Timestamp timestamp = Timestamp.valueOf(dateTime);
+		
+		requestBuilder.param("post_no", "5555555");
 		requestBuilder.param("member_id", "333");
 		requestBuilder.param("views", "100000");
 		requestBuilder.param("meeting_status", "0");
 		requestBuilder.param("meeting_area", "JeJu");
-		requestBuilder.param("meeting_time", "2023/05/1 10:30 AM");
+		requestBuilder.param("meeting_time", dateTime.toString());
 		requestBuilder.param("report_cnt", "0");
-//		requestBuilder.param("participant_id_1", "335");
-//		requestBuilder.param("participant_id_2", "337");
-//		requestBuilder.param("participant_id_3", "339");
+		requestBuilder.param("participant_id_1", "335");
+		requestBuilder.param("participant_id_2", "337");
+		requestBuilder.param("participant_id_3", "339");
 		requestBuilder.param("title", "******MEETING TIME*******"); 
 		requestBuilder.param("content", "*******MEETING TIME*******");
 		

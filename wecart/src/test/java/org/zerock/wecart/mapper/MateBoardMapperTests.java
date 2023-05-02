@@ -2,6 +2,8 @@ package org.zerock.wecart.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -150,13 +152,16 @@ public class MateBoardMapperTests {
 //		String meetingTime = "2023-05-13T19:44";
 //		LocalDateTime localDateTime = LocalDateTime.parse(meetingTime);
 		
-		dto.setTitle("Ju's");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+		LocalDateTime dateTime = LocalDateTime.parse("2023-05-15 07:44 PM", formatter);
+		
+		dto.setTitle("Ju's test");
 		dto.setContent("Ju_New_Content");
 		dto.setViews(1000000000);
 		dto.setMember_id(333);
 		dto.setMeeting_status(String.valueOf(0).charAt(0));
 		dto.setMeeting_area("NY");
-		dto.setMeeting_time("2023/04/30 10:30 AM");
+		dto.setMeeting_time(dateTime);
 		dto.setReport_cnt(0);
 		dto.setParticipant_id_1(335);
 		dto.setParticipant_id_2(337);

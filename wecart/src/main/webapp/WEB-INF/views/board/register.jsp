@@ -55,7 +55,8 @@
                     <input type="hidden" name="report_cnt" value="0">
                     <input type="hidden" name="views" value="0">
                     <input type="hidden" id="secret_yn" name="secret_yn" value="0">
-             <!-- <input type="hidden" name="participant_id_1" value="1">
+                     <!-- <input type="hidden" id="meeting_time" name="meeting_time" value="23/05/02 04:27:56">
+            <input type="hidden" name="participant_id_1" value="1">
                     <input type="hidden" name="participant_id_2" value="1">
                      <input type="hidden" name="participant_id_3" value="1"> -->
                     
