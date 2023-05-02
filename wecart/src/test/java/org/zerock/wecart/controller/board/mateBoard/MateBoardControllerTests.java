@@ -2,7 +2,6 @@ package org.zerock.wecart.controller.board.mateBoard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;

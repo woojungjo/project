@@ -23,7 +23,6 @@
   	<update id="update">
   		UPDATE 
   			mate_board
-  			
   		SET
   			title=#{title},
 		    content=#{content},
@@ -33,7 +32,8 @@
 		    meeting_area=#{meeting_area},
 		    participant_id_1=#{participant_id_1},
 		    participant_id_2=#{participant_id_2},
-		    participant_id_3=#{participant_id_3}
+		    participant_id_3=#{participant_id_3},
+		    meeting_time=#{meeting_time},
 		    
 		WHERE post_no = #{post_no}
   	</update>  	
@@ -54,7 +54,11 @@
 		    #{participant_id_3, jdbcType=NUMERIC},
 		    #{meeting_time}
 		    )
-  	</insert>  	
+  	</insert> 
+  	
+  	<delete id="delete">
+		DELETE FROM mate_board WHERE post_no=#{post_no}
+	</delete> 	
 
   </mapper>
   

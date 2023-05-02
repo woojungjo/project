@@ -24,6 +24,7 @@ import lombok.extern.log4j.Log4j2;
 @Service("mateBoardService")
 public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 	
+
 	@Setter(onMethod_= {@Autowired})
 	private MateBoardMapper mapper;
 	
@@ -95,5 +96,16 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 			throw new ServiceException(e);
 		}//try-catch
 	} // register() 
- 
+	
+	
+	@Override
+	public boolean remove(Integer post_no) throws ServiceException {
+		try {
+			//삭제되면 1(delete==1이니 총 true), affectedLines=1
+			return this.mapper.delete(post_no)==1; 
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}//try-catch
+	}//remove()
+	
 }//end class 

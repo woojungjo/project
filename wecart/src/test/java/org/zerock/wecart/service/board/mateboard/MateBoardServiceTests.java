@@ -171,4 +171,18 @@ public class MateBoardServiceTests {
 		
 	}//testRegister()
 	
+//	@Disabled
+	@Test
+	@Order(5)
+	@DisplayName("testRemove()")
+	@Timeout(value=3, unit=TimeUnit.SECONDS)
+	void testRemove() throws ServiceException {
+		log.trace("testRemove() invoked");
+		
+		int post_no = 222239; 
+		boolean success = this.service.remove(post_no);
+
+		log.info("\t+success:{}", success);
+	}//testRemove
+	
 } //MateBoardServiceTests

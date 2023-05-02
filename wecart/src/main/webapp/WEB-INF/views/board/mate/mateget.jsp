@@ -46,8 +46,10 @@
 	      <% } else { %>
 	         <jsp:include page="../../header_footer/home_header.jsp" flush="true" />
 	      <% } %>
-        <main id="board_main">
-
+       <main id="board_main">
+		<form action="/board/mate/matemodify" method="post">
+			<input type="hidden" name="currPage" value="${param.currPage}">
+			<input type="hidden" name="amount" value="${param.amount}">	
                 <div class="board_change">
                     <a href="RegionBoard.html"><button id="region">지역</button></a>
                     <a href="UsedBoard.html"><button id="used">중고거래</button></a>
@@ -70,7 +72,7 @@
                     <div id="mate_board_writer_and_bookMark">
                         <div class="mate_board_writer">
                             <button type="button" value=""><i class="fa-solid fa-piggy-bank"></i>￦3500 </button>
-                            작성자: ${__MateBoard__.member_id}
+                            작성자: ${__MateBoard__.member_id} 
                         </div>
                         <div class="mate_board_bookMark"><i class="fa-regular fa-bookmark"></i></div>
                     </div>
@@ -182,16 +184,17 @@
                         <button type="button" class="mate_board_delete" >삭제</button>
                         <button type="button" class="mate_board_list" >목록</button>
                     </div>
-                   
+           
 </div>
             </div> <!--mate_board_info_below-->
 
-						<!-- 답글 넣기 -->
+		 </form> <!-- 답글 넣기 -->   				
+		 		
 			 
       	  </main>
-
+ 
         <jsp:include page="../../header_footer/footer.jsp" flush="true" />
-    
+
 </body>
 
 
@@ -217,10 +220,22 @@
  
  	listBtn.addEventListener('click', function(){
  		location.href='/board/mate/matelist';
- 		//var url = '/board/mate/matelist?currPage='+encodeURIComponent('${param.currPage}');
-	 	//location.href = url;
 	});
-
+ 	
+ 	var removeBtn = document.querySelector('.mate_board_delete');
+ 	removeBtn.addEventListener('click', function(){
+ 	  var form = document.querySelector('form');
+ 	  var input = document.createElement('input');
+ 	  input.setAttribute('type', 'hidden');
+ 	  input.setAttribute('name', 'post_no');
+ 	  input.setAttribute('value', '${__MateBoard__.post_no}');
+ 	  form.appendChild(input);
+ 	  form.setAttribute('method', 'POST');
+ 	  form.setAttribute('action', '/board/mate/materemove');
+ 	  form.submit();
+ 	});//addEventListener
+ 	
+	
 	//==================KAKAO API==================
 	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 	
