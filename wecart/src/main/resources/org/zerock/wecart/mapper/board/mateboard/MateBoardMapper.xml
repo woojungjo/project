@@ -50,9 +50,9 @@
 		    #{meeting_area},
 		    #{meeting_time},
 		    #{report_cnt},
-		    #{participant_id_1},
-		    #{participant_id_2},
-		    #{participant_id_3}
+		    #{participant_id_1, jdbcType=NUMERIC},
+		    #{participant_id_2, jdbcType=NUMERIC},
+		    #{participant_id_3, jdbcType=NUMERIC}
 		    )
   	</insert>  	
 

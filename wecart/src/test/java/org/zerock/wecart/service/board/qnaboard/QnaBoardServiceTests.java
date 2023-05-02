@@ -2,6 +2,8 @@ package org.zerock.wecart.service.board.qnaboard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -10,17 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import org.zerock.wecart.domain.board.Criteria;
-import org.zerock.wecart.domain.board.QnaBoardDTO;
-import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
-
 import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
-
+import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -40,6 +38,8 @@ public class QnaBoardServiceTests {
 	@Setter(onMethod_= {@Autowired})
 	private QnaBoardCommentService service;
 	
+	@Setter(onMethod_= {@Autowired})
+	private QnaBoardService qnaBoardService;
 	
 	@BeforeAll
 	void beforeAll() {
@@ -82,7 +82,7 @@ public class QnaBoardServiceTests {
 		dto.setMember_id(33333);
 		dto.setSecret_yn(1);
 		
-		boolean success = this.service.register(dto);
+		boolean success = this.qnaBoardService.register(dto);
 		log.info("\t+success", success);
 		
 	}//testRegister()
