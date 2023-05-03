@@ -122,7 +122,7 @@
                                             <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
                                                 <td>
                                                     <span class="total_price"></span>
-                                                    <span>원</span>  
+                                                    <span class="total_won">원</span>  
                                                 </td>
                                             </c:forEach>
                                         </tr>

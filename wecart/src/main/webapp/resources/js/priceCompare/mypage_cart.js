@@ -1,7 +1,15 @@
 window.onload = function () {
     let cart_id = $('input[name=cart_id]').val();
     let member_id = $('input[name=member_id]').val();
+    let apiDate;
     let api_date = new Date($('#cartDate').val());
+
+    //api_date 변경
+    $('#cartDate').change(function () {
+        apiDate = $('#cartDate').val();
+        api_date = new Date(apiDate);
+        console.log('api_date:', api_date);
+    });
 
     //합계 구하기
     let count = (function () {
@@ -73,6 +81,9 @@ window.onload = function () {
         } //removeCart
 
         function currentCompare(cart_id, member_id, api_date, callback, error) {
+            console.log("currentCompare invoked...");
+            console.log("api_date:", api_date);
+
             $.ajax({
                 type : 'get',
                 url : '/mypageCart/getCurrent/member/' + member_id + '/cart/' + cart_id + '/date/' + api_date,
@@ -260,14 +271,14 @@ window.onload = function () {
                     let str = "";
                     console.log("goodsPrices:", goodsPrices[i].textContent);
                     console.log("curPriceSpans:", curPriceSpans[i].textContent);
-                    console.log("minus:", parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent));
+                    console.log("minus:", parseInt(curPriceSpans[i].textContent.replace(",", "")) - parseInt(goodsPrices[i].textContent.replace(",", "")));
 
-                    if(parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent) >= 0) {
+                    if(parseInt(curPriceSpans[i].textContent.replace(",", "")) - parseInt(goodsPrices[i].textContent.replace(",", "")) >= 0) {
                         str += "    <div class='compare_pluszero'>+";
                     } else {
                         str += "    <div class='compare_minus'>";
                     } //if-else                    
-                    str += parseInt(goodsPrices[i].textContent) - parseInt(curPriceSpans[i].textContent);
+                    str += parseInt(curPriceSpans[i].textContent.replace(",", "")) - parseInt(goodsPrices[i].textContent.replace(",", ""));
                     str += "    </div>";
                     
                     curDivs[i].innerHTML = str + curDivs[i].innerHTML;
@@ -309,7 +320,8 @@ window.onload = function () {
 
             for(let i = 0; i < curPriceArr.length; i++) {
                 str += "    <td>";
-                str += "        <span class='curPrice_total'>" + curPriceArr[i].toLocaleString() + "원</span>";
+                str += "        <span class='curPrice_total'>" + curPriceArr[i].toLocaleString() + "</span>";
+                str += "        <span>원</span>"
                 str += "    </td>";
             } //for
 
@@ -324,11 +336,42 @@ window.onload = function () {
             
         } //curPriceTotalList
 
+        function minusCur() {
+            console.log("minusCur invoked...");
+
+            let totalPrice = document.querySelectorAll(".total_price");
+            let curTotal = document.querySelectorAll(".curPrice_total");
+            let totalWon = document.querySelectorAll(".total_won");
+
+            for(let i = 0; i < totalPrice.length; i++) {
+                let str = "";
+                let totalMinus = curTotal[i].textContent.replace(",", "") - totalPrice[i].textContent.replace(",", "");
+                console.log("totalMinus:", totalMinus);
+
+                if(totalMinus >= 0) {
+                    str += "<div class='compare_pluszero total_compare'>+";
+                } else {
+                    str += "<div class='compare_minus total_compare'>";
+                } //if-else
+                
+                str += totalMinus;
+                str += "</div>";
+                
+                if(document.querySelectorAll('.total_compare')[i] == null) {
+                    totalWon[i].insertAdjacentHTML('afterend', str);
+                } else {
+                    document.querySelectorAll('.total_compare')[i].remove();
+                    totalWon[i].insertAdjacentHTML('afterend', str);
+                } //if-else
+            } //for
+        } //minusCur
+
         return {
             currentList : currentList,
             comparePrice : comparePrice,
             comparePriceTotal : comparePriceTotal,
-            curPriceTotalList : curPriceTotalList
+            curPriceTotalList : curPriceTotalList,
+            minusCur : minusCur
         }
 
     })();
@@ -338,11 +381,13 @@ window.onload = function () {
     const currentPriceBt = document.querySelector("#current_price_bt");
     currentPriceBt.addEventListener('click', function () {
         count.currentCompare(cart_id, member_id, api_date, function (currentPrices) {
+            console.log("api_date:", api_date);
             console.log('currentPrices:', currentPrices);
             compare.currentList(currentPrices);
             compare.comparePrice();
             const curPriceArr = compare.comparePriceTotal();
             compare.curPriceTotalList(curPriceArr);
+            compare.minusCur();
         });
     });
 };  //.onload
