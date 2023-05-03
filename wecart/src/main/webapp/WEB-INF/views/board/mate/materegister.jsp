@@ -62,16 +62,6 @@
                         </div>
 
                         <div><hr></div>
-                        
-                        <!-- 게시판 목록에서 들어가므로 게시판 선택 안해도 되지 않을까? -->
-                        <!-- select name="board">
-                            <option value="1">게시판을 선택해 주세요</option>
-                            <option value="2">지역게시판</option>
-                            <option value="3">중고거래</option>
-                            <option value="">장메이트</option>
-                            <option value="">크롤링</option>
-                            <option value="">세일정보</option>
-                        </select-->
                     <input id="materegister_smeeting_area" name="meeting_area" type="text" placeholder="미팅장소 설정">
                     <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i></div>
 

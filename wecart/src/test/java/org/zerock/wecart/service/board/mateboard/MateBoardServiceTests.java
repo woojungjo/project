@@ -112,23 +112,28 @@ public class MateBoardServiceTests {
 	@Test
 	@Order(4)
 	@DisplayName("testUpdate")
-	@Timeout(value=10, unit=TimeUnit.SECONDS)
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
 	void testModify() throws ServiceException {
 		log.trace("testModify() invoked.");
 		
-		MateBoardVO vo = this.service.get(77);
+		MateBoardVO vo = this.service.get(222273);
 		MateBoardDTO dto = new MateBoardDTO();
 		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		LocalDateTime localDateTime = timestamp.toLocalDateTime();
+		
 		dto.setPost_no(vo.getPost_no());
-		dto.setTitle("NEW 77 TITLE");
-		dto.setContent("77");
+		dto.setTitle("NEW 77 LONDON");
+		dto.setContent("77 LONDON");
 		dto.setViews(vo.getViews());
 		dto.setMember_id(vo.getMember_id());
 		dto.setMeeting_status('0');
-		dto.setMeeting_area("Newyork");
+		dto.setMeeting_area("LONDON");
+		dto.setReport_cnt(0);
 		dto.setParticipant_id_1(300);
 		dto.setParticipant_id_2(301);
 		dto.setParticipant_id_3(303);
+		dto.setMeeting_time(localDateTime);
 		
 		boolean success = this.service.modify(dto);
 		log.info("\t+success", success);
