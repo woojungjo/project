@@ -30,11 +30,11 @@ public class EditServiceImpl implements EditService {
 	} // checkPw
 
 	@Override
-	public Boolean changeAli(UserDTO dto) throws ServiceException {
+	public Boolean changeUser(UserDTO dto) throws ServiceException {
 		log.trace("changeAli() invoked.");
 		
 		try {
-			return this.mapper.updateAli(dto) == 1;
+			return this.mapper.updateUser(dto) == 1;
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -50,17 +50,6 @@ public class EditServiceImpl implements EditService {
 			throw new ServiceException(e);
 		} // try-catch
 	} // changePw
-
-	@Override
-	public Boolean changeEmail(UserDTO dto) throws ServiceException {
-		log.trace("changeEmail() invoked.");
-		
-		try {
-			return this.mapper.updateEmail(dto) == 1;
-		} catch(Exception e) {
-			throw new ServiceException(e);
-		} // try-catch
-	} // changeEmail
 
 	@Override
 	public Boolean withdrawal(Integer member_id) throws ServiceException {

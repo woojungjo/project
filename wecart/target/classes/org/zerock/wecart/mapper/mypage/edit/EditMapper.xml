@@ -17,12 +17,14 @@
       pwd = #{pwd}
   </select>
 
-  <!-- 닉네임 변경 -->
-  <update id="updateAli" >
+  <!-- 닉네임, 이메일 변경 -->
+  <update id="updateUser">
     UPDATE
       member
-    SET
-      alias = #{alias}
+    <set>
+      alias = CASE WHEN #{alias} is null THEN alias ELSE #{alias} END,
+      email = CASE WHEN #{email} is null THEN email ELSE #{email} END
+    </set>
     WHERE
       login_id = #{login_id}
   </update>
@@ -37,16 +39,6 @@
       login_id = #{login_id}
   </update>
 
-  <!-- 이메일 변경 -->
-  <update id="updateEmail">
-    UPDATE
-      member
-    SET
-      email = #{email}
-    WHERE
-      login_id = #{login_id}
-  </update>
-
   <!-- 휴대전화 인증 -->
 
   <!-- 회원 탈퇴 -->
@@ -54,8 +46,7 @@
     DELETE FROM
       member
     WHERE
-      member_id = #{member_id}
+      login_id = #{login_id}
   </delete>
-
 
 </mapper>

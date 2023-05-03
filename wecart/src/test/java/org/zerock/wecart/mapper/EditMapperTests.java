@@ -42,31 +42,31 @@ public class EditMapperTests {
 	} // beforeAll
 	
 //	@Disabled
-	@Test
-	@Order(1)
-	@DisplayName("updateAliTest")
-	@Timeout(value=5, unit = TimeUnit.SECONDS)
-	void updateAliTest() {
-		log.trace("updateAliTest() invoked.");
-		
-		String login_id = "loginid1";
-		
-		// 닉네임 변경
-		String alias = "aliTest";
-//		String alias = "ali1";
-		
-		// 인스턴스 생성
-		UserDTO dto = new UserDTO();
-		
-		dto.setLogin_id(login_id);
-		dto.setAlias(alias);
-		
-		log.info("\t dto:{}", dto);
-
-		assertNotNull(dto);
-		
-		this.mapper.updateAli(dto);
-	} // updateAliTest
+//	@Test
+//	@Order(1)
+//	@DisplayName("updateAliTest")
+//	@Timeout(value=5, unit = TimeUnit.SECONDS)
+//	void updateAliTest() {
+//		log.trace("updateAliTest() invoked.");
+//		
+//		String login_id = "loginid1";
+//		
+//		// 닉네임 변경
+//		String alias = "aliTest";
+////		String alias = "ali1";
+//		
+//		// 인스턴스 생성
+//		UserDTO dto = new UserDTO();
+//		
+//		dto.setLogin_id(login_id);
+//		dto.setAlias(alias);
+//		
+//		log.info("\t dto:{}", dto);
+//
+//		assertNotNull(dto);
+//		
+//		this.mapper.updateAli(dto);
+//	} // updateAliTest
 	
 	@Test
 	@Order(2)

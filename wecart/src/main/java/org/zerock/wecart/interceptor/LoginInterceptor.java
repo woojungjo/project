@@ -48,7 +48,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			ModelAndView modelAndView
 	) throws Exception {
 		log.trace("======================================================================================");
-		log.trace("postHandle(request, response, HANDLER, MODELaNDvIEW");
+		log.trace("postHandle(request, response, handler, modelAndView)");
 		log.trace("======================================================================================");
 		
 		ModelMap modelMap = modelAndView.getModelMap();
@@ -61,12 +61,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 			session.setAttribute("__AUTH__", userVO);
 			log.info("\t 세션영역에 새로운 인증객체 저장 성공");
 			
-			String id = request.getParameter("login_id");
-
-			session.setAttribute("id", id);
-
-//			userVO = (UserVO)modelMap.get("alias");
-//			session.setAttribute("alias", userVO);
+//			String login_id = request.getParameter("login_id");
+//			session.setAttribute("login_id", login_id);
 		} // if
 	} // postHandle
 

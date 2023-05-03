@@ -37,8 +37,6 @@ public class UserController {
 			if (vo != null) {
 				model.addAttribute("__AUTH__", vo);
 
-//				model.addAttribute("alias", vo.getAlias() );
-
 				return null;
 			} else {
 				rttrs.addAttribute("result", "Login Failed");
