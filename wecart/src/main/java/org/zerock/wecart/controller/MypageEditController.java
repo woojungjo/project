@@ -69,38 +69,44 @@ public class MypageEditController {
 	} // checkPw
 
 	// 비밀번호 변경
-	@PostMapping("/changePwPost")
-	public String changePwPost(@SessionAttribute("__AUTH__") UserVO vo, UserDTO dto) throws ControllerException {
-		try {
-			dto.setLogin_id(vo.getLogin_id());
-			
-			boolean result = this.service.changePw(dto);
-			log.trace("result: {}", result);
-
-			return "redirect:/mypage/edit/account";
-		} catch (Exception e) {
-			throw new ControllerException(e);
-		} // try-catch
-	} // changePw
+//	@PostMapping("/changePwPost")
+//	public String changePwPost(@SessionAttribute("__AUTH__") UserVO vo, UserDTO dto) throws ControllerException {
+//		try {
+//			dto.setLogin_id(vo.getLogin_id());
+//			
+//			boolean result = this.service.changePw(dto);
+//			log.trace("result: {}", result);
+//
+//			return "redirect:/mypage/edit/account";
+//		} catch (Exception e) {
+//			throw new ControllerException(e);
+//		} // try-catch
+//	} // changePw
 	
-	@PostMapping("/changePwPost")
-    public String changePwPost(
+	@PostMapping("/changePw")
+    public String changePw(
     							@SessionAttribute("__AUTH__") UserVO vo,
     							UserDTO dto,
-    							@RequestParam("pwd") String pwd,
-                                @RequestParam("new_pwd") String new_pwd,
-                                @RequestParam("confirm_pwd") String confirm_pwd,
+    							@RequestParam("old_pwd") 		String old_pwd,
+                                @RequestParam("pwd") 			String pwd,
+                                @RequestParam("confirm_pwd")	String confirm_pwd,
                                 Model model
                                ) throws ControllerException {
 		try {
-			if ( !pwd.equals(vo.getPwd() )) {
+			dto.setLogin_id(vo.getLogin_id());
+			
+			if ( !old_pwd.equals(vo.getPwd() )) {
 	            model.addAttribute("errorMessage", "기존 비밀번호가 일치하지 않습니다.");
 	            return "redirect:/mypage/edit/changePw";
 	        } // if
-	        if ( !new_pwd.equals(confirm_pwd) ) {
+	        if ( !pwd.equals(confirm_pwd) ) {
 	            model.addAttribute("errorMessage", "새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.");
 	            return "redirect:/mypage/edit/changePw";
 	        } // if
+	        if ( pwd.equals(vo.getPwd() )) {
+	        	model.addAttribute("errorMessage", "변경하려는 비밀번호가 기존 비밀번호와 일치 합니다.");
+	            return "redirect:/mypage/edit/changePw";
+	        }
 	        
 	        boolean result = this.service.changePw(dto);
 			log.trace("result: {}", result);
