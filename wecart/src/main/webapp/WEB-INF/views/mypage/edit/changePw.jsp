@@ -48,16 +48,16 @@
 
                             <div class="table_wrap">
 
-                                <form action="mypage/edit/changePwPost" method="post" onsubmit="return validatePassword()">
+                                <form action="/mypage/edit/changePw" method="post" onsubmit="return validatePassword()">
                                     <div class="article">
-                                        <h3 class="input_title"><label for="pwd">기존 비밀번호</label></h3>
-                                        <input type="password" id="pwd" name="pwd" placeholder="현재 비밀번호를 입력하세요"
+                                        <h3 class="input_title"><label for="old_pwd">기존 비밀번호</label></h3>
+                                        <input type="password" id="old_pwd" name="old_pwd" placeholder="현재 비밀번호를 입력하세요"
                                             class="input" maxlength="16" required>
                                     </div>
 
                                     <div class="article">
-                                        <h3 class="input_title"><label for="new_pwd">변경 비밀번호</label></h3>
-                                        <input type="password" id="new_pwd" name="new_pwd" placeholder="새 비밀번호를 입력하세요"
+                                        <h3 class="input_title"><label for="pwd">변경 비밀번호</label></h3>
+                                        <input type="password" id="pwd" name="pwd" placeholder="새 비밀번호를 입력하세요"
                                             class="input" maxlength="16" required>
                                     </div>
 
@@ -89,30 +89,24 @@
 
     <script>
         function validatePassword() {
-            var new_pwd = document.getElementById("new_pwd").value;
+            var old_pwd = document.getElementById("old_pwd").value;
+            var pwd = document.getElementById("pwd").value;
             var confirm_pwd = document.getElementById("confirm_pwd").value;
 
             // 비밀번호가 비어 있는지 확인
-            if (new_pwd == "") {
+            if (pwd == "") {
                 alert("비밀번호를 입력하세요.");
                 return false;
             }
 
             // 비밀번호 길이가 최소 길이 이상인지 확인
-            if (new_pwd.length < 8) {
+            if (pwd.length < 8) {
                 alert("비밀번호는 8자리 이상이어야 합니다.");
                 return false;
             }
 
-            // 비밀번호가 대문자, 소문자, 숫자, 특수문자를 모두 포함하는지 확인
-            var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!pattern.test(new_pwd)) {
-                alert("비밀번호는 대문자, 소문자, 숫자, 특수문자를 모두 포함해야 합니다.");
-                return false;
-            }
-
             // 비밀번호 확인란과 일치하는지 확인
-            if (new_pwd != confirm_pwd) {
+            if (pwd != confirm_pwd) {
                 alert("비밀번호 확인란과 비밀번호가 일치하지 않습니다.");
                 return false;
             }
