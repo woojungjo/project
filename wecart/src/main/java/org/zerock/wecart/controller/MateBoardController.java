@@ -47,7 +47,7 @@ public class MateBoardController {		//JavaBeans, POJO
 		log.info("\t+this.service:{}", this.service);
 		
 		try {
-			//Step1. 페이징 처리된 현재 currPage에 해당하는게시글 목록 받아옴 
+			//Step1. 페이징 처리된 현재 currPage에 해당하는 게시글 목록 받아옴 
 			List<MateBoardVO> list = this.service.getList(cri);
 			model.addAttribute("__MATE_LIST__", list);
 			
@@ -57,7 +57,7 @@ public class MateBoardController {		//JavaBeans, POJO
 			
 			log.info("\t+pageDTO: {}", pageDTO);
 			//모델상자 안에 넣을 pageDTO
-			model.addAttribute("__PAGE_MAKER__", pageDTO);
+			model.addAttribute("pageMaker", pageDTO);
 		}catch (Exception e) {
 			throw new ControllerException(e);
 		}
@@ -104,7 +104,7 @@ public class MateBoardController {		//JavaBeans, POJO
 			boolean success = this.service.modify(dto);
 			log.info("\t+success",success);
 			
-			//페이징처리용 전송파라미터도 함게 전송처리
+			//페이징처리용 전송파라미터도 함께 전송처리
 			rttrs.addAttribute("currPage", cri.getCurrPage());
 			rttrs.addAttribute("amount", cri.getAmount());
 			 

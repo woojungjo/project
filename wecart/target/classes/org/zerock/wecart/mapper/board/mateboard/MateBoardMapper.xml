@@ -6,14 +6,33 @@
   
   <mapper namespace="org.zerock.wecart.mapper.board.mateboard.MateBoardMapper">
 
-  	<select id="selectAll" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
-  		SELECT *
-  		FROM mate_board
-  		ORDER BY post_no DESC
-		OFFSET (#{currPage}-1) * #{amount} ROWS
-		FETCH NEXT #{amount} ROWS ONLY
-  	</select>
-  	
+   	<select id="selectAll" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
+    SELECT a.*
+    FROM mate_board a
+    <if test="type != null">
+      <where>
+        <choose>
+          <when test="type == 'title-content'">
+            a.title LIKE '%'||#{keyword}||'%'
+            OR a.content LIKE '%'||#{keyword}||'%'
+          </when>
+          <when test="type == 'title'">
+            a.title LIKE '%'||#{keyword}||'%'
+          </when>
+          <when test="type == 'content'">
+            a.content LIKE '%'||#{keyword}||'%'
+          </when>
+          <when test="type == 'member_id'">
+            a.member_id = #{keyword}
+          </when>
+        </choose>
+      </where>
+    </if>
+    ORDER BY a.${sort} DESC
+    OFFSET (#{currPage}-1) * #{amount} ROWS
+    FETCH NEXT #{amount} ROWS ONLY
+  </select>
+  
   	<select id="select" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
   		SELECT *
   		FROM mate_board
@@ -30,10 +49,11 @@
 		    member_id=#{member_id},
 		    meeting_status=#{meeting_status},
 		    meeting_area=#{meeting_area},
+		   	report_cnt=#{report_cnt},
 		    participant_id_1=#{participant_id_1},
 		    participant_id_2=#{participant_id_2},
 		    participant_id_3=#{participant_id_3},
-		    meeting_time=#{meeting_time},
+		    meeting_time=#{meeting_time}
 		    
 		WHERE post_no = #{post_no}
   	</update>  	

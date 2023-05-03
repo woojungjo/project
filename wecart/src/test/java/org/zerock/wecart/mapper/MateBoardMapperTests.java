@@ -2,6 +2,7 @@ package org.zerock.wecart.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -118,19 +119,24 @@ public class MateBoardMapperTests {
 		log.trace("mateBoardMapperuUpdateTest() invoked.");
 		
 		//모든 컬럼을 수정하지 않는 경우
-		MateBoardVO vo = this.mapper.select(301);
+		MateBoardVO vo = this.mapper.select(222240);
 		MateBoardDTO dto = new MateBoardDTO();
 		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		LocalDateTime localDateTime = timestamp.toLocalDateTime();
+		
 		dto.setPost_no(vo.getPost_no());
-		dto.setTitle("NEW TITLE");
-		dto.setContent("NEW_NEW_NEW_NEW_NEW");
+		dto.setTitle("TEST_UPDATE");
+		dto.setContent("TEST_UPDATE");
 		dto.setViews(vo.getViews());
 		dto.setMember_id(vo.getMember_id());
 		dto.setMeeting_status('0');
-		dto.setMeeting_area("Jamsil");
-		dto.setParticipant_id_1(300);
-		dto.setParticipant_id_2(301);
-		dto.setParticipant_id_3(303);
+		dto.setMeeting_area("JEJU");
+		dto.setReport_cnt(0);
+		dto.setParticipant_id_1(1);
+		dto.setParticipant_id_2(2);
+		dto.setParticipant_id_3(3);
+		dto.setMeeting_time(localDateTime);
 		 
 		Integer affectedLines = this.mapper.update(dto);
 		
