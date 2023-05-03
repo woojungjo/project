@@ -57,13 +57,13 @@
     
                         <div class="article">
                             <h3 class="input_title"><label for="email">이메일(선택사항)</label></h3>
-                            <input type="text" id="email" name="email" class="input" placeholder="@부분 까지 전체 이메일 입력" maxlength="100">
+                            <input type="email" id="email" name="email" class="input" placeholder="@부분 까지 전체 이메일 입력" maxlength="100">
                         </div>
     
                         <div class="article">
                             <h3 class="input_title"><label for="mobile_num">휴대전화(선택사항)</label></h3>
-                            <input type="text" id="mobile_num" name="mobile_num" placeholder="-없이 숫자만" class="input" maxlength="16">
-    
+                            <input type="number" id="mobile_num" name="mobile_num" placeholder="-없이 숫자만" class="input" max="16">
+
                             <a href="#" id="auth_button" class="button">
                                 <span>인증번호 받기</span>
                             </a>
@@ -71,7 +71,7 @@
     
                         <div class="article" id="auth">
                             <input type="text" id="authck" class="input" placeholder="인증번호를 입력하세요" maxlength="20">
-                        </div>    
+                        </div>
                     </div>
     
                     <div id="part_3">

@@ -9,14 +9,11 @@ public interface EditMapper {
 	// 유저 재확인
 	public abstract UserVO selectUser(LoginDTO dto);
 	
-	// 닉네임 변경
-	public abstract Integer updateAli(UserDTO dto);
+	// 닉네임, 이메일 변경
+	public abstract Integer updateUser(UserDTO dto);
 	
 	// 비밀번호 변경
 	public abstract Integer updatePw2(UserDTO dto);
-	
-	// 이메일 변경
-	public abstract Integer updateEmail(UserDTO dto);
 	
 	// 휴대전화 인증
 //	public abstract UserVO selectMobile(UserDTO dto);

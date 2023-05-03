@@ -48,45 +48,46 @@
 
                             <div class="table_wrap">
 
-                                <div class="article">
-                                    <h3 class="input_title"><label for="nickname">닉네임</label></h3>
-                                    <input type="text" id="nickname" class="input" maxlength="10">
+                                <form action="/mypage/edit/changeUser" method="post">
 
-                                    <a href="#" id="nick_button" class="button" role="button">
-                                        <span>중복확인</span>
-                                    </a>
-                                </div>
+                                    <div class="article">
+                                        <h3 class="input_title"><label for="alias">닉네임</label></h3>
+                                        <input type="text" id="alias" name="alias" class="input" maxlength="10">
 
-                                <div class="article">
-                                    <h3 class="input_title">비밀번호</h3>
-                                    <a href="/mypage/edit/changePw" id="change_button" class="button"
-                                        role="button">
-                                        <span>변경하기</span>
-                                    </a>
-                                </div>
+                                        <a href="#" id="alias_check" class="button" role="button">
+                                            <span>중복확인</span>
+                                        </a>
+                                    </div>
 
-                                <div class="article">
-                                    <h3 class="input_title"><label for="email">이메일</label></h3>
-                                    <input type="text" id="email" class="input" maxlength="100">
-                                </div>
+                                    <div class="article">
+                                        <h3 class="input_title">비밀번호</h3>
+                                        <a href="/mypage/edit/changePw" id="change_button" class="button" role="button">
+                                            <span>변경하기</span>
+                                        </a>
+                                    </div>
 
-                                <div class="article">
-                                    <h3 class="input_title"><label for="phoneNo">휴대전화</label></h3>
-                                    <input type="text" id="phoneNo" class="input" maxlength="16">
+                                    <div class="article">
+                                        <h3 class="input_title"><label for="email">이메일</label></h3>
+                                        <input type="email" id="email" name="email" class="input" maxlength="100">
+                                    </div>
 
-                                    <a href="#" id="auth_button" class="button" role="button">
-                                        <span>인증</span>
-                                    </a>
-                                </div>
+                                    <div class="article">
+                                        <h3 class="input_title"><label for="mobile_num">휴대전화</label></h3>
+                                        <input type="number" id="mobile_num" name="mobile_num" class="input" maxl="16">
 
-                                <div id="withdrawal">
-                                    <a href="/mypage/edit/withdrawal" id="withdrawal_button">탈퇴하기</a>
-                                </div>
+                                        <a href="#" id="auth_button" class="button" role="button">
+                                            <span>인증</span>
+                                        </a>
+                                    </div>
 
-                            </div>
+                                    <div id="withdrawal">
+                                        <a href="/mypage/edit/withdrawal" id="withdrawal_button">탈퇴하기</a>
+                                    </div>
 
-                            <div id="edit">
-                                <a href="#" id="edit_button">수정하기</a>
+                                    <div id="edit">
+                                        <button type="submit" id="edit_button">수정하기</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -102,5 +103,5 @@
         <jsp:include page="/WEB-INF/views/header_footer/footer.jsp" flush="true" />
 
     </body>
-
+    
     </html>

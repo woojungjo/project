@@ -48,29 +48,31 @@
 
                             <div class="table_wrap">
 
-                                <div class="article">
-                                    <h3 class="input_title"><label for="pwd">기존 비밀번호</label></h3>
-                                    <input type="password" id="pwd" placeholder="현재 비밀번호를 입력하세요" class="input"
-                                        maxlength="16">
-                                </div>
+                                <form action="mypage/edit/changePwPost" method="post" onsubmit="return validatePassword()">
+                                    <div class="article">
+                                        <h3 class="input_title"><label for="pwd">기존 비밀번호</label></h3>
+                                        <input type="password" id="pwd" name="pwd" placeholder="현재 비밀번호를 입력하세요"
+                                            class="input" maxlength="16" required>
+                                    </div>
 
-                                <div class="article">
-                                    <h3 class="input_title"><label for="change_pwd">변경 비밀번호</label></h3>
-                                    <input type="password" id="change_pwd" placeholder="새 비밀번호를 입력하세요" class="input"
-                                        maxlength="16">
-                                </div>
+                                    <div class="article">
+                                        <h3 class="input_title"><label for="new_pwd">변경 비밀번호</label></h3>
+                                        <input type="password" id="new_pwd" name="new_pwd" placeholder="새 비밀번호를 입력하세요"
+                                            class="input" maxlength="16" required>
+                                    </div>
 
-                                <div class="article">
-                                    <h3 class="input_title"><label for="check_change_pwd">변경 비밀번호 확인</label></h3>
-                                    <input type="password" id="check_change_pwd" class="input" maxlength="16">
-                                </div>
+                                    <div class="article">
+                                        <h3 class="input_title"><label for="confirm_pwd">변경 비밀번호 확인</label></h3>
+                                        <input type="password" id="confirm_pwd" name="confirm_pwd" class="input"
+                                            maxlength="16" required>
+                                    </div>
+
+                                    <div id="button">
+                                        <a href="/mypage/edit/account" id="cancel_button">변경 취소</a>
+                                        <button type="submit" id="save_button">확인</button>
+                                    </div>
+                                </form>
                             </div>
-
-                            <div id="button">
-                                <a href="/mypage/edit/account" id="cancel_button">변경 취소</a>
-                                <a href="#" id="save_button">확인</a>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -84,5 +86,39 @@
         <jsp:include page="/WEB-INF/views/header_footer/footer.jsp" flush="true" />
 
     </body>
+
+    <script>
+        function validatePassword() {
+            var new_pwd = document.getElementById("new_pwd").value;
+            var confirm_pwd = document.getElementById("confirm_pwd").value;
+
+            // 비밀번호가 비어 있는지 확인
+            if (new_pwd == "") {
+                alert("비밀번호를 입력하세요.");
+                return false;
+            }
+
+            // 비밀번호 길이가 최소 길이 이상인지 확인
+            if (new_pwd.length < 8) {
+                alert("비밀번호는 8자리 이상이어야 합니다.");
+                return false;
+            }
+
+            // 비밀번호가 대문자, 소문자, 숫자, 특수문자를 모두 포함하는지 확인
+            var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!pattern.test(new_pwd)) {
+                alert("비밀번호는 대문자, 소문자, 숫자, 특수문자를 모두 포함해야 합니다.");
+                return false;
+            }
+
+            // 비밀번호 확인란과 일치하는지 확인
+            if (new_pwd != confirm_pwd) {
+                alert("비밀번호 확인란과 비밀번호가 일치하지 않습니다.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 
     </html>
