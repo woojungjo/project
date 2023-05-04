@@ -238,7 +238,7 @@ $("#keyword").on("keydown", () => {
 })
 
 //townName 가지고 오기 
-var townName = '<%= session.getAttribute("__TOWN_NAME__") %>';
-//var townName = document.getElementById("townName").value;
+//var townName = '<%= session.getAttribute("__TOWN_NAME__") %>';
+var townName = document.getElementById("townName").value;
 document.getElementById("keyword").value = townName + " 마트";
 

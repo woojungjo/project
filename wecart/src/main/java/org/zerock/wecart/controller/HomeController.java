@@ -52,7 +52,7 @@ public class HomeController {
     	
     	try {
             JSONObject jsonObject = new JSONObject(jsondongInfo);
-            String townName = jsonObject.getString("bname");
+            String townName = jsonObject.getString("sigungu");
             
         	String loginId = auth.getLogin_id();
         	

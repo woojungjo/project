@@ -49,12 +49,12 @@
         new daum.Postcode({
             oncomplete: function (data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-				document.querySelector(".adr").value = data.bname;
+				document.querySelector(".adr").value = data.sigungu;
                 
 	            // Get the address link element
 	            const addressLink = document.querySelector("#dong-info a");
 	            // Update the link text with the new address value
-	            addressLink.textContent = data.bname + " ";
+	            addressLink.textContent = data.sigungu + " ";
 	            // Create a new location icon element
 	            const locationIcon = document.createElement("i");
 	            locationIcon.classList.add("fa-solid", "fa-location-dot");

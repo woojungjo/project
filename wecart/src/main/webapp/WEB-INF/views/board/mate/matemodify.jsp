@@ -20,8 +20,8 @@
 		
 		<script src="/resources/js/board/register.js" defer></script>
 		
-        <script src="/resources/js/board/mate/list.js" defer></script>
-        <script src="/resources/js/board/mate/script.js" defer></script>
+        <script src="/resources/js/board/mate/matelist.js" defer></script>
+        <script src="/resources/js/board/mate/mateget.js" defer></script>
         <link rel="stylesheet" href="/resources/css/board/mate/style.css">
         <link rel="stylesheet" href="/resources/css/board/qna/style.css">
         <script src="/resources/js/board/qna/script.js" defer></script>

@@ -68,22 +68,22 @@
 		    	new daum.Postcode({
 		            oncomplete: function (data) {
 		            	
-		                // Create a JSON object with the bname value
+		                // Create a JSON object with the sigungu value
 		                var dongInfo = {
-		                    'bname': data.bname
+		                    'sigungu': data.sigungu
 		                };
 		                
 		                // Convert the JSON object to a string
 		                var jsondongInfo = JSON.stringify(dongInfo);
 		                console.log('jsondongInfo : ', jsondongInfo);
 		
-		                // Update the input field value with the bname value
-		                document.querySelector("#dong-info").value = data.bname;
+		                // Update the input field value with the sigungu value
+		                document.querySelector("#dong-info").value = data.sigungu;
 		                
 		                // Get the address link element
 		                const addressLink = document.querySelector("#dong-info");
 		                // Update the link text with the new address value
-		                addressLink.textContent = data.bname + " ";
+		                addressLink.textContent = data.sigungu + " ";
 		                // Create a new location icon element
 		                const locationIcon = document.createElement("i");
 		                locationIcon.classList.add("fa-solid", "fa-location-dot");
@@ -98,7 +98,7 @@
 		                  contentType: "application/json; charset=utf-8",
 		                  dataType: 'json',// 추가 
 		                  success: function(data) {
-		                    console.log('Successfully stored bname: ' + data);
+		                    console.log('Successfully stored sigungu: ' + data);
 		                  },
 		                  error: function (jqXHR, textStatus, errorThrown) {
 		                	  console.debug('error invoked.');
