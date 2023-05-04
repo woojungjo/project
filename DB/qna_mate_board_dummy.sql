@@ -52,7 +52,21 @@ SELECT
 
 FROM dual
 CONNECT BY level <= 100000;
-truncate table qna_board_comment;
+
+-- 세일게시판 댓글 더미
+ALTER TABLE sale_board_comment MODIFY(comment_no GENERATED AS IDENTITY (START WITH 1));
+
+INSERT INTO sale_board_comment (post_no, member_id, content, delete_yn, comment_root) 
+SELECT
+    level,
+    (SELECT member_id FROM member WHERE member_id = 198),
+	'CONTENT_' || LEVEL,
+	0,
+	ISEQ$$_112091.currval
+
+FROM dual
+CONNECT BY level <= 100000;
+-- /세일게시판 댓글 더미
 
 INSERT INTO qna_board_file (file_id, post_no, file_name, file_path, file_type, file_size) 
 SELECT

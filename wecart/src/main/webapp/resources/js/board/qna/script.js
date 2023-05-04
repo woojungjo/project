@@ -208,3 +208,13 @@ $(function() {
       console.groupEnd();
   }); // .onclick
 });
+
+document.querySelector('#delete').addEventListener('click',function(){
+
+  if (confirm("삭제하시겠습니까?")) {
+    const form = document.querySelector("#updateOrDelete");
+    form.action = "/board/qna/delete";
+    form.method = "post";
+    form.submit();
+  }
+})

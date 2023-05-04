@@ -1,4 +1,4 @@
-package org.zerock.wecart.service.board.qnaboard;
+package org.zerock.wecart.service.board.saleboard;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.board.Criteria;
-import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.domain.board.QnaBoardVO;
-import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
+import org.zerock.wecart.domain.saleboard.SaleBoardDTO;
+import org.zerock.wecart.domain.saleboard.SaleBoardListVO;
 import org.zerock.wecart.exception.ServiceException;
-import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
+import org.zerock.wecart.mapper.board.saleboard.SaleBoardMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,18 +19,18 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Log4j2
 
-@Service("boardService")
-public class QnaBoardServiceImpl implements QnaBoardService{
+@Service("saleBoardService")
+public class SaleBoardServiceImpl implements SaleBoardService{
 
 	@Setter(onMethod_= {@Autowired})
-	private QnaBoardMapper mapper;
+	private SaleBoardMapper mapper;
 	
 //	@Setter(onMethod_= {@Autowired})
 //	private QnaBoardCommentMapper commentMapper;
 	
 	
 	@Override
-	public List<QnaBoard_CommentCountVO> getList(Criteria cri) throws ServiceException { // 게시판 목록조회
+	public List<SaleBoardListVO> getList(Criteria cri) throws ServiceException { // 게시판 목록조회
 		log.trace("getList() invoked.");
 		
 		try {
@@ -57,15 +57,15 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 
 	@Transactional
 	@Override
-	public QnaBoardVO get(Integer post_no) throws ServiceException { // 게시물 상세조회
+	public SaleBoardListVO get(Integer post_no) throws ServiceException { // 게시물 상세조회
 		log.trace("get() invoked.");
 		
 		try {
 			
 			this.mapper.updateViews(post_no);
-			QnaBoardVO qnaBoardVO = this.mapper.read(post_no);
+			SaleBoardListVO saleBoardVO = this.mapper.read(post_no);
 			
-			return qnaBoardVO;
+			return saleBoardVO;
 		} catch(Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -73,21 +73,51 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 
 
 	@Override
-	public boolean register(QnaBoardDTO dto) throws ServiceException {
-		log.trace("register() invoked.");
+	public void postLike(SaleBoardDTO dto) throws ServiceException {
+		Integer result = this.mapper.alreadyLIke(dto);
 		
-		try {
-			return this.mapper.insert(dto)==1;
-		}catch(Exception e) {
-			throw new ServiceException(e);
-		}//try-catch
-	} // register() 
-	
+		
+		if(result != 0) {
+			this.mapper.lIkeDOWN(dto);
+		} else {
+			this.mapper.lIkeUP(dto);
+		}
+		
+	}
+
+
+	@Override
+	public void postHate(SaleBoardDTO dto) throws ServiceException {
+		Integer result = this.mapper.alreadyHate(dto);
+		
+		
+		if(result != 0) {
+			this.mapper.hateDOWN(dto);
+		} else {
+			this.mapper.hateUP(dto);
+		}
+		
+	}
+
+
 	@Override
 	public void remove(Integer post_no) throws ServiceException {
 		
 		this.mapper.delete(post_no);
 		
 	}
-
+//
+//
+//	@Override
+//	public boolean register(QnaBoardDTO dto) throws ServiceException {
+//		log.trace("register() invoked.");
+//		
+//		try {
+//			return this.mapper.insert(dto)==1;
+//		}catch(Exception e) {
+//			throw new ServiceException(e);
+//		}//try-catch
+//	} // register() 
+	
+	
 } // end class

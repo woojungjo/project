@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.wecart.mapper.board.saleboard.SaleBoardMapper">
+
+  <select id="selectAll" resultType="org.zerock.wecart.domain.saleboard.SaleBoardListVO">
+    SELECT a.*, coalesce(b.comment_count, 0) AS comment_count, coalesce(c.like_count, 0) AS like_count, coalesce(d.hate_count, 0) AS hate_count
+    FROM sale_board a
+    LEFT OUTER JOIN (
+        SELECT post_no AS tmp, count(*) AS comment_count
+        FROM sale_board_comment
+        GROUP BY post_no
+    ) b ON (a.post_no = b.tmp)
+    LEFT OUTER JOIN (
+        SELECT post_no AS tmp, count(*) AS like_count
+        FROM sale_board_like
+        GROUP BY post_no
+    ) c ON (a.post_no = c.tmp)
+    LEFT OUTER JOIN (
+        SELECT post_no AS tmp, count(*) AS hate_count
+        FROM sale_board_hate
+        GROUP BY post_no
+    ) d ON (a.post_no = d.tmp)
+    <if test="type != null">
+      <where>
+        <choose>
+          <when test="type == 'title-content'">
+            a.title LIKE '%'||#{keyword}||'%'
+            OR a.content LIKE '%'||#{keyword}||'%'
+          </when>
+          <when test="type == 'title'">
+            a.title LIKE '%'||#{keyword}||'%'
+          </when>
+          <when test="type == 'content'">
+            a.content LIKE '%'||#{keyword}||'%'
+          </when>
+          <when test="type == 'member_id'">
+            a.member_id = #{keyword}
+          </when>
+        </choose>
+      </where>
+    </if>
+    ORDER BY a.${sort} DESC
+    OFFSET (#{currPage}-1) * #{amount} ROWS
+    FETCH NEXT #{amount} ROWS ONLY
+
+  </select>
+  
+  <select id="read" resultType="org.zerock.wecart.domain.saleboard.SaleBoardListVO">
+    SELECT a.*, coalesce(b.comment_count, 0) AS comment_count, coalesce(c.like_count, 0) AS like_count, coalesce(d.hate_count, 0) AS hate_count
+    FROM sale_board a
+    LEFT OUTER JOIN (
+        SELECT post_no AS tmp, count(*) AS comment_count
+        FROM sale_board_comment
+        GROUP BY post_no
+    ) b ON (a.post_no = b.tmp)
+    LEFT OUTER JOIN (
+        SELECT post_no AS tmp, count(*) AS like_count
+        FROM sale_board_like
+        GROUP BY post_no
+    ) c ON (a.post_no = c.tmp)
+    LEFT OUTER JOIN (
+        SELECT post_no AS tmp, count(*) AS hate_count
+        FROM sale_board_hate
+        GROUP BY post_no
+    ) d ON (a.post_no = d.tmp)
+	WHERE a.post_no = #{post_no}
+  </select>
+	
+<!-- 	<insert id="insert">
+  		INSERT INTO
+  			qna_board(title, content, views, member_id, secret_yn)
+  		VALUES(
+  			#{title},
+		    #{content},
+		    #{views},
+		    #{member_id},
+			#{secret_yn, jdbcType=CHAR}
+		    )
+  	</insert>  	 -->
+
+</mapper>
