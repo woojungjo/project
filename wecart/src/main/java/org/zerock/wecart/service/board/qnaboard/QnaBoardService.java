@@ -19,7 +19,7 @@ public interface QnaBoardService {
 //	public abstract List<Object> get(Integer post_no) throws ServiceException;
 	
 	// 3. 특정 게시물 삭제 (DELETE)
-//	public abstract boolean remove(Integer bno) throws ServiceException;
+	public abstract void remove(Integer post_no) throws ServiceException;
 	
 	// 4. 새로운 게시물 등록(CREATE)
 	public abstract boolean register(QnaBoardDTO dto) throws ServiceException;

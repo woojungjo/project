@@ -2,6 +2,7 @@ package org.zerock.wecart.mapper.board.qnaboard;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.zerock.wecart.domain.board.Criteria;
@@ -27,4 +28,8 @@ public interface QnaBoardMapper {
 	
 	//신규 게시물 등록 //added yeonjoo
 	public abstract Integer insert(QnaBoardDTO dto);
+	
+	// 게시글 삭제
+	@Delete("DELETE FROM qna_board WHERE post_no = #{post_no}")
+	public abstract void delete(Integer post_no);
 } // end interface

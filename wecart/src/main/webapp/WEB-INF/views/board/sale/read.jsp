@@ -26,8 +26,11 @@
             <link rel="stylesheet" href="/resources/css/header_footer/main_header.css">
             <link rel="stylesheet" href="/resources/css/header_footer/home_header.css">
             <link rel="stylesheet" href="/resources/css/header_footer/footer.css">
-            <link rel="stylesheet" href="/resources/css/board/qna/style.css">
-            <script src="/resources/js/board/qna/script.js" defer ></script>
+            <!-- <link rel="stylesheet" href="/resources/css/board/sale/style.css"> -->
+            <link rel="stylesheet" href="/resources/css/board/sale/style.css">
+            <script src="/resources/js/board/sale/script.js" defer ></script>
+            <script src="/resources/js/board/sale/board.js" defer ></script>
+
             
 </head>
 <body>
@@ -43,23 +46,24 @@
 	
         <main>
             <!--*********************************************메인 내용은 여기부터*********************************************-->
+            <div class="board_change">
+                <a href="/board/mate/matelist"><button id="mate">장메이트</button></a>
+                <a href="/board/sale/list"><button id="sale">세일정보</button></a>
+            </div>
             
             <main id="board_main">
-                <div id="qna_board_read">
-                    <div class="qna_board_name">문의게시판</div>
-                    <div class="qna_board_writer">${readVO.member_id}</div>
+                <div id="sale_board_read">
+                    <div class="sale_board_name"></div>
+                    <div class="sale_board_writer">${readVO.member_id}</div>
                     <fmt:formatDate value="${readVO.write_dt}" pattern="yyyy-MM-dd HH:mm:ss" var="formatDate" />
-                    <div class="qna_board_writedt">${formatDate}</div>
-                    <div class="qnd_board_views"><span class="fas fa-eye"></span>${readVO.views}</div>
-                    <div class="qna_board_title">
-                        <c:if test="${readVO.secret_yn == 1}">
-                            <span class="fas fa-lock"></span>
-                        </c:if>
+                    <div class="sale_board_writedt">${formatDate}</div>
+                    <div class="sale_board_views"><span class="fas fa-eye"></span>${readVO.views}</div>
+                    <div class="sale_board_title">
                         ${readVO.title}
                     </div>
-                    <div class="qna_board_contents">${readVO.content}</div>
-                    <div class="qna_board_attach"><button id="download_button"><span class="fas fa-paperclip"></span>첨부파일</button>
-                        <div id="qna_board_attach_download">
+                    <div class="sale_board_contents">${readVO.content}</div>
+                    <div class="sale_board_attach"><button id="download_button"><span class="fas fa-paperclip"></span>첨부파일</button>
+                        <div id="sale_board_attach_download">
                             <ul>
                                 <li><span class="fas fa-paperclip"></span> 파일 다운로드1</li>
                                 <li><span class="fas fa-paperclip"></span> 파일 다운로드2</li>
@@ -67,7 +71,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="qna_board_update_delete">
+                    <div class="sale_board_update_delete">
                         <c:if test="${__AUTH__.member_id == readVO.member_id}">
                             <form id="updateOrDelete">
                                 <input type="hidden" name="post_no" value="${readVO.post_no}"> 
@@ -76,13 +80,22 @@
                             </form>
                         </c:if>
                     </div>
+                    <div class="sale_board_like_hate">
+                        <form>
+                            <input type="hidden" name="post_no" value="${readVO.post_no}">
+                            <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
+                            <button class="sale_board_like" type="button"><div class="fas fa-heart"/>&nbsp;좋아요&nbsp;${readVO.like_count}</button>
+                            <button class="sale_board_hate" type="button"><div class="fas fa-heart-crack"/>&nbsp;싫어요&nbsp;${readVO.hate_count}</button>
+                        </form>
+                    </div>
                 </div>
+                
     
                 <hr>
                 <div class="board_commant">
     
                     <div id="board_commant_head">
-                        <div>${commnetCnt}개의 댓글</div>
+                        <div>${readVO.comment_count}개의 댓글</div>
                         <div>
                             <div><span class="fas fa-arrow-left-long"/>&nbsp;이전&nbsp;</div>
                             <div>다음&nbsp;<span class="fas fa-arrow-right-long"/></div>
@@ -91,7 +104,7 @@
                     
                     <c:if test="${not empty sessionScope.__AUTH__}">
 
-                        <form id="comment-form" class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
+                        <form id="comment-form" class="board_commant_write" action="/board/sale/read/commentwrite" method="post">
                             <input type="hidden" name="post_no" value="${readVO.post_no}">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.__AUTH__}">
@@ -202,7 +215,7 @@
                                 </div>
                             </div>
                             <div class="board_commant_comment_update hidden">
-                                <form class="board_commant_write" action="/board/qna/read/commentupdate" method="post">
+                                <form class="board_commant_write" action="/board/sale/read/commentupdate" method="post">
                                     <input type="hidden" name="comment_no" value="${commentList.comment_no}">
                                     <input type="hidden" name="post_no" value="${commentList.post_no}">
                                     <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
@@ -229,7 +242,7 @@
                             <hr>
                             
                             <div class="board_commant_commant_write hidden">
-                                <form class="board_commant_write" action="/board/qna/read/commentwrite" method="post">
+                                <form class="board_commant_write" action="/board/sale/read/commentwrite" method="post">
                                     <input type="hidden" name="post_no" value="${readVO.post_no}">
                                     <c:choose>
                                         <c:when test="${not empty sessionScope.__AUTH__}">
@@ -262,23 +275,6 @@
                                 </form>
                             </div>
 
-                            <!-- <div class="board_commant_comment_update hidden">
-                                <form class="board_commant_write" action="/board/qna/read/commentupdate" method="post">
-                                    <input type="hidden" name="post_no" value="${commentList.post_no}">
-                                    <input type="hidden" name="member_id" value="${__AUTH__.member_id}"> 
-                                    <input type="hidden" name="secret_yn" value="${commentList.secret_yn}">
-                                    <input type="hidden" name="delete_yn" value="${commentList.delete_yn}">
-                                    <input type="hidden" name="comment_root" value="${commentList.comment_root}">
-                                    <input type="hidden" name="comment_step" value="${commentList.comment_step + 1}">
-                                    <input type="hidden" name="comment_indent" value="${commentList.comment_indent + 1}">
-                                    <div>${__AUTH__.member_id}</div>
-                                    <input type="text" name="content" placeholder="댓글을 남겨보세요." value="${commentList.content}">
-                                    <div class="board_commant_write_footer" >
-                                        <div class="fas fa-unlock"></div>
-                                        <button class="board_commant_submit">등록</button>
-                                    </div>
-                                </form>
-                            </div> -->
                         </c:when>
                         <c:otherwise>
                             <div class="board_comment_deleted">

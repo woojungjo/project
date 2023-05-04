@@ -169,6 +169,26 @@ CONSTRAINT region_board_member_id_fk FOREIGN KEY(member_id) REFERENCES member(me
 ALTER TABLE sale_board ADD
 CONSTRAINT sale_board_member_id_fk FOREIGN KEY(member_id) REFERENCES member(member_id) ON DELETE CASCADE;
 
+
+-- like hate 테이블 추가
+ALTER TABLE sale_board_like ADD CONSTRAINT sale_board_like_post_no_fk FOREIGN KEY (post_no) REFERENCES sale_board (post_no) ON DELETE CASCADE;
+
+ALTER TABLE sale_board_like ADD CONSTRAINT sale_board_like_member_id_fk FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE;
+
+ALTER TABLE sale_board_hate ADD CONSTRAINT sale_board_hate_post_no_fk FOREIGN KEY (post_no) REFERENCES sale_board (post_no) ON DELETE CASCADE;
+
+ALTER TABLE sale_board_hate ADD CONSTRAINT sale_board_hate_member_id_fk FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE;
+-- /like hate 테이블 추가
+
+
+-- sale_board_comment_like 테이블 추가
+ALTER TABLE sale_board_comment_like ADD CONSTRAINT sale_board_comment_like_comment_no_fk FOREIGN KEY (comment_no, post_no) REFERENCES sale_board_comment (comment_no, post_no) ON DELETE CASCADE;
+
+ALTER TABLE sale_board_comment_like ADD CONSTRAINT sale_board_comment_like_member_id_fk FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE;
+-- /sale_board_comment_like 테이블 추가
+
+
+
 ALTER TABLE region_board_comment ADD
 CONSTRAINT region_board_comment_post_no_fk FOREIGN KEY(post_no) REFERENCES region_board(post_no) ON DELETE CASCADE;
 
