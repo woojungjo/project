@@ -55,7 +55,7 @@
             	
                 // Create a JSON object with the bname value
                 var dongInfo = {
-                    'bname': data.bname
+                    'sigungu': data.sigungu
                 };
                 
                 // Convert the JSON object to a string
@@ -63,19 +63,19 @@
                 console.log('jsondongInfo : ', jsondongInfo);
 
                 // Update the input field value with the bname value
-                document.querySelector(".adr").value = data.bname;
+                document.querySelector(".adr").value = data.sigungu;
 
                 // Get the address link element
                 const addressLink = document.querySelector("#dong-info");
                 // Update the link text with the new address value
-                addressLink.textContent = data.bname + " ";
+                addressLink.textContent = data.sigungu + " ";
                 // Create a new location icon element
                 const locationIcon = document.createElement("i");
                 locationIcon.classList.add("fa-solid", "fa-location-dot");
                 // Append the location icon element to the link
                 addressLink.appendChild(locationIcon);
                 
-                // Send an Ajax request to store the value of data.bname
+                // Send an Ajax request to store the value of data.sigungu
                 $.ajax({
                   url: '/main',
                   type: 'POST',
@@ -83,17 +83,17 @@
                   contentType: "application/json; charset=utf-8",
                   dataType: 'json',// 추가 
                   success: function(data) {
-                    console.log('Successfully stored bname: ' + data);
+                    console.log('Successfully stored sigungu: ' + data);
                   },
                   
                   /*
                   error: function() {
-                    console.error('Failed to store bname.');
+                    console.error('Failed to store sigungu.');
                   }
                   */
                   error: function (jqXHR) {
 	                	console.log('jqXHR:', error);
-	                    //console.error('Failed to store bname.');
+	                    //console.error('Failed to store sigungu.');
 	                  }
                 });//ajax
             } 

@@ -118,7 +118,7 @@
 					    <div id="menu_wrap" class="bg_white">
 					        <div class="option">
 					            <div>
-					                    키워드 <input type="text" value="" id="keyword">
+					                    키워드 <input type="text" id="keyword">
 					                    <button type="submit" onclick="searchPlaces(); return false; ">검색</button> 
 					            </div>
 					        </div>

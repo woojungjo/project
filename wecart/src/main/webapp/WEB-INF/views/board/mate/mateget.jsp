@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/css/header_footer/main_header.css">
 <link rel="stylesheet" href="/resources/css/header_footer/home_header.css">
 <link rel="stylesheet" href="/resources/css/header_footer/footer.css">
-<script src="/resources/js/board/mate/script.js" defer></script>
+<script src="/resources/js/board/mate/mateget.js" defer></script>
 <link rel="stylesheet" href="/resources/css/board/mate/style.css">
 
 <script src="https://kit.fontawesome.com/a623128410.js" crossorigin="anonymous"></script>
