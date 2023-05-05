@@ -90,4 +90,15 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		
 	}
 
+	@Override
+	public boolean modify(QnaBoardDTO dto) throws ServiceException {
+		log.trace("modify() invoked.");
+		try {
+			return this.mapper.update(dto)==1;
+		}catch(Exception e) {
+			throw new ServiceException(e);
+		}//try-catch
+		
+	}//modify()
+
 } // end class

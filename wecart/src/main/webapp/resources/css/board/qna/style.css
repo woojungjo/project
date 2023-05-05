@@ -425,3 +425,7 @@ select, button{
   background-color: white;
   padding-bottom: 50px;
 }
+
+#modifyBtn:hover {
+    cursor: pointer;
+}

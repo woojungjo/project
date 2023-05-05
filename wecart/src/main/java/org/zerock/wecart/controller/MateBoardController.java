@@ -89,7 +89,6 @@ public class MateBoardController {		//JavaBeans, POJO
 		try {
 			MateBoardVO vo = this.service.get(post_no);
 			model.addAttribute("__MateBoard__", vo);
-			
 			return "/board/mate/mateget";
 		}catch(Exception e) {
 			throw new ControllerException(e);

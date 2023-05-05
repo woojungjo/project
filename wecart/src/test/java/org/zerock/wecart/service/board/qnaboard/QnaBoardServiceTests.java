@@ -2,6 +2,7 @@ package org.zerock.wecart.service.board.qnaboard;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -19,6 +20,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.board.QnaBoardCommentDTO;
 import org.zerock.wecart.domain.board.QnaBoardDTO;
+import org.zerock.wecart.domain.board.QnaBoardVO;
+import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.exception.ServiceException;
 
 import lombok.NoArgsConstructor;
@@ -87,5 +90,26 @@ public class QnaBoardServiceTests {
 		
 	}//testRegister()
 	
+	@Test
+	@Order(4)
+	@DisplayName("testUpdate")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void testModify() throws ServiceException {
+		log.trace("testModify() invoked.");
+		
+		QnaBoardVO vo = this.qnaBoardService.get(301);
+		QnaBoardDTO dto = new QnaBoardDTO();
+		
+		dto.setPost_no(vo.getPost_no());
+		dto.setTitle("NEW 77 LONDON");
+		dto.setContent("77 LONDON");
+		dto.setViews(vo.getViews());
+		dto.setMember_id(vo.getMember_id());
+		dto.setSecret_yn(0);
+		
+		boolean success = this.qnaBoardService.modify(dto);
+		log.info("\t+success", success);
+		
+	}//testModify()
 	
 } // end class

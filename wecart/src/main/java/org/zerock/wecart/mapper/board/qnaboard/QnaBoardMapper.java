@@ -32,4 +32,8 @@ public interface QnaBoardMapper {
 	// 게시글 삭제
 	@Delete("DELETE FROM qna_board WHERE post_no = #{post_no}")
 	public abstract void delete(Integer post_no);
+	
+	//게시물 수정 
+	public abstract Integer update(QnaBoardDTO dto);
+	
 } // end interface
