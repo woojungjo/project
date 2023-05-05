@@ -140,4 +140,27 @@ public class QnaBoardMapperTests {
 		
 	}//mateBoardMapperInsertTest() 
 	
-}
+	@Test
+	@Order(4)
+	@DisplayName("게시물 수정 : qnaBoardMapperuUpdateTest")
+	@Timeout(value=5, unit=TimeUnit.SECONDS)
+	void qnaBoardMapperuUpdateTest() {
+		log.trace("qnaBoardMapperuUpdateTest() invoked.");
+		
+		QnaBoardVO vo = this.mapper.read(299);
+		QnaBoardDTO dto = new QnaBoardDTO();
+		
+		dto.setPost_no(vo.getPost_no());
+		dto.setTitle("TEST_UPDATE");
+		dto.setContent("TEST_UPDATE");
+		dto.setViews(vo.getViews());
+		dto.setMember_id(vo.getMember_id());
+		dto.setSecret_yn(0);
+		
+		Integer affectedLines = this.mapper.update(dto);
+		
+		assertNotNull(affectedLines);
+		log.info("***********afftedLines:{}", affectedLines);
+	}//qnaBoardMapperuUpdateTest()
+	
+}//end class 

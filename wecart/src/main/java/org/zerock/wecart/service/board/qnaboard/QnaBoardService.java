@@ -25,7 +25,7 @@ public interface QnaBoardService {
 	public abstract boolean register(QnaBoardDTO dto) throws ServiceException;
 	
 	// 5. 기존 게시물 수정(MODIFY)
-//	public abstract boolean modify(BoardDTO dto) throws ServiceException;
+	public abstract boolean modify(QnaBoardDTO dto) throws ServiceException;
 	
 	// 6. 현재 총 게시물 건수 반환
 	public abstract Integer getTotalAmount() throws ServiceException;

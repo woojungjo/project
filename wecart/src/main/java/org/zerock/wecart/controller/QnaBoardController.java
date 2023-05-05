@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.PageDTO;
 import org.zerock.wecart.domain.board.QnaBoardCommentVO;
+import org.zerock.wecart.domain.board.QnaBoardDTO;
 import org.zerock.wecart.domain.board.QnaBoardVO;
 import org.zerock.wecart.domain.board.QnaBoard_CommentCountVO;
 import org.zerock.wecart.exception.ControllerException;
-import org.zerock.wecart.mapper.board.qnaboard.QnaBoardMapper;
 import org.zerock.wecart.service.board.qnaboard.QnaBoardCommentService;
 import org.zerock.wecart.service.board.qnaboard.QnaBoardService;
 
@@ -90,6 +90,44 @@ public class QnaBoardController {
 		
 	} // read
 	
+	@GetMapping("/modify/{post_no}")
+	public void modify(@PathVariable Integer post_no, Model model) throws ControllerException {
+		log.trace("read({}, {}) invoked.", post_no, model);
+		
+		try {
+			QnaBoardVO readVO = this.service.get(post_no);
+			model.addAttribute("readVO", readVO);
+		
+		} catch(Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+		
+	} // modify
+	
+	@PostMapping("/modify/{post_no}")
+	public String modify(Criteria cri, QnaBoardDTO dto, RedirectAttributes rttrs)  throws ControllerException{
+	
+			log.trace("modify:{},{}, {}", cri, dto, rttrs);
+			
+			try {
+				boolean success =this.service.modify(dto);
+				log.info("\t+success:{}", success);
+				
+				//페이징처리용 전송파라미터도 함게 전송처리
+				rttrs.addAttribute("currPage", cri.getCurrPage());
+				rttrs.addAttribute("amount", cri.getAmount());
+				
+				//Model 전송처리 
+				rttrs.addAttribute("result", (success)? "success": "failure");
+				
+				return "redirect:/board/qna/list";
+				
+			}catch(Exception e) {
+				throw new ControllerException(e);
+			}//try-catch
+			
+	}//modify()
+	
 	@PostMapping("/delete")
 	public String delete(Integer post_no) throws ControllerException {
 		
@@ -103,5 +141,7 @@ public class QnaBoardController {
 		} // try-catch
 		
 	} // delete
+	
+	
 	
 } // end class

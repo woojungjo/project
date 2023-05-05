@@ -49,5 +49,17 @@
 			#{secret_yn, jdbcType=CHAR}
 		    )
   	</insert>  	
-
+	
+	  	<update id="update">
+  		UPDATE 
+  			qna_board
+  		SET
+  			title=#{title},
+		    content=#{content},
+		    views=#{views},
+		    member_id=#{member_id},
+		    secret_yn=#{secret_yn}
+		    
+		WHERE post_no = #{post_no}
+  	</update>  	
 </mapper>
