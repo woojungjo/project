@@ -218,3 +218,10 @@ document.querySelector('#delete').addEventListener('click',function(){
     form.submit();
   }
 })
+
+var modifyBtn = document.querySelector('#update');
+modifyBtn.addEventListener('click', function(){
+  var postNo = this.getAttribute('data-post-no');
+  console.log('/board/qna/modify/' + postNo);
+  window.location = "/board/qna/modify/" + postNo;
+});
