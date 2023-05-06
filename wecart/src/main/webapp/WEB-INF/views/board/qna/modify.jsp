@@ -48,18 +48,19 @@
             <!--*********************************************메인 내용은 여기부터*********************************************-->
 
             <main id="board_main">
-                <form action="/board/modify" method="post">
+                <form action="/board/qna/modify" method="post">
 					
 					<input type="hidden" name="post_no" value="${readVO.post_no}">
                     <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
                     <input type="hidden" id="secret_yn" name="secret_yn" value="${readVO.secret_yn}">
+                    <input type="hidden" id="views" name="views" value="${readVO.views}">
                     
                     <div id="board_write">
 
                         <div id="board_write_top">
                             <div>수정하기</div>
-                            <input type="text" name="post_no" value="${readVO.post_no}" readonly></td>
-                            <button type="submit" id="registerBtn">등록</button>
+                            <!-- input type="text" name="post_no" value="${readVO.post_no}" readonly-->
+                            <button type="submit" id="modifySaveBtn">저장</button>
                         </div>
                         <div><hr></div>
                 
@@ -73,7 +74,8 @@
                             rows="10" 
                             cols="100" 
                             placeholder="내용을 입력해주세요"
-                            style="width: 1128px">
+                            style="width: 1128px"
+                            >
                             ${readVO.content}
 	                    </textarea>
                     </div>

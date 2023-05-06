@@ -91,20 +91,24 @@ public class QnaBoardController {
 	} // read
 	
 	@GetMapping("/modify/{post_no}")
-	public void modify(@PathVariable Integer post_no, Model model) throws ControllerException {
+	public String modify(@PathVariable Integer post_no, Model model) throws ControllerException {
 		log.trace("read({}, {}) invoked.", post_no, model);
 		
 		try {
 			QnaBoardVO readVO = this.service.get(post_no);
 			model.addAttribute("readVO", readVO);
-		
+			
+	        Date now = new Date();   
+	        model.addAttribute("currentTime", now);
+	        
+	        return "/board/qna/modify";
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 		
 	} // modify
 	
-	@PostMapping("/modify/{post_no}")
+	@PostMapping("/modify")
 	public String modify(Criteria cri, QnaBoardDTO dto, RedirectAttributes rttrs)  throws ControllerException{
 	
 			log.trace("modify:{},{}, {}", cri, dto, rttrs);

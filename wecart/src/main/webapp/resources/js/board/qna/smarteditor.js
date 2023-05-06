@@ -78,6 +78,12 @@ $(function(){
 		    }
     
       });    
+      
+       //버튼 클릭시 form 전송
+     $("#modifySaveBtn").click(function(){
+          oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+       
+         });    
 });
  
  

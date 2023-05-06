@@ -58,7 +58,7 @@
                         ${readVO.title}
                     </div>
                     <div class="qna_board_contents">${readVO.content}</div>
-                    <button type="button" id="modifyBtn">수정</button>
+                    <!-- button type="button" id="modifyBtn">수정</button-->
                     <div class="qna_board_attach"><button id="download_button"><span class="fas fa-paperclip"></span>첨부파일</button>
                         <div id="qna_board_attach_download">
                             <ul>
@@ -72,7 +72,7 @@
                         <c:if test="${__AUTH__.member_id == readVO.member_id}">
                             <form id="updateOrDelete">
                                 <input type="hidden" name="post_no" value="${readVO.post_no}"> 
-                                <button id="update" type="button">수정</button>
+                                <button id="update" type="button" data-post-no="${post_no}">수정</button>
                                 <button id="delete" type="button">삭제</button>
                             </form>
                         </c:if>
@@ -297,13 +297,6 @@
         </main>
        <jsp:include page="../../header_footer/footer.jsp" flush="true" />
         
-        <script>
-	        var modifyBtn = document.querySelector('#modifyBtn');
-	            modifyBtn.addEventListener('click', function(){
-	        		console.log('/board/qna/modify/{post_no}');
-	              window.location = "/board/qna/modify/${post_no}";
-	            });//.addEventListener
-        </script>
 </body>
 
 
