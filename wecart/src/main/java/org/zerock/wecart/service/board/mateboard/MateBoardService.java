@@ -26,4 +26,7 @@ public interface MateBoardService {
 	
 //	5. 특정 게시물 삭제(DELETE)
 	public abstract boolean remove(Integer post_no) throws ServiceException;
+	
+	//신고 
+	public abstract boolean increaseReportCnt(Integer post_no) throws ServiceException;
 }//MateBoardService

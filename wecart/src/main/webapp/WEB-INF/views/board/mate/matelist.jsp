@@ -101,7 +101,9 @@ pageEncoding="UTF-8"%>
                         
                         <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i>${MateBoardVO.meeting_area}</div>
                         <div id="mate_board_contents_dt_and_members">
-                        <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;${MateBoardVO.meeting_time}</div>
+			            <fmt:formatDate value="${MateBoardVO.meeting_time}" pattern="yyyy-MM-dd HH:mm" var="formatMeetingTime" />
+			            <div class="mate_board_contents_dt">${formatMeetingTime}</div>
+                        <!-- div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;${MateBoardVO.meeting_time}</div-->
                         <div class="mate_board_contents_members"><i class="fa-solid fa-people-group"></i></div>
                         <div class="currentMemberNum">2</div>
                         <div>/</div>

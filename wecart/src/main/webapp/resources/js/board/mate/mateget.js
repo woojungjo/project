@@ -97,23 +97,25 @@ reportButton.addEventListener('click', () => {
       cancelButton: 'custom-cancel-button-class'
     }
   }).then((result) => {
-	      /*
-    if (result.isConfirmed) {
-      // 예 버튼을 눌렀을 때 처리할 코드
-      swal.fire('신고가 접수되었습니다.');
-    } else {
-      // 아니오 버튼을 눌렀을 때 처리할 코드
-      swal.fire('신고가 취소되었습니다.');
-      */
+
       if (result.isConfirmed) {
-        // 예 버튼을 눌렀을 때 처리할 코드
-        /*alert('신고가 접수되었습니다.');*/
-        swal.fire('신고가 접수되었습니다.');
+		// swal.fire('신고가 접수되었습니다.');
+    	// 추가 AJAX 통신 시작
+	      $.ajax({
+	        type: "POST", // HTTP 요청 방식
+	        url: "/board/mate/increaseReportCnt", // 요청 보낼 URL
+	        data: { post_no: postNo }, // 요청에 담을 데이터
+	        success: function(response) { // 요청에 대한 응답 처리
+	          swal.fire('신고가 접수되었습니다.');
+	        },
+	        error: function(xhr, status, error) { // 에러 처리
+	          console.error(xhr.responseText);
+	        }
+	      });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // 아니오 버튼을 눌렀을 때 처리할 코드
         /*alert('신고가 취소되었습니다.');*/
         swal.fire('신고가 취소되었습니다.');
-   
   }
   });
 });

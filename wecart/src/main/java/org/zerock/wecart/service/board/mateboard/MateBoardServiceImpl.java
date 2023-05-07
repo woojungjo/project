@@ -68,7 +68,10 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 	public MateBoardVO get(Integer post_no) throws ServiceException {
 		log.trace("get() invoked.");
 		try {
-			return this.mapper.select(post_no);
+			this.mapper.updateViews(post_no);
+			MateBoardVO mateBoardVO = this.mapper.select(post_no);
+			
+			return mateBoardVO;
 		}catch(Exception e) {
 			throw new ServiceException(e);
 		}//try-catch
@@ -107,5 +110,10 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 			throw new ServiceException(e);
 		}//try-catch
 	}//remove()
+	
+	@Override
+	public boolean increaseReportCnt(Integer post_no) {
+	    return this.mapper.increaseReportCnt(post_no) == 1;
+	}
 	
 }//end class 
