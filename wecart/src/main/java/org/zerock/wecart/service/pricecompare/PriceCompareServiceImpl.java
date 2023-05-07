@@ -18,6 +18,7 @@ import org.zerock.wecart.mapper.pricecompare.CityMapper;
 import org.zerock.wecart.mapper.pricecompare.GooodsMapper;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
 import org.zerock.wecart.mapper.pricecompare.SaleMapper;
+import org.zerock.wecart.mapper.pricecompare.TodayCartMapper;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
 
 import lombok.NoArgsConstructor;
@@ -71,9 +72,7 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	@Override
 	public Integer getTotalAmount(String keyword, Integer category) throws ServiceException {
 		log.trace("getTotalAmount() invoked.");
-		
-		
-		
+	
 		try {
 
 			return this.priceCompareMapper.selectTotalCount(keyword, category);
