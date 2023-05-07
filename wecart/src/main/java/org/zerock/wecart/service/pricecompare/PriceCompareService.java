@@ -21,7 +21,7 @@ public interface PriceCompareService {
 	//3. 상품 검색 목록
 	public abstract List<GoodsVO> getSearchList(GoodsCriteria cri) throws ServiceException;
   
-  //4. id에 해당하는 상품 조회
+	//4. id에 해당하는 상품 조회
 	public abstract GoodsVO select(Integer goods_id) throws ServiceException;
 
 	// goods_id를 받고 해당 조회수를 ++한다. 만약 update가 안됐으면 false를 return한다.

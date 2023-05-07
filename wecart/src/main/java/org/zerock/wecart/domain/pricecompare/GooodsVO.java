@@ -10,6 +10,6 @@ public class GooodsVO {
 	public String goods_manufacturer;
 	public String capacity;
 	public String category_id;
-	public Integer readcnt;
 	public String capacity_unit_id;
+	public Integer readcnt;
 }
