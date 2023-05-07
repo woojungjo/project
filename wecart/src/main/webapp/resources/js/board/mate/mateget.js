@@ -5,7 +5,7 @@ bookmarkIcon.addEventListener('click', function() {
   bookmarkIcon.classList.toggle('fa-solid');
 });
 
-const downloadDiv = document.getElementById("mate_board_attach_download");
+const downloadDiv = document.getElementById("qna_board_attach_download");
 const downloadBtn = document.getElementById("download_button");
 
 downloadBtn.onclick = function() {
@@ -117,14 +117,21 @@ reportButton.addEventListener('click', () => {
   }
   });
 });
-
-// '수정' 버튼 클릭 이벤트 처리
+ 
+/* '수정' 버튼 클릭 이벤트 처리
 document.querySelector('.mate_board_modify').addEventListener('click', function() {
   // 수정 작업 수행 코드
   
   // 페이지 새로고침
   location.reload();
 });
+*/
+var modifyBtn = document.querySelector('.mate_board_modify');
+modifyBtn.addEventListener('click', function(){
+  var postNo = this.getAttribute('data-post-no');
+  window.location = "/board/mate/matemodify/" + postNo;
+});
+
 
 /* '삭제' 버튼 클릭 이벤트 처리 수정하기 
 
@@ -137,6 +144,18 @@ document.querySelector('.mate_board_delete').addEventListener('click', function(
   }
 });//confirm
 */
+
+document.querySelector('.mate_board_delete').addEventListener('click',function(){
+
+  if (confirm("삭제하시겠습니까?")) {
+    const form = document.querySelector("#matemodifyDelete");
+    form.action = "/board/mate/materemove";
+    form.method = "post";
+    form.submit();
+    alert('삭제되었습니다.');	
+  }
+})
+
  	
 const subDivs = document.querySelectorAll('#sub > div');
 const currentMemberNum = document.querySelector('.currentMemberNum');

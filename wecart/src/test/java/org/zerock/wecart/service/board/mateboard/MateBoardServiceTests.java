@@ -116,7 +116,7 @@ public class MateBoardServiceTests {
 	void testModify() throws ServiceException {
 		log.trace("testModify() invoked.");
 		
-		MateBoardVO vo = this.service.get(222273);
+		MateBoardVO vo = this.service.get(245);
 		MateBoardDTO dto = new MateBoardDTO();
 		
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
