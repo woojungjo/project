@@ -38,7 +38,7 @@ public interface SaleBoardMapper {
 	public abstract void lIkeUP(SaleBoardDTO dto);
 	
 	// 좋아요 다운
-	@Delete("DELETE FROM sale_board_like WHERE post_no = #{post_no}")
+	@Delete("DELETE FROM sale_board_like WHERE post_no = #{post_no}  AND member_id = #{member_id}")
 	public abstract void lIkeDOWN(SaleBoardDTO dto);
 	
 	
@@ -51,7 +51,7 @@ public interface SaleBoardMapper {
 	public abstract void hateUP(SaleBoardDTO dto);
 	
 	// 싫어요 다운
-	@Delete("DELETE FROM sale_board_hate WHERE post_no = #{post_no}")
+	@Delete("DELETE FROM sale_board_hate WHERE post_no = #{post_no}  AND member_id = #{member_id}")
 	public abstract void hateDOWN(SaleBoardDTO dto);
 
 	@Delete("DELETE FROM sale_board WHERE post_no = #{post_no}")
