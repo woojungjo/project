@@ -343,7 +343,7 @@ public class MypageCartController {
 		} // try - catch
 
 	} // wishedProdsRemoved   jhwan 
-
+	//
 } //end class
 
 
