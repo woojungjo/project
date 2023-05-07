@@ -57,6 +57,14 @@
 		    
 		WHERE post_no = #{post_no}
   	</update>  	
+  	
+  	<update id="increaseReportCnt">
+	  UPDATE 
+	  	mate_board
+	  SET 
+	  	report_cnt = report_cnt + 1
+	  WHERE post_no = #{post_no}
+	</update>
 		
 	<insert id="insert">
   		INSERT INTO

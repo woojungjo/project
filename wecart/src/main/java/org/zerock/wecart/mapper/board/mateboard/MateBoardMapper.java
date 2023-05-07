@@ -3,6 +3,7 @@ package org.zerock.wecart.mapper.board.mateboard;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
@@ -28,4 +29,11 @@ public interface MateBoardMapper {
 	
 	//5. 기존 게시물 삭제 
 	public abstract Integer delete(Integer post_no);
+	
+	// 조회수 업데이트
+	@Update("UPDATE mate_board SET views = views + 1 WHERE post_no = #{post_no}")
+	public abstract void updateViews(Integer post_no);
+	
+	//신고 
+	public abstract int increaseReportCnt(Integer post_no);
 }//MateBoardMapper

@@ -248,22 +248,13 @@ button:hover, #registerBtn:hover{
 	width:250px;
 	height:30px;
 }
-.qna_board_attach{
-  position: relative;
-  grid-column: 1 / span 2;
-  justify-self: end;
-}
-#qna_board_attach_download{
-  width: 300px;
-  position: absolute;
-  right: 0px;
-  border: solid 1px #53917E;
-  display: none;
+
+#mate_board_writedt_mate_board_views{
+	display:flex;
+    justify-content: space-between;
 }
 
-#qna_board_attach_download > ul{
-  list-style-type: none;
-  padding: 0 10px;
+.mate_board_title {
+  font-size: 50px;
+  font-weight: bold;
 }
-#qna_board_attach_download li{
-  padding: 5px;

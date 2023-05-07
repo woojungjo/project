@@ -74,11 +74,13 @@ rel="stylesheet">
                 <div class="mate_board_bookMark"><i class="fa-regular fa-bookmark"></i></div>
             </div>
             
-            <div id="mate_board_writedt_mate_board_views"></div>
+            <div id="mate_board_writedt_mate_board_views">
                 <fmt:formatDate value="${__MateBoard__.write_dt}" pattern="yyyy-MM-dd HH:mm" var="formatDate" />
-                <div class="qna_board_writedt">${formatDate}</div>
+                <div class="qna_board_writedt">작성일시: ${formatDate}</div>
+                <div class="mate_board_views"><div class="fas fa-eye"></div>${__MateBoard__.views}</div>
+            </div>
                 <div id="mate_board_writedt_and_views">
-            <div class="mate_board_views"><div class="fas fa-eye"></div>${__MateBoard__.views}</div>
+            
                 <!--div class="mate_board_writedt">
                     <fmt:formatDate value="${__MateBoard__.write_dt}" pattern="yyyyMMddHHmmss" var="write_dt" />
                             <fmt:formatDate value="${__MateBoard__.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
@@ -111,7 +113,8 @@ rel="stylesheet">
             <div class="mate_board_contents_wrapper">
             <div class="mate_board_maps"><i class="fa-solid fa-location-dot"></i>${__MateBoard__.meeting_area}</div>
             <div id="mate_board_contents_dt_and_members">
-                <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;${__MateBoard__.meeting_time}</div>
+            <fmt:formatDate value="${__MateBoard__.meeting_time}" pattern="yyyy-MM-dd HH:mm" var="formatMeetingTime" />
+            <div class="mate_board_contents_dt">미팅 일시: ${formatMeetingTime}</div>
                 
                 <div id="member">
                     <div class="mate_board_contents_members"><i class="fa-solid fa-people-group"></i></div>
@@ -214,7 +217,9 @@ rel="stylesheet">
 <jsp:include page="../../header_footer/footer.jsp" flush="true" />
 
 </body>
-
+<script>
+  var postNo = ${__MateBoard__.post_no};
+</script>
 <!--  script>
 var mateListBtn = document.querySelector('.mate_board_list');
 var mateModifyBtn = document.querySelector('.mate_board_modify');
