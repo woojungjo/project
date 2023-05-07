@@ -1,5 +1,7 @@
 package org.zerock.wecart.service.pricecompare;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
+import org.zerock.wecart.domain.pricecompare.GooodsVO;
+import org.zerock.wecart.domain.pricecompare.PriceDTO;
+import org.zerock.wecart.domain.pricecompare.RetailVO;
+import org.zerock.wecart.domain.pricecompare.SaleVO;
 import org.zerock.wecart.exception.ServiceException;
+import org.zerock.wecart.mapper.pricecompare.CityMapper;
 import org.zerock.wecart.mapper.pricecompare.GooodsMapper;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
+import org.zerock.wecart.mapper.pricecompare.SaleMapper;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
 
 import lombok.NoArgsConstructor;
@@ -24,12 +32,16 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	private PriceCompareMapper priceCompareMapper;
 	private GooodsMapper gooodsMapper;
 	private WishListMapper wishListMapper;
+	private CityMapper cityMapper;
+	private SaleMapper saleMapper;
 	
 	@Autowired
-	public PriceCompareServiceImpl(PriceCompareMapper priceCompareMapper, GooodsMapper gooodsMapper, WishListMapper wishListMapper) {
+	public PriceCompareServiceImpl(PriceCompareMapper priceCompareMapper, GooodsMapper gooodsMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CityMapper cityMapper) {
 		this.priceCompareMapper = priceCompareMapper;
 		this.gooodsMapper = gooodsMapper;
 		this.wishListMapper = wishListMapper;
+		this.cityMapper = cityMapper;
+		this.saleMapper = saleMapper;
 	}	//Constructor
 
 	@Transactional
@@ -90,6 +102,50 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 		return numberOfUpdate == 1 ? true : false;
 	} // updateReadcntOfGoods
 	
+	@Override
+	public List<PriceDTO> getPriceDTOList(Integer member_id, Integer goods_id) throws ServiceException{
+		log.trace("getPriceDTOList(member_id: {}, goods_id: {}) invoked");
+
+		List<PriceDTO> priceDTO = new ArrayList<PriceDTO>();
+		try {
+			// 0.  api의 최신날짜 얻기
+			Date latestDate = this.saleMapper.selectAPIDate();
+			
+			// 1. member 아이디를 통해 RetailVO를 얻고
+			// 2. 해당 town_id를 가지고 있는데 retail 정보들을 얻는다.
+			List<RetailVO> retailList = this.cityMapper.selectRetailVOOfMember(member_id);
+			
+			// 3. SALE 테이블에서 latestDate, goods_id와 retail_id을 조인하여 가격을 얻는다. 
+			for(RetailVO retail : retailList) {
+				
+				Integer retailId = retail.getRetail_id();
+		
+				SaleVO sale = this.saleMapper.selectPriceWithRetail_idAndGoods_id(latestDate, retailId, goods_id);
+	
+				PriceDTO dto = new PriceDTO();
+				dto.setRetail_name(retail.getRetail_name());
+				dto.setPrice(sale.getPrice());
+				priceDTO.add(dto);
+			} // for
+			
+			}catch(Exception e) { ;; }
+		
+		
+		log.trace("error check1 ");
+		return priceDTO;
+	}
+
+	@Override
+	public GooodsVO selectGooodsVO(Integer goods_id) throws ServiceException {
+		log.trace("selectGooodsVO(goods_id: {} ) invoked. ");
+		
+		try {
+			return this.gooodsMapper.selectGooodsVO(goods_id);
+		}catch(Exception e) {
+			log.trace("selectGooodsVO service has erorr.");
+		}
+		return null;
+	}
 } //end class
 
 

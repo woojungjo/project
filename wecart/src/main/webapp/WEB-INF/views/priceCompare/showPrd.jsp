@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -165,6 +168,11 @@
 			<jsp:include page="../header_footer/main_header.jsp" flush="true" />
 		<% } else { %>
 			<jsp:include page="../header_footer/home_header.jsp" flush="true" />
+			<script>
+			alert("주소 확인을 위해 로그인을 해주십시오.");
+			window.location = "/user/login";
+			</script>
+			
 		<% } %>
 
 
@@ -218,53 +226,28 @@
                             <i class="fa-solid fa-heart fa-2xl"></i></button> -->
 						<button type="button" onclick="addPrdToTodayCart()">장바구니</button>
 					</div>
-					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; ${ __GOODS__.low_price }</p>
 					<table class="tableToShowPrice">
-						<tr>
-							<td>마트 1&emsp;
+						<c:forEach items="${__PRICEDTO__}" var="dto"  >
+							<tr>
+								<td>
+									${dto.retail_name}
+									&emsp;
 								<button type="button">
 									<a href="/map/locationOfMarts"><i class="fa-solid fa-location-dot"></a></i>
 								</button> &emsp;
-							</td>
-							<td>13.000</td>
-						</tr>
-						<tr>
-							<td>마트 2&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 3&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 4&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 5&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 6&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
+								</td>
+								<td>
+									${dto.price }
+								</td>
+							</tr>
+					
+						</c:forEach>
+						<c:if test="${fn:length(__PRICEDTO__) == 0}">
+							<tr>
+    							<div>리스트가 비어있습니다.</div>
+    						</tr>
+						</c:if>
 					</table>
-
 				</div>
 			</div>
 		</article>
