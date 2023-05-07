@@ -60,10 +60,37 @@ rel="stylesheet">
         <div id="mate_board_info">
 
             <div class="mate_board_recruiting">
-                <select class="mate_board_recruiting_option">
+                <!-- select class="mate_board_recruiting_option">
                     <option value="recruiting" >모집중</option >
                     <option value="completed"  >참여완료</option>
-                </select>
+                </select-->
+                
+				<button class="mate_board_recruiting_option" type="button">
+				    <c:choose>
+				        <c:when test="${__MateBoard__.meeting_status == '1'}">
+				            모집중
+				        </c:when>
+				        <c:otherwise>
+				            참여완료
+				        </c:otherwise>
+				    </c:choose>
+				</button>
+								                
+                <script>
+                console.log('meeting_status: ${__MateBoard__.meeting_status}'); //1
+                console.log('check2: ${__MateBoard__.meeting_status== "1"}'); 
+                console.log('check5: ${__MateBoard__.meeting_status == 1}');
+
+                console.log('meeting_status: ${__MateBoard__.meeting_status}'); //1
+                console.log('check2: ${__MateBoard__.meeting_status == 1}'); 
+                console.log('check5: ${__MateBoard__.meeting_status === 1}');
+                
+                console.log('meeting_status: ${__MateBoard__.meeting_status}'); 
+                console.log('check: ${__MateBoard__.meeting_status == '1'}');
+
+
+
+                </script>
             </div>
             
             <div id="mate_board_writer_and_bookMark">
