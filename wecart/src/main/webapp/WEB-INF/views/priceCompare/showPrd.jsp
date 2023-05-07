@@ -174,6 +174,8 @@
 			</script>
 			
 		<% } %>
+		
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0be8f3b8bf2f892c159cfeb384998199&libraries=services"></script>
 
 
 		<div class="widthfix">
