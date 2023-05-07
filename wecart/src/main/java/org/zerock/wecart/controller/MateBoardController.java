@@ -1,5 +1,6 @@
 package org.zerock.wecart.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -82,14 +83,18 @@ public class MateBoardController {		//JavaBeans, POJO
 	}//mateGet()
 	
 
-	@GetMapping(path="/matemodify/{post_no}")
+	@GetMapping("/matemodify/{post_no}")
 	public String mateModify(@PathVariable("post_no") Integer post_no, Model model)throws ControllerException {
 		log.trace("mateget({}, {}) invoked", post_no, model);
 		
 		try {
 			MateBoardVO vo = this.service.get(post_no);
 			model.addAttribute("__MateBoard__", vo);
-			return "/board/mate/mateget";
+			
+	        Date now = new Date();   
+	        model.addAttribute("currentTime", now);
+	        
+			return "/board/mate/matemodify";
 		}catch(Exception e) {
 			throw new ControllerException(e);
 		}//try-catch

@@ -20,8 +20,8 @@
 		
 		<script src="/resources/js/board/register.js" defer></script>
 		
-        <script src="/resources/js/board/mate/list.js" defer></script>
-        <script src="/resources/js/board/mate/script.js" defer></script>
+        <script src="/resources/js/board/mate/matelist.js" defer></script>
+        <script src="/resources/js/board/mate/mateget.js" defer></script>
         <link rel="stylesheet" href="/resources/css/board/mate/style.css">
         <link rel="stylesheet" href="/resources/css/board/qna/style.css">
         <script src="/resources/js/board/qna/script.js" defer></script>
@@ -48,33 +48,50 @@
             <!--*********************************************메인 내용은 여기부터*********************************************-->
 
             <main id="board_main">
-                <form action="/board/mate/matemodify" method="post">
-					
-					<input type="hidden" name="post_no" value="${__MateBoard__.post_no}">
-					<input type="hidden" name="meeting_status" value="${__MateBoard__.meeting_status}">
-                    <input type="hidden" name="report_cnt" value="${__MateBoard__.report_cnt}">
+                <form action="/board/register" method="post" id="register">
+
                     <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
-                    <input type="hidden" id="views" name="views" value="${__MateBoard__.views}">
+                    <input type="hidden" name="meeting_status" value="1">
+                    <input type="hidden" name="report_cnt" value="0">
+                    <input type="hidden" name="views" value="0">
+                    <input type="hidden" id="secret_yn" name="secret_yn" value="0">
+                     <!-- <input type="hidden" id="meeting_time" name="meeting_time" value="23/05/02 04:27:56">
+            <input type="hidden" name="participant_id_1" value="1">
+                    <input type="hidden" name="participant_id_2" value="1">
+                     <input type="hidden" name="participant_id_3" value="1"> -->
+                    
                     
                     <div id="board_write">
 
                         <div id="board_write_top">
-                            <div>수정하기</div>
-                            <!-- input type="text" name="post_no" value="${readVO.post_no}" readonly-->
-                            <button type="submit" id="modifySaveBtn">저장</button>
+                            <div>글 수정하기</div>
+                            <button type="submit" id="modifyBtn">수정</button>
                         </div>
                         <div><hr></div>
-                
-                    <div id="mate_board_maps">
+                        
+                        <!-- select name="sortOfBoard" id="boardSelect">
+                            <option>게시판을 선택해 주세요</option>
+                            <option value="1">지역게시판</option>
+                            <option value="2">중고거래</option>
+                            <option value="3">장메이트</option>
+                            <option value="4">크롤링</option>
+                            <option value="5">세일정보</option>
+                            <option value="6">Q&A</option>
+                        </select-->
+                        
+                 	<div id="mate_board_maps">
 	            		<i class="fa-solid fa-location-dot"></i><input id="materegister_smeeting_area" name="meeting_area" type="text" placeholder="미팅장소 설정">
                     </div>
-                    
+
+                    <!--input id="" name="meeting_time" type="text" placeholder="미팅시간 설정"-->
                     <div id="materegister_setMeetingTime">
                         <div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i></div>
                         <input type="datetime-local" name="meeting_time">
                     </div>
-                    
-                	<input id="smartEditorTitle" name="title" type="text" value="${__MateBoard__.title}"
+                </div> <!--board_main-->
+                
+                
+                <input id="smartEditorTitle" value="${__MateBoard__.title}" name="title" type="text" placeholder="제목을 입력해 주세요"
                         style="width:1128px; height:30px;" />
 				<!-- 스마트에디터 -->
                     <div id="smarteditor">
@@ -84,12 +101,15 @@
                             rows="10" 
                             cols="100" 
                             placeholder="내용을 입력해주세요"
-                            style="width: 1128px"
-                            >
-                            ${__MateBoard__.content}
+                            style="width: 1128px">
 	                    </textarea>
                     </div>
  				<!-- 스마트에디터 -->
+
+				<!-- QnA -->
+                    <div id="board_secret">
+                        <input type="checkbox">&nbsp;비밀글을 작성합니다.
+                    </div>
 
 				<!-- MateBoard -->
 				  <div class="map_wrap">
@@ -98,14 +118,14 @@
 					    <div id="menu_wrap" class="bg_white">
 					        <div class="option">
 					            <div>
-					                    키워드 <input type="text" id="keyword" placeholder="예시: 자양동 마트">
+					                    키워드 <input type="text" value="" id="keyword">
 					                    <button type="submit" onclick="searchPlaces(); return false; ">검색</button> 
 					            </div>
 					        </div>
 					        <hr>
 					        <ul id="placesList"></ul>
 					        <div id="pagination"></div>
-		    </div>
+					    </div>
 					    
 					</div>
                 </form> 

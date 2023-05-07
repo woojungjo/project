@@ -1,9 +1,9 @@
-var listBtn = document.querySelector('#listBtn');
+/*var listBtn = document.querySelector('#listBtn');
 listBtn.addEventListener('click', function(){
   location.href='/board/mate/matelist';
   //?currPage=${param.currPage}&amount=${param.amount}
 });
-
+*/
 /*
 var listBtn = document.querySelector('#listBtn');
 
@@ -12,6 +12,7 @@ listBtn.addEventListener('click', function () {
     location.href = url
 });
             */
+            /*
 var mateDeleteBtn = document.querySelector('.mate_board_delete');
 
 /*
@@ -37,7 +38,7 @@ mateListBtn.addEventListener('click', function(){
 });//.addEventListener
 */
 
-
+/*
 //수정하기!!!!!!
 mateDeleteBtn.addEventListener('click', function(){
     //Form 태그 조작해서 삭제 요청 전송 
@@ -48,3 +49,4 @@ mateDeleteBtn.addEventListener('click', function(){
     form.submit();
 });//.addEventListener
 
+*/

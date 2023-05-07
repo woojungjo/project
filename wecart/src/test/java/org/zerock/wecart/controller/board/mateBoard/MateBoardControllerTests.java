@@ -121,8 +121,8 @@ public class MateBoardControllerTests {
 		DefaultMockMvcBuilder mockMvcBuilder = MockMvcBuilders.webAppContextSetup(ctx);
 		MockMvc mockMvc = mockMvcBuilder.build();
 		
-		//Step.1 post_no 222273 게시글 상세히 조회 
-		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/mate/mateget/{post_no}", 222273);
+		//Step.1 post_no 245 게시글 상세히 조회 
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/mate/mateget/{post_no}", 245);
 		
 		//가상의 MVC 환경에서 MateBoardController요청생성 및 전송 
 		ModelAndView modelAndView = mockMvc.perform(requestBuilder).andReturn().getModelAndView();
@@ -137,7 +137,7 @@ public class MateBoardControllerTests {
 		assertNotNull(vo);
 		log.info("vo:{}", vo);
 		
-		//Step.2 222273 게시글 수정 
+		//Step.2 245 게시글 수정 
 		Integer post_no = vo.getPost_no();
 		Integer member_id = vo.getMember_id();
 		Integer views = vo.getViews();

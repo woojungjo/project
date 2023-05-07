@@ -50,9 +50,9 @@
 		    meeting_status=#{meeting_status},
 		    meeting_area=#{meeting_area},
 		   	report_cnt=#{report_cnt},
-		    participant_id_1=#{participant_id_1},
-		    participant_id_2=#{participant_id_2},
-		    participant_id_3=#{participant_id_3},
+		    participant_id_1=#{participant_id_1, jdbcType=NUMERIC},
+		    participant_id_2=#{participant_id_2, jdbcType=NUMERIC},
+		    participant_id_3=#{participant_id_3, jdbcType=NUMERIC},
 		    meeting_time=#{meeting_time}
 		    
 		WHERE post_no = #{post_no}
