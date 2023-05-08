@@ -63,7 +63,7 @@ public class MypageEditController {
 			// 회원정보 수정 반영 부분
 			LoginDTO check = new LoginDTO();
 			
-			check.setLogin_id(dto.getLogin_id());
+			check.setLogin_id(vo.getLogin_id());
 			check.setPwd(vo.getPwd());
 			
 			 // 수정된 회원 정보를 DB에서 다시 가져옴
@@ -80,13 +80,14 @@ public class MypageEditController {
 	
 	@PostMapping("/changePw")
     public String changePw(
-    							@SessionAttribute("__AUTH__") UserDTO vo,
-    							UserDTO dto,
-    							@RequestParam("old_pwd") 		String old_pwd,
-                                @RequestParam("pwd") 			String pwd,
-                                @RequestParam("confirm_pwd")	String confirm_pwd,
-                                Model model
-                               ) throws ControllerException {
+    		@SessionAttribute("__AUTH__") UserVO vo,
+    		UserDTO dto,
+    		@RequestParam("old_pwd") 		String old_pwd,
+            @RequestParam("pwd") 			String pwd,
+            @RequestParam("confirm_pwd")	String confirm_pwd,
+            Model model
+    ) throws ControllerException {
+		
 		try {
 			dto.setLogin_id(vo.getLogin_id());
 			
@@ -101,13 +102,16 @@ public class MypageEditController {
 	        if ( pwd.equals(vo.getPwd() )) {
 	        	model.addAttribute("errorMessage", "변경하려는 비밀번호가 기존 비밀번호와 일치 합니다.");
 	            return "redirect:/mypage/edit/changePw";
-	        }
-	        
+	        } // if
+
+	     boolean result = this.service.changePw(dto);
+	     log.trace("result: {}", result);
+	     
 	     // 회원정보 수정 반영 부분
 	     LoginDTO check = new LoginDTO();
 	     			
 	     check.setLogin_id(vo.getLogin_id());
-	     check.setPwd(vo.getPwd());
+	     check.setPwd(dto.getPwd());
 	     			
 	     // 수정된 회원 정보를 DB에서 다시 가져옴
 	     UserVO updatedVO = this.service.checkUser(check);

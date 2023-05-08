@@ -31,18 +31,18 @@
 
             <div id="content">
 
-                <form action="/user/signUp" method="post">
+                <form action="/user/signUp" method="post" onsubmit="return validateSignUp()">
                     
                     <div id="part_1">
 
                         <div class="article">
                             <h3 class="input_title"><label for="login_id">아이디</label></h3>
-                            <input type="text" id="login_id" name="login_id" class="input" placeholder="5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능" maxlength="20">
+                            <input type="text" id="login_id" name="login_id" class="input" placeholder="5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능" maxlength="20" required>
                         </div>
     
                         <div class="article">
                             <h3 class="input_title"><label for="pwd">비밀번호</label></h3>
-                            <input type="password" id="pwd" name="pwd" placeholder="최소 8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input" maxlength="16">
+                            <input type="password" id="pwd" name="pwd" placeholder="최소 8~16자 영문 대 소문자, 숫자, 특수문자 사용 가능" class="input" maxlength="16" required>
                         </div>
     
                         <div class="article">
@@ -52,7 +52,7 @@
     
                         <div class="article">
                             <h3 class="input_title"><label for="alias">닉네임</label></h3>
-                            <input type="text" id="alias" name="alias" class="input" placeholder="한글, 영어, 숫자 최소 3~10자로 입력" maxlength="10">
+                            <input type="text" id="alias" name="alias" class="input" placeholder="한글, 영어, 숫자 최소 3~10자로 입력" maxlength="10" required>
                             
                             <a href="#" id="alias_button" class="button">
                                 <span>중복 확인</span>
@@ -116,7 +116,63 @@
 </body>
 
 <script>
+    function validateSignUp() {
+        var login_id = document.getElementById("login_id").value;
+        var pwd = document.getElementById("pwd").value;
+        var pwdCk = document.getElementById("pwdCk").value;
+        var alias = document.getElementById("alias").value;
 
+        const idRegex = /^[a-z0-9_-]{5,20}$/;
+        const pwdRegex = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+        const aliasRegex = /^[a-zA-Z0-9가-힣]$/;
+
+
+        if (login_id == "") {
+            alert("아이디를 입력 해주세요.");
+            return false;
+
+        } else if (login_id.length < 5) {
+            alert("아이디는 최소 5자리 이상이여야 합니다");
+            return false;
+
+        } else if (idRegex.test(login_id)) {
+            alert("아이디는 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능 합니다.");
+            return false;
+
+        } else if (pwd == "") {
+            alert("비밀번호를 입력 해주세요.");
+            return false;
+
+        } else if (pwd.length < 8) {
+            alert("비밀번호는 8자리 이상이어야 합니다.");
+            return false;
+
+        } else if (pwdRegex.test(pwd)) {
+            alert("비밀번호는 영문 대 소문자, 숫자, 특수문자 사용 가능합니다.");
+            return false;
+
+        } else  if (pwd != pwdCk) {
+            alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다.");
+            return false;
+        
+        } else if (alias == "") {
+            alert("닉네임을 입력해주세요.")
+            return false;
+
+        } else if (alias < 3) {
+            alert("닉네임은 최소 3자리 이상이어야 합니다.")
+            return false;
+
+        } else if (alias.test(alias)) {
+            alert("닉네임은 한글, 영문, 숫자만 사용 가능 합니다.")
+            return false;
+
+
+        } else {
+            alert("회원가입이 완료되었습니다.");
+            return true;
+        }
+    }
 </script>
 
 </html>

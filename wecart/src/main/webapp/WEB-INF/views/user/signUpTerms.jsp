@@ -44,7 +44,7 @@
                     <li class="terms_li">
 
                         <div id="checkbox">
-                            <input type="checkbox" id="ck_1">
+                            <input type="checkbox" id="ck_1" required>
                             <label for="ck_1">
                                 우동장 이용약관 동의<span class="ck_color_1">(필수)</span>
                             </label>
@@ -67,7 +67,7 @@
                     <li class="terms_li">
 
                         <div id="checkbox">
-                            <input type="checkbox" id="ck_2">
+                            <input type="checkbox" id="ck_2" required>
                             <label for="ck_2">
                                 약관 1 동의<span class="ck_color_1">(필수)</span>
                             </label>
