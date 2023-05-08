@@ -24,7 +24,7 @@
         <form action="/user/loginPost" method="post">
             <div id="panel_out">
                 <div id="panel_in">
-
+                
                     <div id="id_box">
                         <input type="text" id="id" name="login_id" placeholder="아이디">
                     </div>
