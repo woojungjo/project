@@ -36,7 +36,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			session.removeAttribute("__AUTH__");
 			log.info("\t+ 세션영역에서 인증객체(__AUTH__) 삭제 완료");
 		} // if
-
+		
 		return true;
 	} // preHandle
 
@@ -54,16 +54,22 @@ public class LoginInterceptor implements HandlerInterceptor {
 		ModelMap modelMap = modelAndView.getModelMap();
 		UserVO userVO = (UserVO)modelMap.get("__AUTH__");
 		
-		
 		if(userVO != null) {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("__AUTH__", userVO);
 			log.info("\t 세션영역에 새로운 인증객체 저장 성공");
-			
-//			String login_id = request.getParameter("login_id");
-//			session.setAttribute("login_id", login_id);
 		} // if
+		
+		// 세션에서 이전 페이지 URL을 가져옴
+        String prevPage = (String) request.getSession().getAttribute("prevPage");
+        if (prevPage != null) {
+            // 이전 페이지 URL을 세션에서 삭제
+            request.getSession().removeAttribute("prevPage");
+            // 이전 페이지로 리다이렉트
+            response.sendRedirect(prevPage);
+        } // if
+
 	} // postHandle
 
 } // end class

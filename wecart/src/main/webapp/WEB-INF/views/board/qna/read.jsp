@@ -179,6 +179,9 @@
                                         <c:when test="${commentList.secret_yn == 0}">
                                             ${commentList.content}
                                         </c:when>
+                                        <c:when test="${commentList.secret_yn  == 1 && __AUTH__.member_id == commentList.member_id}">
+                                            <span class="fas fa-lock" />${commentList.content}
+                                        </c:when>
                                         <c:otherwise>
                                             <span class="fas fa-lock" /> 비밀댓글 입니다.
                                         </c:otherwise>

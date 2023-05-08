@@ -301,11 +301,13 @@ window.onload = function () {
                         $('tr.goods_price_tr[data-goods_id="' + goods_id + '"]').remove();
                     } //if
                 }); //.forEach
+
+				count.totalPrice();
             })
         } //if
 
         //합계 구하기
-        count.totalPrice();
+        
     }); //.click    
 
     //상품 개별 삭제
@@ -319,11 +321,15 @@ window.onload = function () {
                 alert('상품이 삭제되었습니다.');
 
                 $('tr.goods_price_tr[data-goods_id="' + goods_id + '"]').remove();
+
+				count.totalPrice();
             });
+
+			
         } //if  
         
         //합계 구하기
-        count.totalPrice();
+        
     };
 
     deleteBts.forEach((bt) => {

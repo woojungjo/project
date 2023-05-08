@@ -43,7 +43,7 @@ public interface QnaBoardCommentMapper {
 	public abstract void commentLIkeUP(QnaBoardCommentDTO dto);
 	
 	// 좋아요 다운
-	@Delete("DELETE FROM qna_board_comment_like WHERE comment_no = #{comment_no}")
+	@Delete("DELETE FROM qna_board_comment_like WHERE comment_no = #{comment_no} AND member_id = #{member_id}")
 	public abstract void commentLIkeDOWN(QnaBoardCommentDTO dto);
 	
 	

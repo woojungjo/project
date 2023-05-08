@@ -20,5 +20,4 @@ public interface GooodsMapper {
 			WHERE goods_id = #{goods_id}
 			""")
 	public abstract Integer updateGooodsReadcnt(Integer goods_id);
-	
 }

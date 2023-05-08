@@ -8,10 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsPageDTO;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
+import org.zerock.wecart.domain.pricecompare.GooodsVO;
+import org.zerock.wecart.domain.pricecompare.PriceDTO;
 import org.zerock.wecart.exception.ControllerException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
@@ -25,7 +29,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/priceCompare")
 @Controller
 public class PriceCompareController {
-	
 	private PriceCompareService service;
 
 	@Autowired
@@ -87,21 +90,40 @@ public class PriceCompareController {
 	@GetMapping("/showPrd/{goods_id}")
 	public String showPrd(
 		@PathVariable("goods_id") Integer goods_id,
-		Model model
+		Model model,
+		@SessionAttribute(name = "__AUTH__", required = false) UserVO userVO
 		) 
 	throws ControllerException {
 		log.trace("showPrd() invoked. ");
+		
+		if(userVO == null) {
+			return "priceCompare/showPrd";
+		}
+		//
 
 		boolean checkUpdate = true;
 		try {
-			GoodsVO goods = this.service.select(goods_id);
+			GooodsVO goods = this.service.selectGooodsVO(goods_id);
 			log.trace("goods: {}", goods);
 			
 			checkUpdate = this.service.updateReadcntOfGoods(goods_id);
 			log.trace("상품 조회수가 +1 되었는지 여부: {}", checkUpdate);
 			
+			List<PriceDTO> priceDTO = this.service.getPriceDTOList(Integer.parseInt(userVO.getMember_id()), goods_id);
+			String categoryName = this.service.selectCategoryName(Integer.parseInt(goods.getCategory_id()));
+			String capacityUnitName = this.service.selectCapacityUnitName(goods.getCapacity_unit_id());
+			log.trace("error check2 ");
+			model.addAttribute("__PRICEDTO__", priceDTO);
+			
 			// 회원의 id와 
 			model.addAttribute("__GOODS__", goods);
+			
+			// 회원의 categoryName
+			model.addAttribute("__CATEGORYNAME__", categoryName);
+			
+			model.addAttribute("__CAPACITYUNITNAME__", capacityUnitName);
+			
+			log.trace("__CAPACITYUNITNAME__: {}", capacityUnitName);
 			
 			return "priceCompare/showPrd";
 		} catch (Exception e) {

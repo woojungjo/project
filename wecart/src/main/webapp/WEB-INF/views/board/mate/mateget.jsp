@@ -66,12 +66,30 @@ rel="stylesheet">
                     <option value="recruiting" >모집중</option >
                     <option value="completed"  >참여완료</option>
                 </select-->
-                <button class="mate_board_recruiting_option" type="button">${__MateBoard__.meeting_status == '1' ? '모집중' : '참여완료'}</button>
+
+				<button class="mate_board_recruiting_option" type="button">
+				    <c:choose>
+				        <c:when test="${__MateBoard__.meeting_status == '1'}">
+				            모집중
+				        </c:when>
+				        <c:otherwise>
+				            참여완료
+				        </c:otherwise>
+				    </c:choose>
+				</button>
+								                
                 <script>
                 console.log('meeting_status: ${__MateBoard__.meeting_status}'); //1
-                console.log('check2: ${__MateBoard__.meeting_status}== 1'); 
-                console.log('check3: ${__MateBoard__.meeting_status} === "1"');
-                console.log('check4: ${__MateBoard__.meeting_status} == 1');
+                console.log('check2: ${__MateBoard__.meeting_status== "1"}'); 
+                console.log('check5: ${__MateBoard__.meeting_status == 1}');
+
+                console.log('meeting_status: ${__MateBoard__.meeting_status}'); //1
+                console.log('check2: ${__MateBoard__.meeting_status == 1}'); 
+                console.log('check5: ${__MateBoard__.meeting_status === 1}');
+                
+                console.log('meeting_status: ${__MateBoard__.meeting_status}'); 
+                console.log('check: ${__MateBoard__.meeting_status == '1'}');
+
                 </script>
             </div>
             

@@ -64,7 +64,7 @@
                                     <div id="mypage_nav">
                                         <ul class="mypage_nav_ul">
                                             <li class="mypage_nav_li"><a href="#" class="nav_text">마이페이지</a></li>
-                                            <li class="mypage_nav_li"><a href="/mypage/edit/check_password"
+                                            <li class="mypage_nav_li"><a href="/mypage/edit/checkUser"
                                                     class="nav_text">개인정보 수정</a></li>
                                             <li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text">장바구니
                                                     목록</a></li>

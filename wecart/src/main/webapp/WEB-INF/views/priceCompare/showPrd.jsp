@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -165,7 +168,14 @@
 			<jsp:include page="../header_footer/main_header.jsp" flush="true" />
 		<% } else { %>
 			<jsp:include page="../header_footer/home_header.jsp" flush="true" />
+			<script>
+			alert("주소 확인을 위해 로그인을 해주십시오.");
+			window.location = "/user/login";
+			</script>
+			
 		<% } %>
+		
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0be8f3b8bf2f892c159cfeb384998199&libraries=services"></script>
 
 
 		<div class="widthfix">
@@ -200,8 +210,8 @@
 
 			<div id="middleContainer">
 				<div class="leftFromUser">
-					<h3>과일류 > ${__GOODS__.goods_id}</h3>
-					<h3>용량: ${ __GOODS__.capacity }</h3>
+					<h3>${__CATEGORYNAME__}  > ${__GOODS__.goods_name}</h3>
+					<h3>${ __GOODS__.capacity} ${__CAPACITYUNITNAME__}</h3>
 					<img src= ${__GOODS__.goods_pic }
 						alt= ${__GOODS__.goods_name } />
 				</div>
@@ -216,55 +226,39 @@
 
 						<!-- <button type="button" class="mypick_btHeart" onclick="changedHeart(this)">
                             <i class="fa-solid fa-heart fa-2xl"></i></button> -->
-						<button type="button" onclick="addPrdToTodayCart()">장바구니</button>
+						<button type="button" onclick="addPrdToTodayCart()" class="mypick_bt mypick_cart">
+							<i class="fa-solid fa-cart-shopping fa-2x"></i>
+						</button>
 					</div>
-					<p style="color: red">최저가격: &emsp;&emsp;&emsp;&emsp; ${ __GOODS__.low_price }</p>
-					<table class="tableToShowPrice">
-						<tr>
-							<td>마트 1&emsp;
+					<c:if test="${fn:length(__PRICEDTO__) != 0}">
+						<br><br><br>
+					</c:if>
+					<table>
+						<c:forEach items="${__PRICEDTO__}" var="dto"  >
+							<tr>
+								<td>
+									${dto.retail_name}
+									&emsp;
 								<button type="button">
 									<a href="/map/locationOfMarts"><i class="fa-solid fa-location-dot"></a></i>
 								</button> &emsp;
-							</td>
-							<td>13.000</td>
-						</tr>
-						<tr>
-							<td>마트 2&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 3&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 4&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 5&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
-						<tr>
-							<td>마트 6&emsp;
-								<button type="button">
-									<i class="fa-solid fa-location-dot"></i>
-								</button> &emsp;
-							<td>15.000</td>
-						</tr>
+								</td>
+								<td>
+									${dto.price }
+								</td>
+							</tr>
+					
+						</c:forEach>
+						<c:if test="${fn:length(__PRICEDTO__) == 0}">
+						<p><p><br>
+							<tr>
+								<p>
+							</tr>
+							<tr>
+    							<h3>주변마트에 해당상품을 팔지 않습니다.</h3>
+    						</tr>
+						</c:if>
 					</table>
-
 				</div>
 			</div>
 		</article>

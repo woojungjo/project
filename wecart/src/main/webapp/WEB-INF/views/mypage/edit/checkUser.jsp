@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <!DOCTYPE html>
     <html lang="ko">
@@ -20,6 +21,18 @@
     </head>
 
     <body>
+    	<c:choose>
+    		<c:when test="${empty sessionScope['__AUTH__']}">
+    			<c:redirect url="/" />
+	        </c:when>
+	    </c:choose>
+	    
+	    <c:choose>
+    		<c:when test="${not empty sessionScope['__CHECK__']}">
+    			<c:redirect url="/mypage/edit/account" />
+	        </c:when>
+	    </c:choose>
+    
         <jsp:include page="/WEB-INF/views/header_footer/main_header.jsp" flush="true" />
 
         <div class="widthfix">
@@ -45,8 +58,8 @@
                             <h3>개인정보 수정</h3> <!--제목 변경-->
                         </div>
                         <div class="mypage_article_content"> <!-- 탭 내용 -->
-                            <p><span class="small_title">비밀번호 재확인</span> <span class="small_content">회원님의 소중한 정보보호를 위해
-                                    비밀번호를 재확인하고 있습니다</span></p>
+                            <p><span class="small_title">유저정보 재확인</span> <span class="small_content">회원님의 소중한 정보보호를 위해
+                                    유저정보를 재확인하고 있습니다</span></p>
                             <hr>
 
                             <form action="/mypage/edit/checkUser" method="post">
