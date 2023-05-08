@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <c:redirect url = "/main"></c:redirect>
+    
 </body>
 
 </html>

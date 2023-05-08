@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.UserVO;
 import org.zerock.wecart.domain.user.LoginDTO;
 import org.zerock.wecart.domain.user.UserDTO;
@@ -28,7 +27,7 @@ public class MypageEditController {
 
 	// 비밀번호 확인
 	@PostMapping("/checkUser")
-	public String checkUser(LoginDTO dto, RedirectAttributes rttrs, Model model) throws ControllerException {
+	public String checkUser(LoginDTO dto, Model model) throws ControllerException {
 		try {
 			UserVO vo = this.service.checkUser(dto);
 			log.trace("vo: {}", vo);
@@ -38,8 +37,7 @@ public class MypageEditController {
 
 				return "redirect:/mypage/edit/account";
 			} else {
-				rttrs.addAttribute("result", "check Failed");
-
+				
 				return null;
 			} // if - else
 		} catch (Exception e) {
@@ -55,37 +53,34 @@ public class MypageEditController {
 
 	// 닉네임, 이메일 변경
 	@PostMapping("/changeUser")
-	public String changeUser(@SessionAttribute("__AUTH__") UserVO vo, UserDTO dto) throws ControllerException {
+	public String changeUser(@SessionAttribute("__AUTH__") UserVO vo, UserDTO dto, Model model) throws ControllerException {
 		try {
 			dto.setLogin_id(vo.getLogin_id());
 			
 			boolean result = this.service.changeUser(dto);
 			log.trace("result: {}", result);
+			
+			// 회원정보 수정 반영 부분
+			LoginDTO check = new LoginDTO();
+			
+			check.setLogin_id(dto.getLogin_id());
+			check.setPwd(vo.getPwd());
+			
+			 // 수정된 회원 정보를 DB에서 다시 가져옴
+	        UserVO updatedVO = this.service.checkUser(check);
+	        
+	        // 세션에도 수정된 회원 정보를 저장
+	        model.addAttribute("__AUTH__", updatedVO);
 
 			return "redirect:/mypage/edit/account";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 	} // checkPw
-
-	// 비밀번호 변경
-//	@PostMapping("/changePwPost")
-//	public String changePwPost(@SessionAttribute("__AUTH__") UserVO vo, UserDTO dto) throws ControllerException {
-//		try {
-//			dto.setLogin_id(vo.getLogin_id());
-//			
-//			boolean result = this.service.changePw(dto);
-//			log.trace("result: {}", result);
-//
-//			return "redirect:/mypage/edit/account";
-//		} catch (Exception e) {
-//			throw new ControllerException(e);
-//		} // try-catch
-//	} // changePw
 	
 	@PostMapping("/changePw")
     public String changePw(
-    							@SessionAttribute("__AUTH__") UserVO vo,
+    							@SessionAttribute("__AUTH__") UserDTO vo,
     							UserDTO dto,
     							@RequestParam("old_pwd") 		String old_pwd,
                                 @RequestParam("pwd") 			String pwd,
@@ -108,10 +103,19 @@ public class MypageEditController {
 	            return "redirect:/mypage/edit/changePw";
 	        }
 	        
-	        boolean result = this.service.changePw(dto);
-			log.trace("result: {}", result);
+	     // 회원정보 수정 반영 부분
+	     LoginDTO check = new LoginDTO();
+	     			
+	     check.setLogin_id(vo.getLogin_id());
+	     check.setPwd(vo.getPwd());
+	     			
+	     // 수정된 회원 정보를 DB에서 다시 가져옴
+	     UserVO updatedVO = this.service.checkUser(check);
+	     	        
+	     // 세션에도 수정된 회원 정보를 저장
+	     model.addAttribute("__AUTH__", updatedVO);
 
-			return "redirect:/mypage/edit/account";
+	     return "redirect:/mypage/edit/account";
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
