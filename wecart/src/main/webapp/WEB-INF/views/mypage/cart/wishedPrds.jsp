@@ -42,7 +42,7 @@
     				console.log("success의 경우를 확인합니다. ");
     				console.log("object: " + object);
     				if(object == "false" ){
-    					alert("상품이 이미 오늘에 장바구니에 담겨있습니다.");
+    					alert("상품이 이미 오늘의 장바구니에 담겨있습니다.");
     				}else{
     			    	alert("상품이 카트에 담겼습니다");
     				}
@@ -141,7 +141,6 @@
 							 <c:set var="numGoods" value="${fn:length(__GOODS_OBJECT_LIST__)}" />
 							찜한 상품(<strong id="numberOfPrd">${fn:length(__GOODS_OBJECT_LIST__)}</strong>)
 						</div>
-						<span>&nbsp; &nbsp; &nbsp; &nbsp; 찜한 상품은 최대 200개까지 저장합니다.</span>
 
 
 
