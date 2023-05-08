@@ -136,8 +136,6 @@
 					}else{
 						alert("상품이 찜목록에 담겼습니다");
 					}
-					
-					window.location = "/mypage/cart/wishedPrds"
 				},
 				error: function(object){
     				console.log("error의 경우를 확인합니다.");
@@ -231,7 +229,7 @@
 						</button>
 					</div>
 					<c:if test="${fn:length(__PRICEDTO__) != 0}">
-						<br><br><br>
+						<br><br>
 					</c:if>
 					<table>
 						<c:forEach items="${__PRICEDTO__}" var="dto"  >
