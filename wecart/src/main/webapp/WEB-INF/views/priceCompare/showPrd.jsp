@@ -210,7 +210,7 @@
 
 			<div id="middleContainer">
 				<div class="leftFromUser">
-					<h3>${__CATEGORYNAME__} > ${__GOODS__.goods_name}</h3>
+					<h3>${__CATEGORYNAME__}  > ${__GOODS__.goods_name}</h3>
 					<h3>${ __GOODS__.capacity} ${__CAPACITYUNITNAME__}</h3>
 					<img src= ${__GOODS__.goods_pic }
 						alt= ${__GOODS__.goods_name } />
@@ -230,7 +230,10 @@
 							<i class="fa-solid fa-cart-shopping fa-2x"></i>
 						</button>
 					</div>
-					<table class="tableToShowPrice">
+					<c:if test="${fn:length(__PRICEDTO__) != 0}">
+						<br><br><br>
+					</c:if>
+					<table>
 						<c:forEach items="${__PRICEDTO__}" var="dto"  >
 							<tr>
 								<td>
