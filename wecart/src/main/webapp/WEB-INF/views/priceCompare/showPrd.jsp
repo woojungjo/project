@@ -244,7 +244,7 @@
 								</button> &emsp;
 								</td>
 								<td>
-									${dto.price }
+									${dto.price } 원
 								</td>
 							</tr>
 					
