@@ -77,6 +77,9 @@
                                     <c:when test="${qnaBoardVO.secret_yn  == 0}">
                                         <div class="board_title"><a href="/board/qna/read/${qnaBoardVO.post_no}">${qnaBoardVO.title}</a></div>
                                     </c:when>
+                                    <c:when test="${qnaBoardVO.secret_yn  == 1 && __AUTH__.member_id == qnaBoardVO.member_id}">
+                                        <div class="board_title"><a href="/board/qna/read/${qnaBoardVO.post_no}"><span class="fas fa-lock" />${qnaBoardVO.title}</a></div>
+                                    </c:when>
                                     <c:otherwise>
                                         <div class="board_title"><span class="fas fa-lock" />비밀글 입니다.</div>    
                                     </c:otherwise>
