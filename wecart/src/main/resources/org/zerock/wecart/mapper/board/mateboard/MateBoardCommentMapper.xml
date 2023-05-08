@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.wecart.mapper.board.mateboard.MateBoardCommentMapper">
+
+  <select id="selectAll">
+    SELECT a.*, coalesce(b.like_count, 0) AS like_count
+    FROM mate_board_comment a
+    LEFT OUTER JOIN (
+    SELECT comment_no AS tmp, count(*) AS like_count
+    FROM mate_board_comment_like
+    GROUP BY comment_no) b 
+    ON (a.comment_no = b.tmp)
+    WHERE post_no = #{post_no}
+    ORDER BY comment_root ASC, comment_step ASC, comment_indent ASC
+  </select>
+
+  <insert id="insertComment">
+  
+    <selectKey keyProperty="comment_no" order="AFTER" resultType="int">
+      SELECT ISEQ$$_110610.currval FROM dual
+    </selectKey>
+    INSERT INTO mate_board_comment(post_no, member_id, secret_yn, content,delete_yn, comment_root, comment_step, comment_indent)
+    VALUES(#{post_no}, #{member_id}, #{secret_yn}, #{content}, #{delete_yn},
+    <choose>
+      <when test="comment_root == null">
+    	 	ISEQ$$_110610.currval,
+    	</when>
+      <when test="comment_root != null">
+    		#{comment_root},
+    	</when>
+    </choose>
+    #{comment_step}, #{comment_indent})
+  </insert>
+	
+
+
+
+
+</mapper>

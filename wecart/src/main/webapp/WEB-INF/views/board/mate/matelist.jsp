@@ -62,9 +62,8 @@ pageEncoding="UTF-8"%>
                     <div class="board_grid">
                         <div class="board_head">
                             <div class="mate_board_writer">
-                            <button type="button" value=""><i class="fa-solid fa-piggy-bank"></i>￦3500 </button>
-                            ${MateBoardVO.member_id}</div>
-                            
+                            <!-- button type="button" value=""><i class="fa-solid fa-piggy-bank"></i>￦3500 </button-->
+                            작성자 : ${MateBoardVO.member_id}</div>
                                 <fmt:formatDate value="${MateBoardVO.write_dt}" pattern="yyyyMMddHHmmss" var="write_dt" />
                                 <fmt:formatDate value="${MateBoardVO.write_dt}" pattern="yyyy-MM-dd" var="formatDate" />
                                 <c:set var="currentLocalDateTime" value="${LocalDateTime.parse(currDate, DateTimeFormatter.ofPattern('yyyyMMddHHmmss'))}"/>
@@ -88,8 +87,11 @@ pageEncoding="UTF-8"%>
                                 </c:choose>
                             </div>
                             
-                            <button type=button value="recruiting" >모집중 </button>
-
+                            <!-- button type=button value="recruiting" >모집중 </button-->
+                            
+							게시글번호: ${MateBoardVO.post_no} 
+							<button type="button" value="${MateBoardVO.meeting_status== '1' ? 'recruiting' : 'completed'}">${MateBoardVO.meeting_status== '1' ? '모집중' : '참여완료'}</button>
+							
                         </div>
                         <div id="mate_board_container1">
                         <div class="board_title"><a href="/board/mate/mateget/${MateBoardVO.post_no}">${MateBoardVO.title}</a></div> 
