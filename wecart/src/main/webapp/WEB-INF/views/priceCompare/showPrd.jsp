@@ -154,6 +154,19 @@
         	
         } // locationOfMarts()
         
+        
+        function sendDTO(retail_name){
+        	console.log(retail_name);
+        	
+	        var json = {retail_name: retail_name};
+
+        	
+	        window.location = "/map/locationOfMarts?retail_name="+retail_name;
+	        
+			
+        	
+        } // sendDTO(dto)
+        
     </script>	
 
 </head>
@@ -237,8 +250,8 @@
 								<td>
 									${dto.retail_name}
 									&emsp;
-								<button type="button">
-									<a href="/map/locationOfMarts"><i class="fa-solid fa-location-dot"></a></i>
+								<button type="button" onclick="sendDTO('${dto.retail_name}')" >
+									<i class="fa-solid fa-location-dot" ></i>
 								</button> &emsp;
 								</td>
 								<td>
