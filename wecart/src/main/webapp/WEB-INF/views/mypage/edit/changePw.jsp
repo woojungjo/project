@@ -35,9 +35,9 @@
                     <div id="mypage_nav">
                         <ul class="mypage_nav_ul">
                             <li class="mypage_nav_li"><a href="#" class="nav_text">마이페이지</a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text">개인정보 수정</a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text">장바구니 목록</a></li>
-                            <li class="mypage_nav_li"><a href="#" class="nav_text">찜한 상품</a></li>
+                            <li class="mypage_nav_li"><a href="/mypage/edit/checkUser" class="nav_text">개인정보 수정</a></li>
+                     		<li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text">장바구니 목록</a></li>
+                     		<li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text">찜한 상품</a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text">즐겨찾는 마트</a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text">내 활동 내역</a></li>
                             <li class="mypage_nav_li"><a href="#" class="nav_text">키워드알림</a></li>
@@ -100,25 +100,30 @@
             var pwd = document.getElementById("pwd").value;
             var confirm_pwd = document.getElementById("confirm_pwd").value;
 
-            // 비밀번호가 비어 있는지 확인
             if (pwd == "") {
-                alert("비밀번호를 입력하세요.");
+                alert("비밀번호를 입력 해주세요.");
                 return false;
-            }
 
-            // 비밀번호 길이가 최소 길이 이상인지 확인
-            if (pwd.length < 8) {
+            } else if (pwd.length < 8) {
                 alert("비밀번호는 8자리 이상이어야 합니다.");
                 return false;
-            }
 
-            // 비밀번호 확인란과 일치하는지 확인
-            if (pwd != confirm_pwd) {
-                alert("비밀번호 확인란과 비밀번호가 일치하지 않습니다.");
+            } else if (pwd != confirm_pwd) {
+                alert("변경할 비밀번호와 비밀번호 확인란이 일치하지 않습니다.");
                 return false;
-            }
 
-            return true;
+            } else  if (old_pwd != '${sessionScope.__AUTH__.pwd}') {
+                alert("기존 비밀번호가 일치하지 않습니다.");
+                return false;
+            
+            } else if (old_pwd != pwd) {
+                alert("기존 비밀번호와 변경할 비밀번호가 일치 합니다.")
+                return false;
+
+            } else {
+                alert("비밀번호 변경 완료.");
+                return true;
+            }
         }
     </script>
 

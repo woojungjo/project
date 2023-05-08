@@ -100,6 +100,7 @@ public class UserController {
 
 	// 비밀번호 찾기
 	@PostMapping("/searchPw")
+	@ResponseBody
 	public String searchPw(UserDTO dto) throws ControllerException {
 		try {
 			boolean result = this.service.searchPw(dto);

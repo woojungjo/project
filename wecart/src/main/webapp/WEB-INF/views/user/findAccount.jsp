@@ -15,13 +15,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
     </head>
 
-    <body>
-	    <c:choose>
-	        <c:when test="${empty sessionScope['__AUTH__']}">
-	            <c:redirect url="/" />
-	        </c:when>
-	    </c:choose>
-	    
+    <body>	    
         <header>
             <div id="logo">
                 <a href="/">우리동네 장바구니</a>
@@ -224,7 +218,7 @@
                 url: "/user/searchPw",
                 data: data,
                 success: function (data) {
-                    if (!data) {
+                    if (data == 0 || !data) {
                     	console.log(data, "실패");
                         $('#pw_value').text("회원 정보를 확인해주세요!");
                     } else {
