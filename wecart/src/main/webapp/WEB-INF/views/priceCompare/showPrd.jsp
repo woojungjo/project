@@ -210,8 +210,8 @@
 
 			<div id="middleContainer">
 				<div class="leftFromUser">
-					<h3>과일류 > ${__GOODS__.goods_id}</h3>
-					<h3>용량: ${ __GOODS__.capacity }</h3>
+					<h3>${__CATEGORYNAME__} > ${__GOODS__.goods_name}</h3>
+					<h3>${ __GOODS__.capacity} ${__CAPACITYUNITNAME__}</h3>
 					<img src= ${__GOODS__.goods_pic }
 						alt= ${__GOODS__.goods_name } />
 				</div>
@@ -226,7 +226,9 @@
 
 						<!-- <button type="button" class="mypick_btHeart" onclick="changedHeart(this)">
                             <i class="fa-solid fa-heart fa-2xl"></i></button> -->
-						<button type="button" onclick="addPrdToTodayCart()">장바구니</button>
+						<button type="button" onclick="addPrdToTodayCart()" class="mypick_bt mypick_cart">
+							<i class="fa-solid fa-cart-shopping fa-2x"></i>
+						</button>
 					</div>
 					<table class="tableToShowPrice">
 						<c:forEach items="${__PRICEDTO__}" var="dto"  >
@@ -245,8 +247,12 @@
 					
 						</c:forEach>
 						<c:if test="${fn:length(__PRICEDTO__) == 0}">
+						<p><p><br>
 							<tr>
-    							<div>리스트가 비어있습니다.</div>
+								<p>
+							</tr>
+							<tr>
+    							<h3>주변마트에 해당상품을 팔지 않습니다.</h3>
     						</tr>
 						</c:if>
 					</table>

@@ -18,7 +18,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.pricecompare.GoodsCriteria;
 import org.zerock.wecart.domain.pricecompare.GoodsVO;
-import org.zerock.wecart.domain.pricecompare.MemberGoodsCartVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.service.pricecompare.PriceCompareService;
 
@@ -119,8 +118,44 @@ public class PriceCompareServiceTests {
 	} //getSearchList
 	
 	
-
+	//3. 상품 검색 
+//	@Disabled
+	@Test
+	@Order(3)
+	@DisplayName("Test3: selectCategoryName()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectCategoryName() throws ServiceException {
+		log.trace("selectCategoryName() invoked.");
+		
+		
+		try {
+			String name = this.service.selectCategoryName(30102021);
+			
+			log.trace("name: {}", name);
+		}catch(Exception e) {
+			;;
+//			
+		}
+	}	
 	
+	//3. 상품 검색 
+//	@Disabled
+	@Test
+	@Order(4)
+	@DisplayName("Test4: selectCapacityUnitName()")
+	@Timeout(value=4, unit=TimeUnit.SECONDS)
+	void selectCapacityUnitName() throws ServiceException {
+		log.trace("selectCategoryName() invoked.");
+		
+		
+		try {
+			String name = this.service.selectCategoryName(30102021);
+			
+			log.trace("name: {}", name);
+		}catch(Exception e) {
+			;;
+		} // try - catch
+	}	
 } //end class
 
 
