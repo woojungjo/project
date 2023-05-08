@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.MateBoardCommentVO;
 import org.zerock.wecart.domain.board.PageDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ControllerException;
+import org.zerock.wecart.service.board.mateboard.MateBoardCommentService;
 import org.zerock.wecart.service.board.mateboard.MateBoardService;
 
 import lombok.NoArgsConstructor;
@@ -40,6 +42,9 @@ public class MateBoardController {		//JavaBeans, POJO
 //	(2) 이 필드를 매개변수로 가지는 생성자가 있다면
 	@Setter(onMethod_= @Autowired)
 	private MateBoardService service;
+	
+	@Setter(onMethod_= {@Autowired})
+	private MateBoardCommentService commentService;
 	
 	@GetMapping("/matelist")
 	public void mateList(Criteria cri, Model model) throws ControllerException{ //게시판 전체 목록 조회 요청 처리 핸들러
@@ -62,6 +67,11 @@ public class MateBoardController {		//JavaBeans, POJO
 			log.info("\t+pageDTO: {}", pageDTO);
 			//모델상자 안에 넣을 pageDTO
 			model.addAttribute("pageMaker", pageDTO);
+			
+			// 현재시간 확인
+	        Date now = new Date();   
+	        model.addAttribute("currentTime", now);
+	        log.info("date now : {}", now); 
 		}catch (Exception e) {
 			throw new ControllerException(e);
 		}
@@ -79,6 +89,16 @@ public class MateBoardController {		//JavaBeans, POJO
 			rttrs.addAttribute("currPage", cri.getCurrPage());
 			rttrs.addAttribute("amount", cri.getAmount());
 			
+			List<MateBoardCommentVO> commentVO = this.commentService.getList(post_no);
+			model.addAttribute("commentVO", commentVO);
+			
+			Integer commnetCnt = this.commentService.getTotalAmount(post_no);
+			model.addAttribute("commnetCnt", commnetCnt);
+			
+			// 현재시간 확인
+	        Date now = new Date();   
+	        model.addAttribute("currentTime", now);
+	        
 			return "/board/mate/mateget";
 		}catch(Exception e) {
 			throw new ControllerException(e);
