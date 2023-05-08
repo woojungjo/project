@@ -121,6 +121,14 @@ table, td, th{
     border-collapse: collapse;
     border: 1px solid black;
     text-align: center;
+    
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  margin : 20px 10px;
 }
 
 td {
@@ -135,13 +143,14 @@ td {
     bottom: 0;
 }
 
+
 #login_bt {
     border-radius: 20px;
     width: 70px;
     height: 30px;
     border: 0;
     margin-left: 10px;
-
+1
     flex-grow: 0;
     flex-shrink: 0;
     font-family: 'Jeju Gothic', sans-serif;
