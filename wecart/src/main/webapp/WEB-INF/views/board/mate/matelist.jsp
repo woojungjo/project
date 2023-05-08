@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/css/board/qna/style.css">
 <link rel="stylesheet" href="/resources/css/board/mate/style.css">
 <script src="/resources/js/board/qna/board.js" defer ></script>
-
+<script src="/resources/js/board/mate/mateget.js" defer></script>
 
 <script src="https://kit.fontawesome.com/a623128410.js" crossorigin="anonymous"></script>
 
@@ -87,11 +87,8 @@ pageEncoding="UTF-8"%>
                                 </c:choose>
                             </div>
                             
-                            <!-- button type=button value="recruiting" >모집중 </button-->
-                            
+                            <button type=button value="recruiting" >모집중 </button>
 							게시글번호: ${MateBoardVO.post_no} 
-							<button type="button" value="${MateBoardVO.meeting_status== '1' ? 'recruiting' : 'completed'}">${MateBoardVO.meeting_status== '1' ? '모집중' : '참여완료'}</button>
-							
                         </div>
                         <div id="mate_board_container1">
                         <div class="board_title"><a href="/board/mate/mateget/${MateBoardVO.post_no}">${MateBoardVO.title}</a></div> 
@@ -106,16 +103,16 @@ pageEncoding="UTF-8"%>
 			            <fmt:formatDate value="${MateBoardVO.meeting_time}" pattern="yyyy-MM-dd HH:mm" var="formatMeetingTime" />
 			            <div class="mate_board_contents_dt">${formatMeetingTime}</div>
                         <!-- div class="mate_board_contents_dt"><i class="fa-regular fa-clock"></i>&nbsp;${MateBoardVO.meeting_time}</div-->
-                        <div class="mate_board_contents_members"><i class="fa-solid fa-people-group"></i></div>
+                        <!-- div class="mate_board_contents_members"><i class="fa-solid fa-people-group"></i></div>
                         <div class="currentMemberNum">2</div>
                         <div>/</div>
-                        <div class="finalMemberNum">4</div>
+                        <div class="finalMemberNum">4</div-->
                         <p></p>
                         </div>
                         
                         <div class="board_tail">
                             <div><span class="fas fa-eye"></span>${MateBoardVO.views}</div>
-                            <div><span class="fas fa-comment-dots"></span>댓글</div>
+                            <div><span class="fas fa-comment-dots"></span>${MateBoardVO.comment_count}</div>
                         </div>
                     </div>
                 </li>
@@ -198,19 +195,6 @@ pageEncoding="UTF-8"%>
 </main>
 
    <jsp:include page="../../header_footer/footer.jsp" flush="true" />
-    
-<script>
-    var registerBtn = document.querySelector('#registerBtnList');
-    registerBtn.addEventListener('click', function () {
-        /*var url = '/board/register?currPage='+encodeURIComponent('${param.currPage}')+'&amount='+encodeURIComponent('${param.amount}');*/
-        location.href =  "/board/register"; 
-    }); //.addEventListener
-    
-    var result = "${param.result}";
-    if(result != null && result != "") {
-        alert('result: ' + result);
-    }
-</script>
 
 </body>
 

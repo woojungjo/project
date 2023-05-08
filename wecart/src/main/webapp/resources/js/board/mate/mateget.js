@@ -162,7 +162,7 @@ document.querySelector('.mate_board_delete').addEventListener('click',function()
 const subDivs = document.querySelectorAll('#sub > div');
 const currentMemberNum = document.querySelector('.currentMemberNum');
 
-currentMemberNum.textContent = subDivs.length -1;
+currentMemberNum.textContent = subDivs.length;
 /*
 // 참여하기 버튼을 눌렀을 때
 $('.mate_board_contents_join').on('click', function() {
@@ -187,6 +187,7 @@ $('.mate_board_contents_join').on('click', function() {
   }
 });
 */
+
 $('.mate_board_join_button').click(function() {
     var currentMemberNum = parseInt($('.currentMemberNum').text());
     var finalMemberNum = parseInt($('.finalMemberNum').text());
@@ -196,7 +197,7 @@ $('.mate_board_join_button').click(function() {
         alert('참여인원이 다 찼으므로 참여할 수 없습니다.');
     } else if (currentMemberNum < finalMemberNum) {
 	 	console.log(currentMemberNum);
-        $('#sub').append('<div class="sub' + (currentMemberNum+1) + '"><li><i class="fa-solid fa-piggy-bank"></i>3500</li><li class="sub_participants' + (currentMemberNum+1) + '">참여자' + (currentMemberNum+1) + ' <span class="sub_waiting">(대기)</span></li></div>');
+        $('#sub').append('<div class="sub' + (currentMemberNum) + '"><li class="sub_participants' + (currentMemberNum) + '">참여자' + (currentMemberNum+1) + ' <span class="sub_waiting">(대기)</span></li></div>');
         currentMemberNum++;
         $('.currentMemberNum').text(currentMemberNum);
         console.log(currentMemberNum);
@@ -212,6 +213,7 @@ $('.mate_board_join_button').click(function() {
     }
 });
 
+/*
 $('.mate_board_join_button').click(function() {
     var currentMemberNum = parseInt($('.currentMemberNum').text());
     var finalMemberNum = parseInt($('.finalMemberNum').text());
@@ -241,7 +243,7 @@ $('.mate_board_join_button').click(function() {
         }
     }
 });
-
+*/
 /*
 $('.sub_participants1').click(function() {
   var result = confirm('참여자를 참여시키겠습니까?');
@@ -498,3 +500,4 @@ document.body.addEventListener('click', function(event) {
         console.groupEnd();
     }); // .onclick
   });
+  

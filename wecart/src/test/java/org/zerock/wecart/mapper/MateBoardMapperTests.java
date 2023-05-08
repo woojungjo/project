@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.MateBoard_CommentCountVO;
 import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.mapper.board.mateboard.MateBoardMapper;
@@ -68,7 +69,7 @@ public class MateBoardMapperTests {
 		cri.setAmount(20);
 //		cri.setSort("views");
 		
-		List<MateBoardVO> list = this.mapper.selectAll(cri);
+		List<MateBoard_CommentCountVO> list = this.mapper.selectAll(cri);
 		assertNotNull(list);
 		
 		list.forEach(log::info);

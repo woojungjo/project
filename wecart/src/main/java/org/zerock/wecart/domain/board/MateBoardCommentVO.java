@@ -16,5 +16,5 @@ public class MateBoardCommentVO {
 	private Integer delete_yn;
 	private Integer comment_step;
 	private Integer comment_indent;
-	//private Integer like_count;
+	private Integer like_count;
 }
