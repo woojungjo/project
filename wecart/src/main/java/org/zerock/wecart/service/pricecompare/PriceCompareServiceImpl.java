@@ -14,11 +14,12 @@ import org.zerock.wecart.domain.pricecompare.PriceDTO;
 import org.zerock.wecart.domain.pricecompare.RetailVO;
 import org.zerock.wecart.domain.pricecompare.SaleVO;
 import org.zerock.wecart.exception.ServiceException;
+import org.zerock.wecart.mapper.pricecompare.Capacity_unitMapper;
+import org.zerock.wecart.mapper.pricecompare.CategoryMapper;
 import org.zerock.wecart.mapper.pricecompare.CityMapper;
 import org.zerock.wecart.mapper.pricecompare.GooodsMapper;
 import org.zerock.wecart.mapper.pricecompare.PriceCompareMapper;
 import org.zerock.wecart.mapper.pricecompare.SaleMapper;
-import org.zerock.wecart.mapper.pricecompare.TodayCartMapper;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
 
 import lombok.NoArgsConstructor;
@@ -35,14 +36,18 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 	private WishListMapper wishListMapper;
 	private CityMapper cityMapper;
 	private SaleMapper saleMapper;
+	private CategoryMapper categoryMapper;
+	private Capacity_unitMapper capacity_unitMapper;
 	
 	@Autowired
-	public PriceCompareServiceImpl(PriceCompareMapper priceCompareMapper, GooodsMapper gooodsMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CityMapper cityMapper) {
+	public PriceCompareServiceImpl(PriceCompareMapper priceCompareMapper, GooodsMapper gooodsMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CityMapper cityMapper, CategoryMapper categoryMapper, Capacity_unitMapper capacity_unitMapper) {
 		this.priceCompareMapper = priceCompareMapper;
 		this.gooodsMapper = gooodsMapper;
 		this.wishListMapper = wishListMapper;
 		this.cityMapper = cityMapper;
 		this.saleMapper = saleMapper;
+		this.categoryMapper = categoryMapper;
+		this.capacity_unitMapper = capacity_unitMapper;
 	}	//Constructor
 
 	@Transactional
@@ -144,12 +149,30 @@ public class PriceCompareServiceImpl implements PriceCompareService {
 			log.trace("selectGooodsVO service has erorr.");
 		}
 		return null;
+	} // selectGooodsVO
+	
+	public String selectCategoryName(Integer category_id) throws ServiceException{
+		
+		try {
+			return this.categoryMapper.selectCategoryName(category_id);
+		
+		}catch(Exception e) {
+			;;
+		}
+		return null;
 	}
+
+	@Override
+	public String selectCapacityUnitName(String capacity_unit_id) throws ServiceException {
+
+		
+		try {
+			return this.capacity_unitMapper.selectCapacityUnitName(capacity_unit_id);
+		}
+		catch(Exception e) {
+			;;
+		} // try - catch
+		
+		return null;
+	} // selectCapacityUnitName
 } //end class
-
-
-
-
-
-
-

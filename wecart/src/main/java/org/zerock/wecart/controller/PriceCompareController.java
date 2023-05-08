@@ -29,7 +29,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/priceCompare")
 @Controller
 public class PriceCompareController {
-	
 	private PriceCompareService service;
 
 	@Autowired
@@ -111,11 +110,20 @@ public class PriceCompareController {
 			log.trace("상품 조회수가 +1 되었는지 여부: {}", checkUpdate);
 			
 			List<PriceDTO> priceDTO = this.service.getPriceDTOList(Integer.parseInt(userVO.getMember_id()), goods_id);
+			String categoryName = this.service.selectCategoryName(Integer.parseInt(goods.getCategory_id()));
+			String capacityUnitName = this.service.selectCapacityUnitName(goods.getCapacity_unit_id());
 			log.trace("error check2 ");
 			model.addAttribute("__PRICEDTO__", priceDTO);
 			
 			// 회원의 id와 
 			model.addAttribute("__GOODS__", goods);
+			
+			// 회원의 categoryName
+			model.addAttribute("__CATEGORYNAME__", categoryName);
+			
+			model.addAttribute("__CAPACITYUNITNAME__", capacityUnitName);
+			
+			log.trace("__CAPACITYUNITNAME__: {}", capacityUnitName);
 			
 			return "priceCompare/showPrd";
 		} catch (Exception e) {

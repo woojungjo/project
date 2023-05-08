@@ -33,4 +33,10 @@ public interface PriceCompareService {
 	
 	// goods_id를 가지고 GooodsVO 객체를 반환
 	public abstract GooodsVO selectGooodsVO(Integer goods_id) throws ServiceException;
+	
+	// categoryName을 return한다.
+	public abstract String selectCategoryName(Integer category_id) throws ServiceException;
+	
+	// capacity_unit_id를 가지고 CapacityUnitName
+	public abstract String selectCapacityUnitName(String capacity_unit_id) throws ServiceException;
 } //end interface

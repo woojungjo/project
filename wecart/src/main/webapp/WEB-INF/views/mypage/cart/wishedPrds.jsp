@@ -42,7 +42,7 @@
     				console.log("success의 경우를 확인합니다. ");
     				console.log("object: " + object);
     				if(object == "false" ){
-    					alert("Today cart already save this goods");
+    					alert("상품이 이미 오늘에 장바구니에 담겨있습니다.");
     				}else{
     			    	alert("상품이 카트에 담겼습니다");
     				}
@@ -106,11 +106,11 @@
 					<div id="mypage_nav">
 						<ul class="mypage_nav_ul">
 							<li class="mypage_nav_li"><a href="#" class="nav_text">마이페이지</a></li>
-							<li class="mypage_nav_li"><a href="#" class="nav_text">개인정보
+							<li class="mypage_nav_li"><a href="/mypage/edit/checkUser" class="nav_text">개인정보
 									수정</a></li>
-							<li class="mypage_nav_li"><a href="#" class="nav_text">장바구니
+							<li class="mypage_nav_li"><a href="/mypage/cart/list" class="nav_text">장바구니
 									목록</a></li>
-							<li class="mypage_nav_li"><a href="#" class="nav_text">찜한
+							<li class="mypage_nav_li"><a href="/mypage/cart/wishedPrds" class="nav_text">찜한
 									상품</a></li>
 							<li class="mypage_nav_li"><a href="#" class="nav_text">즐겨찾는
 									마트</a></li>
