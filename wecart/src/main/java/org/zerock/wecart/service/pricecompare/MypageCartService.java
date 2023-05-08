@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
+import org.zerock.wecart.domain.pricecompare.RetailVO;
 import org.zerock.wecart.exception.ServiceException;
 
 public interface MypageCartService {
@@ -13,7 +14,7 @@ public interface MypageCartService {
 	// 멤버 아이디로 TodayCart_id들을 반환
 	public abstract Integer getTodayCartIdOfMember(Integer member_id) throws ServiceException;
 	
-	// cart_id와 goods_id로 member_goods_cart 테이블을 확인하여, 없다면 true 있다면 false
+	// cart_id와 goods_id로 member_goods_cart 테이블을 확인하여, 없다면 null 있다면 GoodsId를 return
 	public abstract Integer checkGoodsIdInTodayCart(Integer cart_id, Integer goods_id) throws ServiceException;
 	
 	// member_id, goods_id, cart_id를 받아 물건을 member_goods_cart 테이블에 저장
@@ -45,5 +46,7 @@ public interface MypageCartService {
 	
 	// goods_id와 member_id를 받고 해당 아이디가 있는지 확인하고 있으면 true 반환 없으면 false 반환한다.
 	public abstract boolean checkingGoodsIdOfMember(Integer member_id, Integer goods_id) throws ServiceException;
-
+	
+	// retail_name을 가지고 해당 RetailVO를 넘겨받기
+	public abstract RetailVO returnRetailVOWithRetailName(String retail_name) throws ServiceException;
 }

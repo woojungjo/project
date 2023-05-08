@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.wecart.domain.pricecompare.CartVO;
 import org.zerock.wecart.domain.pricecompare.GooodsVO;
+import org.zerock.wecart.domain.pricecompare.RetailVO;
 import org.zerock.wecart.exception.ServiceException;
 import org.zerock.wecart.mapper.pricecompare.CartMapper;
 import org.zerock.wecart.mapper.pricecompare.GooodsMapper;
 import org.zerock.wecart.mapper.pricecompare.MemberGoodsCartMapper;
+import org.zerock.wecart.mapper.pricecompare.RetailMapper;
 import org.zerock.wecart.mapper.pricecompare.SaleMapper;
 import org.zerock.wecart.mapper.pricecompare.WishListMapper;
 
@@ -25,19 +27,25 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class MypageCartServiceImpl implements MypageCartService{
 
+
+
 	private MemberGoodsCartMapper memberGoodsCartMapper; 
 	private WishListMapper wishListMapper;
 	private SaleMapper saleMapper;
 	private CartMapper cartMapper;
 	private GooodsMapper gooodsMapper;
+	private RetailMapper retailMapper;
 
 	@Autowired
-	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CartMapper cartMapper, GooodsMapper gooodsMapper) {
+	public MypageCartServiceImpl(MemberGoodsCartMapper memberGoodsCartMapper, WishListMapper wishListMapper, SaleMapper saleMapper, CartMapper cartMapper, GooodsMapper gooodsMapper, RetailMapper retailMapper) {
 		this.memberGoodsCartMapper = memberGoodsCartMapper;
 		this.wishListMapper = wishListMapper;
 		this.saleMapper = saleMapper;
 		this.cartMapper = cartMapper;
 		this.gooodsMapper = gooodsMapper;
+		this.retailMapper = retailMapper;
+		
+		
 	} // Constructor
 	
 	@Override
@@ -196,5 +204,14 @@ public class MypageCartServiceImpl implements MypageCartService{
 		Integer isGoodsId = this.wishListMapper.selectCheckingGooodsVoOfMember(member_id, goods_id);
 		
 		return isGoodsId == goods_id ? true : false;
+	}
+	
+	@Override
+	public RetailVO returnRetailVOWithRetailName(String retail_name) throws ServiceException {
+
+		try {
+			return this.retailMapper.selectRetailVOWithRetailName(retail_name);
+		}catch(Exception e) { ;; }
+		return null;
 	}
 } // end class
