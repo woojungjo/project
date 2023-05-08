@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.MateBoard_CommentCountVO;
 import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ServiceException;
@@ -69,7 +70,7 @@ public class MateBoardServiceTests {
 		cri.setAmount(20);
 //		cri.setSort("views");
 		
-		List<MateBoardVO> list = this.service.getList(cri);
+		List<MateBoard_CommentCountVO> list = this.service.getList(cri);
 		
 		assert list != null;
 		list.forEach(log::info);

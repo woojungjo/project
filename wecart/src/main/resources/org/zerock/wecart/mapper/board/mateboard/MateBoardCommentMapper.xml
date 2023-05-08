@@ -21,13 +21,13 @@
   <insert id="insertComment">
   
     <selectKey keyProperty="comment_no" order="AFTER" resultType="int">
-      SELECT ISEQ$$_110610.currval FROM dual
+      SELECT ISEQ$$_110639.currval FROM dual
     </selectKey>
     INSERT INTO mate_board_comment(post_no, member_id, secret_yn, content,delete_yn, comment_root, comment_step, comment_indent)
     VALUES(#{post_no}, #{member_id}, #{secret_yn}, #{content}, #{delete_yn},
     <choose>
       <when test="comment_root == null">
-    	 	ISEQ$$_110610.currval,
+    	 	ISEQ$$_110639.currval,
     	</when>
       <when test="comment_root != null">
     		#{comment_root},

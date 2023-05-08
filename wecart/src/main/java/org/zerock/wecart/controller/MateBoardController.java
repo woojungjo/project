@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.wecart.domain.board.Criteria;
 import org.zerock.wecart.domain.board.MateBoardCommentVO;
+import org.zerock.wecart.domain.board.MateBoard_CommentCountVO;
 import org.zerock.wecart.domain.board.PageDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
@@ -57,7 +58,7 @@ public class MateBoardController {		//JavaBeans, POJO
 		
 		try {
 			//Step1. 페이징 처리된 현재 currPage에 해당하는 게시글 목록 받아옴 
-			List<MateBoardVO> list = this.service.getList(cri);
+			List<MateBoard_CommentCountVO> list = this.service.getList(cri);
 			model.addAttribute("__MATE_LIST__", list);
 			
 			//Step2. Pagination 위한 각종 변수값 계산 

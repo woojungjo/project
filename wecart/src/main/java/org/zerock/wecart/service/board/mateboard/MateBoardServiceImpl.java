@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.MateBoard_CommentCountVO;
 import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 import org.zerock.wecart.exception.ServiceException;
@@ -42,7 +43,7 @@ public class MateBoardServiceImpl implements MateBoardService, InitializingBean{
 
 	//게시판 목록조회 
 	@Override 
-	public List<MateBoardVO> getList(Criteria cri) throws ServiceException {
+	public List<MateBoard_CommentCountVO> getList(Criteria cri) throws ServiceException {
 		log.trace("getList()invoked");
 		
 		try {

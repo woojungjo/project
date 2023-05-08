@@ -5,13 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.zerock.wecart.domain.board.Criteria;
+import org.zerock.wecart.domain.board.MateBoard_CommentCountVO;
 import org.zerock.wecart.domain.mateboard.MateBoardDTO;
 import org.zerock.wecart.domain.mateboard.MateBoardVO;
 
 public interface MateBoardMapper {
 		
 	// 전체 목록 조회
-	public abstract List<MateBoardVO> selectAll(Criteria cri);
+	public abstract List<MateBoard_CommentCountVO> selectAll(Criteria cri);
 	
 	//6. 총 게시물건수 반환
 	//항상똑같이 구하고, 길지 않기 때문에 @어노테이션방식

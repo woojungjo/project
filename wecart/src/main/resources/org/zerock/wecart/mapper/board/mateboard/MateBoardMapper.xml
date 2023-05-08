@@ -6,9 +6,14 @@
   
   <mapper namespace="org.zerock.wecart.mapper.board.mateboard.MateBoardMapper">
 
-   	<select id="selectAll" resultType="org.zerock.wecart.domain.mateboard.MateBoardVO">
-    SELECT a.*
+   	<select id="selectAll" resultType="org.zerock.wecart.domain.board.MateBoard_CommentCountVO">
+    SELECT a.*, coalesce(b.comment_count, 0) AS comment_count
     FROM mate_board a
+    LEFT OUTER JOIN (
+    SELECT post_no AS tmp, count(*) AS comment_count
+    FROM mate_board_comment
+    GROUP BY post_no) b 
+    ON (a.post_no = b.tmp)
     <if test="type != null">
       <where>
         <choose>
