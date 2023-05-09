@@ -16,7 +16,17 @@ ALTER TABLE favorite
 ADD CONSTRAINT favorite_retail_id_fk FOREIGN KEY (retail_id)
 REFERENCES retail (retail_id) ON DELETE CASCADE;
 
+ALTER TABLE goods
+ADD CONSTRAINT goods_category_id_fk FOREIGN KEY (category_id)
+REFERENCES category (category_id);
 
+ALTER TABLE goods
+ADD CONSTRAINT goods_capacity_unit_id_fk FOREIGN KEY (capacity_unit_id)
+REFERENCES capacity_unit (capacity_unit_id);
+
+ALTER TABLE retail
+ADD CONSTRAINT retail_town_id_fk FOREIGN KEY (town_id)
+REFERENCES city (town_id);
 
 
 ALTER TABLE sale
