@@ -179,7 +179,8 @@ CREATE TABLE sale (
     api_date DATE,
     retail_id NUMBER,
     goods_id NUMBER, 
-    price NUMBER NOT NULL
+    price NUMBER NOT NULL,
+    avg_price NUMBER
 );
 
 CREATE TABLE wish_list (
