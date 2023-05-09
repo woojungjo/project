@@ -51,7 +51,7 @@
                     <div id="mypage_article">
                         <div class="mypage_article_title">
                             <h3>장바구니 목록</h3>
-                            <p>* (X) 표시는 마트에 존재하지 않는 상품으로 현재 상품의 평균가로 대체하였습니다.</p>
+                            <span>* (X) 표시는 마트에 존재하지 않는 상품으로 현재 상품의 평균가로 대체하였습니다.</span>
                         </div>
 
                         <div class="mypage_article_content">

@@ -159,6 +159,7 @@ body {
     
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 .mypage_article_title > h3 {
     font-size: 1.5em;

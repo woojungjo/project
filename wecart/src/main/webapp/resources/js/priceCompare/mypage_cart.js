@@ -120,9 +120,13 @@ window.onload = function () {
     var counts = Array.from(plusBts).map(() => 1);  
 
     var plus = function (e) {
-        var index = Array.from(plusBts).indexOf(e.currentTarget);
+        console.log('plus invoked...');
 
-        counts[index]++;
+        let amount = parseInt($(this).prev('.amount_div').text());
+        amount++;
+        console.log("amount:", amount);
+
+        var index = Array.from(plusBts).indexOf(e.currentTarget);
 
         const priceTRs = document.querySelectorAll(".goods_price_tr");
         const priceSpans = priceTRs[index].querySelectorAll(".goods_price");
@@ -130,19 +134,20 @@ window.onload = function () {
         priceSpans.forEach((span) => {
             const intialPrice = parseInt(span.dataset.price);
             
-            const calPrice = intialPrice * counts[index];
+            const calPrice = intialPrice * amount;
             console.log("calPrice: ", calPrice);
 
             span.textContent = calPrice.toLocaleString();
         });
 
-        const amountDiv = document.querySelectorAll(".amount_div");
-        amountDiv[index].textContent = `${counts[index]}`;
+        const amountDiv = $(this).prev('.amount_div');
+        amountDiv.text(amount);
 
-        if (counts[index] >= 2) {
-            const minusBt = document.querySelectorAll(".count_minus_bt")[index];
-            minusBt.style.backgroundImage = "url(../../../resources/imgs/priceCompare/minus-xs-svgrepo-black.svg)";
-        }
+        if (amount >= 2) {
+            const minusBt = $(this).siblings(".count_minus_plus_bt.count_minus_bt");
+            console.log("minusBt:", minusBt);
+            minusBt.css('background-image', 'url(/resources/imgs/priceCompare/minus-xs-svgrepo-black.svg)');
+        } //if
 
         count.totalPrice();
     };  //plus
@@ -155,10 +160,13 @@ window.onload = function () {
     var minusBts = document.querySelectorAll(".count_minus_bt");
 
     var minus = function (e) {
-        console.log(e.target);
+        console.log('minus invoked...');
+
         var index = Array.from(minusBts).indexOf(e.currentTarget);
 
-        if(counts[index] > 1) counts[index]--;
+        let amount = parseInt($(this).next('.amount_div').text());
+        if(amount > 1) amount--;
+        console.log("amount:", amount);
 
         const priceTRs = document.querySelectorAll(".goods_price_tr");
         const priceSpans = priceTRs[index].querySelectorAll(".goods_price");
@@ -166,18 +174,21 @@ window.onload = function () {
         priceSpans.forEach((span) => {
             const intialPrice = parseInt(span.dataset.price);
             
-            const calPrice = intialPrice * counts[index];
+            const calPrice = intialPrice * amount;
             console.log("calPrice: ", calPrice);
 
             span.textContent = calPrice.toLocaleString();
         });
 
-        const amountDiv = document.querySelectorAll(".amount_div");
-        amountDiv[index].textContent = `${counts[index]}`;
+        const amountDiv = $(this).next('.amount_div');
+        amountDiv.text(amount);
 
-        if (counts[index] == 1) {
-            e.currentTarget.style.backgroundImage = "url(/resources/imgs/priceCompare/minus-xs-svgrepo-gray.svg)";
-        }
+        if (amount == 1) {
+            const minusBt = $(this);
+            console.log("minusBt:", minusBt);
+
+            minusBt.css('background-image', 'url(/resources/imgs/priceCompare/minus-xs-svgrepo-gray.svg)');
+        } //if
 
         count.totalPrice();
     }; //minus
