@@ -116,7 +116,7 @@
                 alert("기존 비밀번호가 일치하지 않습니다.");
                 return false;
             
-            } else if (old_pwd != pwd) {
+            } else if (old_pwd == pwd) {
                 alert("기존 비밀번호와 변경할 비밀번호가 일치 합니다.")
                 return false;
 
