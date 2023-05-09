@@ -45,6 +45,10 @@
     background: transparent;
     cursor: pointer;
 }
+.mycart_table_div {
+	width: 100%; 
+	overflow: auto;
+}
 .mycart_tbl_button_flex {
     margin-bottom: 50px;
 

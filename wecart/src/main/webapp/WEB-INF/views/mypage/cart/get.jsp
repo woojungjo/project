@@ -129,18 +129,18 @@
                                     </tfoot>
                                 </table>
                                 <input type="hidden" name="member_id" value="${__AUTH__.member_id}">
-                                <input type="hidden" name="cart_id" value="${__CARTID__}">        
+                                <input type="hidden" name="cart_id" value="${__CARTID__}">                                                            
+                            </div>
+                            
+                            <div id="mycart_tbl_button">
+                                <button type="button" id="cart_remove_bt" class="mycart_tbl_bt">장바구니 삭제</button>
 
-                                <div id="mycart_tbl_button">
-                                    <button type="button" id="cart_remove_bt" class="mycart_tbl_bt">장바구니 삭제</button>
+                                <div>
+                                    <button type="button" id="current_price_bt" class="mycart_tbl_bt">현재 가격 비교</button>
 
-                                    <div>
-                                        <button type="button" id="current_price_bt" class="mycart_tbl_bt">현재 가격 비교</button>
-
-                                        <button type="button" id="cart_list_bt" class="mycart_tbl_bt">장바구니 목록</button>
-                                    </div>                                        
-                                </div>                       
-                            </div>                            
+                                    <button type="button" id="cart_list_bt" class="mycart_tbl_bt">장바구니 목록</button>
+                                </div>                                        
+                            </div>   
                         </div>
                     </div>
                 </div>

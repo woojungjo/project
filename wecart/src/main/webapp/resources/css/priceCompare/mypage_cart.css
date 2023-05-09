@@ -163,6 +163,10 @@ tfoot > tr {
 tr[aria-label="합계"] {
     border-top: 2px solid #8e918f;
 }
+.mycart_table_div {
+	width: 911px; 
+	overflow: auto;
+}
 #mycart_tbl_button {
     margin-bottom: 50px;
 

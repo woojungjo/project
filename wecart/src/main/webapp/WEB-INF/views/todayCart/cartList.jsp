@@ -60,8 +60,9 @@
                                 <h2>오늘의 장바구니</h2>
                                 <p>* (X) 표시는 마트에 존재하지 않는 상품으로 현재 상품의 평균가로 대체하였습니다.</p>
                             </div>
-                            <div class="mycart_table_div">
-                                <form action="/todayCart/register" method="post">
+                            
+                            <form action="/todayCart/register" method="post">
+                                <div class="mycart_table_div">
                                     <table id="mycart_tbl">
                                         <thead>
                                             <tr>
@@ -76,7 +77,7 @@
                                                     </div>
                                                 </th>
                                                 <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
-                                                	<th scope="col"><span>${priceList0.retail_name}</span></th>
+                                                    <th scope="col"><span>${priceList0.retail_name}</span></th>
                                                 </c:forEach>
                                             </tr>
                                         </thead>
@@ -108,10 +109,10 @@
                                                             </div>                                                    
                                                         </div>
                                                     </td>
-	                                                
+                                                    
                                                     <c:forEach var="priceLists" items="${__PRICELIST__}">
                                                         <c:forEach var="list" items="${priceLists}">
-                                                        	<c:if test="${goodsList.goods_id eq list.goods_id}">
+                                                            <c:if test="${goodsList.goods_id eq list.goods_id}">
                                                             <td>
                                                                 <span class="goods_price" data-price="${not empty list.price ? list.price : list.avg_price}">
                                                                     <fmt:formatNumber value="${not empty list.price ? list.price : list.avg_price}" pattern="#,##0" />
@@ -119,13 +120,13 @@
                                                                 </span>
                                                                 <span>원</span>
                                                                 <c:if test="${empty list.price}">
-                                                                	<div class="nullPrice">(X)</div>    	
+                                                                    <div class="nullPrice">(X)</div>    	
                                                                 </c:if>
                                                             </td>
                                                             </c:if>
                                                         </c:forEach>
                                                     </c:forEach>                                       
-	                                                
+                                                    
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -135,21 +136,22 @@
                                                     <span>합계</span>
                                                 </td>
                                                 <c:forEach var="priceList0" items="${__PRICELIST__[0]}">
-                                                	<td>
-	                                                    <span class="total_price"></span>
-	                                                    <span>원</span>  
-                                                	</td>
+                                                    <td>
+                                                        <span class="total_price"></span>
+                                                        <span>원</span>  
+                                                    </td>
                                                 </c:forEach>
                                             </tr>
                                         </tfoot>
                                     </table>
                                     <input type="hidden" name="member_id" value="${__AUTH__.member_id}">                                 
+                                </div>
 
-                                    <div class="mycart_tbl_button_flex">
-                                        <input type="submit" value="장바구니 저장" class="mycart_tbl_bt todayCartSave">
-                                    </div>
-                                </form>                        
-                            </div>                            
+                                <div class="mycart_tbl_button_flex">
+                                    <input type="submit" value="장바구니 저장" class="mycart_tbl_bt todayCartSave">
+                                </div>                            
+                            </form>                        
+                                                        
                         </div>
                     </div>
                 </div>
