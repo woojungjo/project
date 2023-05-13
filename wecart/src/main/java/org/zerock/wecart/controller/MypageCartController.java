@@ -271,7 +271,7 @@ public class MypageCartController {
 		
 		// 해당 회원이 가지고 있는 TodayCartId를 리턴 
 		Integer todayCartId = this.service.getTodayCartIdOfMember(member_id);
-		
+		//
 		// 만약 TodayCartId가 반환되면
 		if(todayCartId != null) {
 			
