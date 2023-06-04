@@ -7,15 +7,22 @@
 **서비스 기획 배경**
 : 코로나 사태로 인한 사상 최대의 양적완화로 인한 금리 상승과 러-우 전쟁으로 인한 인플레이션 등으로 장기간의 경기 침체가 계속되는 상황에서 대중들의 합리적인 소비를 도모할 수 있는 서비스
 <p></p>
+
 **데이터 활용**<br>
-한국소비자원_생필품 가격 정보:
+* 한국소비자원_생필품 가격 정보:
 https://www.data.go.kr/data/15083256/fileData.do](https://www.data.go.kr/data/15083256/fileData.do
-<br>
-UI 스토리보드: https://docs.google.com/presentation/d/1TPoAyAR9fTNeU3A5fVU7dkYxcz-bnWTesm3K-EKWIlg/edit#slide=id.p 
-<br>
-IE 표기법 데이터 모델링: https://www.erdcloud.com/d/Enz86RZCZhuh6e6gR
-<br>
-ERD 데이터 모델링
-[Untitled Diagram-회원_수정_230208 drawio](https://github.com/woojungjo/project/assets/110724186/bd8e3112-6f4c-4714-9902-4d6839379109)
-[Untitled Diagram-게시판](https://github.com/woojungjo/project/assets/110724186/1878741c-e9f3-4a19-9606-cafeead0a51f)
+<p></p>
+
+* UI 스토리보드: https://docs.google.com/presentation/d/1TPoAyAR9fTNeU3A5fVU7dkYxcz-bnWTesm3K-EKWIlg/edit#slide=id.p 
+<p></p>
+
+* ERD 데이터 모델링<br>
+
+  [- 회원 ERD](https://github.com/woojungjo/project/assets/110724186/bd8e3112-6f4c-4714-9902-4d6839379109) <br>
+
+  [- 게시판 ERD](https://github.com/woojungjo/project/assets/110724186/1878741c-e9f3-4a19-9606-cafeead0a51f)  
+<p></p>
+
+* IE 표기법 데이터 모델링: https://www.erdcloud.com/d/Enz86RZCZhuh6e6gR
+
 
