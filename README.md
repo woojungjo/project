@@ -24,6 +24,13 @@ https://www.data.go.kr/data/15083256/fileData.do](https://www.data.go.kr/data/15
 <p></p>
 
 * IE 표기법 데이터 모델링: https://www.erdcloud.com/d/Enz86RZCZhuh6e6gR
+<p></p>
+
+* Request Mapping: https://github.com/orgs/woojungjo/projects/8
+<p></p>
+
+* 프로젝트 진행 상황: https://github.com/orgs/woojungjo/projects/7
+<p></p>
 
 ## 프로젝트 상세
 ### 김지연
