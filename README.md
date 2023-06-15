@@ -25,4 +25,15 @@ https://www.data.go.kr/data/15083256/fileData.do](https://www.data.go.kr/data/15
 
 * IE 표기법 데이터 모델링: https://www.erdcloud.com/d/Enz86RZCZhuh6e6gR
 
+## 프로젝트 상세
+### 김지연
+**상품목록**<br>
+<img src='https://github.com/woojungjo/project/assets/110724186/4cf7d2d7-79d6-445b-9c33-84ed89cd68b5'>
+<p></p>
 
+**오늘의 장바구니**<br>
+<img src='https://github.com/woojungjo/project/assets/110724186/b5e4fd13-53f1-45c9-a35c-3e1be12f6777'>
+<p></p>
+
+**마이페이지 장바구니**<br>
+<img src='https://github.com/woojungjo/project/assets/110724186/b4f54923-552a-4638-bacb-10dff1173e03'>
